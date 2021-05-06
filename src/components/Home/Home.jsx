@@ -18,16 +18,16 @@ const Home = () => {
 							track and also trade virtually, <span>risk free</span>.
 						</div>
 						<div className="buttons">
-							<Link to="#" className="signup">
+							<Link to="/signup" className="signupBtn">
 								Sign Up
 							</Link>
-							<Link to="#" className="login">
+							<Link to="/login" className="loginBtn">
 								Login
 							</Link>
 						</div>
 					</div>
 				</div>
-				<footer>&#169; Werrey Inc. 2021.</footer>
+				<footer>&#169; Werrey Inc, 2021.</footer>
 			</div>
 		</>
 	);

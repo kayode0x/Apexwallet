@@ -1,5 +1,12 @@
+$mainColor: #000000;
+$subColor: #070707;
+$textColor: #EBEBEB;
+$subTextColor: rgb(212, 212, 212);
+$blue: #2f52e0;
+$lightBlue: #4E6CE4;
+
 .home {
-	color: #fff;
+	color: $textColor;
 	display: flex;
 	flex-direction: column;
     z-index: 2;
@@ -40,13 +47,11 @@
 			display: flex;
 			flex-direction: column;
             max-width: 30rem;
-            opacity: 0;
-            animation: mainAnim 1s ease-in forwards;
 
             @keyframes mainAnim {
                 from {
                     opacity: 0;
-                    transform: translateY(20%)
+                    transform: translateY(30%)
                 }
                 to {
                     opacity: 1;
@@ -56,22 +61,26 @@
 
 			.name {
 				font-size: 1.5rem;
+                opacity: 0;
+                animation: mainAnim .8s ease-in forwards;
+                font-weight: bold;
+				text-align: left;
                 @media (min-width: 768px) {
                     font-size: 2rem;
                 }
-                font-weight: bold;
-				text-align: left;
 			}
 
 			.mainText {
 				margin-top: 1rem;
 				font-size: 1.15rem;
+				line-height: 1.75;
+				text-align: left;
+				color: $subTextColor;
+                opacity: 0;
+                animation: mainAnim .5s ease-in .8s forwards;
                 @media (min-width: 768px) {
                     font-size: 1.35rem;
                 }
-				line-height: 1.75;
-				text-align: left;
-				color: rgb(212, 212, 212);
 
 				span {
 					color: #fff;
@@ -81,61 +90,60 @@
 
 			.buttons {
 				display: flex;
-				align-items: center;
+				height: 3rem;
+				width: 15rem;
 				flex-direction: row;
 				margin-top: 1.5rem;
+                opacity: 0;
+                animation: mainAnim .5s ease-in 1.2s forwards;
 
-				.signup {
+				.signupBtn {
 					height: 3rem;
-					width: 10rem;
-					background: #2f52e0;
+					width: 8rem;
+					background: $blue;
 					display: flex;
 					align-items: center;
 					justify-content: center;
 					text-decoration: none;
-					color: #fff;
+					color: $textColor;
 					font-weight: bold;
 					border-radius: 5px;
 					font-size: 1.15rem;
                     transition: all 0.2s ease;
 				}
-                .signup:hover {
-                    background: #fff;
-                    color: #2f52e0;
+                .signupBtn:hover {
+                    background: $textColor;
+                    color: $blue;
                 } 
 
-				.login {
+				.loginBtn {
 					display: flex;
 					align-items: center;
 					justify-content: center;
 					text-decoration: none;
-					color: #fff;
+					color: $textColor;
 					font-weight: bold;
 					border-radius: 5px;
 					font-size: 1.15rem;
 					margin-left: 1rem;
                     transition: all 0.2s ease;
-				} .login:hover {
-                    color: #2f52e0;
+				} .loginBtn:hover {
+                    color: $blue;
                 } 
-			}
-
-			.skip {
-				color: rgb(187, 187, 187);
-				margin-top: 2rem;
-				@media (min-width: 768px) {
-					display: flex;
-					align-items: flex-start;
-				}
 			}
 		}
 	}
 
     footer {
-        position: absolute;
+        position: absolute !important;
         bottom: 1%;
         left: 50%;
         transform: translate(-50%, -50%);
+
+        @media (max-width: 768px) and (orientation: landscape) {
+            margin-top: 10rem;
+            position: relative !important;
+        }
     }
 }
 
