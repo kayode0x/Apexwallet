@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { RotateSpinner } from 'react-spinners-kit';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 
 const Reset = () => {
@@ -44,62 +45,69 @@ const Reset = () => {
 	};
 
     return (
-		<div className="reset">
-			<div className="container">
-				<div className="header">Reset Password </div>
+		<HelmetProvider>
+			<div className="reset">
+			<Helmet>
+				<title>
+					Reset Password - Apex
+				</title>
+			</Helmet>
+				<div className="container">
+					<div className="header">Reset Password </div>
 
-				<div className="assets">
-					<img src={astronaut} alt="astronaut" />
-					<div className="circle"></div>
+					<div className="assets">
+						<img src={astronaut} alt="astronaut" />
+						<div className="circle"></div>
+					</div>
+
+					<form onSubmit={handleReset}>
+						<div className="password">
+							<label htmlFor="password">Password</label>
+							<input
+								type={passwordVisible ? 'text' : 'password'}
+								id="password"
+								name="password"
+								placeholder="Chose a strong password"
+								required
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<div className="eyeIcons">
+								{passwordVisible ? (
+									<BsEyeSlashFill onClick={togglePassword} />
+								) : (
+									<BsEyeFill onClick={togglePassword} />
+								)}
+							</div>
+						</div>
+
+						<div className="confirmPassword">
+							<label htmlFor="confirmPassword">Confirm Password</label>
+							<input
+								type={passwordConfirmVisible ? 'text' : 'password'}
+								id="confirmPassword"
+								name="confirmPassword"
+								placeholder="Chose a strong password"
+								required
+								value={confirmPassword}
+								onChange={(e) => setConfirmPassword(e.target.value)}
+							/>
+							<div className="eyeIcons">
+								{passwordConfirmVisible ? (
+									<BsEyeSlashFill onClick={togglePasswordConfirm} />
+								) : (
+									<BsEyeFill onClick={togglePasswordConfirm} />
+								)}
+							</div>
+						</div>
+
+						<button disabled={resetting ? true : false} type="submit">
+							{resetting ? <RotateSpinner size={30} color="#fff" /> : 'Reset Password'}
+						</button>
+					</form>
 				</div>
-
-				<form onSubmit={handleReset}>
-					<div className="password">
-						<label htmlFor="password">Password</label>
-						<input
-							type={passwordVisible ? 'text' : 'password'}
-							id="password"
-							name="password"
-							placeholder="Chose a strong password"
-							required
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-						<div className="eyeIcons">
-							{passwordVisible ? (
-								<BsEyeSlashFill onClick={togglePassword} />
-							) : (
-								<BsEyeFill onClick={togglePassword} />
-							)}
-						</div>
-					</div>
-
-					<div className="confirmPassword">
-						<label htmlFor="confirmPassword">Confirm Password</label>
-						<input
-							type={passwordConfirmVisible ? 'text' : 'password'}
-							id="confirmPassword"
-							name="confirmPassword"
-							placeholder="Chose a strong password"
-							required
-							value={confirmPassword}
-							onChange={(e) => setConfirmPassword(e.target.value)}
-						/>
-						<div className="eyeIcons">
-							{passwordConfirmVisible ? (
-								<BsEyeSlashFill onClick={togglePasswordConfirm} />
-							) : (
-								<BsEyeFill onClick={togglePasswordConfirm} />
-							)}
-						</div>
-					</div>
-
-					<button disabled={resetting ? true : false} type="submit">
-						{resetting ? <RotateSpinner size={30} color="#fff" /> : 'Reset Password'}
-					</button>
-				</form>
 			</div>
-		</div>
+		</HelmetProvider>
 	);
 }
 
