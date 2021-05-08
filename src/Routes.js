@@ -8,6 +8,7 @@ import Reset from './components/ResetPassword/Reset';
 // import AuthContext from './components/Auth/AuthContext';
 // import { useContext } from 'react';
 import './App.css';
+import Dashboard from './components/Dashboard/Dashboard';
 
 
 const Routes = () => {
@@ -24,6 +25,10 @@ const Routes = () => {
 	return (
 		<Router>
 			<Switch>
+				<Route path="/dashboard">
+					<Dashboard />
+				</Route>
+
 				<Route path="/signup">
 					<SignUp />
 				</Route>

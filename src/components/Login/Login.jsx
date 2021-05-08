@@ -1,33 +1,75 @@
 import './Login.scss';
 import astronaut from '../../assets/logo/astronaut-ingravity.svg';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { RotateSpinner } from 'react-spinners-kit';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import AuthContext from '../Auth/AuthContext';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
+	const history = useHistory();
+	const { getLoggedIn } = useContext(AuthContext);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [loggingIn, setLoggingIn] = useState(false);
 
-	const handleLogin = (e) => {
+	//handle the form submit
+	const handleLogin = async (e) => {
 		e.preventDefault();
-		setLoggingIn(true);
-		const user = { email, password };
-		console.log(JSON.stringify(user));
-		setEmail('');
-		setPassword('');
 
-		setTimeout(() => {
+		//start animating the button
+		setLoggingIn(true);
+
+		//use try catch to prevent open hole
+		try {
+			const user = { email, password };
+			await axios
+				.post('http://192.168.1.98:9000/api/v1/auth/login', user, {
+					headers: {
+						// Overwrite Axios's automatically set Content-Type
+						'Content-Type': 'application/json',
+					},
+				})
+				.then((res) => {
+					async function getStatus() {
+						//wait to see if the status exists
+						await res.status;
+						//if the status is 201 (created), then refresh the getLoggedIn()
+						//so the loggedIn value can change from false to true in the AuthContext
+						if (res.status === 200) {
+							await getLoggedIn();
+							await history.push('/dashboard');
+						}
+					}
+					//call the function.
+					getStatus();
+				})
+				.catch(async (err) => {
+					//if error, display the custom error message from the server with toastify.
+					await toast.dark(`${err.response.data.message}`, {
+						position: toast.POSITION.TOP_CENTER,
+					});
+				});
+
+			//after the try operation, stop the button animation
 			setLoggingIn(false);
-		}, 3000);
+		} catch (error) {
+			console.log('ERROR' + error.response);
+			setLoggingIn(false);
+		}
 	};
 
+	//toggle the password visibility
 	const togglePassword = () => {
 		setPasswordVisible(!passwordVisible);
 	};
+
 	return (
 		<HelmetProvider>
 			<div className="login">
@@ -89,6 +131,9 @@ const Login = () => {
 					</Link>
 				</div>
 			</div>
+
+			{/* {DON'T FORGET THE TOASTIFY} */}
+			<ToastContainer />
 		</HelmetProvider>
 	);
 };
