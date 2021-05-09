@@ -31,7 +31,7 @@ const Login = () => {
 		//use try catch to prevent open hole
 		try {
 			const user = { email, password };
-			await axios
+			const axy = await axios
 				.post(`${apiURL}/api/v1/auth/login`, user, {
 					headers: {
 						// Overwrite Axios' automatically set Content-Type
@@ -58,6 +58,9 @@ const Login = () => {
 						position: toast.POSITION.TOP_CENTER,
 					});
 				});
+
+				console.log(axy)
+				console.log(axy.data)
 
 			//after the try operation, stop the button animation
 			setLoggingIn(false);
