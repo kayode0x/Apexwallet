@@ -37,7 +37,7 @@ const SignUp = () => {
 			await axios
 				.post(`${apiURL}/v1/auth/signup`, user, {
 					headers: {
-						// Overwrite Axios's automatically set Content-Type
+						// Overwrite Axios' automatically set Content-Type
 						'Content-Type': 'application/json',
 					},
 				})
