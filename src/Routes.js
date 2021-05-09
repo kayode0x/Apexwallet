@@ -25,30 +25,34 @@ const Routes = () => {
 	return (
 		<Router>
 			<Switch>
-				<Route path="/dashboard">
+				<Route exact path="/dashboard">
 					<Dashboard />
 				</Route>
 
-				<Route path="/signup">
+				<Route exact path="/signup">
 					<SignUp />
 				</Route>
 
-				<Route path="/login">
+				<Route exact path="/login">
 					<Login />
 				</Route>
 
-				<Route path="/forgot-password">
+				<Route exact path="/forgot-password">
 					<ForgotPassword />
 				</Route>
 
-				<Route path="/reset-password">
+				<Route exact path="/reset-password/:resetToken">
 					<Reset />
 				</Route>
 
-				<Route path="/">
+				<Route exact path="/">
 					<div className="App">
 						<Home />
 					</div>
+				</Route>
+
+				<Route exact path="*">
+					<h1 style={{color: '#fff', textAlign: 'center'}}>PAGE NOT FOUND</h1>
 				</Route>
 			</Switch>
 		</Router>

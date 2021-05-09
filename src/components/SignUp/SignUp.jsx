@@ -19,6 +19,7 @@ const SignUp = () => {
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [signingIn, setSigningIn] = useState(false);
+	const apiURL = 'http://apex-env.eba-xpthp5pi.us-east-2.elasticbeanstalk.com';
 
 	//handle the signup request from the form 
 	const handleSignUp = async (e) => {
@@ -30,20 +31,21 @@ const SignUp = () => {
 		//send a post request to the server
 		try {
 			const user = { username, email, password };
+			
 
 			//honestly, axios makes life easier.
 			await axios
-				.post('http://192.168.1.98:9000/api/v1/auth/signup', user,
-					{headers: {
+				.post(`${apiURL}/v1/auth/signup`, user, {
+					headers: {
 						// Overwrite Axios's automatically set Content-Type
 						'Content-Type': 'application/json',
-					}}
-				)
+					},
+				})
 				// OKAY THIS SH*T WORKS 🚀
 				.then(
 					//Using axios, check the res response and look for the status
 					(res) => {
-						async function getStatus(){
+						async function getStatus() {
 							//wait to see if the status exists
 							await res.status;
 							//if the status is 201 (created), then refresh the getLoggedIn()

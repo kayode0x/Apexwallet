@@ -5,9 +5,10 @@ const AuthContext = createContext();
 
 function AuthContextProvider (props){
     const [loggedIn, setLoggedIn] = useState(undefined);
+    const apiURL = 'http://apex-env.eba-xpthp5pi.us-east-2.elasticbeanstalk.com';
 
     async function getLoggedIn() {
-        const loggedInResponse = await axios.get('http://192.168.1.98:9000/api/v1/auth/loggedin');
+        const loggedInResponse = await axios.get(`${apiURL}/api/v1/auth/loggedin`);
         setLoggedIn( loggedInResponse.data)
     }
 

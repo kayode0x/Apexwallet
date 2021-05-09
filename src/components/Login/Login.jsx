@@ -18,6 +18,8 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [loggingIn, setLoggingIn] = useState(false);
+	const apiURL = 'http://apex-env.eba-xpthp5pi.us-east-2.elasticbeanstalk.com';
+
 
 	//handle the form submit
 	const handleLogin = async (e) => {
@@ -30,9 +32,9 @@ const Login = () => {
 		try {
 			const user = { email, password };
 			await axios
-				.post('http://192.168.1.98:9000/api/v1/auth/login', user, {
+				.post(`${apiURL}/api/v1/auth/login`, user, {
 					headers: {
-						// Overwrite Axios's automatically set Content-Type
+						// Overwrite Axios' automatically set Content-Type
 						'Content-Type': 'application/json',
 					},
 				})

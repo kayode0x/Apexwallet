@@ -12,6 +12,7 @@ const Dashboard = () => {
     const { loggedIn, getLoggedIn } = useContext(AuthContext);
     const [data, setData] = useState(null)
     const [wallet, setWallet] = useState(null)
+    const apiURL = 'http://apex-env.eba-xpthp5pi.us-east-2.elasticbeanstalk.com';
 
     useEffect(() => {
         async function load() {
@@ -20,7 +21,7 @@ const Dashboard = () => {
                 history.push('/login')
             } else if (loggedIn === true){
                 try {
-					let user = await axios.get('http://192.168.1.98:9000/api/v1/user/').catch(async (err) => {
+					let user = await axios.get(`${apiURL}/api/v1/user/`).catch(async (err) => {
 						await toast.dark(`${err.response.data.message}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
@@ -32,7 +33,7 @@ const Dashboard = () => {
 				}
 
 				try {
-					let wallet = await axios.get('http://192.168.1.98:9000/api/v1/wallet/').catch(async (err) => {
+					let wallet = await axios.get(`${apiURL}/api/v1/wallet/`).catch(async (err) => {
 						await toast.dark(err.response.data.message, {
 							position: toast.POSITION.TOP_CENTER,
 						});
