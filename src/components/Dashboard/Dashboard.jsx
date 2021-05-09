@@ -12,7 +12,7 @@ const Dashboard = () => {
     const { loggedIn, getLoggedIn } = useContext(AuthContext);
     const [data, setData] = useState(null)
     const [wallet, setWallet] = useState(null)
-    const apiURL = 'http://apex-env.eba-xpthp5pi.us-east-2.elasticbeanstalk.com';
+    const apiURL = 'https://apex-backend.herokuapp.com';
 
     useEffect(() => {
         async function load() {

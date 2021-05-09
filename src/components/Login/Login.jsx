@@ -18,7 +18,7 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [loggingIn, setLoggingIn] = useState(false);
-	const apiURL = 'http://apex-env.eba-xpthp5pi.us-east-2.elasticbeanstalk.com';
+	const apiURL = 'https://apex-backend.herokuapp.com';
 
 
 	//handle the form submit
