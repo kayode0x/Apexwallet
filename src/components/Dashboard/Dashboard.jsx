@@ -20,7 +20,7 @@ const Dashboard = () => {
 				history.push('/login');
 			} else if (loggedIn === true) {
 				try {
-					let user = await axios.get(`${apiURL}/user/`).catch(async (err) => {
+					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
 						await toast.dark(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
@@ -33,7 +33,7 @@ const Dashboard = () => {
 				}
 
 				try {
-					let wallet = await axios.get(`${apiURL}/wallet/`).catch(async (err) => {
+					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
 						await toast.dark(err.response.data, {
 							position: toast.POSITION.TOP_CENTER,
 						});

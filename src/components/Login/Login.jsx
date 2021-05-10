@@ -31,7 +31,7 @@ const Login = () => {
 		try {
 			const user = { email, password };
 			await axios
-				.post(`${apiURL}/auth/login`, user)
+				.post(`${apiURL}/auth/login`, user, { withCredentials: true })
 				.then((res) => {
 					async function getStatus() {
 						//wait to see if the status exists

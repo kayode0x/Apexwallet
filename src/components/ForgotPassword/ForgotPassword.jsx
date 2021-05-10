@@ -22,7 +22,7 @@ const ForgotPassword = () => {
 
 		try {
 			await axios
-				.post(`${apiURL}/auth/forgot-password`, user)
+				.post(`${apiURL}/auth/forgot-password`, user, { withCredentials: true })
 				.then(async (res) => {
 					if (res.status === 200) {
 						setEmailSent(true);

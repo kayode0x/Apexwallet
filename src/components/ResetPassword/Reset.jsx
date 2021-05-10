@@ -36,7 +36,7 @@ const Reset = () => {
 
 			try {
 				await axios
-					.put(`${apiURL}/auth/reset-password/`, user)
+					.put(`${apiURL}/auth/reset-password/`, user, { withCredentials: true })
 					.then(async (res) => {
 						console.log('RES: ', res);
 						if (res.status === 200) {

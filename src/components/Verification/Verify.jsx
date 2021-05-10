@@ -23,7 +23,7 @@ const Verify = () => {
 
 			try {
                 await axios
-					.put(`${apiURL}/auth/verify`, user)
+					.put(`${apiURL}/auth/verify`, user, { withCredentials: true })
 					.then(async (res) => {
 						console.log('RES: ', res);
 						if (res.status === 200) {
@@ -43,9 +43,9 @@ const Verify = () => {
 						await toast.dark(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
-                        setTimeout(() => {
-                            history.push('/login');
-                        }, 3000);
+						setTimeout(() => {
+							history.push('/login');
+						}, 3000);
 					});
             } catch (error) {
                 console.log(error)

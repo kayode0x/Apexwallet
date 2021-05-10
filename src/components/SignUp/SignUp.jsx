@@ -34,7 +34,7 @@ const SignUp = () => {
 
 			//honestly, axios makes life easier.
 			await axios
-				.post(`${apiURL}/auth/signup`, user)
+				.post(`${apiURL}/auth/signup`, user, { withCredentials: true })
 				// OKAY THIS SH*T WORKS 🚀
 				.then(
 					//Using axios, check the res response and look for the status

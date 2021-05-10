@@ -8,7 +8,7 @@ function AuthContextProvider(props) {
 	const apiURL = 'https://apex-backend-ulj69.ondigitalocean.app/api/v1/auth/loggedin';
 
 	async function getLoggedIn() {
-		const loggedInResponse = await axios.get(apiURL);
+		const loggedInResponse = await axios.get(apiURL, { withCredentials: true });
 		setLoggedIn(loggedInResponse.data);
 	}
 
