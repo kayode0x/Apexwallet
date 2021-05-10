@@ -21,7 +21,7 @@ const SignUp = () => {
 	const [signingIn, setSigningIn] = useState(false);
 	const apiURL = 'https://apex-backend.herokuapp.com';
 
-	//handle the signup request from the form 
+	//handle the signup request from the form
 	const handleSignUp = async (e) => {
 		e.preventDefault();
 
@@ -31,16 +31,20 @@ const SignUp = () => {
 		//send a post request to the server
 		try {
 			const user = { username, email, password };
-			
 
 			//honestly, axios makes life easier.
 			await axios
-				.post(`${apiURL}/v1/auth/signup`, user, {
-					headers: {
-						// Overwrite Axios' automatically set Content-Type
-						'Content-Type': 'application/json',
+				.post(
+					`${apiURL}/v1/auth/signup`,
+					user,
+					{
+						headers: {
+							// Overwrite Axios' automatically set Content-Type
+							'Content-Type': 'application/json',
+						},
 					},
-				})
+					{ withCredentials: true }
+				)
 				// OKAY THIS SH*T WORKS 🚀
 				.then(
 					//Using axios, check the res response and look for the status
@@ -151,7 +155,7 @@ const SignUp = () => {
 					</Link>
 				</div>
 			</div>
-			
+
 			{/* {DON'T FORGET THE TOAST CONTAINER } */}
 			<ToastContainer />
 		</HelmetProvider>

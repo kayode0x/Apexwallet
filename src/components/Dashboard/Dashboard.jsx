@@ -21,7 +21,7 @@ const Dashboard = () => {
                 history.push('/login')
             } else if (loggedIn === true){
                 try {
-					let user = await axios.get(`${apiURL}/api/v1/user/`).catch(async (err) => {
+					let user = await axios.get(`${apiURL}/api/v1/user/`, {withCredentials: true}).catch(async (err) => {
 						await toast.dark(`${err.response.data.message}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});

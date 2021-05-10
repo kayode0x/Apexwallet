@@ -32,12 +32,17 @@ const Login = () => {
 		try {
 			const user = { email, password };
 			const axy = await axios
-				.post(`${apiURL}/api/v1/auth/login`, user, {
-					headers: {
-						// Overwrite Axios' automatically set Content-Type
-						'Content-Type': 'application/json',
+				.post(
+					`${apiURL}/api/v1/auth/login`,
+					user,
+					{
+						headers: {
+							// Overwrite Axios' automatically set Content-Type
+							'Content-Type': 'application/json',
+						},
 					},
-				})
+					{ withCredentials: true }
+				)
 				.then((res) => {
 					async function getStatus() {
 						//wait to see if the status exists
