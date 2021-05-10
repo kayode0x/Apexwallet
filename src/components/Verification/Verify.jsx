@@ -19,7 +19,7 @@ const Verify = () => {
 			const urlParams = new URLSearchParams(queryString);
 			const token = urlParams.get('token');
 			const user = { token };
-			const apiURL = 'http://localhost:9000/api/v1';
+			const apiURL = 'https://apex-backend-ulj69.ondigitalocean.app/api/v1';
 
 			try {
                 await axios

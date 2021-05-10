@@ -19,7 +19,7 @@ const SignUp = () => {
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [signingIn, setSigningIn] = useState(false);
-	const apiURL = 'http://localhost:9000/api/v1';
+	const apiURL = 'https://apex-backend-ulj69.ondigitalocean.app/api/v1';
 
 	//handle the signup request from the form
 	const handleSignUp = async (e) => {

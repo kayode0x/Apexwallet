@@ -11,7 +11,7 @@ const Dashboard = () => {
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [user, setUser] = useState(null);
 	const [wallet, setWallet] = useState(null);
-	const apiURL = 'http://localhost:9000/api/v1';
+	const apiURL = 'https://apex-backend-ulj69.ondigitalocean.app/api/v1';
 
 	useEffect(() => {
 		async function load() {
