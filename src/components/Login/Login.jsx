@@ -18,8 +18,7 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [loggingIn, setLoggingIn] = useState(false);
-	const apiURL = 'https://apex-backend.herokuapp.com';
-
+	const apiURL = 'http://localhost:9000/api/v1';
 
 	//handle the form submit
 	const handleLogin = async (e) => {
@@ -31,18 +30,8 @@ const Login = () => {
 		//use try catch to prevent open hole
 		try {
 			const user = { email, password };
-			const axy = await axios
-				.post(
-					`${apiURL}/api/v1/auth/login`,
-					user,
-					{
-						headers: {
-							// Overwrite Axios' automatically set Content-Type
-							'Content-Type': 'application/json',
-						},
-					},
-					{ withCredentials: true }
-				)
+			await axios
+				.post(`${apiURL}/auth/login`, user)
 				.then((res) => {
 					async function getStatus() {
 						//wait to see if the status exists
@@ -59,18 +48,15 @@ const Login = () => {
 				})
 				.catch(async (err) => {
 					//if error, display the custom error message from the server with toastify.
-					await toast.dark(`${err.response.data.message}`, {
+					await toast.dark(`${err.response.data}`, {
 						position: toast.POSITION.TOP_CENTER,
 					});
 				});
 
-				console.log(axy)
-				console.log(axy.data)
-
 			//after the try operation, stop the button animation
 			setLoggingIn(false);
 		} catch (error) {
-			console.log('ERROR' + error.response);
+			console.log('ERROR' + error);
 			setLoggingIn(false);
 		}
 	};

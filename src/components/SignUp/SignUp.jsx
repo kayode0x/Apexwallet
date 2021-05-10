@@ -19,7 +19,7 @@ const SignUp = () => {
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [signingIn, setSigningIn] = useState(false);
-	const apiURL = 'https://apex-backend.herokuapp.com';
+	const apiURL = 'http://localhost:9000/api/v1';
 
 	//handle the signup request from the form
 	const handleSignUp = async (e) => {
@@ -34,17 +34,7 @@ const SignUp = () => {
 
 			//honestly, axios makes life easier.
 			await axios
-				.post(
-					`${apiURL}/v1/auth/signup`,
-					user,
-					{
-						headers: {
-							// Overwrite Axios' automatically set Content-Type
-							'Content-Type': 'application/json',
-						},
-					},
-					{ withCredentials: true }
-				)
+				.post(`${apiURL}/auth/signup`, user)
 				// OKAY THIS SH*T WORKS 🚀
 				.then(
 					//Using axios, check the res response and look for the status
@@ -66,7 +56,7 @@ const SignUp = () => {
 				//if there is an error from the server, display it
 				.catch(async (err) => {
 					//toastify ROCKS!!
-					await toast.dark(`${err.response.data.message}`, {
+					await toast.dark(`${err.response.data}`, {
 						position: toast.POSITION.TOP_CENTER,
 					});
 				});

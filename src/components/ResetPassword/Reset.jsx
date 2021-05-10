@@ -1,57 +1,83 @@
-import './Reset.scss'
+import './Reset.scss';
 import astronaut from '../../assets/logo/astronaut-ingravity.svg';
 import { useState } from 'react';
 import { RotateSpinner } from 'react-spinners-kit';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Reset = () => {
-    const history = useHistory();
+	const history = useHistory();
 
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
-    const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
+	const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
 	const [resetting, setResetting] = useState(false);
+	const apiURL = 'http://localhost:9000/api/v1';
 
-    const handleReset = (e) => {
+	const handleReset = async (e) => {
 		e.preventDefault();
 
-        if (password !== confirmPassword){
-            alert('Passwords do not match')
-        } else {
-            setResetting(true);
-			const user = { password, confirmPassword };
-			console.log(JSON.stringify(user));
-			setPassword('');
-			setConfirmPassword('');
+		if (password !== confirmPassword) {
+			toast.dark('Passwords do not match', {
+				position: toast.POSITION.TOP_CENTER,
+			});
+		} else {
+			setResetting(true);
 
-			setTimeout(() => {
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const token = urlParams.get('token');
+			const user = { password, confirmPassword, token };
+
+			try {
+				await axios
+					.put(`${apiURL}/auth/reset-password/`, user)
+					.then(async (res) => {
+						console.log('RES: ', res);
+						if (res.status === 200) {
+							await toast.dark(`${res.data}`, {
+								position: toast.POSITION.TOP_CENTER,
+							});
+							history.push('/login');
+						}
+					})
+					.catch(async (err) => {
+						//if error, display the custom error message from the server with toastify.
+						await toast.dark(`${err.response.data}`, {
+							position: toast.POSITION.TOP_CENTER,
+						});
+					});
+
 				setResetting(false);
-				history.push('/login');
-			}, 3000);
-        }
+			} catch (error) {
+				await toast.dark(`${error}`, {
+					position: toast.POSITION.TOP_CENTER,
+				});
 
+				setResetting(false);
+			}
+		}
 	};
 
 	const togglePassword = () => {
 		setPasswordVisible(!passwordVisible);
 	};
 
-    const togglePasswordConfirm = () => {
+	const togglePasswordConfirm = () => {
 		setPasswordConfirmVisible(!passwordConfirmVisible);
 	};
 
-    return (
+	return (
 		<HelmetProvider>
 			<div className="reset">
-			<Helmet>
-				<title>
-					Reset Password - Apex
-				</title>
-			</Helmet>
+				<Helmet>
+					<title>Reset Password - Apex</title>
+				</Helmet>
 				<div className="container">
 					<div className="header">Reset Password </div>
 
@@ -69,6 +95,7 @@ const Reset = () => {
 								name="password"
 								placeholder="Chose a strong password"
 								required
+								minLength="6"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 							/>
@@ -89,6 +116,7 @@ const Reset = () => {
 								name="confirmPassword"
 								placeholder="Chose a strong password"
 								required
+								minLength="6"
 								value={confirmPassword}
 								onChange={(e) => setConfirmPassword(e.target.value)}
 							/>
@@ -107,8 +135,10 @@ const Reset = () => {
 					</form>
 				</div>
 			</div>
+			{/* {DON'T FORGET THE TOASTIFY} */}
+			<ToastContainer />
 		</HelmetProvider>
 	);
-}
+};
 
 export default Reset;

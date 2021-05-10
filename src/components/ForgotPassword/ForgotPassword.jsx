@@ -5,23 +5,44 @@ import { RotateSpinner } from 'react-spinners-kit';
 import { Link } from 'react-router-dom';
 import { IoChevronBack } from 'react-icons/io5';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ForgotPassword = () => {
 	const [email, setEmail] = useState('');
 	const [resetting, setResetting] = useState(false);
 	const [emailSent, setEmailSent] = useState(false);
+	const apiURL = 'http://localhost:9000/api/v1';
 
-	const handleLogin = (e) => {
+	const handleLogin = async (e) => {
 		e.preventDefault();
 		setResetting(true);
 		const user = { email };
-		console.log(JSON.stringify(user));
-		setEmail('');
 
-		setTimeout(() => {
-			setResetting(false);
-			setEmailSent(true);
-		}, 3000);
+		try {
+			await axios
+				.post(`${apiURL}/auth/forgot-password`, user)
+				.then(async (res) => {
+					if (res.status === 200) {
+						setEmailSent(true);
+						await toast.dark(`${res.data}`, {
+							position: toast.POSITION.TOP_CENTER,
+						});
+					}
+				})
+				.catch(async (err) => {
+					//if error, display the custom error message from the server with toastify.
+					await toast.dark(`${err.response.data}`, {
+						position: toast.POSITION.TOP_CENTER,
+					});
+				});
+		} catch (error) {
+			await toast.dark(`${error}`, {
+				position: toast.POSITION.TOP_CENTER,
+			});
+		}
+		setResetting(false);
 	};
 
 	return (
@@ -40,7 +61,7 @@ const ForgotPassword = () => {
 
 					{emailSent ? (
 						<div className="resentTrue">
-							A password reset link has been sent to your email address, click the link to continue. 🚀
+							Check your email for further instructions 🚀
 						</div>
 					) : (
 						<form onSubmit={handleLogin}>
@@ -68,6 +89,8 @@ const ForgotPassword = () => {
 					</Link>
 				</div>
 			</div>
+			{/* {DON'T FORGET THE TOASTIFY} */}
+			<ToastContainer />
 		</HelmetProvider>
 	);
 };

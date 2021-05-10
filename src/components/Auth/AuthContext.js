@@ -5,10 +5,10 @@ const AuthContext = createContext();
 
 function AuthContextProvider(props) {
 	const [loggedIn, setLoggedIn] = useState(undefined);
-	const apiURL = 'https://apex-backend.herokuapp.com/api/v1/auth/loggedin';
+	const apiURL = 'http://localhost:9000/api/v1/auth/loggedin';
 
 	async function getLoggedIn() {
-		const loggedInResponse = await axios.get(apiURL, { withCredentials: true });
+		const loggedInResponse = await axios.get(apiURL);
 		setLoggedIn(loggedInResponse.data);
 	}
 

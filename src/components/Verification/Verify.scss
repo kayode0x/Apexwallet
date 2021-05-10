@@ -1,0 +1,120 @@
+$mainColor: #000000;
+$subColor: #070707;
+$textColor: #ebebeb;
+$subTextColor: rgb(212, 212, 212);
+$blue: #2f52e0;
+$lightBlue: #4e6ce4;
+
+.verify {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 3rem;
+	@media (max-width: 768px) and (orientation: landscape) {
+		margin-bottom: 5rem;
+	}
+
+	@media (min-width: 768px) {
+		height: 95vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 30rem;
+		width: 100%;
+		margin-top: 8rem;
+		@media (min-width: 768px) {
+			margin-top: -10rem;
+		}
+
+		.assets {
+			position: absolute;
+			z-index: -2;
+			top: -10%;
+			left: -10%;
+			@media (max-width: 481px) {
+				top: 0%;
+				left: 0%;
+			}
+			@media (min-width: 768px) and (max-width: 1024px) {
+				top: 0%;
+				left: 0%;
+			}
+
+			img {
+				position: absolute;
+				height: 4rem;
+				top: 50%;
+				left: 100%;
+				transform: rotate(-20deg) scaleX(-1);
+				color: $textColor;
+				animation: astronautAnim 5s ease-in-out infinite forwards;
+				@media (max-width: 481px) {
+					height: 3rem;
+				}
+				@media (max-width: 768px) and (orientation: landscape) {
+					top: 30%;
+				}
+
+				@keyframes astronautAnim {
+					0% {
+						transform: translateY(0%) rotate(-20deg) scaleX(-1);
+					}
+
+					25% {
+						transform: translateY(10%) rotate(-20deg) scaleX(-1);
+					}
+
+					50% {
+						transform: translateY(-10%) rotate(-20deg) scaleX(-1);
+					}
+
+					75% {
+						transform: translateY(10%) rotate(-20deg) scaleX(-1);
+					}
+
+					100% {
+						transform: translateY(0%) rotate(-20deg) scaleX(-1);
+					}
+				}
+			}
+
+			.circle {
+				height: 30rem;
+				width: 30rem;
+				opacity: 1;
+				border-radius: 100%;
+				background: linear-gradient(to left, $blue, #b8c4f4);
+				animation: circleAnim 5s ease-in-out infinite forwards;
+				@keyframes circleAnim {
+					from {
+						transform: rotate(0deg);
+					}
+					to {
+						transform: rotate(360deg);
+					}
+				}
+				@media (max-width: 768px) {
+					height: 20rem;
+					width: 20rem;
+				}
+				@media (max-width: 481px) {
+					height: 16rem;
+					width: 16rem;
+				}
+			}
+		}
+
+        .verifying {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+	}
+}

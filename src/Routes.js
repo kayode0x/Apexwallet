@@ -9,6 +9,7 @@ import Reset from './components/ResetPassword/Reset';
 // import { useContext } from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
+import Verify from './components/Verification/Verify';
 
 
 const Routes = () => {
@@ -41,8 +42,12 @@ const Routes = () => {
 					<ForgotPassword />
 				</Route>
 
-				<Route exact path="/reset-password/:resetToken">
+				<Route path="/reset">
 					<Reset />
+				</Route>
+
+				<Route path="/verify">
+					<Verify />
 				</Route>
 
 				<Route exact path="/">
@@ -51,7 +56,7 @@ const Routes = () => {
 					</div>
 				</Route>
 
-				<Route exact path="*">
+				<Route path="*">
 					<h1 style={{color: '#fff', textAlign: 'center'}}>PAGE NOT FOUND</h1>
 				</Route>
 			</Switch>
