@@ -5,10 +5,15 @@ const AuthContext = createContext();
 
 function AuthContextProvider(props) {
 	const [loggedIn, setLoggedIn] = useState(undefined);
-	const apiURL = 'https://apex-backend-ulj69.ondigitalocean.app/api/v1/auth/loggedin';
+	const apiURL = 'https://api.apexwallet.app/api/v1/auth/loggedin';
 
 	async function getLoggedIn() {
-		const loggedInResponse = await axios.get(apiURL, { withCredentials: true });
+		const loggedInResponse = await axios.get(apiURL, {
+			headers: {
+				'content-type': 'application/json',
+			}
+		}, { withCredentials: true });
+		console.log(loggedInResponse);
 		setLoggedIn(loggedInResponse.data);
 	}
 

@@ -18,7 +18,7 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [loggingIn, setLoggingIn] = useState(false);
-	const apiURL = 'https://apex-backend-ulj69.ondigitalocean.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/api/v1';
 
 	//handle the form submit
 	const handleLogin = async (e) => {

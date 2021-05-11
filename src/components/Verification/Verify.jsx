@@ -19,7 +19,7 @@ const Verify = () => {
 			const urlParams = new URLSearchParams(queryString);
 			const token = urlParams.get('token');
 			const user = { token };
-			const apiURL = 'https://apex-backend-ulj69.ondigitalocean.app/api/v1';
+			const apiURL = 'https://api.apexwallet.app/api/v1';
 
 			try {
                 await axios

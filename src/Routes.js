@@ -18,7 +18,7 @@ const Routes = () => {
 	// const { getLoggedIn, loggedIn } = useContext(AuthContext);
 
 	// async function handleLogOut() {
-	// 	await axios.get('http://localhost:9000/api/v1/auth/logout');
+	// 	await axios.get('https://api.apexwallet.app/api/v1/auth/logout');
 	// 	await getLoggedIn();
 	// 	history.push('/login');
 	// }
@@ -57,7 +57,7 @@ const Routes = () => {
 				</Route>
 
 				<Route path="*">
-					<h1 style={{color: '#fff', textAlign: 'center'}}>PAGE NOT FOUND</h1>
+					<h1 style={{ color: '#fff', textAlign: 'center' }}>PAGE NOT FOUND</h1>
 				</Route>
 			</Switch>
 		</Router>

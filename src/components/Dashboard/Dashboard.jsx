@@ -11,7 +11,7 @@ const Dashboard = () => {
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [user, setUser] = useState(null);
 	const [wallet, setWallet] = useState(null);
-	const apiURL = 'https://apex-backend-ulj69.ondigitalocean.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/api/v1';
 
 	useEffect(() => {
 		async function load() {
@@ -54,10 +54,10 @@ const Dashboard = () => {
 				<div>
 					{user && (
 						<>
-							<h1>{user.name ? user.name : 'Name pls'}</h1>
-							<h1>{user.username ? user.username : 'username pls'}</h1>
-							<h1>{user.email}</h1>
-							<h1>{user.image ? user.image : 'Image Pls'}</h1>
+							<h1>{user.name ? user.name : 'No name yet'}</h1>
+							<h1>{user.username ? `Username: ${user.username}` : 'username pls'}</h1>
+							<h1>{user.email ? `Email: ${user.email}` : 'email pls'}</h1>
+							<h1>{user.image ? user.image : 'No image yet'}</h1>
 						</>
 					)}
 					{wallet && (

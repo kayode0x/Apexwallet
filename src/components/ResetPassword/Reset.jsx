@@ -17,7 +17,7 @@ const Reset = () => {
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
 	const [resetting, setResetting] = useState(false);
-	const apiURL = 'https://apex-backend-ulj69.ondigitalocean.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/api/v1';
 
 	const handleReset = async (e) => {
 		e.preventDefault();

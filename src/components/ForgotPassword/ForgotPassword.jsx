@@ -13,7 +13,7 @@ const ForgotPassword = () => {
 	const [email, setEmail] = useState('');
 	const [resetting, setResetting] = useState(false);
 	const [emailSent, setEmailSent] = useState(false);
-	const apiURL = 'https://apex-backend-ulj69.ondigitalocean.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/api/v1';
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
