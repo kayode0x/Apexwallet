@@ -19,7 +19,7 @@ const BottomNav = () => {
 				<Link to="/dashboard" className={splitLocation[1] === 'dashboard' ? 'active homeIcon' : 'homeIcon'}>
 					{splitLocation[1] === 'dashboard' ? <RiHome4Fill /> : <RiHome4Line />}
 				</Link>
-				<Link to="#" className="market">
+				<Link to="/market" className={splitLocation[1] === 'market' ? 'active marketIcon' : 'marketIcon'}>
 					<IoStatsChart />
 				</Link>
 				<Link to="#" className="tradeIcon">
@@ -28,7 +28,7 @@ const BottomNav = () => {
 				<Link to="wallet" className={splitLocation[1] === 'wallet' ? 'active walletIcon' : 'walletIcon'}>
 					{splitLocation[1] === 'wallet' ? <IoWallet /> : <IoWalletOutline />}
 				</Link>
-				<Link to="#" className="profile">
+				<Link to="#" className="profileIcon">
 					<RiUser3Line />
 					{/* <RiUser3Fill /> */}
 				</Link>

@@ -8,6 +8,7 @@ import './App.css';
 import Dashboard from './pages/Portfolio/Dashboard/Dashboard';
 import Verify from './pages/Verification/Verify';
 import Wallet from './pages/Portfolio/Wallet/Wallet';
+import Market from './pages/Portfolio/Market/Market';
 
 
 const Routes = () => {
@@ -20,6 +21,9 @@ const Routes = () => {
 				</Route>
 				<Route exact path="/wallet">
 					<Wallet />
+				</Route>
+				<Route exact path="/market">
+					<Market />
 				</Route>
 
 				<Route exact path="/signup">
