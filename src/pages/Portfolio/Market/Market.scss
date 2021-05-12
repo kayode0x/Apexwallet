@@ -1,0 +1,23 @@
+$mainColor: #000000;
+$subColor: #070707;
+$textColor: #ebebeb;
+$subTextColor: rgb(212, 212, 212);
+$blue: #2f52e0;
+$lightBlue: #4e6ce4;
+
+.market {
+    display: flex;
+	justify-content: center;
+	margin-bottom: 3rem;
+	@media (max-width: 768px) and (orientation: landscape) {
+		margin-bottom: 5rem;
+	}
+
+	@media (min-width: 768px) {
+		height: 95vh;
+		width: 100%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+	}
+}

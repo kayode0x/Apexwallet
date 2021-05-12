@@ -1,0 +1,116 @@
+$mainColor: #000000;
+$subColor: #070707;
+$textColor: #ebebeb;
+$subTextColor: rgb(212, 212, 212);
+$blue: #2f52e0;
+$lightBlue: #4e6ce4;
+
+.wallet {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 3rem;
+	@media (max-width: 768px) and (orientation: landscape) {
+		margin-bottom: 5rem;
+	}
+
+	@media (min-width: 768px) {
+		height: 95vh;
+		width: 100%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+	}
+
+	.container {
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+		padding: 0 1rem;
+
+		@media (min-width: 768px) {
+			max-width: 1000px;
+			width: 100%;
+			padding: 2rem 5rem;
+			margin-left: 2rem;
+			align-items: flex-start;
+			justify-content: center;
+		}
+
+		.loading {
+			position: absolute;
+			top: 45%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.header {
+			color: $textColor;
+			display: flex;
+			text-align: left;
+			align-self: flex-start;
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
+
+		.notActive {
+			background-image: linear-gradient(111.6deg, rgba(174, 68, 223, 1) 27.3%, rgba(246, 135, 135, 1) 112.7%);
+
+			padding: 1rem;
+			border-radius: 5px;
+			color: $textColor;
+			text-align: center;
+			max-width: 20rem;
+
+			@media (min-width: 768px) {
+				position: absolute;
+				top: 40%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.leadText {
+				font-size: 1.35rem;
+				font-weight: bold;
+				margin-top: 0.25rem;
+			}
+
+			.subText {
+				margin-top: -0.5rem;
+				font-size: 0.95rem;
+				font-weight: 500;
+				font-weight: bold;
+			}
+
+			.thirdText {
+				background: rgba(0, 0, 0, 0.3);
+				height: 3rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 5px;
+				margin-bottom: 0rem;
+				font-size: 0.95rem;
+				font-weight: 550;
+			}
+		}
+
+		.notActive2 {
+			color: rgb(83, 83, 83);
+			font-weight: bold;
+			text-align: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 100%;
+			transform: translate(-50%, -50%);
+			@media (min-width: 768px) {
+				max-width: 20rem;
+				position: absolute;
+				top: 55%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+		}
+	}
+}

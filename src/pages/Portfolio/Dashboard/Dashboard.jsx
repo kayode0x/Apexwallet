@@ -1,17 +1,21 @@
 import './Dashboard.scss';
-import AuthContext from '../Auth/AuthContext';
+import AuthContext from '../../../components/Auth/AuthContext';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { RotateSpinner } from 'react-spinners-kit';
+import BottomNav from '../../../components/BottomNav/BottomNav';
 
 const Dashboard = () => {
 	const history = useHistory();
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [user, setUser] = useState(null);
-	const [wallet, setWallet] = useState(null);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
+	//breakpoint set at mobile only
+	const matches = useMediaQuery('(max-width:767px)');
 
 	useEffect(() => {
 		async function load() {
@@ -26,22 +30,9 @@ const Dashboard = () => {
 						});
 					});
 					setUser(user.data);
-					console.log(user);
-					
+					console.log(user.data);
 				} catch (error) {
 					console.log('ERROR' + error.response);
-				}
-
-				try {
-					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
-						await toast.dark(err.response.data, {
-							position: toast.POSITION.TOP_CENTER,
-						});
-					});
-					setWallet(wallet.data);
-					console.log(wallet);
-				} catch (error) {
-					console.log('ERROR2: ', error);
 				}
 			}
 		}
@@ -50,23 +41,28 @@ const Dashboard = () => {
 
 	return (
 		<div className="dashboard">
-			{loggedIn === true && (
-				<div>
-					{user && (
-						<>
-							<h1>{user.name ? user.name : 'No name yet'}</h1>
-							<h1>{user.username ? `Username: ${user.username}` : 'username pls'}</h1>
-							<h1>{user.email ? `Email: ${user.email}` : 'email pls'}</h1>
-							<h1>{user.image ? user.image : 'No image yet'}</h1>
-						</>
-					)}
-					{wallet && (
-						<>
-							<h1>{wallet ? wallet : ''}</h1>
-						</>
-					)}
-				</div>
-			)}
+			<div className="container">
+				<p className="header">Home</p>
+				{user ? (
+					<div className="notActive">
+						{user.isActive === false && (
+							<>
+								<p className="leadText">Verify your account</p>
+								<p className="subText">
+									Welcome to the crypto world, as a new user, you need to verify your account before
+									doing anything.
+								</p>
+								<p className="thirdText">Check your email 😉</p>
+							</>
+						)}
+					</div>
+				) : (
+					<div className="loading">
+						<RotateSpinner size={40} color="#fff" />
+					</div>
+				)}
+			</div>
+			<BottomNav />
 			<ToastContainer />
 		</div>
 	);

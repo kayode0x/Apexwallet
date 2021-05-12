@@ -1,33 +1,25 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; //useHistory
-import Home from './components/Home/Home';
-import SignUp from './components/SignUp/SignUp';
-import Login from './components/Login/Login';
-import ForgotPassword from './components/ForgotPassword/ForgotPassword';
-import Reset from './components/ResetPassword/Reset';
-// import axios from 'axios';
-// import AuthContext from './components/Auth/AuthContext';
-// import { useContext } from 'react';
+import LandingPage from './pages/LandingPage/LandingPage';
+import SignUp from './pages/SignUp/SignUp';
+import Login from './pages/Login/Login'
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import Reset from './pages/ResetPassword/Reset';
 import './App.css';
-import Dashboard from './components/Dashboard/Dashboard';
-import Verify from './components/Verification/Verify';
+import Dashboard from './pages/Portfolio/Dashboard/Dashboard';
+import Verify from './pages/Verification/Verify';
+import Wallet from './pages/Portfolio/Wallet/Wallet';
 
 
 const Routes = () => {
-	// const history = useHistory();
-
-	// const { getLoggedIn, loggedIn } = useContext(AuthContext);
-
-	// async function handleLogOut() {
-	// 	await axios.get('https://api.apexwallet.app/api/v1/auth/logout');
-	// 	await getLoggedIn();
-	// 	history.push('/login');
-	// }
 
 	return (
 		<Router>
 			<Switch>
 				<Route exact path="/dashboard">
 					<Dashboard />
+				</Route>
+				<Route exact path="/wallet">
+					<Wallet />
 				</Route>
 
 				<Route exact path="/signup">
@@ -52,7 +44,7 @@ const Routes = () => {
 
 				<Route exact path="/">
 					<div className="App">
-						<Home />
+						<LandingPage />
 					</div>
 				</Route>
 

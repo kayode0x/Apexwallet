@@ -1,12 +1,12 @@
-import './Home.scss'
+import './LandingPage.scss';
 import rocketLogo from '../../assets/logo/appl-1f680-160.png'
 import { Link } from 'react-router-dom';
 
-const Home = () => {
-    return (
+const LandingPage = () => {
+	return (
 		<>
 			{/* <div id="stars"></div> */}
-			<div className="home">
+			<div className="landingPage">
 				<div className="mainContainer">
 					<div className="logo">
 						<img src={rocketLogo} alt="rocket" />
@@ -31,6 +31,6 @@ const Home = () => {
 			</div>
 		</>
 	);
-}
+};
 
-export default Home;
+export default LandingPage;
