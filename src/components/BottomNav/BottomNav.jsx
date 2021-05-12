@@ -15,7 +15,6 @@ const BottomNav = () => {
 
 	return (
 		<div className="navbar">
-			<div className="navContainer">
 				<Link to="/dashboard" className={splitLocation[1] === 'dashboard' ? 'active homeIcon' : 'homeIcon'}>
 					{splitLocation[1] === 'dashboard' ? <RiHome4Fill /> : <RiHome4Line />}
 				</Link>
@@ -32,7 +31,6 @@ const BottomNav = () => {
 					<RiUser3Line />
 					{/* <RiUser3Fill /> */}
 				</Link>
-			</div>
 		</div>
 	);
 };

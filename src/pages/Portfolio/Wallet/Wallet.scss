@@ -28,6 +28,10 @@ $lightBlue: #4e6ce4;
 		align-items: center;
 		padding: 0 1rem;
 
+		@media screen and (max-width: 812px) and (orientation:landscape) {
+			
+		}
+
 		@media (min-width: 768px) {
 			max-width: 1000px;
 			width: 100%;
@@ -63,10 +67,10 @@ $lightBlue: #4e6ce4;
 			max-width: 20rem;
 
 			@media (min-width: 768px) {
-				position: absolute;
-				top: 40%;
-				left: 50%;
-				transform: translate(-50%, -50%);
+				// position: absolute;
+				// top: 40%;
+				// left: 50%;
+				// transform: translate(-50%, -50%);
 			}
 
 			.leadText {
@@ -99,18 +103,6 @@ $lightBlue: #4e6ce4;
 			color: rgb(83, 83, 83);
 			font-weight: bold;
 			text-align: center;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			width: 100%;
-			transform: translate(-50%, -50%);
-			@media (min-width: 768px) {
-				max-width: 20rem;
-				position: absolute;
-				top: 55%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-			}
 		}
 	}
 }
