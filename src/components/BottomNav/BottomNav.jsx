@@ -24,12 +24,11 @@ const BottomNav = () => {
 				<Link to="#" className="tradeIcon">
 					<BsArrowUpDown />
 				</Link>
-				<Link to="wallet" className={splitLocation[1] === 'wallet' ? 'active walletIcon' : 'walletIcon'}>
+				<Link to="/wallet" className={splitLocation[1] === 'wallet' ? 'active walletIcon' : 'walletIcon'}>
 					{splitLocation[1] === 'wallet' ? <IoWallet /> : <IoWalletOutline />}
 				</Link>
-				<Link to="#" className="profileIcon">
-					<RiUser3Line />
-					{/* <RiUser3Fill /> */}
+				<Link to="/account" className={splitLocation[1] === 'account' ? 'active accountIcon' : 'accountIcon'}>
+					{splitLocation[1] === 'account' ? <RiUser3Fill /> : <RiUser3Line />}
 				</Link>
 		</div>
 	);

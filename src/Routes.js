@@ -10,6 +10,7 @@ import Verify from './pages/Verification/Verify';
 import Wallet from './pages/Portfolio/Wallet/Wallet';
 import Market from './pages/Portfolio/Market/Market';
 import Coin from './components/Coin/Coin';
+import Account from './pages/Portfolio/Account/Account';
 
 
 const Routes = () => {
@@ -29,6 +30,10 @@ const Routes = () => {
 
 				<Route exact path="/market/:coin">
 					<Coin />
+				</Route>
+
+				<Route exact path="/account">
+					<Account />
 				</Route>
 
 				<Route exact path="/signup">

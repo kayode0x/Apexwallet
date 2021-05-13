@@ -49,20 +49,30 @@ $lightBlue: #4e6ce4;
 			display: flex;
 			text-align: left;
 			align-self: flex-start;
+            justify-content: center;
 			font-size: 1.5rem;
 			font-weight: bold;
             text-transform: capitalize;
+
+            img {
+                margin-left: 1rem;
+                height: 2rem;
+                width: 2rem;
+            }
 		}
 
-		.notActive {
+		.graphDiv {
 			background-color: #4158d0;
 			background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
-
-			padding: 1rem;
+            height: 22rem;
+            font-weight: bold;
+            width: 100%;
 			border-radius: 5px;
 			color: $textColor;
 			text-align: center;
-			max-width: 20rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
 			.leadText {
 				font-size: 1.35rem;

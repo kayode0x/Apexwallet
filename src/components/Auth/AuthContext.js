@@ -13,7 +13,6 @@ function AuthContextProvider(props) {
 				'content-type': 'application/json',
 			}
 		}, { withCredentials: true });
-		console.log(loggedInResponse);
 		setLoggedIn(loggedInResponse.data);
 	}
 

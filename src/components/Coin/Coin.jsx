@@ -12,25 +12,26 @@ import BottomNav from '../BottomNav/BottomNav';
 import { BsStarFill, BsStar } from 'react-icons/bs';
 
 const Coin = () => {
-
-    const location = useLocation();
+	const location = useLocation();
 	const { pathname } = location;
 	const splitLocation = pathname.split('/');
-    const coinSearchId = splitLocation[2]
+	const coinSearchId = splitLocation[2];
 
-    const history = useHistory();
+	const history = useHistory();
 	const matches = useMediaQuery('(min-width:1171px)');
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [wallet, setWallet] = useState(null);
 	const [canTrade, setCanTrade] = useState(false);
 	const [asset, setAsset] = useState(null);
 	const [user, setUser] = useState(null);
-    const [days, setDays] = useState(7)
+	const [days, setDays] = useState(7);
+	const [coinInfo, setCoinInfo] = useState(null);
 
-    const coingeckoApi = `https://api.coingecko.com/api/v3/coins/${coinSearchId}/market_chart?vs_currency=usd&days=${days}`;
-    const apiURL = 'https://api.apexwallet.app/api/v1'
+	const coingeckoApi = `https://api.coingecko.com/api/v3/coins/${coinSearchId}/market_chart?vs_currency=usd&days=${days}`;
+	const coingeckoDataApi = `https://api.coingecko.com/api/v3/coins/${coinSearchId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=true`;
+	const apiURL = 'https://api.apexwallet.app/api/v1';
 
-    useEffect(() => {
+	useEffect(() => {
 		async function load() {
 			await getLoggedIn();
 			if (loggedIn === false) {
@@ -43,7 +44,7 @@ const Coin = () => {
 						});
 					});
 					setUser(user.data);
-					console.log(user.data);
+					// console.log(user.data);
 					if (user.data.isActive === false) {
 						setCanTrade(false);
 					}
@@ -60,10 +61,28 @@ const Coin = () => {
 					})
 						.then((response) => response.json())
 						.then((data) => {
-                            console.log("GRAPH: ", data.prices);
+							// console.log("GRAPH: ", data.prices);
 							setAsset(data);
 						})
-                        .catch((error) => {console.log("ERROR: ", error)})
+						.catch((error) => {
+							console.log('ERROR: ', error);
+						});
+				} catch (error) {
+					console.log('ERROR: ' + error);
+				}
+
+				try {
+					await fetch(coingeckoDataApi, {
+						method: 'GET',
+						headers: {
+							'content-type': 'application/json',
+						},
+					})
+						.then((response) => response.json())
+						.then((data) => {
+							console.log('DATA: ', data);
+							setCoinInfo(data);
+						});
 				} catch (error) {
 					console.log('ERROR: ' + error);
 				}
@@ -71,27 +90,17 @@ const Coin = () => {
 		}
 
 		load();
-	}, [getLoggedIn, loggedIn, history, coingeckoApi]);
+	}, [getLoggedIn, loggedIn, history, coingeckoApi, coingeckoDataApi]);
 
-
-
-    return (
+	return (
 		<div className="coin">
 			<div className="container">
-				<p className="header">{coinSearchId}</p>
-				{user ? (
-					<div className="notActive">
-						{user.isActive === false && (
-							<>
-								<p className="leadText">Verify your account</p>
-								<p className="subText">
-									Welcome to the crypto world, as a new user, you need to verify your account before
-									doing anything.
-								</p>
-								<p className="thirdText">Check your email 😉</p>
-							</>
-						)}
-					</div>
+				<p className="header">
+					{coinSearchId}
+					{coinInfo && <img src={coinInfo.image.large} alt={coinInfo.symbol} />}
+				</p>
+				{coinInfo ? (
+					<>{asset && <>{user && <div className="graphDiv">GRAPH WOULD GO HERE</div>}</>}</>
 				) : (
 					<div className="loading">
 						<RotateSpinner size={40} color="#fff" />

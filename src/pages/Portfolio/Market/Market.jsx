@@ -179,7 +179,7 @@ const Market = () => {
 											<Link
 												className="coinList"
 												key={coin.id}
-												onClick={() => console.log('Clicked Coin: ', coin)}
+												// onClick={() => console.log('Clicked Coin: ', coin)}
                                                 to={`/market/${coin.id}`}
 											>
 												<div className="imageAndName">
@@ -209,7 +209,7 @@ const Market = () => {
 											</Link>
 										))}
 									</div>
-									{matches && <div className="marketTrade">cccc</div>}
+									{matches && <div className="marketTrade"></div>}
 								</div>
 							</>
 						)}
