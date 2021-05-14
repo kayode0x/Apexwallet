@@ -11,7 +11,7 @@ $lightBlue: #4e6ce4;
 	justify-content: center;
 	height: 100vh;
 	@media (max-width: 767px) {
-		margin-bottom: 7rem;
+		margin-bottom: 10rem;
 	}
 	@media (min-width: 768px) {
 		height: 95vh;
@@ -29,7 +29,7 @@ $lightBlue: #4e6ce4;
 		padding: 0 1rem;
 
 		@media (min-width: 768px) {
-			max-width: 1000px;
+			max-width: 20rem;
 			width: 100%;
 			padding: 2rem 5rem;
 			align-items: center;
@@ -48,10 +48,10 @@ $lightBlue: #4e6ce4;
 			color: $textColor;
 			display: flex;
 			text-align: left;
-			align-self: center;
-            @media (max-width: 481px){
-                align-self: flex-start;
-            }
+			align-self: flex-start;
+			@media (max-width: 481px) {
+				align-self: flex-start;
+			}
 			font-size: 1.5rem;
 			font-weight: bold;
 			text-transform: capitalize;
@@ -76,9 +76,18 @@ $lightBlue: #4e6ce4;
 				text-align: left;
 				width: 100%;
 
+				.nameAndImage {
+					display: flex;
+					justify-content: flex-start;
+					width: 100%;
+					height: 8rem;
+					margin-top: -1rem;
+					align-items: center;
+				}
+
 				img {
 					height: 6rem;
-                    width: auto;
+					width: auto;
 				}
 
 				.nameAndStatus {
@@ -86,38 +95,37 @@ $lightBlue: #4e6ce4;
 					display: flex;
 					flex-direction: column;
 					align-items: center;
-					border-bottom: .1px solid $thirdTextColor;
 					p:nth-child(1) {
 						margin-bottom: -0.75rem;
-						font-size: 1.35rem;
-						align-items: center;
-                        justify-content: center;
-                        text-align: center;
+						font-size: 1.25rem;
+						margin-left: 1.5rem;
 						display: flex;
+						align-self: flex-start;
 						font-weight: bold;
-                        word-break: break-all;
-                        max-width: 100%;
-						padding: 0 1rem;
+						word-break: break-all;
+						max-width: 100%;
 						text-transform: capitalize;
 					}
 					p:nth-child(2) {
-						margin-bottom: .5rem;
+						margin-bottom: 0.5rem;
+						margin-left: 1.5rem;
 						align-items: center;
+						align-self: flex-start;
 						display: flex;
-						// background-image: linear-gradient(
-						// 	111.6deg,
-						// 	rgba(217, 111, 111, 1) 0.4%,
-						// 	rgba(34, 14, 215, 1) 100.3%
-						// );
+						background-image: linear-gradient(
+							111.6deg,
+							rgba(217, 111, 111, 1) 0.4%,
+							rgba(34, 14, 215, 1) 100.3%
+						);
 						transition: 0.5s;
 						background-size: 200% auto;
-						color: $thirdTextColor;
+						color: $textColor;
 						border-radius: 5px;
 						font-weight: 600;
-						font-size: 1.05rem;
+						font-size: 1rem;
 						width: fit-content;
-						padding: 0 .5rem;
-						height: 2rem;
+						padding: 0 0.5rem;
+						height: 1.75rem;
 					}
 
 					p:nth-child(2):hover {
@@ -127,62 +135,128 @@ $lightBlue: #4e6ce4;
 					}
 				}
 
-				hr {
+				.personalField,
+				.statusField,
+				.helpField {
 					width: 100%;
-					background: #000;
-					border: 0.5px solid $thirdTextColor;
-				}
-
-				ul {
-					width: 100%;
+					background: rgba(#13151b, 1);
 					display: flex;
-					flex-direction: column;
-					list-style: none;
-					padding: 0 1rem;
+					align-items: center;
+					justify-content: flex-start;
+					border-radius: 10px;
+					// padding: 0 0.5rem;
+					position: relative;
 
-					li:nth-child(1) {
-						margin-top: -0.5rem;
-					}
-
-					li {
-						margin-top: 0.5rem;
+					.accountIcons {
 						display: flex;
 						align-items: center;
+						margin-left: 0.75rem;
+					}
+
+					p {
+						margin-left: 1rem;
+					}
+				}
+				.personalField {
+					margin-top: 1.5rem;
+					flex-direction: column;
+					width: 100%;
+
+					.personalFieldName,
+					.personalFieldEmail,
+					.personalFieldPassword {
 						width: 100%;
-						font-size: 1.35rem;
-						position: relative;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
 
-						p {
-							margin-left: 1rem;
-							font-size: 1.15rem;
-						}
-
-						span {
+						.nameAndDisplay {
 							display: flex;
-							align-items: center;
-							justify-content: center;
-							position: absolute;
-							border-radius: 5px;
-							top: 30%;
-							right: 0;
-							width: 6rem;
-							height: 1.5rem;
-							font-size: .95rem;
-							font-weight: 550;
+							flex-direction: column;
+
+							.displayLabel {
+								font-size: 0.9rem;
+								color: $thirdTextColor;
+								margin-bottom: -0.25rem;
+							}
+
+							.displayValue {
+								font-size: 1rem;
+								font-weight: bold;
+								max-width: 95%;
+								word-break: break-word;
+							}
 						}
+
+						button {
+							margin-right: 1rem;
+							height: 2rem;
+							padding: 0 0.75rem;
+							// width: 3.5rem;
+							outline: none;
+							background: #626064;
+							border: none;
+							border-radius: 5px;
+							color: $textColor;
+							font-size: 0.95rem;
+							font-weight: 500;
+							transition: all 0.2s ease-in-out;
+						}
+						button:hover {
+							cursor: pointer;
+							transform: translateY(-10%);
+						}
+					}
+				}
+
+				.statusField {
+					margin-top: 1rem;
+					cursor: pointer;
+					span {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						position: absolute;
+						border-radius: 5px;
+						top: 25%;
+						right: 5%;
+						padding: 0 0.75rem;
+						height: 1.5rem;
+						font-size: 0.9rem;
+						font-weight: 550;
+					}
+				}
+
+				.helpField {
+					flex-direction: column;
+					align-items: center;
+					justify-content: flex-start;
+					margin-top: 1rem;
+					width: 100%;
+
+					.helpAndSupportField,
+					.privacyField,
+					.aboutUsField {
+						width: 100%;
+						display: flex;
+						align-items: center;
 					}
 				}
 			}
 			.signOut {
-				width: 100%;
-				background: transparent;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				align-self: center;
+				width: 50%;
+				background: rgba(#13151b, 1);
 				padding: 1rem 0rem;
-				margin-top: 1rem;
-				border-radius: 5px;
-				border: 1px solid $thirdTextColor;
-				font-size: 1.15rem;
+				margin-top: 2rem;
+				border-radius: 10px;
+				border: none;
+				font-size: 1rem;
 				font-weight: bold;
-				color: rgba(226, 37, 37, 1);
+				color: $textColor;
 				transition: 0.5s;
 			}
 
@@ -194,16 +268,15 @@ $lightBlue: #4e6ce4;
 				);
 				color: $textColor;
 				cursor: pointer;
-				border: 1px solid rgba(226, 37, 37, 1);
 			}
 			.walletVersion {
-				font-size: 1.15rem;
+				font-size: 0.95rem;
 				color: $thirdTextColor;
 				margin-top: 1.5rem;
 			}
 
 			.copyright {
-				font-size: 1.15rem;
+				font-size: 0.95rem;
 				color: $thirdTextColor;
 				margin-top: -0.5rem;
 			}

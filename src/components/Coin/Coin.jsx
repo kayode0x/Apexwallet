@@ -95,10 +95,10 @@ const Coin = () => {
 	return (
 		<div className="coin">
 			<div className="container">
-				<p className="header">
-					{coinSearchId}
+				<div className="header">
 					{coinInfo && <img src={coinInfo.image.large} alt={coinInfo.symbol} />}
-				</p>
+					<p>{coinInfo ? coinInfo.name : coinSearchId}</p>
+				</div>
 				{coinInfo ? (
 					<>{asset && <>{user && <div className="graphDiv">GRAPH WOULD GO HERE</div>}</>}</>
 				) : (

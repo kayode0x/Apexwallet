@@ -9,10 +9,10 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { RotateSpinner } from 'react-spinners-kit';
 import BottomNav from '../../../components/BottomNav/BottomNav';
 import usrIMG from '../../../assets/logo/package.svg';
-import { GoUnverified, GoVerified } from 'react-icons/go';
-import { RiUser3Fill } from 'react-icons/ri';
+import StatusModal from './StatusModal/Modal';
 import { BiSupport } from 'react-icons/bi';
 import { MdSecurity, MdInfo } from 'react-icons/md';
+import PasswordModal from './PaswordModal/PasswordModal';
 
 const Account = () => {
 	const history = useHistory();
@@ -47,7 +47,7 @@ const Account = () => {
     const handleLogOut = async () => {
         try {
             await axios.post(`${apiURL}/auth/logout`)
-            .then(()=> history.push('/login'))
+            .then(history.push('/login'))
             .catch(async (err) => {
                 await toast.dark(`${err.response.data}`, {
 					position: toast.POSITION.TOP_CENTER,
@@ -57,46 +57,66 @@ const Account = () => {
             console.log("Error: " + error)
         }
     }
+	
 
 	return (
 		<div className="account">
 			<div className="container">
-				<p className="header">Account</p>
+				<p className="header">My Account</p>
 				{user ? (
 					<>
 						<div className="accountInfo">
 							<div className="userDetails">
-								<img src={user.image ? user.image : usrIMG} alt={user.username} />
-								<div className="nameAndStatus">
-									<p>{user.name ? user.name : user.username + ' 🚀'}</p>
-									<p>Username: {user.username}</p>
+								<div className="nameAndImage">
+									<img src={user.image ? user.image : usrIMG} alt={user.username} />
+									<div className="nameAndStatus">
+										<p>{user.name ? user.name : user.username + ' 🚀'}</p>
+										<p>{user.username}</p>
+									</div>
+								</div>
+								<div className="personalField">
+									<div className="personalFieldName">
+										<div className="nameAndDisplay">
+											<p className="displayLabel">Display Name</p>
+											<p className="displayValue">{user.name ? user.name : 'No name yet'}</p>
+										</div>
+										<div className="editButton">
+											<button>Edit</button>
+										</div>
+									</div>
+									<div className="personalFieldEmail">
+										<div className="nameAndDisplay">
+											<p className="displayLabel">Email</p>
+											<p className="displayValue">{user.email}</p>
+										</div>
+									</div>
+									<PasswordModal user={user} />
+									
 								</div>
 
-								<ul>
-									<li>
-										<RiUser3Fill />
-										<p>Personal</p>
-									</li>
-									<li>
-										{user.isActive === true ? <GoVerified /> : <GoUnverified />}
-										<p>Status</p>
-										<span style={{ background: user.isActive === true ? '#109648' : '#BF211E' }}>
-											{user.isActive === true ? 'Verified' : 'Unverified'}
-										</span>
-									</li>
-									<li>
-										<BiSupport />
+								<StatusModal user={user} />
+
+								<div className="helpField">
+									<div className="helpAndSupportField">
+										<div className="accountIcons">
+											<BiSupport />
+										</div>
 										<p>Help and Support</p>
-									</li>
-									<li>
-										<MdSecurity />
+									</div>
+
+									<div className="privacyField">
+										<div className="accountIcons">
+											<MdSecurity />
+										</div>
 										<p>Privacy and Security</p>
-									</li>
-									<li>
-										<MdInfo />
+									</div>
+									<div className="aboutUsField">
+										<div className="accountIcons">
+											<MdInfo />
+										</div>
 										<p>About Us</p>
-									</li>
-								</ul>
+									</div>
+								</div>
 							</div>
 
 							{/* button to log the user out */}

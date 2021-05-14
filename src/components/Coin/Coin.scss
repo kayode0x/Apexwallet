@@ -55,7 +55,9 @@ $lightBlue: #4e6ce4;
             text-transform: capitalize;
 
             img {
-                margin-left: 1rem;
+                display: flex;
+                align-self: center;
+                margin-right: .5rem;
                 height: 2rem;
                 width: 2rem;
             }

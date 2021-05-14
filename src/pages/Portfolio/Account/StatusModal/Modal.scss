@@ -1,0 +1,80 @@
+$mainColor: #000000;
+$subColor: #070707;
+$textColor: #ebebeb;
+$subTextColor: rgb(212, 212, 212);
+$thirdTextColor: rgb(131, 131, 131);
+$blue: #2f52e0;
+$lightBlue: #4e6ce4;
+
+.statusModalContainer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-45%, -50%);
+	width: 100%;
+	max-width: 20rem;
+	outline: none;
+	border: none;
+
+	@media (max-width: 480px) {
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.statusModalSubContainer {
+		background-color: #4158d0;
+		background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+        flex-direction: column;
+		height: 28rem;
+		border-radius: 10px;
+		padding: 1rem;
+		display: flex;
+		justify-content: center;
+        align-items: center;
+
+		.iconContainer {
+			font-size: 5rem;
+			color: #fff;
+			margin-bottom: 1rem;
+            margin-top: 1rem;
+		}
+		.privilegesContainer {
+			display: flex;
+			flex-direction: column;
+
+            div {
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+                margin-top: -1rem;
+            }
+
+            img {
+                height: 1.25rem;
+                margin-right: .75rem;
+            }
+            p {
+                color: $textColor;
+                font-weight:  bold;
+            }
+
+            div:nth-child(7){
+                margin-bottom: 1.5rem;
+            }
+		}
+        .privilegesNote {
+            display: flex;
+            background: rgba($color: #000000, $alpha: .4);
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            img {
+                margin-bottom: -.21rem;
+                margin-right: 0;
+                margin-left: .25rem;
+            }
+            padding: 0 1rem;
+            border-radius: 10px;
+        }
+	}
+}
