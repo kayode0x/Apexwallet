@@ -8,9 +8,9 @@ $lightBlue: #4e6ce4;
 .wallet {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 3rem;
-	@media (max-width: 768px) and (orientation: landscape) {
-		margin-bottom: 5rem;
+	height: 100vh;
+	@media (max-width: 768px){
+		margin-bottom: 15rem;
 	}
 
 	@media (min-width: 768px) {
@@ -28,16 +28,12 @@ $lightBlue: #4e6ce4;
 		align-items: center;
 		padding: 0 1rem;
 
-		@media screen and (max-width: 812px) and (orientation:landscape) {
-			
-		}
-
 		@media (min-width: 768px) {
 			max-width: 1000px;
 			width: 100%;
 			padding: 2rem 5rem;
 			margin-left: 2rem;
-			align-items: flex-start;
+			align-items: center;
 			justify-content: center;
 		}
 
@@ -52,14 +48,16 @@ $lightBlue: #4e6ce4;
 			color: $textColor;
 			display: flex;
 			text-align: left;
-			align-self: flex-start;
+			align-self: center;
 			font-size: 1.5rem;
 			font-weight: bold;
+			@media (max-width: 481px) {
+				align-self: flex-start;
+			}
 		}
 
 		.notActive {
 			background-image: linear-gradient(111.6deg, rgba(174, 68, 223, 1) 27.3%, rgba(246, 135, 135, 1) 112.7%);
-
 			padding: 1rem;
 			border-radius: 5px;
 			color: $textColor;
@@ -81,7 +79,7 @@ $lightBlue: #4e6ce4;
 
 			.subText {
 				margin-top: -0.5rem;
-				font-size: 0.95rem;
+				font-size: 1rem;
 				font-weight: 500;
 				font-weight: bold;
 			}
@@ -94,7 +92,7 @@ $lightBlue: #4e6ce4;
 				justify-content: center;
 				border-radius: 5px;
 				margin-bottom: 0rem;
-				font-size: 0.95rem;
+				font-size: 1.15rem;
 				font-weight: 550;
 			}
 		}

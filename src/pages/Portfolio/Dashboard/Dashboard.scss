@@ -9,6 +9,7 @@ $lightBlue: #4e6ce4;
 	display: flex;
 	justify-content: center;
 	margin-bottom: 3rem;
+	// height: 100vh;
 	@media (max-width: 768px) and (orientation: landscape) {
 		margin-bottom: 5rem;
 	}
@@ -29,10 +30,9 @@ $lightBlue: #4e6ce4;
 
 		@media (min-width: 768px) {
 			max-width: 1000px;
-			// background: red;
 			width: 100%;
 			padding: 2rem 5rem;
-			align-items: flex-start;
+			align-items: center;
 			justify-content: center;
 			margin-left: 2rem;
 		}
@@ -48,9 +48,12 @@ $lightBlue: #4e6ce4;
 			color: $textColor;
 			display: flex;
 			text-align: left;
-			align-self: flex-start;
+			align-self: center;
 			font-size: 1.5rem;
 			font-weight: bold;
+			@media (max-width: 481px) {
+				align-self: flex-start;
+			}
 		}
 
 		.notActive {
@@ -71,7 +74,7 @@ $lightBlue: #4e6ce4;
 
 			.subText {
 				margin-top: -0.5rem;
-				font-size: 0.95rem;
+				font-size: 1rem;
 				font-weight: 500;
 				font-weight: bold;
 			}
@@ -84,7 +87,7 @@ $lightBlue: #4e6ce4;
 				justify-content: center;
 				border-radius: 5px;
 				margin-bottom: 0rem;
-				font-size: 0.95rem;
+				font-size: 1rem;
 				font-weight: 550;
 			}
 		}

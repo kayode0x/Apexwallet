@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { RotateSpinner } from 'react-spinners-kit';
 import BottomNav from '../../../components/BottomNav/BottomNav';
 import usrIMG from '../../../assets/logo/package.svg';
@@ -20,8 +19,6 @@ const Account = () => {
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [user, setUser] = useState(null);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
-	//breakpoint set at mobile only
-	const matches = useMediaQuery('(max-width:767px)');
 
 	useEffect(() => {
 		async function load() {

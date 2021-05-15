@@ -118,7 +118,7 @@ const Market = () => {
 											<div className="marketInfo">
 												<div className="marketCap">
 													<p>Market Cap.</p>
-													<p>{formatNumber(marketInfo.total_market_cap.usd)}</p>
+													<p>${formatNumber(marketInfo.total_market_cap.usd)}</p>
 													<p
 														style={{
 															color:

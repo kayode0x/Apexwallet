@@ -71,6 +71,17 @@ const Wallet = () => {
 								</div>
 							</>
 						)}
+						{user.isActive === true && (
+							<>
+								<div className="notActive">
+									<p className="leadText">Account verified</p>
+									<p className="subText">
+										Currently working on the stuffs that will go up here, please check back for updates.
+									</p>
+									<p className="thirdText">⏳</p>
+								</div>
+							</>
+						)}
 					</>
 				) : (
 					<div className="loading">

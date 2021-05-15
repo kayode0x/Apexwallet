@@ -2,15 +2,17 @@ $mainColor: #000000;
 $subColor: #070707;
 $textColor: #ebebeb;
 $subTextColor: rgb(212, 212, 212);
+$thirdTextColor: rgb(131, 131, 131);
 $blue: #2f52e0;
 $lightBlue: #4e6ce4;
 
 .coin {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 3rem;
-	@media (max-width: 768px) and (orientation: landscape) {
-		margin-bottom: 5rem;
+	// margin-bottom: 13rem;
+	min-height: 100vh;
+	@media (max-width: 768px) {
+		margin-bottom: 10rem;
 	}
 	@media (min-width: 768px) {
 		height: 95vh;
@@ -47,58 +49,245 @@ $lightBlue: #4e6ce4;
 		.header {
 			color: $textColor;
 			display: flex;
+			align-items: center;
 			text-align: left;
-			align-self: flex-start;
-            justify-content: center;
+			align-self: center;
+			@media (max-width: 480px) {
+				align-self: center;
+			}
+			width: 100%;
 			font-size: 1.5rem;
 			font-weight: bold;
-            text-transform: capitalize;
+			text-transform: capitalize;
 
-            img {
-                display: flex;
-                align-self: center;
-                margin-right: .5rem;
-                height: 2rem;
-                width: 2rem;
-            }
+			.coinBackEmoji {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.5rem;
+				margin-right: 0.5rem;
+				margin-right: auto;
+			}
+			.coinImageAndName {
+				display: flex;
+				align-self: center;
+				margin-right: auto;
+				@media (max-width: 480px) {
+					margin-left: -0.5rem;
+				}
+			}
+
+			img {
+				display: flex;
+				align-self: center;
+				margin-right: 0.5rem;
+				height: 2rem;
+				width: 2rem;
+			}
 		}
 
 		.graphDiv {
 			background-color: #4158d0;
 			background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
-            height: 22rem;
-            font-weight: bold;
-            width: 100%;
+			height: 25rem;
+			font-weight: bold;
+			width: 100%;
 			border-radius: 5px;
 			color: $textColor;
 			text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+			display: flex;
+			justify-content: flex-start;
+			position: relative;
+			.graphGoesHere {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
 
-			.leadText {
-				font-size: 1.35rem;
+			.currentPriceAndPercentage {
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+				height: 3rem;
+				// width: 12rem;
+				position: absolute;
+				top: 10%;
+				left: 4%;
+				@media (max-width: 480px) {
+					left: 6%;
+					top: 5%;
+				}
+			}
+
+			.currentPrice {
+				font-size: 2rem;
+				@media (max-width: 480px) {
+					font-size: 1.5rem;
+				}
 				font-weight: bold;
 				margin-top: 0.25rem;
 			}
 
-			.subText {
+			.currentPercentage {
 				margin-top: -0.5rem;
-				font-size: 0.95rem;
+				margin-left: 0.5rem;
+				font-size: 1rem;
 				font-weight: 500;
 				font-weight: bold;
 			}
 
-			.thirdText {
-				background: rgba(0, 0, 0, 0.3);
-				height: 3rem;
-				display: flex;
-				align-items: center;
-				justify-content: center;
+			.watchIcons {
+				position: absolute;
+				background: rgba(0, 0, 0, 0.5);
 				border-radius: 5px;
-				margin-bottom: 0rem;
-				font-size: 0.95rem;
-				font-weight: 550;
+				padding: 0.75rem;
+				font-size: 1.5rem;
+				top: -15%;
+				right: 0%;
+				@media (max-width: 480px) {
+					right: 0%;
+				}
+			}
+
+			.selectDays {
+				justify-self: center;
+				position: absolute;
+				top: 1%;
+				right: 1%;
+				display: flex;
+				align-self: center;
+				align-items: center;
+				justify-content: space-between;
+				border-radius: 5px;
+				padding: 1rem;
+				width: 70%;
+				@media (max-width: 480px) {
+					max-width: 25rem;
+					padding: 0.75rem;
+					top: 108%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
+				max-width: 10rem;
+
+				button {
+					outline: none;
+					border: none;
+					font-size: 1rem;
+					cursor: pointer;
+					font-weight: 600;
+					background: transparent;
+					color: $subTextColor;
+					transition: all 0.3s ease;
+				}
+
+				button:hover {
+					color: $lightBlue;
+				}
+
+				button.active {
+					color: $lightBlue;
+				}
+			}
+		}
+
+		.coinInformationContainer {
+			width: 100%;
+			@media (max-width: 480px) {
+				margin-top: 4rem;
+			}
+			margin-top: 2rem;
+			color: $textColor;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+
+			.coinPricesContainer {
+				padding: 0 1rem;
+				border-radius: 5px;
+				background: rgba(#13151b, 1);
+				height: fit-content;
+
+				.mainCoinPrices {
+					display: flex;
+					@media (max-width: 480px) {
+						flex-direction: column;
+						align-items: flex-start;
+						justify-content: space-evenly;
+					}
+					width: 100%;
+					align-items: center;
+					justify-content: space-between;
+
+					div {
+						display: flex;
+						flex-direction: column;
+						@media (max-width: 480px) {
+							flex-direction: row;
+							width: 100%;
+							justify-content: space-between;
+							align-items: center;
+						}
+
+						p:nth-child(1) {
+							font-size: 1.15rem;
+							color: $subTextColor;
+							@media (min-width: 768px) {
+								margin-bottom: -0.5rem;
+							}
+						}
+
+						p:nth-child(2) {
+							font-size: 1.5rem;
+							font-weight: 500;
+							color: $textColor;
+
+							@media (max-width: 480px) {
+								font-size: 1.15rem;
+								font-weight: bold;
+							}
+
+							span {
+								text-transform: uppercase;
+							}
+						}
+					}
+				}
+			}
+
+			.tradeCoin {
+				// background: red;
+				margin-top: -1.5rem;
+				margin-bottom: 1rem;
+				max-width: 25rem;
+				display: flex;
+				align-self: center;
+
+				div {
+					// background: rgba(#13151b, 1);
+					// padding: 0 1rem;
+					width: 100%;
+
+					p {
+						padding: 1rem;
+						font-size: 1.15rem;
+						background: rgba(#13151b, 1);
+						border: 1px solid $subTextColor;
+						border-radius: 5px;
+					}
+
+					button {
+						width: 100%;
+						height: 3rem;
+						border-radius: 5px;
+						outline: none;
+						border: none;
+						font-size: 1.15rem;
+						background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+						background: $lightBlue;
+					}
+				}
 			}
 		}
 	}
