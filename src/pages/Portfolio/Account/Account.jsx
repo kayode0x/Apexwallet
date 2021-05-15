@@ -12,7 +12,8 @@ import usrIMG from '../../../assets/logo/package.svg';
 import StatusModal from './StatusModal/Modal';
 import { BiSupport } from 'react-icons/bi';
 import { MdSecurity, MdInfo } from 'react-icons/md';
-import PasswordModal from './PaswordModal/PasswordModal';
+import PasswordModal from './PasswordModal/PasswordModal';
+import NameModal from './NameModal/NameModal';
 
 const Account = () => {
 	const history = useHistory();
@@ -75,15 +76,7 @@ const Account = () => {
 									</div>
 								</div>
 								<div className="personalField">
-									<div className="personalFieldName">
-										<div className="nameAndDisplay">
-											<p className="displayLabel">Display Name</p>
-											<p className="displayValue">{user.name ? user.name : 'No name yet'}</p>
-										</div>
-										<div className="editButton">
-											<button>Edit</button>
-										</div>
-									</div>
+									<NameModal user={user}/>
 									<div className="personalFieldEmail">
 										<div className="nameAndDisplay">
 											<p className="displayLabel">Email</p>
@@ -108,7 +101,7 @@ const Account = () => {
 										<div className="accountIcons">
 											<MdSecurity />
 										</div>
-										<p>Privacy and Security</p>
+										<p>Privacy and Policy</p>
 									</div>
 									<div className="aboutUsField">
 										<div className="accountIcons">
