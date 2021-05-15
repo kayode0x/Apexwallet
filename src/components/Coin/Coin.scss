@@ -73,7 +73,7 @@ $lightBlue: #4e6ce4;
 				align-self: center;
 				margin-right: auto;
 				@media (max-width: 480px) {
-					margin-left: -0.5rem;
+					margin-left: -1rem;
 				}
 			}
 
@@ -151,34 +151,22 @@ $lightBlue: #4e6ce4;
 			}
 
 			.selectDays {
-				justify-self: center;
 				position: absolute;
-				top: 1%;
-				right: 1%;
+				top: 108%;
+				width: 12rem;
 				display: flex;
-				align-self: center;
-				align-items: center;
-				justify-content: space-between;
-				border-radius: 5px;
-				padding: 1rem;
-				width: 70%;
-				@media (max-width: 480px) {
-					max-width: 25rem;
-					padding: 0.75rem;
-					top: 108%;
-					left: 50%;
-					transform: translate(-50%, -50%);
-				}
-				max-width: 10rem;
+				justify-content: space-around;
+				left: 50%;
+				transform: translate(-50%, -50%);
 
 				button {
 					outline: none;
 					border: none;
-					font-size: 1rem;
+					font-size: 1.15rem;
 					cursor: pointer;
-					font-weight: 600;
+					font-weight: 500;
 					background: transparent;
-					color: $subTextColor;
+					color: $textColor;
 					transition: all 0.3s ease;
 				}
 
@@ -258,7 +246,7 @@ $lightBlue: #4e6ce4;
 
 			.tradeCoin {
 				// background: red;
-				margin-top: -1.5rem;
+				margin-top: -1rem;
 				margin-bottom: 1rem;
 				max-width: 25rem;
 				display: flex;
