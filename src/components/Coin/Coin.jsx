@@ -241,14 +241,14 @@ const Coin = () => {
 															<a href={coinInfo.links.homepage[0]}>Official Website</a>
 														</span>
 													</div>
-													{/* <div className="tradeCoin">
-														<TradeTab user={user} wallet={wallet} coinInfo={coinInfo}/>
-													</div> */}
+													<div className="tradeCoin">
+														<TradeTab user={user} wallet={wallet} coinInfo={coinInfo} />
+													</div>
 												</div>
 											)}
 											{matches && (
-												<div className="tradeCoinAndAboutCoin">
-													<div className="aboutCoin">
+												<div className="tradeCoinAndAboutCoinMobile">
+													<div className="aboutCoinMobile">
 														<p>{coinInfo.description.en}</p>
 														<p>Resources</p>
 														<span>

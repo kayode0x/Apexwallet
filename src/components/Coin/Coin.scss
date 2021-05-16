@@ -9,7 +9,7 @@ $lightBlue: #4e6ce4;
 .coin {
 	display: flex;
 	justify-content: center;
-	// margin-bottom: 13rem;
+	margin-bottom: 13rem;
 	min-height: 100vh;
 	@media (max-width: 768px) {
 		margin-bottom: 10rem;
@@ -288,23 +288,68 @@ $lightBlue: #4e6ce4;
 				margin-top: 2rem;
 			}
 
-			.tradeCoinAndAboutCoin {
+			.tradeCoinAndAboutCoinMobile {
 				width: 100%;
 				display: flex;
-				justify-content: space-between;
-				@media (max-width: 1023px) {
-					flex-direction: column;
+				@media (max-width: 625px){
+					max-width: 21rem;
 				}
 
-				.aboutCoin {
+				.aboutCoinMobile {
 					height: fit-content;
 					line-height: 1.7;
 					background: rgba(#13151b, 1);
 					font-size: 1.15rem;
-					width: 45%;
-					@media (max-width: 1023px) {
-						width: 100%;
+					width: 100%;
+					border-radius: 5px;
+
+					p:nth-child(1) {
+						padding: 0.25rem 1rem;
+						margin-top: 1rem;
+						display: -webkit-box;
+						-webkit-line-clamp: 7;
+						-webkit-box-orient: vertical;
+						overflow: hidden;
 					}
+					p:nth-child(2) {
+						padding: 1rem;
+						margin-top: -1rem;
+						font-size: 1.15rem;
+						color: $subTextColor;
+						font-weight: bold;
+						margin-bottom: 0.5rem;
+					}
+					span {
+						margin-top: -2rem;
+						padding: 1rem;
+						display: flex;
+						align-items: center;
+						margin-bottom: 0.5rem;
+						font-size: 1.3rem;
+
+						a {
+							text-decoration: none;
+							color: rgb(50, 132, 255);
+							margin-left: 0.25rem;
+							font-size: 1rem;
+						}
+					}
+				}
+			}
+
+			.tradeCoinAndAboutCoin {
+				width: 100%;
+				display: flex;
+				position: relative;
+
+				.aboutCoin {
+					position: absolute;
+					height: fit-content;
+					line-height: 1.7;
+					background: rgba(#13151b, 1);
+					font-size: 1.15rem;
+					left: 0%;
+					width: 45%;
 					border-radius: 5px;
 
 					p:nth-child(1) {
@@ -344,13 +389,16 @@ $lightBlue: #4e6ce4;
 					display: flex;
 					justify-content: space-around;
 					background: rgba(#13151b, 1);
-					width: 45%;
+					width: 50%;
+					margin-left: auto;
 					height: 20rem;
 					border-radius: 5px;
 					color: $subTextColor;
 					position: relative;
 
-					.buyCoins, .sellCoins, .convertCoins {
+					.buyCoins,
+					.sellCoins,
+					.convertCoins {
 						position: absolute;
 						// background: black;
 						width: 100%;
@@ -414,7 +462,11 @@ $lightBlue: #4e6ce4;
 							margin-top: 1rem;
 
 							div:nth-child(1) {
-								background-image: linear-gradient( 105.3deg,  rgb(26, 33, 87) 21.8%, rgb(51, 62, 146) 100.2% );
+								background-image: linear-gradient(
+									105.3deg,
+									rgb(26, 33, 87) 21.8%,
+									rgb(51, 62, 146) 100.2%
+								);
 								transition: 0.5s;
 								font-weight: bold;
 								// border: 1px solid $subTextColor;
@@ -452,7 +504,7 @@ $lightBlue: #4e6ce4;
 								background: $blue;
 							}
 
-							div:nth-child(3){
+							div:nth-child(3) {
 								transition: 0.5s;
 								font-weight: bold;
 								padding: 1rem;
@@ -464,7 +516,6 @@ $lightBlue: #4e6ce4;
 								justify-content: space-between;
 								font-size: 1rem;
 							}
-							
 						}
 					}
 				}

@@ -90,6 +90,7 @@ export default function TradeTab({ user, wallet, coinInfo }) {
 		<Box sx={{ width: '100%' }}>
 			<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 				<Tabs
+					style={{ position: 'relative', left: '20%', width: '70%' }}
 					value={value}
 					textColor="inherit"
 					indicatorColor="primary"
@@ -98,7 +99,7 @@ export default function TradeTab({ user, wallet, coinInfo }) {
 				>
 					<Tab style={{ fontWeight: 'bold' }} label="Buy" {...a11yProps(0)} />
 					<Tab style={{ fontWeight: 'bold' }} label="Sell" {...a11yProps(1)} />
-					<Tab style={{ fontWeight: 'bold' }} label="Convert" {...a11yProps(2)} />
+					{/* <Tab style={{ fontWeight: 'bold' }} label="Convert" {...a11yProps(2)} /> */}
 				</Tabs>
 			</Box>
 
@@ -199,10 +200,10 @@ export default function TradeTab({ user, wallet, coinInfo }) {
 				</form>
 			</TabPanel>
 
-			{/* Convert coins tab */}
+			{/* Convert coins tab
 			<TabPanel value={value} index={2}>
 				<p style={{ position: 'absolute', top: '50%', left:'50%', transform: 'translate(-50%, -50%)' }}>Coming Soon.</p>
-			</TabPanel>
+			</TabPanel> */}
 		</Box>
 	);
 }
