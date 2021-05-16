@@ -9,7 +9,8 @@ import { IoChevronBack } from 'react-icons/io5';
 import { RotateSpinner } from 'react-spinners-kit';
 import axios from 'axios';
 import BottomNav from '../BottomNav/BottomNav';
-import { BsStarFill, BsStar } from 'react-icons/bs';
+import { BsStarFill, BsStar, BsLink45Deg } from 'react-icons/bs';
+import TradeTab from './TradeTab/TradeTab';
 
 const Coin = () => {
 	const location = useLocation();
@@ -18,7 +19,7 @@ const Coin = () => {
 	const coinSearchId = splitLocation[2];
 
 	const history = useHistory();
-	const matches = useMediaQuery('(max-width:480px)');
+	const matches = useMediaQuery('(max-width:768px)');
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [wallet, setWallet] = useState(null);
 	const [canTrade, setCanTrade] = useState(false);
@@ -101,6 +102,13 @@ const Coin = () => {
 		if (n >= 1e12) return +(n / 1e12).toFixed(1) + 'T';
 	};
 
+	//shorten the about coin text
+	function shortenText(aboutText, length) {
+		return aboutText && aboutText.length > length
+			? aboutText.slice(0, length).split(' ').slice(0, -1).join(' ')
+			: aboutText;
+	}
+
 	return (
 		<div className="coin">
 			<div className="container">
@@ -161,7 +169,7 @@ const Coin = () => {
 										</div>
 										<div className="coinInformationContainer">
 											{matches && (
-												<div className="tradeCoin">
+												<div className="tradeCoinMobile">
 													{user.isActive === false && (
 														<div>
 															<p>
@@ -198,8 +206,7 @@ const Coin = () => {
 													)} */}
 												</div>
 											)}
-
-											<h3>{coinInfo.name} Stats</h3>
+											<p className="coinStats">{coinInfo.name} Stats</p>
 											<div className="coinPricesContainer">
 												<div className="mainCoinPrices">
 													<div>
@@ -223,6 +230,34 @@ const Coin = () => {
 													</div>
 												</div>
 											</div>
+											<p className="aboutCoinHeader">About {coinInfo.name}</p>
+											{matches ? null : (
+												<div className="tradeCoinAndAboutCoin">
+													<div className="aboutCoin">
+														<p>{coinInfo.description.en}</p>
+														<p>Resources</p>
+														<span>
+															<BsLink45Deg />{' '}
+															<a href={coinInfo.links.homepage[0]}>Official Website</a>
+														</span>
+													</div>
+													<div className="tradeCoin">
+														<TradeTab user={user} wallet={wallet} coinInfo={coinInfo}/>
+													</div>
+												</div>
+											)}
+											{matches && (
+												<div className="tradeCoinAndAboutCoin">
+													<div className="aboutCoin">
+														<p>{coinInfo.description.en}</p>
+														<p>Resources</p>
+														<span>
+															<BsLink45Deg />{' '}
+															<a href={coinInfo.links.homepage[0]}>Official Website</a>
+														</span>
+													</div>
+												</div>
+											)}
 										</div>
 									</>
 								)}

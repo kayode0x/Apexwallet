@@ -67,6 +67,7 @@ $lightBlue: #4e6ce4;
 				font-size: 1.5rem;
 				margin-right: 0.5rem;
 				margin-right: auto;
+				cursor: pointer;
 			}
 			.coinImageAndName {
 				display: flex;
@@ -180,9 +181,14 @@ $lightBlue: #4e6ce4;
 			}
 		}
 
+		.coinStats {
+			font-size: 1.25rem;
+			font-weight: bold;
+		}
+
 		.coinInformationContainer {
 			width: 100%;
-			@media (max-width: 480px) {
+			@media (max-width: 768px) {
 				margin-top: 4rem;
 			}
 			margin-top: 2rem;
@@ -199,7 +205,7 @@ $lightBlue: #4e6ce4;
 
 				.mainCoinPrices {
 					display: flex;
-					@media (max-width: 480px) {
+					@media (max-width: 768px) {
 						flex-direction: column;
 						align-items: flex-start;
 						justify-content: space-evenly;
@@ -211,7 +217,7 @@ $lightBlue: #4e6ce4;
 					div {
 						display: flex;
 						flex-direction: column;
-						@media (max-width: 480px) {
+						@media (max-width: 768px) {
 							flex-direction: row;
 							width: 100%;
 							justify-content: space-between;
@@ -221,8 +227,9 @@ $lightBlue: #4e6ce4;
 						p:nth-child(1) {
 							font-size: 1.15rem;
 							color: $subTextColor;
-							@media (min-width: 768px) {
-								margin-bottom: -0.5rem;
+							margin-bottom: -0.5rem;
+							@media (max-width: 768px) {
+								margin-bottom: 1.5rem;
 							}
 						}
 
@@ -231,7 +238,7 @@ $lightBlue: #4e6ce4;
 							font-weight: 500;
 							color: $textColor;
 
-							@media (max-width: 480px) {
+							@media (max-width: 768px) {
 								font-size: 1.15rem;
 								font-weight: bold;
 							}
@@ -244,17 +251,16 @@ $lightBlue: #4e6ce4;
 				}
 			}
 
-			.tradeCoin {
+			.tradeCoinMobile {
 				// background: red;
 				margin-top: -1rem;
 				margin-bottom: 1rem;
-				max-width: 25rem;
+				// max-width: 25rem;
+				width: 100%;
 				display: flex;
 				align-self: center;
 
 				div {
-					// background: rgba(#13151b, 1);
-					// padding: 0 1rem;
 					width: 100%;
 
 					p {
@@ -274,6 +280,194 @@ $lightBlue: #4e6ce4;
 						font-size: 1.15rem;
 						background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
 						background: $lightBlue;
+					}
+				}
+			}
+
+			.aboutCoinHeader {
+				font-size: 1.25rem;
+				font-weight: bold;
+				margin-top: 2rem;
+			}
+
+			.tradeCoinAndAboutCoin {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				@media (max-width: 1023px) {
+					flex-direction: column;
+				}
+
+				.aboutCoin {
+					height: fit-content;
+					line-height: 1.7;
+					background: rgba(#13151b, 1);
+					font-size: 1.15rem;
+					width: 45%;
+					@media (max-width: 1023px) {
+						width: 100%;
+					}
+					border-radius: 5px;
+
+					p:nth-child(1) {
+						padding: 0.25rem 1rem;
+						margin-top: 1rem;
+						display: -webkit-box;
+						-webkit-line-clamp: 7;
+						-webkit-box-orient: vertical;
+						overflow: hidden;
+					}
+					p:nth-child(2) {
+						padding: 1rem;
+						margin-top: -1rem;
+						font-size: 1.15rem;
+						color: $subTextColor;
+						font-weight: bold;
+						margin-bottom: 0.5rem;
+					}
+					span {
+						margin-top: -2rem;
+						padding: 1rem;
+						display: flex;
+						align-items: center;
+						margin-bottom: 0.5rem;
+						font-size: 1.3rem;
+
+						a {
+							text-decoration: none;
+							color: rgb(50, 132, 255);
+							margin-left: 0.25rem;
+							font-size: 1rem;
+						}
+					}
+				}
+
+				.tradeCoin {
+					display: flex;
+					justify-content: space-around;
+					background: rgba(#13151b, 1);
+					width: 45%;
+					height: 20rem;
+					border-radius: 5px;
+					color: $subTextColor;
+					position: relative;
+
+					.buyCoins, .sellCoins, .convertCoins {
+						position: absolute;
+						// background: black;
+						width: 100%;
+						left: 0;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						height: 15rem;
+
+						.input {
+							width: 90%;
+							display: flex;
+							align-items: center;
+							justify-content: space-around;
+							position: relative;
+
+							input {
+								display: flex;
+								height: 1.5rem;
+								background: none;
+								border: none;
+								outline: none;
+								font-size: 2.5rem;
+								color: $textColor;
+								background: transparent;
+								border-radius: 5px;
+								width: 70%;
+								padding: 1rem;
+								text-align: center;
+								transition: 0.5s;
+							}
+							input::-webkit-outer-spin-button,
+							input::-webkit-inner-spin-button {
+								/* display: none; <- Crashes Chrome on hover */
+								-webkit-appearance: none;
+								margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+							}
+
+							input[type='number'] {
+								-moz-appearance: textfield; /* Firefox */
+							}
+							span {
+								// position: absolute;
+								// left: 10%;
+								font-size: 1.5rem;
+								color: $textColor;
+								// margin-right: 0.5rem;
+							}
+
+							div {
+								font-size: 1.5rem;
+								color: $textColor;
+								cursor: pointer;
+								margin-left: 1rem;
+							}
+						}
+						.coinAndWalletTab {
+							width: 90%;
+							display: flex;
+							flex-direction: column;
+							margin-top: 1rem;
+
+							div:nth-child(1) {
+								background-image: linear-gradient( 105.3deg,  rgb(26, 33, 87) 21.8%, rgb(51, 62, 146) 100.2% );
+								transition: 0.5s;
+								font-weight: bold;
+								// border: 1px solid $subTextColor;
+								padding: 1rem;
+								height: 1.35rem;
+								border-radius: 5px;
+								margin-bottom: 1rem;
+								display: flex;
+								align-items: center;
+								justify-content: space-between;
+
+								p {
+									font-size: 1.15rem;
+								}
+
+								span {
+									font-size: 1.25rem;
+								}
+							}
+
+							button {
+								height: 3rem;
+								font-size: 1.15rem;
+								padding: 1rem;
+								border-radius: 5px;
+								outline: none;
+								border: none;
+								color: $textColor;
+								font-weight: bold;
+								background: $lightBlue;
+								transition: 0.5s;
+							}
+
+							button:hover {
+								background: $blue;
+							}
+
+							div:nth-child(3){
+								transition: 0.5s;
+								font-weight: bold;
+								padding: 1rem;
+								height: 1.35rem;
+								border-radius: 5px;
+								margin-bottom: 1rem;
+								display: flex;
+								align-items: center;
+								justify-content: space-between;
+								font-size: 1rem;
+							}
+							
+						}
 					}
 				}
 			}
