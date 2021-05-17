@@ -196,7 +196,7 @@ const Market = () => {
 												className="coinList"
 												key={coin.id}
 												// onClick={() => console.log('Clicked Coin: ', coin)}
-                                                to={`/market/${coin.id}`}
+												to={`/market/${coin.id}`}
 											>
 												<div className="imageAndName">
 													<img className="coinImage" src={coin.image} alt={coin.name} />
@@ -238,7 +238,7 @@ const Market = () => {
 			</div>
 
 			<BottomNav />
-			<ToastContainer />
+			<ToastContainer autoClose={3000} />
 		</div>
 	);
 };

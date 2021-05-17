@@ -7,6 +7,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { IoChevronBack } from 'react-icons/io5';
 import { RotateSpinner } from 'react-spinners-kit';
+import { IconContext } from 'react-icons'
 import axios from 'axios';
 import BottomNav from '../BottomNav/BottomNav';
 import { BsStarFill, BsStar, BsLink45Deg } from 'react-icons/bs';
@@ -228,10 +229,17 @@ const Coin = () => {
 											<div
 												className="watchIcons"
 												style={{ color: watchingCoin ? '#FDCA40' : '#fff' }}
-												onClick={triggerWatchCoin}
 											>
 												{matches ? null : <span>{watchingCoin ? 'Unwatch' : 'Watch'}</span>}
-												{watchingCoin ? <BsStarFill /> : <BsStar />}
+												{watchingCoin ? (
+													<IconContext.Provider value={{ className: 'watchingCoinIcon' }}>
+														<BsStarFill onClick={triggerWatchCoin} />
+													</IconContext.Provider>
+												) : (
+													<IconContext.Provider value={{ className: 'normalCoinIcon' }}>
+														<BsStar onClick={triggerWatchCoin} />
+													</IconContext.Provider>
+												)}
 											</div>
 											<div className="selectDays">
 												<button className="active oneDay">1D</button>
@@ -345,7 +353,7 @@ const Coin = () => {
 				)}
 			</div>
 			<BottomNav />
-			<ToastContainer />
+			<ToastContainer autoClose={3000}/>
 		</div>
 	);
 };

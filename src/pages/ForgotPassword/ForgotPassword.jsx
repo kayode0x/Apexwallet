@@ -60,9 +60,7 @@ const ForgotPassword = () => {
 					</div>
 
 					{emailSent ? (
-						<div className="resentTrue">
-							Check your email for further instructions 🚀
-						</div>
+						<div className="resentTrue">Check your email for further instructions 🚀</div>
 					) : (
 						<form onSubmit={handleLogin}>
 							<div className="email">
@@ -90,7 +88,7 @@ const ForgotPassword = () => {
 				</div>
 			</div>
 			{/* {DON'T FORGET THE TOASTIFY} */}
-			<ToastContainer />
+			<ToastContainer autoClose={3000} />
 		</HelmetProvider>
 	);
 };

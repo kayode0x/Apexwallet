@@ -148,7 +148,7 @@ const SignUp = () => {
 			</div>
 
 			{/* {DON'T FORGET THE TOAST CONTAINER } */}
-			<ToastContainer />
+			<ToastContainer autoClose={3000} />
 		</HelmetProvider>
 	);
 };

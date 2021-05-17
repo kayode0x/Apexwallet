@@ -118,7 +118,7 @@ export default function NameModal({ user }) {
 					</div>
 				</Fade>
 			</Modal>
-			<ToastContainer />
+			<ToastContainer autoClose={3000} />
 		</div>
 	);
 }

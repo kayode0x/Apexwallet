@@ -129,7 +129,7 @@ const Login = () => {
 			</div>
 
 			{/* {DON'T FORGET THE TOASTIFY} */}
-			<ToastContainer />
+			<ToastContainer autoClose={3000} />
 		</HelmetProvider>
 	);
 };

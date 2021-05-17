@@ -84,7 +84,7 @@ const Account = () => {
 									</div>
 								</div>
 								<div className="personalField">
-									<NameModal user={user}/>
+									<NameModal user={user} />
 									<div className="personalFieldEmail">
 										<div className="nameAndDisplay">
 											<p className="displayLabel">Email</p>
@@ -92,7 +92,6 @@ const Account = () => {
 										</div>
 									</div>
 									<PasswordModal user={user} />
-									
 								</div>
 
 								<StatusModal user={user} />
@@ -136,7 +135,7 @@ const Account = () => {
 				)}
 			</div>
 			<BottomNav />
-			<ToastContainer />
+			<ToastContainer autoClose={3000}/>
 		</div>
 	);
 };

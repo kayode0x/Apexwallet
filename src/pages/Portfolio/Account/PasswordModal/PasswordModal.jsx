@@ -139,7 +139,7 @@ export default function PasswordModal({ user }) {
 					</div>
 				</Fade>
 			</Modal>
-			<ToastContainer />
+			<ToastContainer autoClose={3000} />
 		</div>
 	);
 }

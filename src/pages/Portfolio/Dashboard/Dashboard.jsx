@@ -82,7 +82,7 @@ const Dashboard = () => {
 				)}
 			</div>
 			<BottomNav />
-			<ToastContainer />
+			<ToastContainer autoClose={3000} />
 		</div>
 	);
 };
