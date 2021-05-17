@@ -1,6 +1,6 @@
 import './Account.scss';
 import AuthContext from '../../../components/Auth/AuthContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -19,8 +19,10 @@ const Account = () => {
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [user, setUser] = useState(null);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
+	let isRendered = useRef(false);
 
 	useEffect(() => {
+		isRendered.current = true;
 		async function load() {
 			await getLoggedIn();
 			if (loggedIn === false) {
@@ -32,13 +34,22 @@ const Account = () => {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
-					setUser(user.data);
+					if(isRendered.current === true){
+						setUser(user.data);
+					} else {
+						return null;
+					}
 				} catch (error) {
 					console.log('ERROR' + error);
 				}
 			}
 		}
 		load();
+
+		return () => {
+			isRendered.current = false;
+		};
+
 	}, [getLoggedIn, loggedIn, history]);
 
     //log the user out

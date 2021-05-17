@@ -15,7 +15,7 @@ $lightBlue: #4e6ce4;
 	}
 
 	@media (min-width: 768px) {
-		height: 95vh;
+		min-height: 95vh;
 		width: 100%;
 		display: flex;
 		align-items: flex-start;
@@ -176,7 +176,7 @@ $lightBlue: #4e6ce4;
 		.marketData {
 			display: flex;
 			flex-direction: column;
-			align-items: flex-start;
+			align-items: center; //change back to flex-start if you want to edit each coin card in the market page.
 			justify-content: center;
 			width: 100%;
 			margin-bottom: 3rem;

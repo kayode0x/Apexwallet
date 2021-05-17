@@ -46,9 +46,8 @@ export default function TradeTab({ user, wallet, coinInfo }) {
 	const [amountToSellCrypto, setAmountToSellCrypto] = useState(0);
 	const [buyType, setBuyType] = useState('fiat');
     const [sellType, setSellType] = useState('fiat');
-	const [buying, setBuying] = useState(false);
-	const [selling, setSelling] = useState(false);
-	const [converting, setConverting] = useState(false);
+	// const [buying, setBuying] = useState(false);
+	// const [selling, setSelling] = useState(false);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -80,11 +79,6 @@ export default function TradeTab({ user, wallet, coinInfo }) {
     const handleSellCoin = (e) => {
 		e.preventDefault();
 	};
-
-    //convert coin
-    const handleConvertCoin = (e) => {
-        e.preventDefault();
-    }
 
 	return (
 		<Box sx={{ width: '100%' }}>

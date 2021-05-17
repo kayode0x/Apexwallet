@@ -1,6 +1,6 @@
 import './Coin.scss';
 import AuthContext from '../Auth/AuthContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -13,10 +13,12 @@ import { BsStarFill, BsStar, BsLink45Deg } from 'react-icons/bs';
 import TradeTab from './TradeTab/TradeTab';
 
 const Coin = () => {
+	//get the current location.
 	const location = useLocation();
 	const { pathname } = location;
+	//split the location to get just the coin id.
 	const splitLocation = pathname.split('/');
-	const coinSearchId = splitLocation[2];
+	const coinSearchId = splitLocation[2]; //coin id.
 
 	const history = useHistory();
 	const matches = useMediaQuery('(max-width:768px)');
@@ -27,12 +29,23 @@ const Coin = () => {
 	const [user, setUser] = useState(null);
 	const [days, setDays] = useState(7);
 	const [coinInfo, setCoinInfo] = useState(null);
+	const [watchingCoin, setWatchingCoin] = useState(false);
+	const watchingRef = useRef(null);
+	const watchingArrayRef = useRef(null);
+	let isRendered = useRef(false);
 
+	//ALL URLS HERE
+	//api endpoint to get the coin chart.
 	const coingeckoApi = `https://api.coingecko.com/api/v3/coins/${coinSearchId}/market_chart?vs_currency=usd&days=${days}`;
+
+	//api endpoint to get the coin data.
 	const coingeckoDataApi = `https://api.coingecko.com/api/v3/coins/${coinSearchId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=true`;
+
+	//global api for Apex Wallet.
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 
 	useEffect(() => {
+		isRendered.current = true;
 		async function load() {
 			await getLoggedIn();
 			if (loggedIn === false) {
@@ -44,10 +57,13 @@ const Coin = () => {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
-					setUser(user.data);
-					// console.log(user.data);
-					if (user.data.isActive === false) {
-						setCanTrade(false);
+
+					if (isRendered.current === true) {
+						setUser(user.data);
+						console.log('USER: ', user.data.watchList);
+						watchingArrayRef.current = user.data.watchList; //saves the watchList array as a ref hook to save in case of re-render.
+					} else {
+						return null;
 					}
 				} catch (error) {
 					console.log('ERROR' + error);
@@ -62,8 +78,12 @@ const Coin = () => {
 					})
 						.then((response) => response.json())
 						.then((data) => {
-							// console.log("GRAPH: ", data.prices);
-							setAsset(data);
+							if (isRendered.current === true) {
+								// console.log("GRAPH: ", data.prices);
+								setAsset(data);
+							} else {
+								return null;
+							}
 						})
 						.catch((error) => {
 							console.log('ERROR: ', error);
@@ -81,17 +101,35 @@ const Coin = () => {
 					})
 						.then((response) => response.json())
 						.then((data) => {
-							console.log('DATA: ', data);
-							setCoinInfo(data);
+							if (isRendered.current === true) {
+								console.log('DATA: ', data);
+								setCoinInfo(data);
+							} else {
+								return null;
+							}
 						});
 				} catch (error) {
 					console.log('ERROR: ' + error);
+				}
+
+				if (isRendered.current === true) {
+					//okay this part gets the current coin id and saves it in case the page re-renders.
+					watchingRef.current = (obj) => obj.coinId === coinSearchId; //check if the current coin is in the user's watch list
+					if (watchingArrayRef.current.some(watchingRef.current) === true) {
+						setWatchingCoin(true); //if yes, set the coin state to watching (true)
+					} else {
+						setWatchingCoin(false); //if no, set the coin state to not watching (false)
+					}
 				}
 			}
 		}
 
 		load();
-	}, [getLoggedIn, loggedIn, history, coingeckoApi, coingeckoDataApi]);
+
+		return () => {
+			isRendered.current = false;
+		};
+	}, [getLoggedIn, loggedIn, history, coingeckoApi, coingeckoDataApi, coinSearchId]);
 
 	//convert the mega numbers
 	const formatNumber = (n) => {
@@ -102,12 +140,44 @@ const Coin = () => {
 		if (n >= 1e12) return +(n / 1e12).toFixed(1) + 'T';
 	};
 
-	//shorten the about coin text
-	function shortenText(aboutText, length) {
-		return aboutText && aboutText.length > length
-			? aboutText.slice(0, length).split(' ').slice(0, -1).join(' ')
-			: aboutText;
-	}
+	//function to watch or unwatch a coin
+	const triggerWatchCoin = async () => {
+		setWatchingCoin(!watchingCoin);
+		let name = coinInfo.name;
+		let coinId = coinInfo.id;
+		const coinWatch = { name, coinId };
+
+		try {
+			watchingCoin
+				? await axios //if the coin is being watched, send an unwatch request
+						.put(`${apiURL}/user/watch-list`, coinWatch)
+						.then(async (res) => {
+							await toast.dark(`${res.data}`, {
+								position: toast.POSITION.TOP_CENTER,
+							});
+						})
+						.catch(async (err) => {
+							await toast.dark(`${err.response.data}`, {
+								position: toast.POSITION.TOP_CENTER,
+							});
+						})
+				: //if it's not being watched, add to watch list
+				  await axios
+						.post(`${apiURL}/user/watch-list`, coinWatch)
+						.then(async (res) => {
+							await toast.dark(`${res.data}`, {
+								position: toast.POSITION.TOP_CENTER,
+							});
+						})
+						.catch(async (err) => {
+							await toast.dark(`${err.response.data}`, {
+								position: toast.POSITION.TOP_CENTER,
+							});
+						});
+		} catch (error) {
+			console.log('ERROR: ' + error);
+		}
+	};
 
 	return (
 		<div className="coin">
@@ -155,9 +225,13 @@ const Coin = () => {
 													%
 												</p>
 											</div>
-											<div className="watchIcons">
-												<BsStar />
-												{/* <BsStarFill /> */}
+											<div
+												className="watchIcons"
+												style={{ color: watchingCoin ? '#FDCA40' : '#fff' }}
+												onClick={triggerWatchCoin}
+											>
+												{matches ? null : <span>{watchingCoin ? 'Unwatch' : 'Watch'}</span>}
+												{watchingCoin ? <BsStarFill /> : <BsStar />}
 											</div>
 											<div className="selectDays">
 												<button className="active oneDay">1D</button>

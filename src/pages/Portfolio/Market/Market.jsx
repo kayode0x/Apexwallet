@@ -1,26 +1,28 @@
 import './Market.scss';
 import AuthContext from '../../../components/Auth/AuthContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory, Link } from 'react-router-dom';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+// import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { BiSearch } from 'react-icons/bi';
 import { RotateSpinner } from 'react-spinners-kit';
 import BottomNav from '../../../components/BottomNav/BottomNav';
-import { BsStarFill, BsStar } from 'react-icons/bs';
+// import { BsStarFill, BsStar } from 'react-icons/bs';
 
 const Market = () => {
 	const history = useHistory();
-	const matches = useMediaQuery('(min-width:1171px)');
+	// const matches = useMediaQuery('(min-width:1171px)');
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
-	const [wallet, setWallet] = useState(null);
-	const [canTrade, setCanTrade] = useState(false);
+	// const [wallet, setWallet] = useState(null);
+	// const [canTrade, setCanTrade] = useState(false);
 	const [searchText, setSearchText] = useState('');
 	const [user, setUser] = useState(null);
 	const [market, setMarket] = useState(null);
 	const [marketInfo, setMarketInfo] = useState(null);
+	let isRendered = useRef(false);
+
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const coingeckoApi =
 		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20litecoin%2C%20tether%2C%20dogecoin%2C%20ethereum%2C%20ethereum-classic%2C%20ripple%2C%20binancecoin%2C%20cardano%2C%20usd-coin%2C%20tron%2C%20bitcoin-cash%2C%20polkadot%2C%20uniswap%2C%20dash%2C%20&order=market_cap_desc&per_page=100&page=1&sparkline=false';
@@ -28,6 +30,7 @@ const Market = () => {
 	const coingeckoMarketInfo = 'https://api.coingecko.com/api/v3/global';
 
 	useEffect(() => {
+		isRendered.current = true;
 		async function load() {
 			await getLoggedIn();
 			if (loggedIn === false) {
@@ -39,10 +42,11 @@ const Market = () => {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
-					setUser(user.data);
-					console.log(user.data);
-					if (user.data.isActive === false) {
-						setCanTrade(false);
+					if (isRendered.current === true) {
+						setUser(user.data);
+						// console.log(user.data);
+					} else {
+						return null;
 					}
 				} catch (error) {
 					console.log('ERROR' + error);
@@ -57,7 +61,11 @@ const Market = () => {
 					})
 						.then((response) => response.json())
 						.then((data) => {
-							setMarket(data);
+							if (isRendered.current === true){
+								setMarket(data)
+							} else {
+								return null;
+							}
 						});
 				} catch (error) {
 					console.log('ERROR: ' + error);
@@ -72,7 +80,11 @@ const Market = () => {
 					})
 						.then((response) => response.json())
 						.then((data) => {
-							setMarketInfo(data.data);
+							if(isRendered.current === true){
+								setMarketInfo(data.data);
+							} else {
+								return null;
+							}
 						});
 				} catch (error) {
 					console.log('ERROR: ' + error);
@@ -81,6 +93,10 @@ const Market = () => {
 		}
 
 		load();
+
+		return () => {
+			isRendered.current = false;
+		};
 	}, [getLoggedIn, loggedIn, history]);
 
 	//convert the mega numbers
@@ -209,7 +225,7 @@ const Market = () => {
 											</Link>
 										))}
 									</div>
-									{matches && <div className="marketTrade"></div>}
+									{/* {matches && <div className="marketTrade">x</div>} */}
 								</div>
 							</>
 						)}

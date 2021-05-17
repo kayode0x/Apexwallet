@@ -12,7 +12,7 @@ $lightBlue: #4e6ce4;
 	margin-bottom: 13rem;
 	min-height: 100vh;
 	@media (max-width: 768px) {
-		margin-bottom: 10rem
+		margin-bottom: 10rem;
 	}
 	@media (min-width: 768px) {
 		height: 95vh;
@@ -139,14 +139,34 @@ $lightBlue: #4e6ce4;
 
 			.watchIcons {
 				position: absolute;
-				background: rgba(0, 0, 0, 0.5);
 				border-radius: 5px;
-				padding: 0.75rem;
+				@media (min-width: 768px) {
+					padding: 0.75rem;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					top: -15%;
+					width: 7rem;
+					border: 1px solid $thirdTextColor;
+					transition: all 0.5s ease-in;
+				}
 				font-size: 1.5rem;
-				top: -15%;
+				top: -12%;
 				right: 0%;
 				@media (max-width: 480px) {
 					right: 0%;
+				}
+
+				span {
+					font-size: 1.25rem;
+					color: $subTextColor;
+				}
+			}
+
+			@media (min-width: 768px){
+				.watchIcons:hover {
+					border: 1px solid $lightBlue;
+					cursor: pointer;
 				}
 			}
 
@@ -291,7 +311,7 @@ $lightBlue: #4e6ce4;
 			.tradeCoinAndAboutCoinMobile {
 				width: 100%;
 				display: flex;
-				@media (max-width: 625px){
+				@media (max-width: 625px) {
 					max-width: 21rem;
 				}
 
