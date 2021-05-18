@@ -1,10 +1,11 @@
-$mainColor: #000000;
-$subColor: #070707;
-$textColor: #ebebeb;
-$subTextColor: rgb(212, 212, 212);
-$thirdTextColor: rgb(131, 131, 131);
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
 $blue: #2f52e0;
 $lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
 
 .coin {
 	display: flex;
@@ -18,8 +19,10 @@ $lightBlue: #4e6ce4;
 		height: 95vh;
 		width: 100%;
 		display: flex;
-		align-items: flex-start;
-		justify-content: center;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
+		position: relative;
 	}
 
 	.container {
@@ -30,13 +33,12 @@ $lightBlue: #4e6ce4;
 		padding: 0 1rem;
 
 		@media (min-width: 768px) {
-			max-width: 1000px;
-			// background: red;
+			max-width: 900px;
 			width: 100%;
-			padding: 2rem 5rem;
-			align-items: flex-start;
+			padding: 2rem;
+			align-items: center;
 			justify-content: center;
-			margin-left: 2rem;
+			margin-top: 2rem;
 		}
 
 		.loading {
@@ -55,10 +57,15 @@ $lightBlue: #4e6ce4;
 			@media (max-width: 480px) {
 				align-self: center;
 			}
+			@media (min-width: 768px) {
+				margin-top: -4rem;
+			}
 			width: 100%;
 			font-size: 1.5rem;
-			font-weight: bold;
 			text-transform: capitalize;
+			@media (min-width: 768px){
+				max-width: 90%;
+			}
 
 			.coinBackEmoji {
 				display: flex;
@@ -93,8 +100,11 @@ $lightBlue: #4e6ce4;
 			height: 25rem;
 			font-weight: bold;
 			width: 100%;
+			@media (min-width: 768px) and (max-width: 1023px) {
+				width: 90%;
+			}
 			border-radius: 5px;
-			color: $textColor;
+			color: $mainColor;
 			text-align: center;
 			display: flex;
 			justify-content: flex-start;
@@ -139,9 +149,10 @@ $lightBlue: #4e6ce4;
 
 			.watchIcons {
 				position: absolute;
-				border-radius: 5px;
+				border: none;
 
-				.watchingCoinIcon, .normalCoinIcon {
+				.watchingCoinIcon,
+				.normalCoinIcon {
 					animation: watchAnim 0.3s ease-in-out forwards;
 				}
 				@keyframes watchAnim {
@@ -158,33 +169,24 @@ $lightBlue: #4e6ce4;
 					}
 				}
 
-				@media (min-width: 768px) {
+				@media (min-width: 1024px) {
 					padding: 0.75rem;
 					display: flex;
 					align-items: center;
 					justify-content: space-between;
 					top: -15%;
+					right: -10%;
 					width: 7rem;
-					border: 1px solid $thirdTextColor;
 					transition: all 0.5s ease-in;
 				}
 				font-size: 1.5rem;
 				top: -12%;
 				right: 0%;
-				@media (max-width: 480px) {
-					right: 0%;
-				}
 
 				span {
 					font-size: 1.25rem;
-					color: $subTextColor;
-				}
-			}
-
-			@media (min-width: 768px) {
-				.watchIcons:hover {
-					border: 1px solid $lightBlue;
-					cursor: pointer;
+					color: $subColor;
+					margin-left: -0.5rem;
 				}
 			}
 
@@ -219,14 +221,18 @@ $lightBlue: #4e6ce4;
 		}
 
 		.coinStats {
-			font-size: 1.25rem;
-			font-weight: bold;
+			font-size: 1.35rem;
+			margin-bottom: -0.25rem;
 		}
 
 		.coinInformationContainer {
 			width: 100%;
-			@media (max-width: 768px) {
+			@media (min-width: 768px) and (max-width: 1023px) {
+				max-width: 90%;
+			}
+			@media (max-width: 767px) {
 				margin-top: 4rem;
+				max-width: 100%;
 			}
 			margin-top: 2rem;
 			color: $textColor;
@@ -235,9 +241,7 @@ $lightBlue: #4e6ce4;
 			flex-direction: column;
 
 			.coinPricesContainer {
-				padding: 0 1rem;
 				border-radius: 5px;
-				background: rgba(#13151b, 1);
 				height: fit-content;
 
 				.mainCoinPrices {
@@ -262,8 +266,8 @@ $lightBlue: #4e6ce4;
 						}
 
 						p:nth-child(1) {
-							font-size: 1.15rem;
-							color: $subTextColor;
+							font-size: 1.05rem;
+							color: $subColor;
 							margin-bottom: -0.5rem;
 							@media (max-width: 768px) {
 								margin-bottom: 1.5rem;
@@ -271,13 +275,12 @@ $lightBlue: #4e6ce4;
 						}
 
 						p:nth-child(2) {
-							font-size: 1.5rem;
-							font-weight: 500;
-							color: $textColor;
+							font-size: 1.05rem;
+							color: $subColor;
 
-							@media (max-width: 768px) {
+							@media (min-width: 768px) {
 								font-size: 1.15rem;
-								font-weight: bold;
+								color: $textColor;
 							}
 
 							span {
@@ -289,46 +292,68 @@ $lightBlue: #4e6ce4;
 			}
 
 			.tradeCoinMobile {
-				// background: red;
-				margin-top: -1rem;
+				margin-top: 2rem;
+				@media (max-width: 767px) {
+					margin-top: -0.5rem;
+				}
 				margin-bottom: 1rem;
 				width: 100%;
 				display: flex;
 				align-self: center;
+				border: 1px solid $subColor;
+				border-radius: 5px;
 
 				div {
+					display: flex;
+					justify-content: center;
+					align-items: center;
 					width: 100%;
+					height: 5rem;
 
-					p {
-						padding: 1rem;
-						font-size: 1.15rem;
-						background: rgba(#13151b, 1);
-						border: 1px solid $subTextColor;
-						border-radius: 5px;
+					img {
+						height: 3rem;
+						margin-left: 1rem;
 					}
 
-					button {
-						width: 100%;
-						height: 3rem;
-						border-radius: 5px;
-						outline: none;
-						border: none;
-						font-size: 1.15rem;
-						background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
-						background: $lightBlue;
+					p:nth-child(1){
+						text-align: center;
+						word-break: break-word;
+						max-width: 20rem;
+					}
+
+					p:nth-child(2) {
+						font-size: 1.05rem;
+						margin-left: 1rem;
+
+						span {
+							text-transform: uppercase;
+						}
+					}
+
+					p:nth-child(3) {
+						font-size: 1.35rem;
+						margin-left: auto;
+						margin-right: 1rem;
 					}
 				}
 			}
 
 			.aboutCoinHeader {
-				font-size: 1.25rem;
-				font-weight: bold;
-				margin-top: 2rem;
+				font-size: 1.35rem;
+				margin-top: 1rem;
+				@media (min-width: 1024px) {
+					margin-bottom: -0.5rem;
+				}
 			}
 
 			.tradeCoinAndAboutCoinMobile {
+				color: $subColor;
 				width: 100%;
+				@media (min-width: 768px) {
+					width: 100%;
+				}
 				display: flex;
+				align-self: center;
 				@media (max-width: 625px) {
 					max-width: 21rem;
 				}
@@ -336,34 +361,32 @@ $lightBlue: #4e6ce4;
 				.aboutCoinMobile {
 					height: fit-content;
 					line-height: 1.7;
-					background: rgba(#13151b, 1);
 					font-size: 1.15rem;
 					width: 100%;
 					border-radius: 5px;
 
 					p:nth-child(1) {
-						padding: 0.25rem 1rem;
 						margin-top: 1rem;
 						display: -webkit-box;
 						-webkit-line-clamp: 7;
 						-webkit-box-orient: vertical;
 						overflow: hidden;
+						margin-top: -0.5rem;
 					}
 					p:nth-child(2) {
-						padding: 1rem;
-						margin-top: -1rem;
+						margin-top: -0.5rem;
 						font-size: 1.15rem;
-						color: $subTextColor;
+						color: $subColor;
 						font-weight: bold;
 						margin-bottom: 0.5rem;
 					}
 					span {
-						margin-top: -2rem;
-						padding: 1rem;
+						margin-top: 0.5rem;
 						display: flex;
 						align-items: center;
 						margin-bottom: 0.5rem;
-						font-size: 1.3rem;
+						font-size: 1.5rem;
+						text-align: left;
 
 						a {
 							text-decoration: none;
@@ -381,17 +404,14 @@ $lightBlue: #4e6ce4;
 				position: relative;
 
 				.aboutCoin {
-					position: absolute;
+					color: $subColor;
 					height: fit-content;
 					line-height: 1.7;
-					background: rgba(#13151b, 1);
 					font-size: 1.15rem;
-					left: 0%;
 					width: 45%;
 					border-radius: 5px;
 
 					p:nth-child(1) {
-						padding: 0.25rem 1rem;
 						margin-top: 1rem;
 						display: -webkit-box;
 						-webkit-line-clamp: 7;
@@ -399,20 +419,19 @@ $lightBlue: #4e6ce4;
 						overflow: hidden;
 					}
 					p:nth-child(2) {
-						padding: 1rem;
-						margin-top: -1rem;
+						margin-top: 1rem;
 						font-size: 1.15rem;
-						color: $subTextColor;
+						color: $subColor;
 						font-weight: bold;
 						margin-bottom: 0.5rem;
 					}
 					span {
-						margin-top: -2rem;
-						padding: 1rem;
+						margin-top: 0.5rem;
 						display: flex;
 						align-items: center;
 						margin-bottom: 0.5rem;
-						font-size: 1.3rem;
+						font-size: 1.5rem;
+						text-align: left;
 
 						a {
 							text-decoration: none;
@@ -431,14 +450,13 @@ $lightBlue: #4e6ce4;
 					margin-left: auto;
 					height: 20rem;
 					border-radius: 5px;
-					color: $subTextColor;
+					color: $mainColor;
 					position: relative;
 
 					.buyCoins,
 					.sellCoins,
 					.convertCoins {
 						position: absolute;
-						// background: black;
 						width: 100%;
 						left: 0;
 						display: flex;
@@ -452,6 +470,7 @@ $lightBlue: #4e6ce4;
 							align-items: center;
 							justify-content: space-around;
 							position: relative;
+							color: $mainColor;
 
 							input {
 								display: flex;
@@ -460,7 +479,7 @@ $lightBlue: #4e6ce4;
 								border: none;
 								outline: none;
 								font-size: 2.5rem;
-								color: $textColor;
+								color: $mainColor;
 								background: transparent;
 								border-radius: 5px;
 								width: 70%;
@@ -479,16 +498,13 @@ $lightBlue: #4e6ce4;
 								-moz-appearance: textfield; /* Firefox */
 							}
 							span {
-								// position: absolute;
-								// left: 10%;
 								font-size: 1.5rem;
-								color: $textColor;
-								// margin-right: 0.5rem;
+								color: $mainColor;
 							}
 
 							div {
 								font-size: 1.5rem;
-								color: $textColor;
+								color: $mainColor;
 								cursor: pointer;
 								margin-left: 1rem;
 							}

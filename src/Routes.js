@@ -63,7 +63,7 @@ const Routes = () => {
 				</Route>
 
 				<Route path="*">
-					<h1 style={{ color: '#fff', textAlign: 'center' }}>PAGE NOT FOUND</h1>
+					<h1 style={{ color: '#000', textAlign: 'center' }}>PAGE NOT FOUND</h1>
 				</Route>
 			</Switch>
 		</Router>

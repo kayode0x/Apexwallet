@@ -8,6 +8,7 @@ import { RotateSpinner } from 'react-spinners-kit';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { IoClose } from 'react-icons/io5';
+import { FiChevronRight } from 'react-icons/fi';
 
 export default function NameModal({ user }) {
 	const [openModal, setOpenModal] = useState(false);
@@ -32,13 +33,13 @@ export default function NameModal({ user }) {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setChangingName(false);
-			} else if (name.length > 20 ){
-                toast.dark('Name can not be more than 20 characters', {
+			} else if (name.length > 20) {
+				toast.dark('Name can not be more than 20 characters', {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setChangingName(false);
-            } else {
-                name.trim();
+			} else {
+				name.trim();
 				await axios
 					.put(nameChangeEndpoint, displayName)
 					.then((res) => {
@@ -48,9 +49,9 @@ export default function NameModal({ user }) {
 							});
 							handleCloseModal();
 							setChangingName(false);
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 2000);
+							setTimeout(() => {
+								window.location.reload();
+							}, 2000);
 						}
 					})
 					.catch(async (err) => {
@@ -68,13 +69,13 @@ export default function NameModal({ user }) {
 
 	return (
 		<div style={{ width: '100%' }}>
-			<div className="personalFieldName">
+			<div className="personalFieldName" onClick={handleOpenModal}>
 				<div className="nameAndDisplay">
 					<p className="displayLabel">Display Name</p>
 					<p className="displayValue">{user.name ? user.name : 'No name yet'}</p>
 				</div>
-				<div className="editButton">
-					<button onClick={handleOpenModal}>Edit</button>
+				<div className="editIcon">
+					<FiChevronRight />
 				</div>
 			</div>
 			<Modal
@@ -103,7 +104,7 @@ export default function NameModal({ user }) {
 										id="name"
 										maxLength="20"
 										name="name"
-										placeholder={user.name}
+										placeholder={user.name ? user.name : 'Pick a display name'}
 										required
 										value={name}
 										onChange={(e) => setName(e.target.value)}

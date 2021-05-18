@@ -1,10 +1,11 @@
-$mainColor: #000000;
-$subColor: #070707;
-$textColor: #ebebeb;
-$subTextColor: rgb(212, 212, 212);
-$thirdTextColor: rgb(131, 131, 131);
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
 $blue: #2f52e0;
 $lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
 
 .nameModalContainer {
 	position: absolute;
@@ -22,7 +23,7 @@ $lightBlue: #4e6ce4;
 	}
 
 	.nameModalSubContainer {
-        background: rgba(#13151b, 1);
+        background: rgba($mainColor, 1);
 		flex-direction: column;
 		height: 15rem;
 		border-radius: 10px;
@@ -34,7 +35,7 @@ $lightBlue: #4e6ce4;
 
 		p {
 			font-size: 1.15rem;
-			font-weight: bold;
+			// font-weight: bold;
 			color: $textColor;
 		}
 
@@ -73,7 +74,7 @@ $lightBlue: #4e6ce4;
 					font-size: 1.15rem;
 					outline: none;
 					border-radius: 5px;
-					border: 2px solid $thirdTextColor;
+					border: 2px solid $subColor;
 					padding: 0.75rem;
 					background: transparent;
 					color: $textColor;
@@ -83,7 +84,7 @@ $lightBlue: #4e6ce4;
 				}
 
 				input::placeholder {
-					color: $subTextColor;
+					color: $subColor;
 					font-size: 1rem;
 				}
 
@@ -108,7 +109,7 @@ $lightBlue: #4e6ce4;
 				background: $lightBlue;
                 font-weight: bold;
 				transition: 0.5s;
-				color: $textColor;
+				color: $mainColor;
                 display: flex;
                 align-items: center;
                 justify-content: center;

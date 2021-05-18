@@ -50,40 +50,43 @@ const Dashboard = () => {
 	}, [getLoggedIn, loggedIn, history]);
 
 	return (
-		<div className="dashboard">
-			<div className="container">
-				<p className="header">Home</p>
-				{user ? (
-					<div className="notActive">
-						{user.isActive === false && (
-							<>
-								<p className="leadText">Verify your account</p>
-								<p className="subText">
-									Welcome to the crypto world, as a new user, you need to verify your account before
-									doing anything.
-								</p>
-								<p className="thirdText">Check your email 😉</p>
-							</>
-						)}
-						{user.isActive === true && (
-							<>
-								<p className="leadText">Account verified</p>
-								<p className="subText">
-									Currently working on the stuffs that will go up here, please check back for updates.
-								</p>
-								<p className="thirdText">⏳</p>
-							</>
-						)}
-					</div>
-				) : (
-					<div className="loading">
-						<RotateSpinner size={40} color="#fff" />
-					</div>
-				)}
+		<>
+			<div className="dashboard">
+				<BottomNav />
+				<div className="container">
+					<p className="header">Home</p>
+					{user ? (
+						<div className="notActive">
+							{user.isActive === false && (
+								<>
+									<p className="leadText">Verify your account</p>
+									<p className="subText">
+										Welcome to the crypto world, as a new user, you need to verify your account
+										before doing anything.
+									</p>
+									<p className="thirdText">Check your email 😉</p>
+								</>
+							)}
+							{user.isActive === true && (
+								<>
+									<p className="leadText">Account verified</p>
+									<p className="subText">
+										Currently working on the stuffs that will go up here, please check back for
+										updates.
+									</p>
+									<p className="thirdText">⏳</p>
+								</>
+							)}
+						</div>
+					) : (
+						<div className="loading">
+							<RotateSpinner size={40} color="#080809" />
+						</div>
+					)}
+				</div>
+				<ToastContainer autoClose={3000} />
 			</div>
-			<BottomNav />
-			<ToastContainer autoClose={3000} />
-		</div>
+		</>
 	);
 };
 

@@ -121,6 +121,7 @@ const Market = () => {
 
 	return (
 		<div className="market">
+			<BottomNav />
 			<div className="container">
 				<p className="header">Market</p>
 
@@ -232,12 +233,10 @@ const Market = () => {
 					</>
 				) : (
 					<div className="loading">
-						<RotateSpinner size={40} color="#fff" />
+						<RotateSpinner size={40} color="#080809" />
 					</div>
 				)}
 			</div>
-
-			<BottomNav />
 			<ToastContainer autoClose={3000} />
 		</div>
 	);

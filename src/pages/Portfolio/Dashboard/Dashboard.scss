@@ -1,24 +1,27 @@
-$mainColor: #000000;
-$subColor: #070707;
-$textColor: #ebebeb;
-$subTextColor: rgb(212, 212, 212);
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
 $blue: #2f52e0;
 $lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
 
 .dashboard {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 3rem;
 	// height: 100vh;
-	@media (max-width: 768px) and (orientation: landscape) {
+	@media (max-width: 767px) and (orientation: landscape) {
 		margin-bottom: 5rem;
 	}
 	@media (min-width: 768px) {
 		height: 95vh;
 		width: 100%;
 		display: flex;
-		align-items: flex-start;
-		justify-content: center;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
 	}
 
 	.container {
@@ -31,10 +34,10 @@ $lightBlue: #4e6ce4;
 		@media (min-width: 768px) {
 			max-width: 1000px;
 			width: 100%;
-			padding: 2rem 5rem;
-			align-items: center;
+			padding: 2rem;
+			align-items: flex-start;
 			justify-content: center;
-			margin-left: 2rem;
+			margin-top: 2rem;
 		}
 
 		.loading {
@@ -48,23 +51,28 @@ $lightBlue: #4e6ce4;
 			color: $textColor;
 			display: flex;
 			text-align: left;
-			align-self: center;
+			align-self: flex-start;
 			font-size: 1.5rem;
 			font-weight: bold;
 			@media (max-width: 481px) {
 				align-self: flex-start;
+			}
+			@media (min-width: 768px) {
+				display: none;
 			}
 		}
 
 		.notActive {
 			background-color: #4158d0;
 			background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
-
 			padding: 1rem;
 			border-radius: 5px;
-			color: $textColor;
+			color: $mainColor;
 			text-align: center;
 			max-width: 20rem;
+			display: flex;
+			flex-direction: column;
+			align-self: center;
 
 			.leadText {
 				font-size: 1.35rem;
@@ -74,9 +82,7 @@ $lightBlue: #4e6ce4;
 
 			.subText {
 				margin-top: -0.5rem;
-				font-size: 1rem;
-				font-weight: 500;
-				font-weight: bold;
+				font-size: 1.05rem;
 			}
 
 			.thirdText {
@@ -86,6 +92,7 @@ $lightBlue: #4e6ce4;
 				align-items: center;
 				justify-content: center;
 				border-radius: 5px;
+				margin-top: 0.25rem;
 				margin-bottom: 0rem;
 				font-size: 1rem;
 				font-weight: 550;

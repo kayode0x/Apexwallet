@@ -1,9 +1,11 @@
-$mainColor: #000000;
-$subColor: #070707;
-$textColor: #EBEBEB;
-$subTextColor: rgb(212, 212, 212);
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
 $blue: #2f52e0;
-$lightBlue: #4E6CE4;
+$lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
 
 .signup {
     display: flex;
@@ -114,7 +116,6 @@ $lightBlue: #4E6CE4;
         .header {
             color: $textColor;
             font-size: 2rem;
-            font-weight: bold;
         }
 
         form {
@@ -141,9 +142,9 @@ $lightBlue: #4E6CE4;
                     font-size: 1.15rem;
                     outline: none;
                     border-radius: 5px;
-                    border: 2px solid $subTextColor;
+                    border: 2px solid $subColor;
                     padding: .75rem;
-                    background: rgb(0, 0, 0);
+                    background: transparent;
                     color: $textColor;
                     transition: all .2s ease-in;
                 }
@@ -175,7 +176,7 @@ $lightBlue: #4E6CE4;
                 background: $blue;
                 font-size: 1.15rem;
                 font-weight: bold;
-                color: $textColor;
+                color: $mainColor;
                 transition: all .2s ease-in;
                 display: flex;
                 align-items: center;
@@ -188,7 +189,7 @@ $lightBlue: #4E6CE4;
         }
 
         .oldUser {
-            color: $subTextColor;
+            color: $subColor;
             text-decoration: none;
             margin-top: 1.5rem;
             font-size: 1.15rem;

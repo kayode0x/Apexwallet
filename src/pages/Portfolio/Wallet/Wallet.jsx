@@ -4,12 +4,10 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 // import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { RotateSpinner } from 'react-spinners-kit';
 import BottomNav from '../../../components/BottomNav/BottomNav';
-import uranusSVG from '../../../assets/logo/uranusSVG.svg';
-import { ImArrowDownLeft2 } from 'react-icons/im';
+import completeUser from './CompleteUser/CompleteUser'
 
 const Wallet = () => {
 	const history = useHistory();
@@ -98,24 +96,26 @@ const Wallet = () => {
 		if (market !== null && wallet !== null && user !== null) {
 			let arr = [];
 
-			wallet.coins.forEach((coin) => {
-				const newCoin = coin;
-				//produce external data for the user's assets
-				market.forEach((market) => {
-					if (market.id === newCoin.coin) {
-						let newCoinData = {
-							name: market.name,
-							symbol: market.symbol,
-							id:market.id,
-							usdValue: market.current_price * newCoin.balance,
-							price: market.current_price,
-							image: market.image,
-							balance: newCoin.balance,
-						};
-						arr.push(newCoinData);
-					}
+			if(wallet.coins !== undefined){
+				wallet.coins.forEach((coin) => {
+					const newCoin = coin;
+					//produce external data for the user's assets
+					market.forEach((market) => {
+						if (market.id === newCoin.coin) {
+							let newCoinData = {
+								name: market.name,
+								symbol: market.symbol,
+								id: market.id,
+								usdValue: market.current_price * newCoin.balance,
+								price: market.current_price,
+								image: market.image,
+								balance: newCoin.balance,
+							};
+							arr.push(newCoinData);
+						}
+					});
 				});
-			});
+			}
 
 			function compare(a, b) {
 				if (a.name < b.name) {
@@ -161,198 +161,15 @@ const Wallet = () => {
 		}
 	};
 
-	//format the transaction date
-	const formatDate = (dateStr) => {
-		var date = new Date(dateStr);
-
-		var monthNames = [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December',
-		];
-		var d = date.getDate();
-		var m = monthNames[date.getMonth()];
-		var y = date.getFullYear();
-
-		return `${d + ' ' + m + ' ' + y}`;
-	};
-
 	return (
 		<div className="wallet">
+			<BottomNav />
 			<div className="container">
 				<p className="header">Wallet</p>
-				{user ? (
-					<>
-						{user.isActive === true && (
-							<>
-								{user.wallet !== undefined && (
-									<>
-										{asset && (
-											<>
-												{wallet && (
-													<>
-														<div className="walletCard">
-															<div className="apexWallet">Apex Card</div>
-															<div className="cardBalance">
-																<p>
-																	<span>$</span>
-																	{wallet.balance}
-																</p>
-															</div>
-															<p className="cardNumber">
-																<span>6732</span> <span>9239</span> <span>4344</span>{' '}
-																<span>2230</span>
-															</p>
-															<img className="uranusSVG" src={uranusSVG} alt="Uranus" />
-														</div>
 
-														{/* Assets container */}
-														<p className="assetsHeader">Assets</p>
-														{asset.map((asset, index) => (
-															<Link
-																to={`/market/${asset.id}`}
-																className="asset"
-																key={index}
-															>
-																<div className="imageAndName">
-																	<img src={asset.image} alt={asset.name} />
-																	<div className="nameAndSymbol">
-																		<p>{asset.name}</p>
-																	</div>
-																</div>
-																<div className="priceAndBalance">
-																	<p>${asset.usdValue}</p>
-																	<p>
-																		{asset.balance}{' '}
-																		<span style={{ textTransform: 'uppercase' }}>
-																			{asset.symbol}
-																		</span>
-																	</p>
-																</div>
-															</Link>
-														))}
-
-														{/* Transactions Container */}
-														<p className="transactionsHeader">Transactions</p>
-														<div className="walletTransactions">
-															{wallet.transactions.map((transaction) => (
-																<div
-																	className="walletTransaction"
-																	key={transaction._id}
-																>
-																	<div
-																		style={{
-																			background:
-																				transaction.type === 'Free' ||
-																				'Bought' ||
-																				'Received'
-																					? '#C2FEDB'
-																					: '#FDC4CC',
-																			color:
-																				transaction.type === 'Free' ||
-																				'Bought' ||
-																				'Received'
-																					? '#12A550'
-																					: '#F71735',
-																		}}
-																		className="transactionIcon"
-																	>
-																		<ImArrowDownLeft2 />
-																	</div>
-																	<div className="memoAndDate">
-																		<p>
-																			{transaction.type} {transaction.coin}
-																		</p>
-																		<p>{formatDate(transaction.date)}</p>
-																	</div>
-																	<div className="value">
-																		<p>${transaction.value}</p>
-																	</div>
-																</div>
-															))}
-														</div>
-													</>
-												)}
-											</>
-										)}
-									</>
-								)}
-							</>
-						)}
-					</>
-				) : (
-					<div className="loading">
-						<RotateSpinner size={40} color="#fff" />
-					</div>
-				)}
-				{user ? (
-					<>
-						{user.isActive === false && (
-							<>
-								<div className="notActive">
-									<p className="leadText">Verify your account</p>
-									<p className="subText">
-										You can not open a wallet until you have verified your account.
-									</p>
-									<p className="thirdText">Check your email 😉</p>
-								</div>
-								<div className="notActive2">
-									<p>Once you have verified your account, your assets will show up here.</p>
-								</div>
-							</>
-						)}
-					</>
-				) : (
-					<div className="loading">
-						<RotateSpinner size={40} color="#fff" />
-					</div>
-				)}
-
-				{user ? (
-					<>
-						{user.isActive === true && (
-							<>
-								{user.wallet === undefined && (
-									<>
-										<div className="createWallet">
-											<p>Account Verified!</p>
-											<p>
-												Your account has been verified, you can now create a wallet and start
-												trading 🚀
-											</p>
-
-											<button
-												onClick={handleCreateWallet}
-												disabled={creatingWallet ? true : false}
-											>
-												{creatingWallet ? (
-													<RotateSpinner size={30} color="#fff" />
-												) : (
-													'Create Wallet'
-												)}
-											</button>
-										</div>
-									</>
-								)}
-							</>
-						)}
-					</>
-				) : (
-					<div className="loading">
-						<RotateSpinner size={40} color="#fff" />
-					</div>
-				)}
+				{/* Moved the complete user to a separate function */}
+				{completeUser(user, asset, wallet, handleCreateWallet, creatingWallet)}
 			</div>
-			<BottomNav />
 			<ToastContainer autoClose={3000} />
 		</div>
 	);

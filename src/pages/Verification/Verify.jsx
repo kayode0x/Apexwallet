@@ -18,6 +18,9 @@ const Verify = () => {
 			const queryString = window.location.search;
 			const urlParams = new URLSearchParams(queryString);
 			const token = urlParams.get('token');
+			if (token === null) {
+				history.push('/login');
+			}
 			const user = { token };
 			const apiURL = 'https://api.apexwallet.app/api/v1';
 
@@ -70,7 +73,7 @@ const Verify = () => {
 						<img src={astronaut} alt="astronaut" />
 						<div className="circle"></div>
 					</div>
-					<div className="verifying">{verifying && <RotateSpinner size={50} color="#fff" />}</div>
+					<div className="verifying">{verifying && <RotateSpinner size={50} color="#000" />}</div>
 				</div>
 			</div>
 			{/* {DON'T FORGET THE TOASTIFY} */}

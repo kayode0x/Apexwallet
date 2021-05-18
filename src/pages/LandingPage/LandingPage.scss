@@ -1,15 +1,20 @@
-$mainColor: #000000;
-$subColor: #070707;
-$textColor: #EBEBEB;
-$subTextColor: rgb(212, 212, 212);
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
 $blue: #2f52e0;
-$lightBlue: #4E6CE4;
+$lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
 
 .landingPage {
-	color: $textColor;
+	color: $mainColor;
+	background: #000;
+	height: 100vh;
 	display: flex;
 	flex-direction: column;
     z-index: 2;
+	overflow: hidden;
 
 	.mainContainer {
 		display: flex;
@@ -75,7 +80,7 @@ $lightBlue: #4E6CE4;
 				font-size: 1.15rem;
 				line-height: 1.75;
 				text-align: left;
-				color: $subTextColor;
+				color: $mainColor;
                 opacity: 0;
                 animation: mainAnim .5s ease-in .8s forwards;
                 @media (min-width: 768px) {
@@ -105,14 +110,14 @@ $lightBlue: #4E6CE4;
 					align-items: center;
 					justify-content: center;
 					text-decoration: none;
-					color: $textColor;
+					color: $mainColor;
 					font-weight: bold;
 					border-radius: 5px;
 					font-size: 1.15rem;
                     transition: all 0.2s ease;
 				}
                 .signupBtn:hover {
-                    background: $textColor;
+                    background: $mainColor;
                     color: $blue;
                 } 
 
@@ -121,7 +126,7 @@ $lightBlue: #4E6CE4;
 					align-items: center;
 					justify-content: center;
 					text-decoration: none;
-					color: $textColor;
+					color: $mainColor;
 					font-weight: bold;
 					border-radius: 5px;
 					font-size: 1.15rem;

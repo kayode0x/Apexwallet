@@ -1,10 +1,11 @@
-$mainColor: #000000;
-$subColor: #070707;
-$textColor: #ebebeb;
-$subTextColor: rgb(212, 212, 212);
-$thirdTextColor: rgb(131, 131, 131);
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
 $blue: #2f52e0;
 $lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
 
 .market {
 	display: flex;
@@ -15,11 +16,13 @@ $lightBlue: #4e6ce4;
 	}
 
 	@media (min-width: 768px) {
-		min-height: 95vh;
+		height: 95vh;
 		width: 100%;
 		display: flex;
-		align-items: flex-start;
-		justify-content: center;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
+		position: relative;
 	}
 
 	.container {
@@ -31,12 +34,12 @@ $lightBlue: #4e6ce4;
 		color: $textColor;
 
 		@media (min-width: 768px) {
-			max-width: 1000px;
+			max-width: 900px;
 			width: 100%;
-			padding: 2rem 5rem;
-			margin-left: 2rem;
-			align-items: flex-start;
+			padding: 2rem;
+			align-items: center;
 			justify-content: center;
+			margin-top: 2rem;
 		}
 
 		.loading {
@@ -54,24 +57,27 @@ $lightBlue: #4e6ce4;
 			@media (max-width: 481px) {
 				align-self: flex-start;
 			}
+			@media(min-width: 768px){
+				display: none;
+			}
 			font-size: 1.5rem;
-			font-weight: bold;
 		}
 
 		.coinPercentDown {
 			color: #ff1b1c;
-			text-align: left;
+			text-align: right;
 		}
 
 		.coinPercentUp {
 			color: #68df44;
-			text-align: left;
+			text-align: right;
 		}
 
 		.searchAndSort {
 			display: flex;
 			flex-direction: column;
 			width: 50%;
+			margin-bottom: 1rem;
 
 			@media (max-width: 1170px) {
 				width: 100%;
@@ -96,7 +102,7 @@ $lightBlue: #4e6ce4;
 				input {
 					background: transparent;
 					outline: none;
-					border: 2px solid #333;
+					border: 2px solid $subColor;
 					padding: 0.5rem;
 					width: 100%;
 					border-radius: 5px;
@@ -107,7 +113,7 @@ $lightBlue: #4e6ce4;
 				}
 
 				input:focus {
-					border: 2px solid $textColor;
+					border: 2px solid $lightBlue;
 				}
 
 				.searchIcon {
@@ -133,13 +139,15 @@ $lightBlue: #4e6ce4;
 
 		.marketAndTrade {
 			display: flex;
-			width: 100%;
+			width: 90%;
+			@media (max-width: 767px){
+				width: 100%;
+			}
 			align-items: flex-start;
 			justify-content: space-between;
 		}
 
 		.marketInfo {
-			// background: red;
 			display: flex;
 			flex-direction: row;
 			align-items: center;
@@ -156,14 +164,13 @@ $lightBlue: #4e6ce4;
 			.marketVolume,
 			.BTCDominance {
 				p:nth-child(1) {
-					color: $thirdTextColor;
+					color: $subColor;
 					margin-bottom: -0.5rem;
 					font-size: 0.9rem;
-					font-weight: 500;
 				}
 				p:nth-child(2) {
 					color: $textColor;
-					font-weight: bold;
+					// font-weight: bold;
 					margin-bottom: -0.5rem;
 				}
 				p:nth-child(3) {
@@ -194,9 +201,8 @@ $lightBlue: #4e6ce4;
 				}
 				justify-content: space-between;
 				height: 5rem;
-				background: rgba(#13151b, 1);
-				border-radius: 8px;
-				margin-top: 1.5rem;
+				// border-bottom: 1px solid $subColor;
+				margin-top: 0rem;
 				transition: all 0.2s ease-in-out;
 
 				.imageAndName {
@@ -204,13 +210,11 @@ $lightBlue: #4e6ce4;
 						display: flex;
 						width: 70%;
 						align-items: center;
-						margin-left: 1rem;
 					}
-					margin-left: 1rem;
 					display: flex;
 					align-items: center;
 					justify-content: flex-start;
-					width: 33.3%;
+					width: 40%;
 
 					.coinImage {
 						height: 2rem;
@@ -218,17 +222,16 @@ $lightBlue: #4e6ce4;
 					}
 
 					.coinNames {
-						margin-left: 1.15rem;
+						margin-left: 1rem;
 
 						.coinName {
 							color: $textColor;
-							font-weight: bold;
 							text-align: left;
 							font-size: 1.05rem;
-							margin-bottom: -0.5rem;
+							margin-bottom: -1rem;
 						}
 						.coinSymbol {
-							color: $thirdTextColor;
+							color: $subColor;
 							text-transform: uppercase;
 						}
 					}
@@ -240,20 +243,18 @@ $lightBlue: #4e6ce4;
 						flex-direction: column;
 						align-items: flex-end;
 						text-align: right;
-						margin-right: 1rem;
 					}
 					width: 33.3%;
+					margin-left: 2rem;
 					display: flex;
 					justify-content: space-between;
-					margin-left: -2rem;
 					align-items: center;
 					flex-direction: row;
 					height: 5rem;
 
 					.coinPrice {
 						color: $textColor;
-						font-size: 1.05rem;
-						font-weight: 500;
+						font-size: 1rem;
 						text-align: left;
 						@media (max-width: 480px) {
 							margin-bottom: -1rem;
@@ -268,8 +269,7 @@ $lightBlue: #4e6ce4;
 					color: $textColor;
 					text-align: left;
 					height: 100%;
-					width: 20%;
-					margin-right: -1rem;
+					margin-left: auto;
 					display: flex;
 					align-items: center;
 					justify-content: flex-start;

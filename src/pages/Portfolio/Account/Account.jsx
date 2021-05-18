@@ -13,6 +13,7 @@ import { BiSupport } from 'react-icons/bi';
 import { MdSecurity, MdInfo } from 'react-icons/md';
 import PasswordModal from './PasswordModal/PasswordModal';
 import NameModal from './NameModal/NameModal';
+import { FiChevronRight } from 'react-icons/fi';
 
 const Account = () => {
 	const history = useHistory();
@@ -70,8 +71,9 @@ const Account = () => {
 
 	return (
 		<div className="account">
+			<BottomNav />
 			<div className="container">
-				<p className="header">My Account</p>
+				<p className="header">Account</p>
 				{user ? (
 					<>
 						<div className="accountInfo">
@@ -83,38 +85,43 @@ const Account = () => {
 										<p>{user.username}</p>
 									</div>
 								</div>
-								<div className="personalField">
-									<NameModal user={user} />
-									<div className="personalFieldEmail">
-										<div className="nameAndDisplay">
-											<p className="displayLabel">Email</p>
-											<p className="displayValue">{user.email}</p>
-										</div>
+								<NameModal user={user} />
+								<div className="personalFieldEmail">
+									<div className="nameAndDisplay">
+										<p className="displayLabel">Email</p>
+										<p className="displayValue">{user.email}</p>
 									</div>
-									<PasswordModal user={user} />
 								</div>
+								<PasswordModal user={user} />
 
 								<StatusModal user={user} />
 
-								<div className="helpField">
-									<div className="helpAndSupportField">
-										<div className="accountIcons">
-											<BiSupport />
-										</div>
-										<p>Help and Support</p>
+								<div className="helpAndSupportField">
+									<div className="accountIcons">
+										<BiSupport />
 									</div>
+									<p>Help and Support</p>
+									<div className="editIcon">
+										<FiChevronRight />
+									</div>
+								</div>
 
-									<div className="privacyField">
-										<div className="accountIcons">
-											<MdSecurity />
-										</div>
-										<p>Privacy and Policy</p>
+								<div className="privacyField">
+									<div className="accountIcons">
+										<MdSecurity />
 									</div>
-									<div className="aboutUsField">
-										<div className="accountIcons">
-											<MdInfo />
-										</div>
-										<p>About Us</p>
+									<p>Privacy and Policy</p>
+									<div className="editIcon">
+										<FiChevronRight />
+									</div>
+								</div>
+								<div className="aboutUsField">
+									<div className="accountIcons">
+										<MdInfo />
+									</div>
+									<p>About Us</p>
+									<div className="editIcon">
+										<FiChevronRight />
 									</div>
 								</div>
 							</div>
@@ -130,12 +137,11 @@ const Account = () => {
 					</>
 				) : (
 					<div className="loading">
-						<RotateSpinner size={40} color="#fff" />
+						<RotateSpinner size={40} color="#080809" />
 					</div>
 				)}
 			</div>
-			<BottomNav />
-			<ToastContainer autoClose={3000}/>
+			<ToastContainer autoClose={3000} />
 		</div>
 	);
 };

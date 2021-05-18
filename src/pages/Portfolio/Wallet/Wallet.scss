@@ -1,10 +1,11 @@
-$mainColor: #000000;
-$subColor: #070707;
-$textColor: #ebebeb;
-$subTextColor: rgb(212, 212, 212);
-$thirdTextColor: rgb(131, 131, 131);
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
 $blue: #2f52e0;
 $lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
 
 .wallet {
 	display: flex;
@@ -18,8 +19,10 @@ $lightBlue: #4e6ce4;
 		height: 95vh;
 		width: 100%;
 		display: flex;
-		align-items: flex-start;
-		justify-content: center;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
+		position: relative;
 	}
 
 	.container {
@@ -29,14 +32,16 @@ $lightBlue: #4e6ce4;
 		align-items: center;
 		padding: 0 1rem;
 
-		@media (min-width: 481px) {
-			max-width: 1000px;
-			max-width: 20rem;
+		@media (min-width: 768px) {
+			max-width: 900px;
 			width: 100%;
-			padding: 2rem 5rem;
-			margin-left: 2rem;
+			padding: 2rem;
 			align-items: center;
+			@media (min-width: 1024px){
+				align-items: flex-start;
+			}
 			justify-content: center;
+			margin-top: 2rem;
 		}
 
 		.loading {
@@ -53,8 +58,11 @@ $lightBlue: #4e6ce4;
 			align-self: center;
 			font-size: 1.5rem;
 			font-weight: bold;
-			@media (max-width: 481px) {
+			@media (max-width: 767px) {
 				align-self: flex-start;
+			}
+			@media(min-width: 768px){
+				display: none;
 			}
 		}
 
@@ -62,21 +70,22 @@ $lightBlue: #4e6ce4;
 			background-image: linear-gradient(111.6deg, rgba(174, 68, 223, 1) 27.3%, rgba(246, 135, 135, 1) 112.7%);
 			padding: 1rem;
 			border-radius: 5px;
-			color: $textColor;
+			color: $mainColor;
 			text-align: center;
 			max-width: 20rem;
+			display: flex;
+			flex-direction: column;
+			align-self: center;
 
 			.leadText {
-				font-size: 1.35rem;
+				font-size: 1.25rem;
 				font-weight: bold;
 				margin-top: 0.25rem;
 			}
 
 			.subText {
 				margin-top: -0.5rem;
-				font-size: 1rem;
-				font-weight: 500;
-				font-weight: bold;
+				font-size: 1.05rem;
 			}
 
 			.thirdText {
@@ -93,33 +102,38 @@ $lightBlue: #4e6ce4;
 		}
 
 		.notActive2 {
-			color: rgb(83, 83, 83);
-			font-weight: bold;
+			color: $subColor;
 			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-self: center;
 		}
 
 		.createWallet {
 			background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
 			padding: 1rem;
 			border-radius: 5px;
-			color: $textColor;
+			color: $mainColor;
 			text-align: center;
 			max-width: 20rem;
 			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-self: center;
 
 			p:nth-child(1) {
 				font-size: 1.25rem;
 				font-weight: bold;
-				margin-top: 0.5rem;
+				margin-top: -0.25rem;
 			}
 
 			p:nth-child(2) {
-				font-size: 1.15rem;
+				font-size: 1.05rem;
+				margin-top: -0.5rem;
 			}
 
 			button {
 				padding: 1rem;
-				// margin-top: 1rem;
 				width: 100%;
 				height: 3rem;
 				outline: none;
@@ -128,7 +142,7 @@ $lightBlue: #4e6ce4;
 				font-size: 1.15rem;
 				font-weight: 500;
 				background: rgba(0, 0, 0, 0.5);
-				color: $textColor;
+				color: $mainColor;
 				transition: all 0.2s ease-in;
 				display: flex;
 				align-items: center;
@@ -141,25 +155,53 @@ $lightBlue: #4e6ce4;
 			}
 		}
 
-		.walletCard {
-			// background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
-			background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-			// background-image: radial-gradient( circle farthest-corner at -8.9% 51.2%,  rgba(255,124,0,1) 0%, rgba(255,124,0,1) 15.9%, rgba(255,163,77,1) 15.9%, rgba(255,163,77,1) 24.4%, rgba(19,30,37,1) 24.5%, rgba(19,30,37,1) 66% );
+		.alienSVG {
 			background-image: radial-gradient(
-				circle 274px at 7.4% 17.9%,
-				rgba(82, 107, 248, 1) 0.3%,
-				rgba(167, 139, 252, 1) 90.5%
+				circle farthest-corner at 10% 20%,
+				rgba(128, 248, 174, 1) 0%,
+				rgba(223, 244, 148, 1) 90%
 			);
-			// background-image: linear-gradient( 134.6deg, rgba(158,150,252,0.85) -1%, rgba(211,133,176,1) 16.9%, rgba(249,116,146,1) 43.7%, rgba(255,158,136,1) 66.9%, rgba(254,228,172,1) 94.8% );
-			// background-image: linear-gradient( 109.6deg, rgb(158, 167, 250)  11.2%, rgb(67, 79, 184)  91.1% );
-			// padding: 1rem;
+		}
+
+		.saturnSVG {
+			background-image: linear-gradient( 109.6deg, rgb(158, 167, 250)  11.2%, rgb(67, 79, 184)  91.1% );
+		}
+
+		.sunSVG {
+			background-image: linear-gradient( 135deg, #FF9D6C 10%, #BB4E75 100%);
+		}
+
+		.astronautSVG {
+			background-image: radial-gradient(
+				circle farthest-corner at -8.9% 51.2%,
+				rgba(255, 124, 0, 1) 0%,
+				rgba(255, 124, 0, 1) 15.9%,
+				rgba(255, 163, 77, 1) 15.9%,
+				rgba(255, 163, 77, 1) 24.4%,
+				rgba(19, 30, 37, 1) 24.5%,
+				rgba(19, 30, 37, 1) 66%
+			);
+		}
+
+		.saturnSVG, .sunSVG, .astronautSVG, .alienSVG {
 			border-radius: 5px;
+			box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
 			color: #fff;
 			text-align: center;
-			// max-width: 20rem;
 			width: 100%;
 			height: 12rem;
 			position: relative;
+			@media (min-width: 768px){
+				max-width: 23rem;
+			}
+
+			.cardOptions {
+				font-size: 1.5rem;
+				position: absolute;
+				right: 2%;
+				top: 5%;
+				cursor: pointer;
+			}
 
 			.apexWallet {
 				position: absolute;
@@ -181,7 +223,7 @@ $lightBlue: #4e6ce4;
 					font-size: 1.75rem;
 					font-weight: 600;
 					margin-top: -0.75rem;
-					color: #fff;
+					font-weight: bold;
 				}
 			}
 
@@ -193,20 +235,20 @@ $lightBlue: #4e6ce4;
 				z-index: 3;
 				font-size: 1.25rem;
 				width: 80%;
-				// font-weight: bold;
+				font-weight: bold;
 				display: flex;
-				// background: red;
+				color: #fff;
 				align-items: center;
 				justify-content: space-evenly;
 			}
 
-			.uranusSVG {
+			.cardSVG {
 				position: absolute;
 				top: 15%;
 				right: 7%;
 				height: 8rem;
 				opacity: 0.7;
-				// animation: rotateUranus 5s ease-in-out infinite forwards;
+				// animation: rotateUranus 10s ease-in-out infinite forwards;
 			}
 
 			@keyframes rotateUranus {
@@ -224,12 +266,46 @@ $lightBlue: #4e6ce4;
 			color: $textColor;
 			display: flex;
 			align-self: flex-start;
+			@media (min-width: 481px){
+				align-self: center;
+			}
 			margin-top: 2rem;
 			font-size: 1.15rem;
-			margin-bottom: -.5rem;
-			@media (min-width: 481px) {
-				margin-left: -1rem;
+			margin-bottom: -0.5rem;
+		}
+
+		.cardAssetsAndTransactions {
+			width: 90%;
+			@media (max-width: 767px){
+				width: 100%;
 			}
+			@media (min-width: 768px){
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+			}
+		}
+
+		.coinsAndTransactions {
+			@media (min-width : 768px){
+				width: 45%;
+				margin-right: -2rem;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
+			@media (min-width: 1024px){
+				width: 50%;
+			}
+
+			@media (min-width: 768px){
+				margin-top: -2rem;
+			}
+		}
+
+		.assetsContainer, .transactionsContainer {
+			width: 100%;
 		}
 
 		.asset {
@@ -237,12 +313,11 @@ $lightBlue: #4e6ce4;
 			display: flex;
 			align-items: center;
 			width: 100%;
-			max-width: 30rem;
+			@media (min-width: 768px){
+				max-width: 23rem;
+			}
 			justify-content: space-between;
-			height: 5rem;
-			background: rgba(#13151b, 1);
-			border-radius: 8px;
-			margin-top: 1.5rem;
+			height: 4.5rem;
 			transition: all 0.2s ease-in-out;
 
 			.imageAndName {
@@ -253,7 +328,7 @@ $lightBlue: #4e6ce4;
 				img {
 					height: 2rem;
 					width: 2rem;
-					margin-left: 1rem;
+					// margin-left: 1rem;
 				}
 				.nameAndSymbol {
 					display: flex;
@@ -263,11 +338,10 @@ $lightBlue: #4e6ce4;
 					p {
 						font-size: 1.05rem;
 						color: $textColor;
-						font-weight: bold;
 					}
 
 					span {
-						color: $thirdTextColor;
+						color: $textColor;
 						text-transform: uppercase;
 					}
 				}
@@ -276,24 +350,20 @@ $lightBlue: #4e6ce4;
 			.priceAndBalance {
 				display: flex;
 				flex-direction: column;
-				margin-right: 1rem;
 				text-align: right;
-				
 
-				p:nth-child(1){
+				p:nth-child(1) {
 					color: $textColor;
-					font-weight: bold;
+					// font-weight: bold;
 					font-size: 1.15rem;
-					// margin-top: 0rem;
 					margin-bottom: -0.5rem;
 				}
 
-				p:nth-child(2){
-					color: $thirdTextColor;
+				p:nth-child(2) {
+					color: $subColor;
 					word-break: break-word;
-					// background: #000;
 					max-width: 100%;
-					font-size: .9rem;
+					font-size: 0.9rem;
 				}
 			}
 		}
@@ -302,63 +372,54 @@ $lightBlue: #4e6ce4;
 			color: $textColor;
 			display: flex;
 			align-self: flex-start;
+			@media (min-width: 481px){
+				align-self: center;
+			}
 			margin-top: 2rem;
 			font-size: 1.15rem;
 			margin-bottom: 0.5rem;
-			@media (min-width: 481px) {
-				margin-left: -1rem;
-			}
 		}
 
-		.walletTransactions {
-			background: rgba(#13151b, 1);
-			padding: 0 1rem;
+		.walletTransaction {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 			width: 100%;
-			max-width: 20rem;
-			border-radius: 5px;
+			max-width: 23rem;
+			margin-top: -0.5rem;
 
-			.walletTransaction {
+			.transactionIcon {
+				padding: 0.55rem;
+				border-radius: 5px;
+				font-weight: bold;
+				font-size: 1.5rem;
 				display: flex;
 				align-items: center;
-				justify-content: space-between;
-				// border-bottom: 1px solid #fff;
-				// background: red;
-				width: 100%;
+				justify-content: center;
+			}
 
-				.transactionIcon {
-					padding: 0.55rem;
-					border-radius: 5px;
-					font-weight: bold;
-					font-size: 1.5rem;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-				}
+			.memoAndDate {
+				margin-left: 1rem;
+				display: flex;
+				flex-direction: column;
+				// background: black;
+				margin-right: auto;
 
-				.memoAndDate {
-					margin-left: 1rem;
-					display: flex;
-					flex-direction: column;
-					// background: black;
-					margin-right: auto;
-
-					p:nth-child(1) {
-						font-size: 1rem;
-						color: $textColor;
-						font-weight: bold;
-					}
-
-					p:nth-child(2) {
-						font-size: 0.85rem;
-						margin-top: -0.75rem;
-						color: $thirdTextColor;
-					}
-				}
-
-				.value {
+				p:nth-child(1) {
+					font-size: 1rem;
 					color: $textColor;
-					font-size: 1.15rem;
 				}
+
+				p:nth-child(2) {
+					font-size: 0.85rem;
+					margin-top: -0.75rem;
+					color: $subColor;
+				}
+			}
+
+			.value {
+				color: $textColor;
+				font-size: 1.05rem;
 			}
 		}
 	}

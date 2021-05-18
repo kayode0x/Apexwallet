@@ -182,6 +182,7 @@ const Coin = () => {
 
 	return (
 		<div className="coin">
+			<BottomNav />
 			<div className="container">
 				<div className="header">
 					<div className="coinBackEmoji" onClick={history.goBack}>
@@ -228,9 +229,8 @@ const Coin = () => {
 											</div>
 											<div
 												className="watchIcons"
-												style={{ color: watchingCoin ? '#FDCA40' : '#fff' }}
+												style={{ color: watchingCoin ? '#FDCA40' : '#5d5c5f' }}
 											>
-												{matches ? null : <span>{watchingCoin ? 'Unwatch' : 'Watch'}</span>}
 												{watchingCoin ? (
 													<IconContext.Provider value={{ className: 'watchingCoinIcon' }}>
 														<BsStarFill onClick={triggerWatchCoin} />
@@ -254,11 +254,7 @@ const Coin = () => {
 												<div className="tradeCoinMobile">
 													{user.isActive === false && (
 														<div>
-															<p>
-																You cannot trade {coinInfo.name} till you verify your
-																account, then open a wallet.
-															</p>
-															<button disabled={true}>Trade</button>
+															<p>Verify your account before trading {coinInfo.name}</p>
 														</div>
 													)}
 													{user.isActive === true && (
@@ -269,23 +265,23 @@ const Coin = () => {
 																		Before buying {coinInfo.name} please open a
 																		wallet.
 																	</p>
-																	<button disabled={true}>Trade</button>
 																</div>
 															)}
 														</>
 													)}
-													{/* {user.isActive === true && (
+													{user.isActive === true && (
 														<>
 															{user.wallet !== undefined && (
 																<div>
+																	<img src={coinInfo.image.large} alt={coinInfo.id} />
 																	<p>
-																		Balance $0.00
+																		<span>{coinInfo.symbol}</span> balance
 																	</p>
-																	<button disabled={false}>Trade</button>
+																	<p>$0</p>
 																</div>
 															)}
 														</>
-													)} */}
+													)}
 												</div>
 											)}
 											<p className="coinStats">{coinInfo.name} Stats</p>
@@ -348,12 +344,11 @@ const Coin = () => {
 					</>
 				) : (
 					<div className="loading">
-						<RotateSpinner size={40} color="#fff" />
+						<RotateSpinner size={40} color="#080809" />
 					</div>
 				)}
 			</div>
-			<BottomNav />
-			<ToastContainer autoClose={3000}/>
+			<ToastContainer autoClose={3000} />
 		</div>
 	);
 };

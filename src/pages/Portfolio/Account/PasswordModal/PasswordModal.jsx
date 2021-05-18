@@ -8,6 +8,7 @@ import { RotateSpinner } from 'react-spinners-kit';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { IoClose } from 'react-icons/io5';
+import { FiChevronRight } from 'react-icons/fi';
 
 export default function PasswordModal({ user }) {
 	const [openModal, setOpenModal] = useState(false);
@@ -63,13 +64,13 @@ export default function PasswordModal({ user }) {
 
 	return (
 		<div style={{ width: '100%' }}>
-			<div className="personalFieldPassword">
+			<div className="personalFieldPassword" onClick={handleOpenModal}>
 				<div className="nameAndDisplay">
 					<p className="displayLabel">Password</p>
 					<p className="displayValue">**********</p>
 				</div>
-				<div className="editButton">
-					<button onClick={handleOpenModal}>Change</button>
+				<div className="editIcon">
+					<FiChevronRight />
 				</div>
 			</div>
 			<Modal

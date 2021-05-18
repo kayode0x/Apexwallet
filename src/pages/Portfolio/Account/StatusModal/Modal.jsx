@@ -6,9 +6,9 @@ import Fade from '@material-ui/core/Fade';
 import { GoUnverified, GoVerified } from 'react-icons/go';
 import notAllowedIcon from '../../../../assets/logo/appl-274c-160.png';
 import allowedIcon from '../../../../assets/logo/appl-2705-160.png';
-import moneyMouth from '../../../../assets/logo/moneyMouth.png'
+import moneyMouth from '../../../../assets/logo/moneyMouth.png';
 import unamusedEmoji from '../../../../assets/logo/unamusedEmoji.png';
-
+import { FiChevronRight } from 'react-icons/fi';
 
 export default function StatusModal({ user }) {
 	const [openModal, setOpenModal] = useState(false);
@@ -23,6 +23,9 @@ export default function StatusModal({ user }) {
 				<span style={{ background: user.isActive === true ? '#109648' : '#BF211E' }}>
 					{user.isActive === true ? 'Verified' : 'Unverified'}
 				</span>
+				<div className="editIcon">
+					<FiChevronRight />
+				</div>
 			</div>
 			<Modal
 				open={openModal}

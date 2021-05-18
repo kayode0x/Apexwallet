@@ -1,15 +1,16 @@
-$mainColor: #000000;
-$subColor: #070707;
-$textColor: #ebebeb;
-$subTextColor: rgb(212, 212, 212);
-$thirdTextColor: rgb(131, 131, 131);
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
 $blue: #2f52e0;
 $lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
 
 .account {
 	display: flex;
 	justify-content: center;
-	height: 100vh;
+	min-height: 100vh;
 	@media (max-width: 767px) {
 		margin-bottom: 15rem;
 	}
@@ -17,8 +18,9 @@ $lightBlue: #4e6ce4;
 		height: 95vh;
 		width: 100%;
 		display: flex;
-		align-items: flex-start;
-		justify-content: center;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
 	}
 
 	.container {
@@ -55,6 +57,9 @@ $lightBlue: #4e6ce4;
 			font-size: 1.5rem;
 			font-weight: bold;
 			text-transform: capitalize;
+			@media(min-width: 768px){
+				display: none;
+			}
 		}
 
 		.accountInfo {
@@ -96,7 +101,8 @@ $lightBlue: #4e6ce4;
 					align-items: center;
 					p:nth-child(1) {
 						margin-bottom: -0.75rem;
-						font-size: 1.25rem;
+						font-size: 1.15rem;
+						color: $textColor;
 						margin-left: 1.5rem;
 						display: flex;
 						align-self: flex-start;
@@ -118,9 +124,8 @@ $lightBlue: #4e6ce4;
 						);
 						transition: 0.5s;
 						background-size: 200% auto;
-						color: $textColor;
+						color: $mainColor;
 						border-radius: 5px;
-						font-weight: 600;
 						font-size: 1rem;
 						width: fit-content;
 						padding: 0 0.5rem;
@@ -134,82 +139,53 @@ $lightBlue: #4e6ce4;
 					}
 				}
 
-				.personalField,
-				.statusField,
-				.helpField {
+				.personalFieldName,
+				.personalFieldEmail,
+				.personalFieldPassword {
 					width: 100%;
-					background: rgba(#13151b, 1);
 					display: flex;
 					align-items: center;
-					justify-content: flex-start;
-					border-radius: 10px;
-					position: relative;
+					justify-content: space-between;
 
-					.accountIcons {
+					.nameAndDisplay {
 						display: flex;
-						align-items: center;
-						margin-left: 0.75rem;
-					}
-
-					p {
-						margin-left: 1rem;
-					}
-				}
-				.personalField {
-					margin-top: .5rem;
-					flex-direction: column;
-					width: 100%;
-
-					.personalFieldName,
-					.personalFieldEmail,
-					.personalFieldPassword {
+						flex-direction: column;
 						width: 100%;
-						display: flex;
-						align-items: center;
-						justify-content: space-between;
 
-						.nameAndDisplay {
-							display: flex;
-							flex-direction: column;
-
-							.displayLabel {
-								font-size: 0.9rem;
-								color: $thirdTextColor;
-								margin-bottom: -0.25rem;
-							}
-
-							.displayValue {
-								font-size: 1rem;
-								font-weight: bold;
-								max-width: 95%;
-								word-break: break-word;
-							}
-						}
-
-						button {
-							margin-right: 1rem;
-							height: 2rem;
-							padding: 0 0.75rem;
-							// width: 3.5rem;
-							outline: none;
-							background: #626064;
-							border: none;
-							border-radius: 5px;
-							color: $textColor;
+						.displayLabel {
 							font-size: 0.95rem;
-							font-weight: 500;
-							transition: all 0.2s ease-in-out;
+							color: $subColor;
+							margin-bottom: -0.25rem;
 						}
-						button:hover {
-							cursor: pointer;
-							transform: translateY(-10%);
+
+						.displayValue {
+							font-size: 1.05rem;
+							font-weight:500;
+							color: $textColor;
+							max-width: 95%;
+							word-break: break-word;
+							margin-top: 0.5rem;
 						}
+					}
+
+					.editIcon {
+						font-size: 1.25rem;
 					}
 				}
 
 				.statusField {
 					margin-top: 1rem;
 					cursor: pointer;
+					width: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: flex-start;
+					position: relative;
+
+					p {
+						margin-left: 1rem;
+						font-size: 1.05rem;
+					}
 					span {
 						display: flex;
 						align-items: center;
@@ -217,27 +193,39 @@ $lightBlue: #4e6ce4;
 						position: absolute;
 						border-radius: 5px;
 						top: 25%;
-						right: 5%;
+						right: 7%;
 						padding: 0 0.75rem;
 						height: 1.5rem;
 						font-size: 0.9rem;
-						font-weight: 550;
+						color: $mainColor;
+					}
+
+					.editIcon {
+						margin-left: auto;
+						font-size: 1.25rem;
 					}
 				}
 
-				.helpField {
-					flex-direction: column;
-					align-items: center;
-					justify-content: flex-start;
-					margin-top: 1rem;
+				.statusField,
+				.helpAndSupportField,
+				.privacyField,
+				.aboutUsField {
 					width: 100%;
+					display: flex;
+					align-items: center;
 
-					.helpAndSupportField,
-					.privacyField,
-					.aboutUsField {
-						width: 100%;
+					.accountIcons {
 						display: flex;
 						align-items: center;
+					}
+
+					p {
+						margin-left: 1rem;
+					}
+
+					.editIcon {
+						margin-left: auto;
+						font-size: 1.25rem;
 					}
 				}
 			}
@@ -254,7 +242,7 @@ $lightBlue: #4e6ce4;
 				border: none;
 				font-size: 1rem;
 				font-weight: bold;
-				color: $textColor;
+				color: $mainColor;
 				transition: 0.5s;
 			}
 
@@ -264,18 +252,18 @@ $lightBlue: #4e6ce4;
 					rgba(226, 37, 37, 1) 0%,
 					rgba(211, 49, 49, 1) 82.8%
 				);
-				color: $textColor;
+				color: $mainColor;
 				cursor: pointer;
 			}
 			.walletVersion {
 				font-size: 0.95rem;
-				color: $thirdTextColor;
+				color: $textColor;
 				margin-top: 1.5rem;
 			}
 
 			.copyright {
 				font-size: 0.95rem;
-				color: $thirdTextColor;
+				color: $textColor;
 				margin-top: -0.5rem;
 			}
 		}
