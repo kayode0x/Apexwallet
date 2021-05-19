@@ -6,6 +6,7 @@ $blue: #2f52e0;
 $lightBlue: #4e6ce4;
 $orange: #ef5116;
 $navyBlue: #262946;
+$borderColor: rgb(158, 158, 158);
 
 .dashboard {
 	display: flex;
@@ -83,7 +84,7 @@ $navyBlue: #262946;
 			@media (min-width: 768px) and (max-width: 1023px) {
 				width: 70%;
 			}
-			border: 1px solid $subColor;
+			border: 1px solid $borderColor;
 
 			div {
 				padding: 0 1rem;
@@ -243,7 +244,7 @@ $navyBlue: #262946;
 				font-size: 1.35rem;
 				// background: #000;
 				margin-top: -0.5rem;
-				border: 1px solid $subColor;
+				border: 1px solid $borderColor;
 				color: $subColor;
 				border-radius: 50%;
 				width: 3rem;
@@ -270,7 +271,7 @@ $navyBlue: #262946;
 			@media (min-width: 768px) and (max-width: 1023px) {
 				width: 90%;
 			}
-			border: 1px solid $subColor;
+			border: 1px solid $borderColor;
 			border-radius: 10px;
 			margin-top: 1rem;
 		}

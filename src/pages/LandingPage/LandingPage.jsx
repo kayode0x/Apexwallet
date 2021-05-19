@@ -14,7 +14,7 @@ const LandingPage = () => {
 					<div className="container">
 						<div className="name">Apex</div>
 						<div className="mainText">
-							Get real time market information on your favorite crypto currencies, watch them to keep
+							Get real time market information on your favorite cryptocurrencies, watch them to keep
 							track and also trade virtually, <span>risk free</span>.
 						</div>
 						<div className="buttons">
