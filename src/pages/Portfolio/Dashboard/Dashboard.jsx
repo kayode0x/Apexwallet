@@ -5,11 +5,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { RotateSpinner } from 'react-spinners-kit';
 import BottomNav from '../../../components/BottomNav/BottomNav';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { RiNotification4Line } from 'react-icons/ri';
 import CompleteDashboard from './CompleteDashboard/CompleteDashboard';
 
 const Dashboard = () => {
@@ -18,13 +15,14 @@ const Dashboard = () => {
 	const [user, setUser] = useState(null);
 	const [market, setMarket] = useState(null);
 	const [watchList, setWatchList] = useState(null);
+	const [news, setNews] = useState(null);
 
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const marketEndPoint =
 		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20litecoin%2C%20tether%2C%20dogecoin%2C%20ethereum%2C%20ethereum-classic%2C%20ripple%2C%20binancecoin%2C%20cardano%2C%20usd-coin%2C%20tron%2C%20bitcoin-cash%2C%20polkadot%2C%20uniswap%2C%20dash%2C%20&order=market_cap_desc&per_page=100&page=1&sparkline=false';
+	const newsAPI = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN';
 
-	//breakpoint set at mobile only
-	// const matches = useMediaQuery('(max-width:767px)');
+
 	let isRendered = useRef(false);
 
 	useEffect(() => {
@@ -66,6 +64,22 @@ const Dashboard = () => {
 								return null;
 							}
 						});
+				} catch (error) {
+					console.log('ERROR: ', error);
+				}
+
+				try {
+					const cryptoCompareAPIKey = process.env.REACT_APP_CRYPTO_COMPARE_API;
+					console.log(cryptoCompareAPIKey);
+					// await fetch(marketEndPoint, {
+					// 	method: 'GET',
+					// 	headers: {
+					// 		'content-type': 'application/json',
+					// 	},
+					// }).then((response) => response.json()).then((data) => {
+					// 	console.log(data)
+					// })
+
 				} catch (error) {
 					console.log('ERROR: ', error);
 				}

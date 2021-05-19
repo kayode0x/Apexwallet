@@ -47,6 +47,11 @@ const CompleteDashboard = (user, watchList) => {
 		}
 	};
 
+
+    const newsFunction = () => {
+        
+    }
+
 	if (watchList !== null && user !== null && user.isActive === false && user.wallet === undefined) {
 		return (
 			<>
