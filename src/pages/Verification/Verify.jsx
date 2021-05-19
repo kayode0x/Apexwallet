@@ -66,6 +66,7 @@ const Verify = () => {
 		<HelmetProvider>
 			<div className="verify">
 				<Helmet>
+					<meta charSet="utf-8" />
 					<title>Verify - Apex</title>
 				</Helmet>
 				<div className="container">

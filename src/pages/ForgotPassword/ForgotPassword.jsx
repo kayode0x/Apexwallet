@@ -49,6 +49,7 @@ const ForgotPassword = () => {
 		<HelmetProvider>
 			<div className="forgotPassword">
 				<Helmet>
+					<meta charSet="utf-8" />
 					<title>Forgot Password - Apex</title>
 				</Helmet>
 				<div className="container">

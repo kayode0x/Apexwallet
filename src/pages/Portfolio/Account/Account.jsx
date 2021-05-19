@@ -14,6 +14,8 @@ import { MdSecurity, MdInfo } from 'react-icons/md';
 import PasswordModal from './PasswordModal/PasswordModal';
 import NameModal from './NameModal/NameModal';
 import { FiChevronRight } from 'react-icons/fi';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { IoCamera } from 'react-icons/io5';
 
 const Account = () => {
 	const history = useHistory();
@@ -35,7 +37,7 @@ const Account = () => {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
-					if(isRendered.current === true){
+					if (isRendered.current === true) {
 						setUser(user.data);
 					} else {
 						return null;
@@ -50,99 +52,108 @@ const Account = () => {
 		return () => {
 			isRendered.current = false;
 		};
-
 	}, [getLoggedIn, loggedIn, history]);
 
-    //log the user out
-    const handleLogOut = async () => {
-        try {
-            await axios.post(`${apiURL}/auth/logout`)
-            .then(history.push('/login'))
-            .catch(async (err) => {
-                await toast.dark(`${err.response.data}`, {
-					position: toast.POSITION.TOP_CENTER,
+	//log the user out
+	const handleLogOut = async () => {
+		try {
+			await axios
+				.post(`${apiURL}/auth/logout`)
+				.then(history.push('/login'))
+				.catch(async (err) => {
+					await toast.dark(`${err.response.data}`, {
+						position: toast.POSITION.TOP_CENTER,
+					});
 				});
-            })
-        } catch (error) {
-            console.log("Error: " + error)
-        }
-    }
-	
+		} catch (error) {
+			console.log('Error: ' + error);
+		}
+	};
 
 	return (
-		<div className="account">
-			<BottomNav />
-			<div className="container">
-				<p className="header">Account</p>
-				{user ? (
-					<>
-						<div className="accountInfo">
-							<div className="userDetails">
-								<div className="nameAndImage">
-									<img src={user.image ? user.image : usrIMG} alt={user.username} />
-									<div className="nameAndStatus">
-										<p>{user.name ? user.name : user.username + ' 🚀'}</p>
-										<p>{user.username}</p>
+		<HelmetProvider>
+			<div className="account">
+				<Helmet>
+					<meta charSet="utf-8" />
+					<title>Account - Apex</title>
+				</Helmet>
+				<BottomNav />
+				<div className="container">
+					<p className="header">Account</p>
+					{user ? (
+						<>
+							<div className="accountInfo">
+								<div className="userDetails">
+									<div className="nameAndImage">
+										<div className="cameraIcon">
+											<IoCamera />
+										</div>
+										{/* <div className="imgDiv">{user.username.charAt(0).toUpperCase()}</div> */}
+										<img src={usrIMG} alt={user.username} />
+										<div className="nameAndStatus">
+											<p>{user.name ? user.name : user.username + ' 🚀'}</p>
+											<p>{user.username}</p>
+										</div>
 									</div>
-								</div>
-								<NameModal user={user} />
-								<div className="personalFieldEmail">
-									<div className="nameAndDisplay">
-										<p className="displayLabel">Email</p>
-										<p className="displayValue">{user.email}</p>
+									<NameModal user={user} />
+									<div className="personalFieldEmail">
+										<div className="nameAndDisplay">
+											<p className="displayLabel">Email</p>
+											<p className="displayValue">{user.email}</p>
+										</div>
 									</div>
-								</div>
-								<PasswordModal user={user} />
+									<PasswordModal user={user} />
 
-								<StatusModal user={user} />
+									<StatusModal user={user} />
 
-								<div className="helpAndSupportField">
-									<div className="accountIcons">
-										<BiSupport />
+									<div className="helpAndSupportField">
+										<div className="accountIcons">
+											<BiSupport />
+										</div>
+										<p>Help and Support</p>
+										<div className="editIcon">
+											<FiChevronRight />
+										</div>
 									</div>
-									<p>Help and Support</p>
-									<div className="editIcon">
-										<FiChevronRight />
+
+									<div className="privacyField">
+										<div className="accountIcons">
+											<MdSecurity />
+										</div>
+										<p>Privacy and Policy</p>
+										<div className="editIcon">
+											<FiChevronRight />
+										</div>
+									</div>
+									<div className="aboutUsField">
+										<div className="accountIcons">
+											<MdInfo />
+										</div>
+										<p>About Us</p>
+										<div className="editIcon">
+											<FiChevronRight />
+										</div>
 									</div>
 								</div>
 
-								<div className="privacyField">
-									<div className="accountIcons">
-										<MdSecurity />
-									</div>
-									<p>Privacy and Policy</p>
-									<div className="editIcon">
-										<FiChevronRight />
-									</div>
-								</div>
-								<div className="aboutUsField">
-									<div className="accountIcons">
-										<MdInfo />
-									</div>
-									<p>About Us</p>
-									<div className="editIcon">
-										<FiChevronRight />
-									</div>
-								</div>
+								{/* button to log the user out */}
+								<button onClick={handleLogOut} className="signOut">
+									Sign Out
+								</button>
+
+								<p className="walletVersion">v 0.01 - pre beta</p>
+								<p className="copyright">&copy; Werrey Inc, 2021</p>
 							</div>
-
-							{/* button to log the user out */}
-							<button onClick={handleLogOut} className="signOut">
-								Sign Out
-							</button>
-
-							<p className="walletVersion">v 0.01 - pre beta</p>
-							<p className="copyright">&copy; Werrey Inc, 2021</p>
+						</>
+					) : (
+						<div className="loading">
+							<RotateSpinner size={40} color="#080809" />
 						</div>
-					</>
-				) : (
-					<div className="loading">
-						<RotateSpinner size={40} color="#080809" />
-					</div>
-				)}
+					)}
+				</div>
+				<ToastContainer autoClose={3000} />
 			</div>
-			<ToastContainer autoClose={3000} />
-		</div>
+		</HelmetProvider>
 	);
 };
 

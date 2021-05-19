@@ -50,6 +50,7 @@ $navyBlue: #262946;
 
 		.header {
 			color: $textColor;
+			// background: #000;
 			display: flex;
 			align-items: center;
 			text-align: left;
@@ -62,8 +63,9 @@ $navyBlue: #262946;
 			}
 			width: 100%;
 			font-size: 1.5rem;
+			margin-bottom: -.5rem;
 			text-transform: capitalize;
-			@media (min-width: 768px){
+			@media (min-width: 768px) and (max-width: 1023px) {
 				max-width: 90%;
 			}
 
@@ -72,13 +74,12 @@ $navyBlue: #262946;
 				align-items: center;
 				justify-content: center;
 				font-size: 1.5rem;
-				margin-right: 0.5rem;
+				margin-left: -0.25rem;
 				margin-right: auto;
 				cursor: pointer;
 			}
 			.coinImageAndName {
 				display: flex;
-				align-self: center;
 				margin-right: auto;
 				@media (max-width: 480px) {
 					margin-left: -1rem;
@@ -348,14 +349,16 @@ $navyBlue: #262946;
 
 			.tradeCoinAndAboutCoinMobile {
 				color: $subColor;
-				width: 100%;
 				@media (min-width: 768px) {
 					width: 100%;
 				}
 				display: flex;
-				align-self: center;
-				@media (max-width: 625px) {
-					max-width: 21rem;
+				align-self: flex-start;
+				@media (max-width: 480px){
+					max-width: 22rem;
+				}
+				@media (min-width: 481px) and (max-width: 767px) {
+					max-width: 30rem;
 				}
 
 				.aboutCoinMobile {
@@ -374,7 +377,7 @@ $navyBlue: #262946;
 						margin-top: -0.5rem;
 					}
 					p:nth-child(2) {
-						margin-top: -0.5rem;
+						margin-top: 0.5rem;
 						font-size: 1.15rem;
 						color: $subColor;
 						font-weight: bold;

@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 // import useMediaQuery from '@material-ui/core/useMediaQuery';
 import BottomNav from '../../../components/BottomNav/BottomNav';
 import completeUser from './CompleteUser/CompleteUser'
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 
 const Wallet = () => {
 	const history = useHistory();
@@ -24,7 +25,7 @@ const Wallet = () => {
 	//api endpoint.
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const walletAssetUrl =
-		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum%2C%20bitcoin%2C%20ethereum-classic%2C%20litecoin%2C%20dogecoin%2C%20tron%20binancecoin%2C%20%20ripple%2C%20tether%2C%20&order=market_cap_desc&per_page=100&page=1&sparkline=false';
+		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20litecoin%2C%20tether%2C%20dogecoin%2C%20ethereum%2C%20ethereum-classic%2C%20ripple%2C%20binancecoin%2C%20cardano%2C%20usd-coin%2C%20tron%2C%20bitcoin-cash%2C%20polkadot%2C%20uniswap%2C%20dash%2C%20&order=market_cap_desc&per_page=100&page=1&sparkline=false';
 
 	useEffect(() => {
 		isRendered.current = true;
@@ -162,16 +163,22 @@ const Wallet = () => {
 	};
 
 	return (
-		<div className="wallet">
-			<BottomNav />
-			<div className="container">
-				<p className="header">Wallet</p>
+		<HelmetProvider>
+			<div className="wallet">
+				<Helmet>
+					<meta charSet="utf-8" />
+					<title>Wallet - Apex</title>
+				</Helmet>
+				<BottomNav />
+				<div className="container">
+					<p className="header">Wallet</p>
 
-				{/* Moved the complete user to a separate function */}
-				{completeUser(user, asset, wallet, handleCreateWallet, creatingWallet)}
+					{/* Moved the complete user to a separate function */}
+					{completeUser(user, asset, wallet, handleCreateWallet, creatingWallet)}
+				</div>
+				<ToastContainer autoClose={3000} />
 			</div>
-			<ToastContainer autoClose={3000} />
-		</div>
+		</HelmetProvider>
 	);
 };
 

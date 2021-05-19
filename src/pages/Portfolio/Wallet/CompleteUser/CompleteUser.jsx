@@ -130,10 +130,10 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet) =
 				<div className="notActive">
 					<p className="leadText">Verify your account</p>
 					<p className="subText">You can not open a wallet until you have verified your account.</p>
-					<p className="thirdText">Check your email 😉</p>
+					<p className="thirdText">We sent you an email 😉</p>
 				</div>
 				<div className="notActive2">
-					<p>Once you have verified your account, your assets will show up here.</p>
+					<p>Once verified, your assets will show up here.</p>
 				</div>
 			</>
 		);
@@ -143,7 +143,7 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet) =
 				<div className="createWallet">
 					<p>Account Verified!</p>
 					<p>
-						Your account has been verified, click the button below to create a wallet and start trading 🚀
+						Click the button below to create a wallet and get started 🚀
 					</p>
 
 					<button onClick={handleCreateWallet} disabled={creatingWallet ? true : false}>

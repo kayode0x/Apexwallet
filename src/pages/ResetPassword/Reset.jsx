@@ -76,6 +76,7 @@ const Reset = () => {
 		<HelmetProvider>
 			<div className="reset">
 				<Helmet>
+					<meta charSet="utf-8" />
 					<title>Reset Password - Apex</title>
 				</Helmet>
 				<div className="container">

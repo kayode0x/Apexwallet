@@ -9,6 +9,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { BiSearch } from 'react-icons/bi';
 import { RotateSpinner } from 'react-spinners-kit';
 import BottomNav from '../../../components/BottomNav/BottomNav';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 // import { BsStarFill, BsStar } from 'react-icons/bs';
 
 const Market = () => {
@@ -120,125 +121,135 @@ const Market = () => {
 	};
 
 	return (
-		<div className="market">
-			<BottomNav />
-			<div className="container">
-				<p className="header">Market</p>
+		<HelmetProvider>
+			<div className="market">
+				<Helmet>
+					<meta charSet="utf-8" />
+					<title>Market - Apex</title>
+				</Helmet>
+				<BottomNav />
+				<div className="container">
+					<p className="header">Market</p>
 
-				{market ? (
-					<>
-						{user && (
-							<>
-								<div className="marketAndTrade">
-									<div className="marketData">
-										{marketInfo && (
-											<div className="marketInfo">
-												<div className="marketCap">
-													<p>Market Cap.</p>
-													<p>${formatNumber(marketInfo.total_market_cap.usd)}</p>
-													<p
-														style={{
-															color:
-																marketInfo.market_cap_change_percentage_24h_usd < 0
-																	? '#FF1B1C'
-																	: '#68df44',
-														}}
-													>
-														<span>
-															{marketInfo.market_cap_change_percentage_24h_usd < 0
-																? ''
-																: '+'}
-														</span>
-														{Math.round(
-															(marketInfo.market_cap_change_percentage_24h_usd +
-																Number.EPSILON) *
-																100
-														) / 100}
-														%
-													</p>
-												</div>
+					{market ? (
+						<>
+							{user && (
+								<>
+									<div className="marketAndTrade">
+										<div className="marketData">
+											{marketInfo && (
+												<div className="marketInfo">
+													<div className="marketCap">
+														<p>Market Cap.</p>
+														<p>${formatNumber(marketInfo.total_market_cap.usd)}</p>
+														<p
+															style={{
+																color:
+																	marketInfo.market_cap_change_percentage_24h_usd < 0
+																		? '#FF1B1C'
+																		: '#68df44',
+															}}
+														>
+															<span>
+																{marketInfo.market_cap_change_percentage_24h_usd < 0
+																	? ''
+																	: '+'}
+															</span>
+															{Math.round(
+																(marketInfo.market_cap_change_percentage_24h_usd +
+																	Number.EPSILON) *
+																	100
+															) / 100}
+															%
+														</p>
+													</div>
 
-												<div className="marketVolume">
-													<p>Volume 24h</p>
-													<p>${formatNumber(marketInfo.total_volume.usd)}</p>
-													<p>-</p>
-												</div>
+													<div className="marketVolume">
+														<p>Volume 24h</p>
+														<p>${formatNumber(marketInfo.total_volume.usd)}</p>
+														<p>-</p>
+													</div>
 
-												<div className="BTCDominance">
-													<p>BTC Dominance</p>
-													<p>
-														{Math.round(
-															(marketInfo.market_cap_percentage.btc + Number.EPSILON) *
-																100
-														) / 100}
-														%
-													</p>
+													<div className="BTCDominance">
+														<p>BTC Dominance</p>
+														<p>
+															{Math.round(
+																(marketInfo.market_cap_percentage.btc +
+																	Number.EPSILON) *
+																	100
+															) / 100}
+															%
+														</p>
 
-													<p>-</p>
-												</div>
-											</div>
-										)}
-										<div className="searchAndSort">
-											<div className="searchBar">
-												<input
-													type="text"
-													required
-													placeholder="Search for an asset"
-													onChange={handleSearch}
-												/>
-												<div className="searchIcon">
-													<BiSearch />
-												</div>
-											</div>
-											{/* <div className="sortBar">Sorting goes here</div> */}
-										</div>
-										{allCoins.map((coin) => (
-											<Link
-												className="coinList"
-												key={coin.id}
-												// onClick={() => console.log('Clicked Coin: ', coin)}
-												to={`/market/${coin.id}`}
-											>
-												<div className="imageAndName">
-													<img className="coinImage" src={coin.image} alt={coin.name} />
-													<div className="coinNames">
-														<p className="coinName">{coin.name}</p>
-														<p className="coinSymbol">{coin.symbol}</p>
+														<p>-</p>
 													</div>
 												</div>
-												<div className="priceAndPercentage">
-													<p className="coinPrice">${coin.current_price}</p>
-													<p
-														className={
-															coin.price_change_percentage_24h < 0
-																? 'coinPercentDown'
-																: 'coinPercentUp'
-														}
-													>
-														<span>{coin.price_change_percentage_24h < 0 ? '' : '+'}</span>
-														{Math.round(
-															(coin.price_change_percentage_24h + Number.EPSILON) * 100
-														) / 100}
-														%
-													</p>
+											)}
+											<div className="searchAndSort">
+												<div className="searchBar">
+													<input
+														type="text"
+														required
+														placeholder="Search for an asset"
+														onChange={handleSearch}
+													/>
+													<div className="searchIcon">
+														<BiSearch />
+													</div>
 												</div>
-												<p className="coinMarketCap">${formatNumber(coin.market_cap)}</p>
-											</Link>
-										))}
+												{/* <div className="sortBar">Sorting goes here</div> */}
+											</div>
+											{allCoins.map((coin) => (
+												<Link
+													className="coinList"
+													key={coin.id}
+													// onClick={() => console.log('Clicked Coin: ', coin)}
+													to={`/market/${coin.id}`}
+												>
+													<div className="imageAndName">
+														<img className="coinImage" src={coin.image} alt={coin.name} />
+														<div className="coinNames">
+															<p className="coinName">{coin.name}</p>
+															<p className="coinSymbol">{coin.symbol}</p>
+														</div>
+													</div>
+													<div className="priceAndPercentage">
+														<p className="coinPrice">${coin.current_price}</p>
+														<p
+															className={
+																coin.price_change_percentage_24h < 0
+																	? 'coinPercentDown'
+																	: 'coinPercentUp'
+															}
+														>
+															<span>
+																{coin.price_change_percentage_24h < 0 ? '' : '+'}
+															</span>
+															{Math.round(
+																(coin.price_change_percentage_24h + Number.EPSILON) *
+																	100
+															) / 100}
+															%
+														</p>
+													</div>
+													<p className="coinMarketCap">${formatNumber(coin.market_cap)}</p>
+												</Link>
+											))}
+										</div>
+										{/* {matches && <div className="marketTrade">x</div>} */}
 									</div>
-									{/* {matches && <div className="marketTrade">x</div>} */}
-								</div>
-							</>
-						)}
-					</>
-				) : (
-					<div className="loading">
-						<RotateSpinner size={40} color="#080809" />
-					</div>
-				)}
+								</>
+							)}
+						</>
+					) : (
+						<div className="loading">
+							<RotateSpinner size={40} color="#080809" />
+						</div>
+					)}
+				</div>
+				<ToastContainer autoClose={3000} />
 			</div>
-			<ToastContainer autoClose={3000} />
-		</div>
+		</HelmetProvider>
 	);
 };
 

@@ -77,6 +77,7 @@ const SignUp = () => {
 		<HelmetProvider>
 			<div className="signup">
 				<Helmet>
+					<meta charSet="utf-8" />
 					<title>Signup - Apex</title>
 				</Helmet>
 				<div className="container">

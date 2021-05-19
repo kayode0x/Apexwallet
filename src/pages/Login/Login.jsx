@@ -70,6 +70,7 @@ const Login = () => {
 		<HelmetProvider>
 			<div className="login">
 				<Helmet>
+					<meta charSet="utf-8" />
 					<title>Login - Apex</title>
 				</Helmet>
 				<div className="container">

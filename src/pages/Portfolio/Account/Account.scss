@@ -81,12 +81,34 @@ $navyBlue: #262946;
 				width: 100%;
 
 				.nameAndImage {
+					position: relative;
 					display: flex;
 					justify-content: flex-start;
 					width: 100%;
 					height: 8rem;
 					margin-top: -1rem;
 					align-items: center;
+				}
+
+				.cameraIcon {
+					position: absolute;
+					bottom: 3%;
+					left: 20%;
+					font-size: 1.5rem;
+				}
+
+				.imgDiv {
+					height: 6rem;
+					width: 8.5rem;
+					background: transparent;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 1.5rem;
+					border: 1px solid $subColor;
+					color: $textColor;
+					font-weight: bold;
+					border-radius: 50%;
 				}
 
 				img {
@@ -215,6 +237,7 @@ $navyBlue: #262946;
 					align-items: center;
 
 					.accountIcons {
+						font-size: 1.25rem;
 						display: flex;
 						align-items: center;
 					}
