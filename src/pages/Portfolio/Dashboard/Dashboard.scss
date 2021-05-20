@@ -16,13 +16,21 @@ $borderColor: rgb(158, 158, 158);
 	@media (max-width: 767px) and (orientation: landscape) {
 		margin-bottom: 5rem;
 	}
-	@media (min-width: 768px) {
+	@media (min-width: 1024px) {
 		height: 95vh;
 		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
 		flex-direction: column;
+	}
+	@media (min-width: 768px) and (max-width: 1023px){
+		height: 95vh;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
 	}
 
 	.container {
@@ -63,7 +71,7 @@ $borderColor: rgb(158, 158, 158);
 			}
 		}
 
-		.watchListHeader {
+		.watchListHeader, .newsHeader {
 			color: $textColor;
 			font-size: 1.25rem;
 			text-align: left;
@@ -71,9 +79,6 @@ $borderColor: rgb(158, 158, 158);
 			margin-top: 2rem;
 			display: flex;
 			align-self: flex-start;
-			@media (min-width: 768px) and (max-width: 1023px) {
-				align-self: center;
-			}
 		}
 
 		.noWatchList {
@@ -86,7 +91,7 @@ $borderColor: rgb(158, 158, 158);
 			justify-content: center;
 			text-align: center;
 			@media (min-width: 768px) and (max-width: 1023px) {
-				width: 70%;
+				width: 100%;
 			}
 			border: 1px solid $borderColor;
 
@@ -123,10 +128,15 @@ $borderColor: rgb(158, 158, 158);
 					align-items: center;
 					justify-content: center;
 					text-decoration: none;
+					transition: all 0.2s;
 
 					p {
 						color: $mainColor;
 					}
+				}
+
+				.allAssets:hover {
+					background: linear-gradient(25deg,#ee4758,#d64c7f 50%);
 				}
 			}
 		}
@@ -138,10 +148,11 @@ $borderColor: rgb(158, 158, 158);
 			display: flex;
 			flex-direction: column;
 			align-self: center;
+			align-items: center;
 			@media (min-width: 768px) {
 				flex-direction: row;
 				display: flex;
-				justify-content: space-around;
+				justify-content: space-between;
 			}
 
 			.leadWelcomeText {
@@ -168,6 +179,11 @@ $borderColor: rgb(158, 158, 158);
 				display: flex;
 				flex-direction: column;
 				align-items: center;
+				// background: #000;
+				@media(max-width: 767px){
+					margin-top: 1rem;
+					margin-bottom: -.5rem;
+				}
 
 				p:nth-child(1) {
 					font-size: 1.25rem;
@@ -184,22 +200,26 @@ $borderColor: rgb(158, 158, 158);
 			flex-direction: column;
 			align-items: center;
 			align-self: center;
-			padding: 1rem;
+			justify-content: center;
 			border-radius: 5px;
 			color: $mainColor;
-			max-width: 20rem;
+			height: 10rem;
+			@media (min-width: 768px) and (max-width: 1023px) {
+				width: 90%;
+			}
+			width: 100%;
 			background: linear-gradient(25deg, #d64c7f, #ee4758 50%);
 
 			.leadText {
-				font-size: 1.35rem;
+				font-size: 1.25rem;
 				font-weight: bold;
-				margin-top: 0.25rem;
 			}
 
 			.subText {
 				margin-top: -0.5rem;
 				font-size: 1.05rem;
 				text-align: center;
+				max-width: 90%;
 
 				a {
 					text-decoration: none;
@@ -210,14 +230,13 @@ $borderColor: rgb(158, 158, 158);
 		}
 
 		.verifiedWithWallet {
-			// background: #000;
 			display: flex;
 			flex-direction: row;
 			align-items: center;
 			align-self: center;
 			width: 100%;
 			@media (min-width: 768px) and (max-width: 1023px) {
-				width: 90%;
+				width: 100%;
 			}
 			justify-content: space-between;
 
@@ -272,8 +291,10 @@ $borderColor: rgb(158, 158, 158);
 			flex-direction: column;
 			width: 100%;
 			align-self: center;
+			// align-items: center;
+			// background: #000;
 			@media (min-width: 768px) and (max-width: 1023px) {
-				width: 90%;
+				// width: 90%;
 			}
 			border: 1px solid $borderColor;
 			border-radius: 10px;
@@ -326,6 +347,36 @@ $borderColor: rgb(158, 158, 158);
 					margin-top: -0.5rem;
 				}
 			}
+		}
+
+		.newsDiv {
+			text-decoration: none;
+			width: 100%;
+			display: flex;
+			align-items: center;
+			transition: all 0.5s ease-in-out;
+
+
+			p:nth-child(1){
+				color: $textColor;
+			}
+
+			p:nth-child(2){
+				font-weight: 300;
+				color: $subColor;
+				margin-top: -0.5rem;
+			}
+
+			img {
+				height: 3.5rem;
+				margin-left: auto;
+				border-radius: 5px;
+			}
+		}
+
+		.newsDiv:hover {
+			cursor: pointer;
+			transform: translateY(-5%)
 		}
 	}
 }

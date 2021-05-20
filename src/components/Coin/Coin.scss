@@ -6,6 +6,7 @@ $blue: #2f52e0;
 $lightBlue: #4e6ce4;
 $orange: #ef5116;
 $navyBlue: #262946;
+$borderColor: rgb(158, 158, 158);
 
 .coin {
 	display: flex;
@@ -271,7 +272,7 @@ $navyBlue: #262946;
 							color: $subColor;
 							margin-bottom: -0.5rem;
 							@media (max-width: 768px) {
-								margin-bottom: 1.5rem;
+								margin-bottom: 1rem;
 							}
 						}
 
@@ -301,7 +302,7 @@ $navyBlue: #262946;
 				width: 100%;
 				display: flex;
 				align-self: center;
-				border: 1px solid $subColor;
+				border: 1px solid $borderColor;
 				border-radius: 5px;
 
 				div {
@@ -332,9 +333,22 @@ $navyBlue: #262946;
 					}
 
 					p:nth-child(3) {
-						font-size: 1.35rem;
+						// font-size: 1.35rem;
 						margin-left: auto;
 						margin-right: 1rem;
+						display: flex;
+						flex-direction: column;
+
+						span:nth-child(1){
+							// background: #000;
+							font-size: 1.35rem;
+							margin-left: auto;
+						}
+						span:nth-child(2){
+							font-size: .95rem;
+							color: $subColor;
+							margin-left: auto;
+						}
 					}
 				}
 			}
@@ -364,7 +378,7 @@ $navyBlue: #262946;
 				.aboutCoinMobile {
 					height: fit-content;
 					line-height: 1.7;
-					font-size: 1.15rem;
+					font-size: 1.05rem;
 					width: 100%;
 					border-radius: 5px;
 
@@ -526,7 +540,6 @@ $navyBlue: #262946;
 								);
 								transition: 0.5s;
 								font-weight: bold;
-								// border: 1px solid $subTextColor;
 								padding: 1rem;
 								height: 1.35rem;
 								border-radius: 5px;

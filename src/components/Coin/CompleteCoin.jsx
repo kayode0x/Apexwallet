@@ -4,7 +4,8 @@ import { BsStarFill, BsStar, BsLink45Deg } from 'react-icons/bs';
 import TradeTab from './TradeTab/TradeTab';
 
 
-const completeCoin = (coinInfo, asset, user, watchingCoin, triggerWatchCoin, matches, wallet) => {
+const completeCoin = (coinInfo, asset, user, watchingCoin, triggerWatchCoin, matches, wallet, balance) => {
+	
 	//convert the mega numbers
 	const formatNumber = (n) => {
 		if (n < 1e3) return n;
@@ -15,8 +16,7 @@ const completeCoin = (coinInfo, asset, user, watchingCoin, triggerWatchCoin, mat
 	};
 
 
-
-	if (coinInfo !== null && asset !== null && user !== null) {
+	if (coinInfo !== null && asset !== null && user !== null && wallet !== null) {
 		return (
 			<>
 				<div className="graphDiv">
@@ -80,7 +80,12 @@ const completeCoin = (coinInfo, asset, user, watchingCoin, triggerWatchCoin, mat
 											<p>
 												<span>{coinInfo.symbol}</span> balance
 											</p>
-											<p>$0</p>
+											<p>
+												<span>${balance * coinInfo.market_data.current_price.usd}</span>
+												<span>
+													{balance} {coinInfo.symbol.toUpperCase()}
+												</span>
+											</p>
 										</div>
 									)}
 								</>

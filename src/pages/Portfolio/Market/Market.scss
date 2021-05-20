@@ -76,7 +76,7 @@ $navyBlue: #262946;
 		.searchAndSort {
 			display: flex;
 			flex-direction: column;
-			width: 50%;
+			width: 70%;
 			margin-bottom: 1rem;
 
 			@media (max-width: 1170px) {
@@ -152,7 +152,7 @@ $navyBlue: #262946;
 			flex-direction: row;
 			align-items: center;
 			justify-content: space-between;
-			width: 50%;
+			width: 70%;
 			@media (max-width: 1170px) {
 				width: 100%;
 			}
@@ -195,7 +195,7 @@ $navyBlue: #262946;
 				text-decoration: none;
 				display: flex;
 				align-items: center;
-				width: 50%;
+				width: 70%;
 				@media (max-width: 1170px) {
 					width: 100%;
 				}

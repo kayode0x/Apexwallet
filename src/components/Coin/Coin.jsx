@@ -23,6 +23,7 @@ const Coin = () => {
 	const matches = useMediaQuery('(max-width:768px)');
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [wallet, setWallet] = useState(null);
+	const [balance, setBalance] = useState(null);
 	const [canTrade, setCanTrade] = useState(false);
 	const [asset, setAsset] = useState(null);
 	const [user, setUser] = useState(null);
@@ -59,13 +60,27 @@ const Coin = () => {
 
 					if (isRendered.current === true) {
 						setUser(user.data);
-						console.log('USER: ', user.data.watchList);
 						watchingArrayRef.current = user.data.watchList; //saves the watchList array as a ref hook to save in case of re-render.
 					} else {
 						return null;
 					}
 				} catch (error) {
 					console.log('ERROR' + error);
+				}
+
+				try {
+					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
+						await toast.dark(err.response.data, {
+							position: toast.POSITION.TOP_CENTER,
+						});
+					});
+					if (isRendered.current === true) {
+						setWallet(wallet.data);
+					} else {
+						return null;
+					}
+				} catch (error) {
+					console.log('ERROR2: ', error);
 				}
 
 				try {
@@ -78,7 +93,6 @@ const Coin = () => {
 						.then((response) => response.json())
 						.then((data) => {
 							if (isRendered.current === true) {
-								// console.log("GRAPH: ", data.prices);
 								setAsset(data);
 							} else {
 								return null;
@@ -101,7 +115,6 @@ const Coin = () => {
 						.then((response) => response.json())
 						.then((data) => {
 							if (isRendered.current === true) {
-								console.log('DATA: ', data);
 								setCoinInfo(data);
 							} else {
 								return null;
@@ -170,6 +183,14 @@ const Coin = () => {
 		}
 	};
 
+	useEffect(() => {
+		if (wallet !== null && coinInfo !== null) {
+			let newCoinBalance;
+			newCoinBalance = wallet.coins.filter((coin) => coin.coin === coinInfo.id);
+			setBalance(newCoinBalance[0].balance);
+		}
+	}, [wallet, coinInfo]);
+
 	return (
 		<HelmetProvider>
 			<div className="coin">
@@ -190,7 +211,7 @@ const Coin = () => {
 					</div>
 
 					{/* Moved the coin to a new function */}
-					{completeCoin(coinInfo, asset, user, watchingCoin, triggerWatchCoin, matches, wallet)}
+					{completeCoin(coinInfo, asset, user, watchingCoin, triggerWatchCoin, matches, wallet, balance)}
 				</div>
 				<ToastContainer autoClose={3000} />
 			</div>

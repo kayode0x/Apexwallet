@@ -40,7 +40,6 @@ const Dashboard = () => {
 					});
 					if (isRendered.current === true) {
 						setUser(user.data);
-						console.log(user.data);
 					} else {
 						return null;
 					}
@@ -59,7 +58,6 @@ const Dashboard = () => {
 						.then((data) => {
 							if (isRendered.current === true) {
 								setMarket(data);
-								// console.log(market)
 							} else {
 								return null;
 							}
@@ -70,15 +68,17 @@ const Dashboard = () => {
 
 				try {
 					const cryptoCompareAPIKey = process.env.REACT_APP_CRYPTO_COMPARE_API;
-					console.log(cryptoCompareAPIKey);
-					// await fetch(marketEndPoint, {
-					// 	method: 'GET',
-					// 	headers: {
-					// 		'content-type': 'application/json',
-					// 	},
-					// }).then((response) => response.json()).then((data) => {
-					// 	console.log(data)
-					// })
+					await fetch(newsAPI, {
+						method: 'GET',
+						headers: {
+							'content-type': 'application/json',
+							authorization: `Apikey ${cryptoCompareAPIKey}`,
+						},
+					})
+						.then((response) => response.json())
+						.then((data) => {
+							setNews(data.Data);
+						});
 
 				} catch (error) {
 					console.log('ERROR: ', error);
@@ -100,8 +100,6 @@ const Dashboard = () => {
 			if (user.watchList !== undefined) {
 				user.watchList.forEach((watchedCoin) => {
 					const oldList = watchedCoin;
-					// console.log(user.watchList);
-					// console.log(market);
 					market.forEach((market) => {
 						if (market.id === oldList.coinId) {
 							let newCoinData = {
@@ -132,7 +130,7 @@ const Dashboard = () => {
 				<BottomNav />
 				<div className="container">
 					<p className="header">Home</p>
-					{CompleteDashboard(user, watchList)}
+					{CompleteDashboard(user, watchList, news)}
 				</div>
 				<ToastContainer autoClose={3000} />
 			</div>

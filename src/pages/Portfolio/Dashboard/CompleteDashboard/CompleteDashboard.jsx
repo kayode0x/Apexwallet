@@ -2,8 +2,9 @@ import { RotateSpinner } from 'react-spinners-kit';
 import { RiNotification4Line } from 'react-icons/ri';
 import coinsSVG from '../../../../assets/logo/coinsSVG.svg';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
-const CompleteDashboard = (user, watchList) => {
+const CompleteDashboard = (user, watchList, news) => {
 	const watchListFunction = () => {
 		let length = watchList.length;
 		if (length === 0) {
@@ -12,9 +13,9 @@ const CompleteDashboard = (user, watchList) => {
 					<div>
 						<img src={coinsSVG} alt="coins" />
 						<p>Find an assortment of highlights and get a touch of each crypto to go for yourself.</p>
-						<Link to="/market" className="allAssets">
+						<a href="/market" className="allAssets">
 							<p>See all assets </p>
-						</Link>
+						</a>
 					</div>
 				</div>
 			);
@@ -47,12 +48,25 @@ const CompleteDashboard = (user, watchList) => {
 		}
 	};
 
-
-    const newsFunction = () => {
+	const newsFunction = () => {
+		let newsLength = 5;
         
-    }
+        console.log(news);
+		return news.slice(0, newsLength).map((news) => (
+			<a className="newsDiv" key={news.id} href={news.url}>
+				<div className="titleAndAuthor">
+					<p>{news.title}</p>
+					<p>
+						<span>{news.source_info.name}</span>{' '}<span>&#8226;</span>{' '}
+						<span>{moment.unix(news.published_on).startOf('hour').fromNow()}</span>
+					</p>
+				</div>
+				<img src={news.imageurl} alt={news.source} />
+			</a>
+		));
+	};
 
-	if (watchList !== null && user !== null && user.isActive === false && user.wallet === undefined) {
+	if (news !== null && watchList !== null && user !== null && user.isActive === false && user.wallet === undefined) {
 		return (
 			<>
 				<div className="welcomeContainer">
@@ -75,9 +89,17 @@ const CompleteDashboard = (user, watchList) => {
 
 				<p className="watchListHeader">Watch List</p>
 				{watchListFunction()}
+				<p className="newsHeader">News</p>
+				{newsFunction()}
 			</>
 		);
-	} else if (watchList !== null && user !== null && user.isActive === true && user.wallet === undefined) {
+	} else if (
+		news !== null &&
+		watchList !== null &&
+		user !== null &&
+		user.isActive === true &&
+		user.wallet === undefined
+	) {
 		return (
 			<>
 				<div className="verifiedNoWallet">
@@ -89,9 +111,17 @@ const CompleteDashboard = (user, watchList) => {
 				</div>
 				<p className="watchListHeader">Watch List</p>
 				{watchListFunction()}
+				<p className="newsHeader">News</p>
+				{newsFunction()}
 			</>
 		);
-	} else if (watchList !== null && user !== null && user.isActive === true && user.wallet !== undefined) {
+	} else if (
+		news !== null &&
+		watchList !== null &&
+		user !== null &&
+		user.isActive === true &&
+		user.wallet !== undefined
+	) {
 		return (
 			<>
 				<div className="verifiedWithWallet">
@@ -107,6 +137,8 @@ const CompleteDashboard = (user, watchList) => {
 				</div>
 				<p className="watchListHeader">Watch List</p>
 				{watchListFunction()}
+				<p className="newsHeader">News</p>
+				{newsFunction()}
 			</>
 		);
 	} else {
