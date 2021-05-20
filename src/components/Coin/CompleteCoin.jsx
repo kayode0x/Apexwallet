@@ -3,9 +3,7 @@ import { IconContext } from 'react-icons';
 import { BsStarFill, BsStar, BsLink45Deg } from 'react-icons/bs';
 import TradeTab from './TradeTab/TradeTab';
 
-
-const completeCoin = (coinInfo, asset, user, watchingCoin, triggerWatchCoin, matches, wallet, balance) => {
-	
+const CompleteCoin = ({coinInfo, asset, user, watchingCoin, triggerWatchCoin, matches, wallet, balance}) => {
 	//convert the mega numbers
 	const formatNumber = (n) => {
 		if (n < 1e3) return n;
@@ -14,7 +12,36 @@ const completeCoin = (coinInfo, asset, user, watchingCoin, triggerWatchCoin, mat
 		if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + 'B';
 		if (n >= 1e12) return +(n / 1e12).toFixed(1) + 'T';
 	};
-
+	const balanceFunction = () => {
+		if (user.isActive === false) {
+			return (
+				<div>
+					<p>Verify your account before trading {coinInfo.name}</p>
+				</div>
+			);
+		} else if (user.isActive === true && user.wallet === undefined) {
+			return (
+				<div>
+					<p>Before buying {coinInfo.name}, please create a wallet.</p>
+				</div>
+			);
+		} else if (user.isActive === true && user.wallet !== undefined) {
+			return (
+				<div>
+					<img src={coinInfo.image.large} alt={coinInfo.id} />
+					<p>
+						<span>{coinInfo.symbol}</span> balance
+					</p>
+					<p>
+						<span>${balance * coinInfo.market_data.current_price.usd}</span>
+						<span>
+							{balance} {coinInfo.symbol.toUpperCase()}
+						</span>
+					</p>
+				</div>
+			);
+		}
+	};
 
 	if (coinInfo !== null && asset !== null && user !== null && wallet !== null) {
 		return (
@@ -56,42 +83,7 @@ const completeCoin = (coinInfo, asset, user, watchingCoin, triggerWatchCoin, mat
 					</div>
 				</div>
 				<div className="coinInformationContainer">
-					{matches && (
-						<div className="tradeCoinMobile">
-							{user.isActive === false && (
-								<div>
-									<p>Verify your account before trading {coinInfo.name}</p>
-								</div>
-							)}
-							{user.isActive === true && (
-								<>
-									{user.wallet === undefined && (
-										<div>
-											<p>Before buying {coinInfo.name} please open a wallet.</p>
-										</div>
-									)}
-								</>
-							)}
-							{user.isActive === true && (
-								<>
-									{user.wallet !== undefined && (
-										<div>
-											<img src={coinInfo.image.large} alt={coinInfo.id} />
-											<p>
-												<span>{coinInfo.symbol}</span> balance
-											</p>
-											<p>
-												<span>${balance * coinInfo.market_data.current_price.usd}</span>
-												<span>
-													{balance} {coinInfo.symbol.toUpperCase()}
-												</span>
-											</p>
-										</div>
-									)}
-								</>
-							)}
-						</div>
-					)}
+					{matches && <div className="tradeCoinMobile">{balanceFunction()}</div>}
 					<p className="coinStats">{coinInfo.name} Stats</p>
 					<div className="coinPricesContainer">
 						<div className="mainCoinPrices">
@@ -154,4 +146,4 @@ const completeCoin = (coinInfo, asset, user, watchingCoin, triggerWatchCoin, mat
 	}
 };
 
-export default completeCoin;
+export default CompleteCoin;

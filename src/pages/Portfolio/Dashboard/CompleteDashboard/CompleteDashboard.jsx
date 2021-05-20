@@ -20,7 +20,6 @@ const CompleteDashboard = (user, watchList, news) => {
 				</div>
 			);
 		} else if (length > 0) {
-			console.log(watchList);
 			return (
 				<div className="watchListContainer">
 					{watchList.map((watchList, index) => (
@@ -50,8 +49,6 @@ const CompleteDashboard = (user, watchList, news) => {
 
 	const newsFunction = () => {
 		let newsLength = 5;
-        
-        console.log(news);
 		return news.slice(0, newsLength).map((news) => (
 			<a className="newsDiv" key={news.id} href={news.url}>
 				<div className="titleAndAuthor">
@@ -105,7 +102,7 @@ const CompleteDashboard = (user, watchList, news) => {
 				<div className="verifiedNoWallet">
 					<p className="leadText">Up next, open a wallet!</p>
 					<p className="subText">
-						Yay your account has been verified, go to the <a href="/wallet">wallets</a> tab to open a
+						Yay your account has been verified, go to the <a href="/wallet">wallets</a> tab to create a
 						wallet.
 					</p>
 				</div>

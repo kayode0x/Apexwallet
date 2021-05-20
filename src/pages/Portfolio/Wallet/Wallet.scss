@@ -330,7 +330,7 @@ $navyBlue: #262946;
 				img {
 					height: 2rem;
 					width: 2rem;
-					// margin-left: 1rem;
+					// margin-left: 1rem; 
 				}
 				.nameAndSymbol {
 					display: flex;
@@ -387,7 +387,6 @@ $navyBlue: #262946;
 			align-items: center;
 			justify-content: space-between;
 			width: 100%;
-			max-width: 23rem;
 			margin-top: -0.5rem;
 
 			.transactionIcon {
@@ -422,6 +421,7 @@ $navyBlue: #262946;
 			.value {
 				color: $textColor;
 				font-size: 1.05rem;
+				margin-left: auto;
 			}
 		}
 	}

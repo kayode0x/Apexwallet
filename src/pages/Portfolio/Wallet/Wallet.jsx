@@ -57,7 +57,6 @@ const Wallet = () => {
 					});
 					if (isRendered.current === true) {
 						setWallet(wallet.data);
-						console.log(wallet);
 					} else {
 						return null;
 					}

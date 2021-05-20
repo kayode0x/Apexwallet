@@ -9,7 +9,7 @@ import { IoChevronBack } from 'react-icons/io5';
 import axios from 'axios';
 import BottomNav from '../BottomNav/BottomNav';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import completeCoin from './CompleteCoin';
+import CompleteCoin from './CompleteCoin';
 
 const Coin = () => {
 	//get the current location.
@@ -24,7 +24,6 @@ const Coin = () => {
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [wallet, setWallet] = useState(null);
 	const [balance, setBalance] = useState(null);
-	const [canTrade, setCanTrade] = useState(false);
 	const [asset, setAsset] = useState(null);
 	const [user, setUser] = useState(null);
 	const [days, setDays] = useState(7);
@@ -183,13 +182,25 @@ const Coin = () => {
 		}
 	};
 
+
+	//get the current price from coin gecko then pass it into the coin the user is currently viewing
 	useEffect(() => {
-		if (wallet !== null && coinInfo !== null) {
+		async function callPrice() {
 			let newCoinBalance;
 			newCoinBalance = wallet.coins.filter((coin) => coin.coin === coinInfo.id);
 			setBalance(newCoinBalance[0].balance);
+
+			console.log(user, wallet)
 		}
-	}, [wallet, coinInfo]);
+		if (
+			user !== null &&
+			user.isActive === true &&
+			(user.wallet !== undefined) & (wallet !== null) &&
+			coinInfo !== null
+		) {
+			callPrice(); //only call this function if the user is active and has a wallet
+		}
+	}, [coinInfo, user, wallet]);
 
 	return (
 		<HelmetProvider>
@@ -209,9 +220,8 @@ const Coin = () => {
 							<p>{coinInfo ? coinInfo.name : coinSearchId}</p>
 						</div>
 					</div>
-
-					{/* Moved the coin to a new function */}
-					{completeCoin(coinInfo, asset, user, watchingCoin, triggerWatchCoin, matches, wallet, balance)}
+					{/* Moved the coin to a new component */}
+					<CompleteCoin coinInfo={coinInfo} asset={asset} user={user} watchingCoin={watchingCoin} triggerWatchCoin={triggerWatchCoin} matches={matches} balance={balance} wallet={wallet}/>
 				</div>
 				<ToastContainer autoClose={3000} />
 			</div>

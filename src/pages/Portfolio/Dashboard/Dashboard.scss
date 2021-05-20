@@ -13,8 +13,8 @@ $borderColor: rgb(158, 158, 158);
 	justify-content: center;
 	margin-bottom: 3rem;
 	// height: 100vh;
-	@media (max-width: 767px) and (orientation: landscape) {
-		margin-bottom: 5rem;
+	@media (max-width: 767px) {
+		margin-bottom: 10rem;
 	}
 	@media (min-width: 1024px) {
 		height: 95vh;

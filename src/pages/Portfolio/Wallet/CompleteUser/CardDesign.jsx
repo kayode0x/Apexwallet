@@ -28,7 +28,6 @@ export default function CardDesign({ user, BsThreeDotsVertical }) {
 		setChanging(true);
 
 		const newCardDesign = { cardDesign };
-		console.log(newCardDesign);
 
 		try {
 			await axios
