@@ -463,12 +463,13 @@ $borderColor: rgb(158, 158, 158);
 				.tradeCoin {
 					display: flex;
 					justify-content: space-around;
-					background: rgba(#13151b, 1);
+					// background: rgba(#13151b, 1);
+					border: 1px solid $borderColor;
 					width: 50%;
 					margin-left: auto;
 					height: 20rem;
 					border-radius: 5px;
-					color: $mainColor;
+					color: $textColor;
 					position: relative;
 
 					.buyCoins,
@@ -482,13 +483,17 @@ $borderColor: rgb(158, 158, 158);
 						align-items: center;
 						height: 15rem;
 
+						.noWalletTrade {
+							color: $textColor;
+						}
+
 						.input {
 							width: 90%;
 							display: flex;
 							align-items: center;
 							justify-content: space-around;
 							position: relative;
-							color: $mainColor;
+							color: $textColor;
 
 							input {
 								display: flex;
@@ -497,7 +502,7 @@ $borderColor: rgb(158, 158, 158);
 								border: none;
 								outline: none;
 								font-size: 2.5rem;
-								color: $mainColor;
+								color: $textColor;
 								background: transparent;
 								border-radius: 5px;
 								width: 70%;
@@ -517,15 +522,21 @@ $borderColor: rgb(158, 158, 158);
 							}
 							span {
 								font-size: 1.5rem;
-								color: $mainColor;
+								color: $textColor;
 							}
 
 							div {
 								font-size: 1.5rem;
-								color: $mainColor;
+								color: $textColor;
 								cursor: pointer;
 								margin-left: 1rem;
 							}
+						}
+
+						.amountYouGet {
+							color: $textColor;
+							margin-bottom: -1rem;
+							margin-top: 0rem;
 						}
 						.coinAndWalletTab {
 							width: 90%;
@@ -534,16 +545,12 @@ $borderColor: rgb(158, 158, 158);
 							margin-top: 1rem;
 
 							div:nth-child(1) {
-								background-image: linear-gradient(
-									105.3deg,
-									rgb(26, 33, 87) 21.8%,
-									rgb(51, 62, 146) 100.2%
-								);
+								border: 1px solid $borderColor;
 								transition: 0.5s;
-								font-weight: bold;
 								padding: 1rem;
 								height: 1.35rem;
 								border-radius: 5px;
+								color: $textColor;
 								margin-bottom: 1rem;
 								display: flex;
 								align-items: center;
@@ -559,26 +566,30 @@ $borderColor: rgb(158, 158, 158);
 							}
 
 							button {
+								display: flex;
+								align-items: center;
+								justify-content: center;
 								height: 3rem;
 								font-size: 1.15rem;
 								padding: 1rem;
 								border-radius: 5px;
 								outline: none;
 								border: none;
-								color: $textColor;
+								color: $mainColor;
 								font-weight: bold;
 								background: $lightBlue;
 								transition: 0.5s;
 							}
 
 							button:hover {
+								cursor: pointer;
 								background: $blue;
 							}
 
 							div:nth-child(3) {
 								transition: 0.5s;
-								font-weight: bold;
 								padding: 1rem;
+								color: $textColor;
 								height: 1.35rem;
 								border-radius: 5px;
 								margin-bottom: 1rem;

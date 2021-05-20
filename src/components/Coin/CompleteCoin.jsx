@@ -119,7 +119,7 @@ const CompleteCoin = ({coinInfo, asset, user, watchingCoin, triggerWatchCoin, ma
 								</span>
 							</div>
 							<div className="tradeCoin">
-								<TradeTab user={user} wallet={wallet} coinInfo={coinInfo} />
+								<TradeTab user={user} wallet={wallet} coinInfo={coinInfo} balance={balance}/>
 							</div>
 						</div>
 					)}

@@ -4,7 +4,7 @@ import saturnSVG from '../../../../assets/logo/saturnSVG.svg';
 import alienSVG from '../../../../assets/logo/alienSVG.svg';
 import astronautSVG from '../../../../assets/logo/astronautSVG.svg';
 import sunSVG from '../../../../assets/logo/sunSVG.svg';
-import { ImArrowDownLeft2 } from 'react-icons/im';
+import { ImArrowDownLeft2, ImArrowUpRight2 } from 'react-icons/im';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import CardDesign from './CardDesign';
 
@@ -57,7 +57,7 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet) =
 					<div className="cardBalance">
 						<p>
 							<span>$</span>
-							{wallet.balance}
+							{parseFloat(wallet.balance).toFixed(2)}
 						</p>
 					</div>
 					<p className="cardNumber">
@@ -79,9 +79,9 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet) =
 									</div>
 								</div>
 								<div className="priceAndBalance">
-									<p>${asset.usdValue}</p>
+									<p>${parseFloat(asset.usdValue).toFixed(2)}</p>
 									<p>
-										{asset.balance}{' '}
+										{parseFloat(asset.balance).toFixed(5)}{' '}
 										<span style={{ textTransform: 'uppercase' }}>{asset.symbol}</span>
 									</p>
 								</div>
@@ -97,17 +97,27 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet) =
 								<div
 									style={{
 										background:
-											transaction.type === 'Free' || 'Bought' || 'Received'
+											transaction.type === 'Free' ||
+											transaction.type === 'Sold' ||
+											transaction.type === 'Received'
 												? '#C2FEDB'
 												: '#FDC4CC',
 										color:
-											transaction.type === 'Free' || 'Bought' || 'Received'
+											transaction.type === 'Free' ||
+											transaction.type === 'Sold' ||
+											transaction.type === 'Received'
 												? '#12A550'
 												: '#F71735',
 									}}
 									className="transactionIcon"
 								>
-									<ImArrowDownLeft2 />
+									{transaction.type === 'Free' ||
+									transaction.type === 'Sold' ||
+									transaction.type === 'Received' ? (
+										<ImArrowDownLeft2 />
+									) : (
+										<ImArrowUpRight2 />
+									)}
 								</div>
 								<div className="memoAndDate">
 									<p>
@@ -116,7 +126,7 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet) =
 									<p>{formatDate(transaction.date)}</p>
 								</div>
 								<div className="value">
-									<p>${transaction.value}</p>
+									<p>${transaction.amount}</p>
 								</div>
 							</div>
 						))}
@@ -142,9 +152,7 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet) =
 			<>
 				<div className="createWallet">
 					<p>Account Verified!</p>
-					<p>
-						Click the button below to create a wallet and get started 🚀
-					</p>
+					<p>Click the button below to create a wallet and get started 🚀</p>
 
 					<button onClick={handleCreateWallet} disabled={creatingWallet ? true : false}>
 						{creatingWallet ? <RotateSpinner size={30} color="#fff" /> : 'Create Wallet'}

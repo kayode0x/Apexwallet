@@ -91,7 +91,7 @@ const Account = () => {
 										{/* <div className="imgDiv">{user.username.charAt(0).toUpperCase()}</div> */}
 										<img src={usrIMG} alt={user.username} />
 										<div className="nameAndStatus">
-											<p>{user.name ? user.name : user.username + ' 🚀'}</p>
+											<p style={{ textTransform : user.name ? '' : 'capitalize' }}>{user.name ? user.name : user.username + ' 🚀'}</p>
 											<p>{user.username}</p>
 										</div>
 									</div>
