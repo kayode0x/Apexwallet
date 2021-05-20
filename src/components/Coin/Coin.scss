@@ -363,13 +363,14 @@ $borderColor: rgb(158, 158, 158);
 
 			.tradeCoinAndAboutCoinMobile {
 				color: $subColor;
+				// background: #000;
 				@media (min-width: 768px) {
 					width: 100%;
 				}
 				display: flex;
 				align-self: flex-start;
 				@media (max-width: 480px){
-					max-width: 22rem;
+					max-width: 21rem;
 				}
 				@media (min-width: 481px) and (max-width: 767px) {
 					max-width: 30rem;
