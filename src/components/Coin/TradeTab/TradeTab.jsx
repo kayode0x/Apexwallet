@@ -113,9 +113,12 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
+								toast.dark(`Success 🚀`, {
+									position: toast.POSITION.TOP_CENTER,
+								});
 								setTimeout(() => {
 									window.location.reload();
-								}, 2000);
+								}, 3000);
 							}
 							console.log('DATA: ', res.data);
 						})
@@ -168,7 +171,17 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 					await axios
 						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
 						.then((res) => {
-							console.log('DATA: ', res.data);
+							if (res.status === 200) {
+								toast.dark(
+									`Success 🚀`,
+									{
+										position: toast.POSITION.TOP_CENTER,
+									}
+								);
+								setTimeout(() => {
+									window.location.reload();
+								}, 3000);
+							}
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
@@ -217,9 +230,12 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
+								toast.dark(`Success 🚀`, {
+									position: toast.POSITION.TOP_CENTER,
+								});
 								setTimeout(() => {
 									window.location.reload();
-								}, 2000);
+								}, 3000);
 							}
 							console.log('DATA: ', res.data);
 						})
@@ -263,7 +279,14 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 					await axios
 						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
 						.then((res) => {
-							console.log('DATA: ', res.data);
+							if(res.status === 200){
+								toast.dark(`Success 🚀`, {
+									position: toast.POSITION.TOP_CENTER,
+								});
+								setTimeout(() => {
+									window.location.reload();
+								}, 3000);
+							}
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
