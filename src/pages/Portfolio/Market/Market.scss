@@ -2,6 +2,7 @@ $mainColor: #f1f2f4;
 $subColor: #5d5c5f;
 $textColor: #080809;
 $subTextColor: #cbbaba;
+$borderColor: rgb(158, 158, 158);
 $blue: #2f52e0;
 $lightBlue: #4e6ce4;
 $orange: #ef5116;
@@ -102,7 +103,7 @@ $navyBlue: #262946;
 				input {
 					background: transparent;
 					outline: none;
-					border: 2px solid $subColor;
+					border: 1px solid $borderColor;
 					padding: 0.5rem;
 					width: 100%;
 					border-radius: 5px;
@@ -113,7 +114,7 @@ $navyBlue: #262946;
 				}
 
 				input:focus {
-					border: 2px solid $lightBlue;
+					border: 1px solid $lightBlue;
 				}
 
 				.searchIcon {
@@ -122,7 +123,7 @@ $navyBlue: #262946;
 					align-items: center;
 					display: flex;
 					position: absolute;
-					right: 5%;
+					right: 3%;
 				}
 			}
 

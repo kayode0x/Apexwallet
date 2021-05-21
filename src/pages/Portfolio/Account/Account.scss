@@ -2,6 +2,7 @@ $mainColor: #f1f2f4;
 $subColor: #5d5c5f;
 $textColor: #080809;
 $subTextColor: #cbbaba;
+$borderColor: rgb(158, 158, 158);
 $blue: #2f52e0;
 $lightBlue: #4e6ce4;
 $orange: #ef5116;
@@ -92,23 +93,19 @@ $navyBlue: #262946;
 
 				.cameraIcon {
 					position: absolute;
-					bottom: 3%;
+					bottom: 5%;
 					left: 20%;
-					font-size: 1.5rem;
-				}
-
-				.imgDiv {
-					height: 6rem;
-					width: 8.5rem;
-					background: transparent;
+					font-size: 1.25rem;
+					background: $mainColor;
+					border: 1px solid $borderColor;
+					color: $textColor;
+					border-radius: 50%;
+					height: 2rem;
+					width: 2rem;
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					font-size: 1.5rem;
-					border: 1px solid $subColor;
-					color: $textColor;
-					font-weight: bold;
-					border-radius: 50%;
+
 				}
 
 				img {

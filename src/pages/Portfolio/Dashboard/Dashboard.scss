@@ -26,7 +26,7 @@ $borderColor: rgb(158, 158, 158);
 	}
 	@media (min-width: 768px) and (max-width: 1023px){
 		height: 95vh;
-		width: 100%;
+		width: 90%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
@@ -183,6 +183,9 @@ $borderColor: rgb(158, 158, 158);
 				@media(max-width: 767px){
 					margin-top: 1rem;
 					margin-bottom: -.5rem;
+				}
+				@media (min-width: 768px) {
+					margin-left: 2rem;
 				}
 
 				p:nth-child(1) {

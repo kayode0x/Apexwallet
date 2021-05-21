@@ -5,7 +5,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
-// import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import BottomNav from '../../../components/BottomNav/BottomNav';
 import completeUser from './CompleteUser/CompleteUser'
 import { HelmetProvider, Helmet } from 'react-helmet-async';
@@ -19,7 +19,7 @@ const Wallet = () => {
 	const [user, setUser] = useState(null);
 	const [creatingWallet, setCreatingWallet] = useState(false);
 	//breakpoint set at mobile only
-	// const matches = useMediaQuery('(max-width:767px)');
+	const matches = useMediaQuery('(max-width:767px)');
 	let isRendered = useRef(false);
 
 	//api endpoint.
@@ -174,7 +174,7 @@ const Wallet = () => {
 					<p className="header">Wallet</p>
 
 					{/* Moved the complete user to a separate function */}
-					{completeUser(user, asset, wallet, handleCreateWallet, creatingWallet)}
+					{completeUser(user, asset, wallet, handleCreateWallet, creatingWallet, matches)}
 				</div>
 				<ToastContainer autoClose={3000} />
 			</div>

@@ -33,7 +33,7 @@ const BottomNav = () => {
 				{matches ? <IoStatsChart /> : <p>Market</p>}
 			</Link>
 			<Link to="#" className="tradeIcon">
-				{matches ? <BsArrowUpDown /> : 'Trade'}
+				{matches && <BsArrowUpDown /> }
 			</Link>
 			<Link
 				to="/wallet"

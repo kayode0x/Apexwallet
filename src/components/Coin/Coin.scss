@@ -201,23 +201,29 @@ $borderColor: rgb(158, 158, 158);
 				left: 50%;
 				transform: translate(-50%, -50%);
 
-				button {
-					outline: none;
-					border: none;
-					font-size: 1.15rem;
+				div {
+					font-size: 1.05rem;
+					height: 1.5rem;
+					width: 2rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					margin-right: 0.5rem;
 					cursor: pointer;
-					font-weight: 500;
 					background: transparent;
+					border-radius: 5px;
 					color: $textColor;
 					transition: all 0.3s ease;
 				}
 
-				button:hover {
+				div:hover {
 					color: $lightBlue;
 				}
 
-				button.active {
-					color: $lightBlue;
+				div.active {
+					color: $mainColor;
+					font-weight: bold;
+					background: $textColor;
 				}
 			}
 		}
@@ -421,7 +427,7 @@ $borderColor: rgb(158, 158, 158);
 					color: $subColor;
 					height: fit-content;
 					line-height: 1.7;
-					font-size: 1.15rem;
+					font-size: 1.05rem;
 					width: 45%;
 					border-radius: 5px;
 
@@ -459,7 +465,7 @@ $borderColor: rgb(158, 158, 158);
 				.tradeCoin {
 					display: flex;
 					justify-content: space-around;
-					// background: rgba(#13151b, 1);
+					margin-top: -1rem;
 					border: 1px solid $borderColor;
 					width: 50%;
 					margin-left: auto;

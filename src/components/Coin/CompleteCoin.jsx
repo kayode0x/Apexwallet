@@ -3,7 +3,16 @@ import { IconContext } from 'react-icons';
 import { BsStarFill, BsStar, BsLink45Deg } from 'react-icons/bs';
 import TradeTab from './TradeTab/TradeTab';
 
-const CompleteCoin = ({coinInfo, asset, user, watchingCoin, triggerWatchCoin, matches, wallet, balance}) => {
+const CompleteCoin = ({
+	coinInfo,
+	asset,
+	user,
+	watchingCoin,
+	triggerWatchCoin,
+	matches,
+	wallet,
+	balance,
+}) => {
 	//convert the mega numbers
 	const formatNumber = (n) => {
 		if (n < 1e3) return n;
@@ -75,15 +84,24 @@ const CompleteCoin = ({coinInfo, asset, user, watchingCoin, triggerWatchCoin, ma
 						)}
 					</div>
 					<div className="selectDays">
-						<button className="active oneDay">1D</button>
-						<button className="oneWeek">1W</button>
-						<button className="oneMonth">1M</button>
-						<button className="oneYear">1Y</button>
-						<button className="allTime">All</button>
+						<div  className="active oneDay">
+							1D
+						</div>
+						<div className="oneWeek">
+							1W
+						</div>
+						<div  className="oneMonth">
+							1M
+						</div>
+						<div  className="oneYear">
+							1Y
+						</div>
+						<div  className="allTime">
+							All
+						</div>
 					</div>
 				</div>
 				<div className="coinInformationContainer">
-
 					{/* Balance function */}
 					{matches && <div className="tradeCoinMobile">{balanceFunction()}</div>}
 
@@ -122,7 +140,7 @@ const CompleteCoin = ({coinInfo, asset, user, watchingCoin, triggerWatchCoin, ma
 								</span>
 							</div>
 							<div className="tradeCoin">
-								<TradeTab user={user} wallet={wallet} coinInfo={coinInfo} balance={balance}/>
+								<TradeTab user={user} wallet={wallet} coinInfo={coinInfo} balance={balance} />
 							</div>
 						</div>
 					)}

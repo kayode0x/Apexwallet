@@ -1,0 +1,134 @@
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
+$blue: #2f52e0;
+$lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
+
+.transactionsComponent {
+	display: flex;
+	justify-content: center;
+	min-height: 100vh;
+	@media (max-width: 768px) {
+		margin-bottom: 10rem;
+	}
+
+	@media (min-width: 768px) {
+		height: 95vh;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
+		position: relative;
+	}
+
+	.container {
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+		padding: 0 1rem;
+
+		@media (min-width: 768px) {
+			max-width: 900px;
+			width: 100%;
+			padding: 2rem;
+			align-items: center;
+			@media (min-width: 1024px) {
+				align-items: flex-start;
+			}
+			justify-content: center;
+			margin-top: 2rem;
+		}
+
+		.loading {
+			position: absolute;
+			top: 45%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.header {
+			color: $textColor;
+			display: flex;
+			text-align: left;
+			align-self: center;
+			font-size: 1.5rem;
+			// font-weight: bold;
+			margin-bottom: 0rem;
+			@media (max-width: 767px) {
+				align-self: flex-start;
+			}
+		}
+
+		.transactionsContainer {
+			width: 100%;
+			padding: 1rem;
+		}
+
+        .noWalletTransaction {
+            display: flex;
+            align-self: center;
+            text-align: center;
+            justify-content : center;
+        }
+
+		.transactionsHeader {
+			color: $textColor;
+			display: flex;
+			align-self: flex-start;
+			@media (min-width: 481px) {
+				align-self: center;
+			}
+			margin-top: 2rem;
+			font-size: 1.15rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.walletTransaction {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			margin-top: -0.5rem;
+
+			.transactionIcon {
+				padding: 0.55rem;
+				border-radius: 5px;
+				font-weight: bold;
+				font-size: 1.5rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.memoAndDate {
+				margin-left: 1rem;
+				display: flex;
+				flex-direction: column;
+				text-transform: capitalize;
+				margin-right: auto;
+
+				p:nth-child(1) {
+					font-size: 1rem;
+					color: $textColor;
+				}
+
+				p:nth-child(2) {
+					font-size: 0.85rem;
+					margin-top: -0.75rem;
+					color: $subColor;
+				}
+			}
+
+			.value {
+				color: $textColor;
+				font-size: 1.05rem;
+				margin-left: auto;
+			}
+		}
+	}
+}

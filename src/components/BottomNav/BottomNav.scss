@@ -43,11 +43,6 @@ $navyBlue: #262946;
 		align-items: center;
 		justify-content: center;
 
-		@media (min-width: 768px) {
-			margin-right: 2rem;
-			font-size: 1.15rem;
-			margin-bottom: -0.25rem;
-		}
 		@media (max-width: 767px) {
 			height: 3.5rem;
 			border-radius: 50%;
@@ -89,9 +84,10 @@ $navyBlue: #262946;
 		@media (min-width: 768px) {
 			flex-direction: row;
 			font-size: 1.5rem;
-			align-items: flex-end;
-			justify-content: flex-end;
-			margin-right: 2rem;
+			align-items: center;
+			justify-content: center;
+			margin-left: 2rem;
+			// background: #000;
 		}
 
 		p {

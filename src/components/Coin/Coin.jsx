@@ -20,13 +20,13 @@ const Coin = () => {
 	const coinSearchId = splitLocation[2]; //coin id.
 
 	const history = useHistory();
-	const matches = useMediaQuery('(max-width:768px)');
+	const matches = useMediaQuery('(max-width:767px)');
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [wallet, setWallet] = useState(null);
 	const [balance, setBalance] = useState(null);
 	const [asset, setAsset] = useState(null);
 	const [user, setUser] = useState(null);
-	const [days, setDays] = useState(7);
+	const [days, setDays] = useState(1);
 	const [coinInfo, setCoinInfo] = useState(null);
 	const [watchingCoin, setWatchingCoin] = useState(false);
 	const watchingRef = useRef(null);
@@ -202,6 +202,10 @@ const Coin = () => {
 		}
 	}, [coinInfo, user, wallet]);
 
+	const setDaysFunction = (time) => {
+		setDays(time);
+	}
+
 	return (
 		<HelmetProvider>
 			<div className="coin">
@@ -221,7 +225,17 @@ const Coin = () => {
 						</div>
 					</div>
 					{/* Moved the coin to a new component */}
-					<CompleteCoin coinInfo={coinInfo} asset={asset} user={user} watchingCoin={watchingCoin} triggerWatchCoin={triggerWatchCoin} matches={matches} balance={balance} wallet={wallet}/>
+					<CompleteCoin
+						setDaysFunction={setDaysFunction}
+						coinInfo={coinInfo}
+						asset={asset}
+						user={user}
+						watchingCoin={watchingCoin}
+						triggerWatchCoin={triggerWatchCoin}
+						matches={matches}
+						balance={balance}
+						wallet={wallet}
+					/>
 				</div>
 				<ToastContainer autoClose={3000} />
 			</div>

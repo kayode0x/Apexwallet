@@ -100,7 +100,7 @@ const CompleteDashboard = (user, watchList, news) => {
 		return (
 			<>
 				<div className="verifiedNoWallet">
-					<p className="leadText">Up next, open a wallet!</p>
+					<p className="leadText">Up next, create a wallet!</p>
 					<p className="subText">
 						Yay your account has been verified, go to the <a href="/wallet">wallets</a> tab to create a
 						wallet.
@@ -124,7 +124,7 @@ const CompleteDashboard = (user, watchList, news) => {
 				<div className="verifiedWithWallet">
 					<div className="balanceDiv">
 						<p className="balanceHeader">Available Balance</p>
-						<p className="balanceUSD">${user.wallet.balance}</p>
+						<p className="balanceUSD">${parseFloat(user.wallet.balance).toFixed(2)}</p>
 					</div>
 
 					<div className="notificationIcon">

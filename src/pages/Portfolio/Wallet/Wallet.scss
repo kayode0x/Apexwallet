@@ -193,6 +193,8 @@ $navyBlue: #262946;
 			width: 100%;
 			height: 12rem;
 			position: relative;
+			display: flex;
+			align-self: center;
 			@media (min-width: 768px){
 				max-width: 23rem;
 			}
@@ -277,37 +279,23 @@ $navyBlue: #262946;
 		}
 
 		.cardAssetsAndTransactions {
-			width: 90%;
-			@media (max-width: 767px){
-				width: 100%;
-			}
-			@media (min-width: 768px){
-				display: flex;
-				justify-content: space-between;
-				align-items: flex-start;
-			}
+			width: 100%;
 		}
 
 		.coinsAndTransactions {
 			@media (min-width : 768px){
-				width: 45%;
-				margin-right: -2rem;
+				width: 100%;
 				display: flex;
 				flex-direction: column;
-				align-items: flex-start;
-			}
-
-			@media (min-width: 1024px){
-				width: 50%;
-			}
-
-			@media (min-width: 768px){
-				margin-top: -2rem;
+				align-items: center;
 			}
 		}
 
 		.assetsContainer, .transactionsContainer {
 			width: 100%;
+			@media (min-width : 768px) and (max-width: 1023px){
+				width: 90%;
+			}
 		}
 
 		.asset {
@@ -315,9 +303,6 @@ $navyBlue: #262946;
 			display: flex;
 			align-items: center;
 			width: 100%;
-			@media (min-width: 768px){
-				max-width: 23rem;
-			}
 			justify-content: space-between;
 			height: 4.5rem;
 			transition: all 0.2s ease-in-out;
@@ -373,13 +358,20 @@ $navyBlue: #262946;
 		.transactionsHeader {
 			color: $textColor;
 			display: flex;
+			align-items: center;
 			align-self: flex-start;
 			@media (min-width: 481px){
 				align-self: center;
 			}
 			margin-top: 2rem;
 			font-size: 1.15rem;
-			margin-bottom: 0.5rem;
+			margin-bottom: -1rem;
+
+			a {
+				text-decoration: none;
+				margin-left: auto;
+				color: $lightBlue;
+			}
 		}
 
 		.walletTransaction {

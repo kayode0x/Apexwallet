@@ -11,6 +11,7 @@ import Wallet from './pages/Portfolio/Wallet/Wallet';
 import Market from './pages/Portfolio/Market/Market';
 import Coin from './components/Coin/Coin';
 import Account from './pages/Portfolio/Account/Account';
+import Transactions from './pages/Portfolio/Wallet/Transactions/Transactions';
 
 
 const Routes = () => {
@@ -23,6 +24,9 @@ const Routes = () => {
 				</Route>
 				<Route exact path="/wallet">
 					<Wallet />
+				</Route>
+				<Route exact path="/wallet/transactions">
+					<Transactions />
 				</Route>
 				<Route exact path="/market">
 					<Market />
