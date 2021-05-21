@@ -44,14 +44,14 @@ function a11yProps(index) {
 export default function TradeTab({ user, wallet, coinInfo, balance }) {
 	const [value, setValue] = useState(0);
 	const [amountToBuyFiat, setAmountToBuyFiat] = useState(1);
-	const [amountToBuyCrypto, setAmountToBuyCrypto] = useState(0);
+	const [amountToBuyCrypto, setAmountToBuyCrypto] = useState('');
 	const [amountToSellFiat, setAmountToSellFiat] = useState(1);
-	const [amountToSellCrypto, setAmountToSellCrypto] = useState(0);
+	const [amountToSellCrypto, setAmountToSellCrypto] = useState('');
 	const [buyType, setBuyType] = useState('fiat');
 	const [sellType, setSellType] = useState('fiat');
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const [buying, setBuying] = useState(false);
-	// const [selling, setSelling] = useState(false);
+	const [selling, setSelling] = useState(false);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -75,7 +75,17 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 	};
 
 	const coinAmountToBuy = (amountToBuyFiat) => {
-		return parseFloat(amountToBuyFiat / coinInfo.market_data.current_price.usd).toFixed(6);
+		return parseFloat(amountToBuyFiat / coinInfo.market_data.current_price.usd).toFixed(5);
+	};
+	const coinAmountToBuyCrypto = (amountToBuyCrypto) => {
+		return parseFloat(amountToBuyCrypto * coinInfo.market_data.current_price.usd).toFixed(2);
+	};
+
+	const coinAmountToSellCrypto = (amountToSellCrypto) => {
+		return parseFloat(amountToSellCrypto * coinInfo.market_data.current_price.usd).toFixed(2);
+	};
+	const coinAmountToSellFiat = (amountToSellFiat) => {
+		return parseFloat(amountToSellFiat / coinInfo.market_data.current_price.usd).toFixed(5);
 	};
 
 	//buy coin
@@ -86,8 +96,8 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 		//first check the 'buy type' for necessary values
 		if (buyType === 'fiat') {
 			console.log(amountToBuyFiat);
-			if (amountToBuyFiat < 10) {
-				toast.dark(`You can only buy a minimum of $10 worth of ${coinInfo.symbol.toUpperCase()}`, {
+			if (amountToBuyFiat < 2) {
+				toast.dark(`You can only buy a minimum of $2 worth of ${coinInfo.symbol.toUpperCase()}`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setBuying(false);
@@ -97,9 +107,75 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				});
 				setBuying(false);
 			} else {
-				let purchase = {coin: coinInfo.id, amount: amountToBuyFiat, type: 'buy'};
+				let purchase = { coin: coinInfo.id, amount: amountToBuyFiat, type: 'buy' };
 				try {
-					await axios.post(`${apiURL}/coin`, purchase, { withCredentials: true }).then(res => {console.log("DATA: ", res.data)})
+					await axios
+						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
+						.then((res) => {
+							if (res.status === 200) {
+								setTimeout(() => {
+									window.location.reload();
+								}, 2000);
+							}
+							console.log('DATA: ', res.data);
+						})
+						.catch(async (err) => {
+							//toastify ROCKS!!
+							await toast.dark(`${err.response.data}`, {
+								position: toast.POSITION.TOP_CENTER,
+							});
+						});
+				} catch (error) {
+					console.log('Error: ', error);
+				}
+				setBuying(false);
+			}
+		} else if (buyType === 'crypto') {
+			console.log(amountToBuyCrypto);
+			let convertedAmount = parseFloat(amountToBuyCrypto * coinInfo.market_data.current_price.usd).toFixed(5);
+
+			if (amountToBuyCrypto < 0) {
+				toast.dark(
+					`You can only buy a minimum of $2 ≈ ${parseFloat(
+						2 / coinInfo.market_data.current_price.usd
+					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
+					{
+						position: toast.POSITION.TOP_CENTER,
+					}
+				);
+				setBuying(false);
+			} else if (convertedAmount < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(5)) {
+				toast.dark(
+					`You can only buy a minimum of $2 ≈ ${parseFloat(
+						2 / coinInfo.market_data.current_price.usd
+					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
+					{
+						position: toast.POSITION.TOP_CENTER,
+					}
+				);
+				setBuying(false);
+			} else if (convertedAmount > wallet.balance) {
+				toast.dark(
+					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
+					{
+						position: toast.POSITION.TOP_CENTER,
+					}
+				);
+				setBuying(false);
+			} else {
+				let purchase = { coin: coinInfo.id, amount: convertedAmount, type: 'buy' };
+				try {
+					await axios
+						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
+						.then((res) => {
+							console.log('DATA: ', res.data);
+						})
+						.catch(async (err) => {
+							//toastify ROCKS!!
+							await toast.dark(`${err.response.data}`, {
+								position: toast.POSITION.TOP_CENTER,
+							});
+						});
 				} catch (error) {
 					console.log('Error: ', error);
 				}
@@ -109,8 +185,98 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 	};
 
 	//sell coin
-	const handleSellCoin = (e) => {
+	const handleSellCoin = async (e) => {
 		e.preventDefault();
+		setSelling(true);
+
+		//get the value of the amount to sell in fiat
+		let convertedAmount = parseFloat(amountToSellFiat / coinInfo.market_data.current_price.usd).toFixed(6);
+
+		//first check the 'buy type' for necessary values
+		if (sellType === 'fiat') {
+			console.log(convertedAmount, balance);
+			if (convertedAmount > parseFloat(balance).toFixed(5)) {
+				toast.dark(
+					`Your ${coinInfo.symbol.toUpperCase()} balance is ${parseFloat(balance).toFixed(
+						5
+					)}, you can't sell more than that`,
+					{
+						position: toast.POSITION.TOP_CENTER,
+					}
+				);
+				setSelling(false);
+			} else if (amountToSellFiat < 1) {
+				toast.dark(`You can only sell a minimum of $1 worth of ${coinInfo.symbol.toUpperCase()}`, {
+					position: toast.POSITION.TOP_CENTER,
+				});
+				setSelling(false);
+			} else {
+				let purchase = { coin: coinInfo.id, amount: convertedAmount, type: 'sell' };
+				try {
+					await axios
+						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
+						.then((res) => {
+							if (res.status === 200) {
+								setTimeout(() => {
+									window.location.reload();
+								}, 2000);
+							}
+							console.log('DATA: ', res.data);
+						})
+						.catch(async (err) => {
+							//toastify ROCKS!!
+							await toast.dark(`${err.response.data}`, {
+								position: toast.POSITION.TOP_CENTER,
+							});
+						});
+				} catch (error) {
+					console.log('Error: ', error);
+				}
+				setSelling(false);
+			}
+		} else if (sellType === 'crypto') {
+			console.log(amountToSellCrypto);
+
+			if (amountToSellCrypto < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(6)) {
+				toast.dark(
+					`You can only sell a minimum of $2 ≈ ${parseFloat(
+						2 / coinInfo.market_data.current_price.usd
+					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
+					{
+						position: toast.POSITION.TOP_CENTER,
+					}
+				);
+				setSelling(false);
+			} else if (amountToSellCrypto > balance) {
+				toast.dark(
+					`Your ${coinInfo.symbol.toUpperCase()} balance is ${parseFloat(balance).toFixed(
+						5
+					)}, you can't sell more than that`,
+					{
+						position: toast.POSITION.TOP_CENTER,
+					}
+				);
+				setSelling(false);
+			} else {
+				let purchase = { coin: coinInfo.id, amount: amountToSellCrypto, type: 'sell' };
+				try {
+					await axios
+						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
+						.then((res) => {
+							console.log('DATA: ', res.data);
+						})
+						.catch(async (err) => {
+							//toastify ROCKS!!
+							await toast.dark(`${err.response.data}`, {
+								position: toast.POSITION.TOP_CENTER,
+							});
+						});
+				} catch (error) {
+					console.log('Error: ', error);
+				}
+				setSelling(false);
+			}
+		}
 	};
 
 	//allow only verified users with a wallet to trade.
@@ -141,7 +307,6 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 									value={amountToBuyCrypto}
 									onChange={(e) => setAmountToBuyCrypto(e.target.value)}
 									type="number"
-									min="0"
 									placeholder="0"
 								/>
 							</>
@@ -151,15 +316,21 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						</div>
 					</div>
 					<p className="amountYouGet">
-						You get {coinAmountToBuy(amountToBuyFiat)} {coinInfo.symbol.toUpperCase()}
+						{buyType === 'fiat' ? (
+							<>
+								You get {coinAmountToBuy(amountToBuyFiat)} {coinInfo.symbol.toUpperCase()}
+							</>
+						) : (
+							<>You Pay ${coinAmountToBuyCrypto(amountToBuyCrypto)}</>
+						)}
 					</p>
 					<div className="coinAndWalletTab">
 						<div>
-							<p>USD balance</p> <span>${wallet.balance}</span>
+							<p>USD balance</p> <span>${parseFloat(wallet.balance).toFixed(2)}</span>
 						</div>
 						<button disabled={buying ? true : false} type="submit">
 							{buying ? (
-								<p>Processing...</p>
+								<p>Buying...</p>
 							) : (
 								<p>
 									BUY <span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
@@ -171,7 +342,8 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 								<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span> balance
 							</p>
 							<span style={{ textTransform: 'uppercase' }}>
-								{balance} {coinInfo.symbol} ≈ ${balance * coinInfo.market_data.current_price.usd}
+								{parseFloat(balance).toFixed(5)} {coinInfo.symbol} ≈ $
+								{parseFloat(balance * coinInfo.market_data.current_price.usd).toFixed(2)}
 							</span>
 						</div>
 					</div>
@@ -194,8 +366,6 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 									value={amountToSellFiat}
 									onChange={(e) => setAmountToSellFiat(e.target.value)}
 									type="number"
-									min="1"
-									max="5000"
 									placeholder="1"
 								/>
 							</>
@@ -206,7 +376,6 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 									value={amountToSellCrypto}
 									onChange={(e) => setAmountToSellCrypto(e.target.value)}
 									type="number"
-									min="0"
 									placeholder="0"
 								/>
 							</>
@@ -216,17 +385,32 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						</div>
 					</div>
 
+					<p className="amountYouGet">
+						{sellType === 'crypto' ? (
+							<> You get ${coinAmountToSellCrypto(amountToSellCrypto)} </>
+						) : (
+							<>
+								You Pay {coinAmountToSellFiat(amountToSellFiat)} {coinInfo.symbol.toUpperCase()}{' '}
+							</>
+						)}
+					</p>
 					<div className="coinAndWalletTab">
 						<div>
 							<p>
 								<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span> balance
 							</p>{' '}
 							<span style={{ textTransform: 'uppercase' }}>
-								{balance} {coinInfo.symbol}
+								{parseFloat(balance).toFixed(5)} {coinInfo.symbol}
 							</span>
 						</div>
-						<button type="submit">
-							SELL <span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
+						<button disabled={selling ? true : false} type="submit">
+							{selling ? (
+								<p>Selling...</p>
+							) : (
+								<p>
+									SELL <span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
+								</p>
+							)}
 						</button>
 					</div>
 				</>

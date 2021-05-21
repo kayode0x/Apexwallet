@@ -126,7 +126,16 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet) =
 									<p>{formatDate(transaction.date)}</p>
 								</div>
 								<div className="value">
-									<p>${transaction.amount}</p>
+									<p>
+										<span>
+											{transaction.type === 'Free' ||
+											transaction.type === 'Sold' ||
+											transaction.type === 'Received'
+												? ''
+												: '-'}
+										</span>
+										${parseFloat(transaction.amount).toFixed(2)}
+									</p>
 								</div>
 							</div>
 						))}

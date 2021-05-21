@@ -326,10 +326,6 @@ $borderColor: rgb(158, 158, 158);
 					p:nth-child(2) {
 						font-size: 1.05rem;
 						margin-left: 1rem;
-
-						span {
-							text-transform: uppercase;
-						}
 					}
 
 					p:nth-child(3) {
@@ -341,7 +337,7 @@ $borderColor: rgb(158, 158, 158);
 
 						span:nth-child(1){
 							// background: #000;
-							font-size: 1.35rem;
+							font-size: 1.15rem;
 							margin-left: auto;
 						}
 						span:nth-child(2){

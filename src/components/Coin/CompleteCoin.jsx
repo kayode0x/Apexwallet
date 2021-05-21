@@ -30,12 +30,12 @@ const CompleteCoin = ({coinInfo, asset, user, watchingCoin, triggerWatchCoin, ma
 				<div>
 					<img src={coinInfo.image.large} alt={coinInfo.id} />
 					<p>
-						<span>{coinInfo.symbol}</span> balance
+						<span>{coinInfo.symbol.toUpperCase()}</span> Balance
 					</p>
 					<p>
-						<span>${balance * coinInfo.market_data.current_price.usd}</span>
+						<span>${parseFloat(balance * coinInfo.market_data.current_price.usd).toFixed(2)}</span>
 						<span>
-							{balance} {coinInfo.symbol.toUpperCase()}
+							{parseFloat(balance).toFixed(5)} {coinInfo.symbol.toUpperCase()}
 						</span>
 					</p>
 				</div>
@@ -83,7 +83,10 @@ const CompleteCoin = ({coinInfo, asset, user, watchingCoin, triggerWatchCoin, ma
 					</div>
 				</div>
 				<div className="coinInformationContainer">
+
+					{/* Balance function */}
 					{matches && <div className="tradeCoinMobile">{balanceFunction()}</div>}
+
 					<p className="coinStats">{coinInfo.name} Stats</p>
 					<div className="coinPricesContainer">
 						<div className="mainCoinPrices">

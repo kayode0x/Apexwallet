@@ -97,7 +97,6 @@ const Wallet = () => {
 			let arr = [];
 
 			if(wallet.coins !== undefined){
-				console.log(wallet);
 				wallet.coins.forEach((coin) => {
 					const newCoin = coin;
 					//produce external data for the user's assets

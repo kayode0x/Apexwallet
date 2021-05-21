@@ -48,7 +48,7 @@ const CompleteDashboard = (user, watchList, news) => {
 	};
 
 	const newsFunction = () => {
-		let newsLength = 5;
+		let newsLength = 10;
 		return news.slice(0, newsLength).map((news) => (
 			<a className="newsDiv" key={news.id} href={news.url}>
 				<div className="titleAndAuthor">
