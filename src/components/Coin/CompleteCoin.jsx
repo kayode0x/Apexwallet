@@ -114,16 +114,16 @@ const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches,
 						)}
 					</div>
 					<div className="selectDays">
-						<div onClick={() => setDays(1)} className="active oneDay">
+						<div onClick={() => setDays(1)} className={days === 1 ? 'active' : ''}>
 							1D
 						</div>
-						<div onClick={() => setDays(7)} className="oneWeek">
+						<div onClick={() => setDays(7)} className={days === 7 ? 'active' : ''}>
 							1W
 						</div>
-						<div onClick={() => setDays(30)} className="oneMonth">
+						<div onClick={() => setDays(30)} className={days === 30 ? 'active' : ''}>
 							1M
 						</div>
-						<div onClick={() => setDays(365)} className="oneMonth">
+						<div onClick={() => setDays(365)} className={days === 365 ? 'active' : ''}>
 							1Y
 						</div>
 					</div>

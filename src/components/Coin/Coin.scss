@@ -211,10 +211,6 @@ $borderColor: rgb(158, 158, 158);
 					transition: all 0.3s ease;
 				}
 
-				div:hover {
-					color: $lightBlue;
-				}
-
 				div.active {
 					color: $mainColor;
 					font-weight: bold;
