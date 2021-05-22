@@ -95,7 +95,6 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 
 		//first check the 'buy type' for necessary values
 		if (buyType === 'fiat') {
-			console.log(amountToBuyFiat);
 			if (amountToBuyFiat < 2) {
 				toast.dark(`You can only buy a minimum of $2 worth of ${coinInfo.symbol.toUpperCase()}`, {
 					position: toast.POSITION.TOP_CENTER,
@@ -134,7 +133,6 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				setBuying(false);
 			}
 		} else if (buyType === 'crypto') {
-			console.log(amountToBuyCrypto);
 			let convertedAmount = parseFloat(amountToBuyCrypto * coinInfo.market_data.current_price.usd).toFixed(5);
 
 			if (amountToBuyCrypto < 0) {
@@ -207,7 +205,6 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 
 		//first check the 'buy type' for necessary values
 		if (sellType === 'fiat') {
-			console.log(convertedAmount, balance);
 			if (convertedAmount > parseFloat(balance).toFixed(5)) {
 				toast.dark(
 					`Your ${coinInfo.symbol.toUpperCase()} balance is ${parseFloat(balance).toFixed(
@@ -251,7 +248,6 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				setSelling(false);
 			}
 		} else if (sellType === 'crypto') {
-			console.log(amountToSellCrypto);
 
 			if (amountToSellCrypto < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(6)) {
 				toast.dark(

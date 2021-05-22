@@ -20,8 +20,8 @@ const Dashboard = () => {
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const marketEndPoint =
 		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20litecoin%2C%20tether%2C%20dogecoin%2C%20ethereum%2C%20ethereum-classic%2C%20ripple%2C%20binancecoin%2C%20cardano%2C%20usd-coin%2C%20tron%2C%20bitcoin-cash%2C%20polkadot%2C%20uniswap%2C%20dash%2C%20&order=market_cap_desc&per_page=100&page=1&sparkline=false';
+	// decentraland = %20decentraland%2C
 	const newsAPI = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN';
-
 
 	let isRendered = useRef(false);
 
@@ -79,7 +79,6 @@ const Dashboard = () => {
 						.then((data) => {
 							setNews(data.Data);
 						});
-
 				} catch (error) {
 					console.log('ERROR: ', error);
 				}

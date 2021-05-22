@@ -1,4 +1,5 @@
 import { AreaChart, Tooltip, Area, ResponsiveContainer } from 'recharts';
+import moment from 'moment';
 
 const Graph = ({ graphData, days, coinInfoId }) => {
 	let mainColor;
@@ -50,6 +51,9 @@ const Graph = ({ graphData, days, coinInfoId }) => {
 		} else if (coinInfoId === 'binancecoin') {
 			mainColor = '#ffc107';
 			return mainColor;
+		} else if (coinInfoId === 'decentraland') {
+			mainColor = '#e64a19';
+			return mainColor;
 		}
 	};
 
@@ -99,14 +103,23 @@ const Graph = ({ graphData, days, coinInfoId }) => {
 		} else if (coinInfoId === 'binancecoin') {
 			subColor = '#ffecb3';
 			return subColor;
+		} else if (coinInfoId === 'decentraland') {
+			subColor = '#ffccbc';
+			return subColor;
 		}
 	};
 
 	const CustomTooltip = ({ active, payload }) => {
 		if (active && payload && payload.length) {
+			
 			return (
 				<div className="custom-tooltip">
-					<p style={{ color: '#080808' }} className="label">{`$ ${payload[0].value}`}</p>
+					{days === 1 ? (
+						<p>{moment(payload[0].payload.date).format('ddd, hA')}</p>
+					) : (
+						<p>{moment(payload[0].payload.date).format('MMMM Do, YYYY')}</p>
+					)}
+					<p className="label">{`$ ${payload[0].value}`}</p>
 				</div>
 			);
 		}

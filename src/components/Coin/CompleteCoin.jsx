@@ -6,6 +6,8 @@ import Graph from './Graph/Graph';
 import { useEffect, useState } from 'react';
 
 const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches, wallet, balance, coinSearchId }) => {
+	
+	//initialize the array that stores the graph data
 	let arr = [];
 	//api endpoint to get the coin chart.
 	const [days, setDays] = useState(1);
@@ -29,10 +31,13 @@ const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches,
 	}, [coingeckoApi]);
 
 	useEffect(() => {
+		//run this once to prevent render looping
 		if (data !== null) {
 			data.forEach((item) => {
+				//create a new object for each item in the array since recharts uses them
 				let newGraphDataX = {
 					name: `${coinSearchId}`,
+					date: item[0],
 					price: parseFloat(item[1]).toFixed(2),
 				};
 

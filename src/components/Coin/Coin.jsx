@@ -19,6 +19,25 @@ const Coin = () => {
 	const splitLocation = pathname.split('/');
 	const coinSearchId = splitLocation[2]; //coin id.
 
+	const supportedCoins = [
+		'bitcoin',
+		'ethereum',
+		'ethereum-classic',
+		'litecoin',
+		'dogecoin',
+		'ripple',
+		'tether',
+		'binancecoin',
+		'cardano',
+		'usd-coin',
+		'tron',
+		'bitcoin-cash',
+		'polkadot',
+		'uniswap',
+		'dash',
+		// 'decentraland',
+	];
+
 	const history = useHistory();
 	const matches = useMediaQuery('(max-width:767px)');
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
@@ -30,6 +49,10 @@ const Coin = () => {
 	const watchingRef = useRef(null);
 	const watchingArrayRef = useRef(null);
 	let isRendered = useRef(false);
+
+	//in case someone tries to use an unsupported coin in the link
+	const isCoinSupported = supportedCoins.includes(coinSearchId);
+	if (isCoinSupported === false) history.goBack(); //go back to the previous page
 
 	//ALL URLS HERE
 	//api endpoint to get the coin data.
@@ -159,7 +182,11 @@ const Coin = () => {
 		async function callPrice() {
 			let newCoinBalance;
 			newCoinBalance = wallet.coins.filter((coin) => coin.coin === coinInfo.id);
-			setBalance(newCoinBalance[0].balance);
+			if (newCoinBalance[0] === undefined) {
+				setBalance(0);
+			} else {
+				setBalance(newCoinBalance[0].balance);
+			}
 		}
 		if (
 			user !== null &&

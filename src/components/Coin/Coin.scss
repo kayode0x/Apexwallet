@@ -218,14 +218,18 @@ $borderColor: rgb(158, 158, 158);
 				}
 			}
 
-			.graphGraph {
-				width: 100%;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				// background: #000;
-				height: 100%;
+			.custom-tooltip {
+				background: rgba(0, 0, 0, 0.7);
+				color: $mainColor;
+				// width: 8rem;
+				border-radius: 5px;
+				// height: 3rem;
+				padding: 0 .5rem;
+				margin-top: -2rem;
+
+				p {
+					margin-bottom: -1rem;
+				}
 			}
 		}
 
