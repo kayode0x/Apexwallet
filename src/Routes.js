@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; //useHistory
 import LandingPage from './pages/LandingPage/LandingPage';
 import SignUp from './pages/SignUp/SignUp';
-import Login from './pages/Login/Login'
+import Login from './pages/Login/Login';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import Reset from './pages/ResetPassword/Reset';
 import './App.css';
@@ -13,9 +13,7 @@ import Coin from './components/Coin/Coin';
 import Account from './pages/Portfolio/Account/Account';
 import Transactions from './pages/Portfolio/Wallet/Transactions/Transactions';
 
-
 const Routes = () => {
-
 	return (
 		<Router>
 			<Switch>

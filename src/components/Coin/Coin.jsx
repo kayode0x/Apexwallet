@@ -24,9 +24,7 @@ const Coin = () => {
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [wallet, setWallet] = useState(null);
 	const [balance, setBalance] = useState(null);
-	const [asset, setAsset] = useState(null);
 	const [user, setUser] = useState(null);
-	const [days, setDays] = useState(1);
 	const [coinInfo, setCoinInfo] = useState(null);
 	const [watchingCoin, setWatchingCoin] = useState(false);
 	const watchingRef = useRef(null);
@@ -34,9 +32,6 @@ const Coin = () => {
 	let isRendered = useRef(false);
 
 	//ALL URLS HERE
-	//api endpoint to get the coin chart.
-	const coingeckoApi = `https://api.coingecko.com/api/v3/coins/${coinSearchId}/market_chart?vs_currency=usd&days=${days}`;
-
 	//api endpoint to get the coin data.
 	const coingeckoDataApi = `https://api.coingecko.com/api/v3/coins/${coinSearchId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=true`;
 
@@ -83,28 +78,6 @@ const Coin = () => {
 				}
 
 				try {
-					await fetch(coingeckoApi, {
-						method: 'GET',
-						headers: {
-							'content-type': 'application/json',
-						},
-					})
-						.then((response) => response.json())
-						.then((data) => {
-							if (isRendered.current === true) {
-								setAsset(data);
-							} else {
-								return null;
-							}
-						})
-						.catch((error) => {
-							console.log('ERROR: ', error);
-						});
-				} catch (error) {
-					console.log('ERROR: ' + error);
-				}
-
-				try {
 					await fetch(coingeckoDataApi, {
 						method: 'GET',
 						headers: {
@@ -140,8 +113,7 @@ const Coin = () => {
 		return () => {
 			isRendered.current = false;
 		};
-	}, [getLoggedIn, loggedIn, history, coingeckoApi, coingeckoDataApi, coinSearchId]);
-
+	}, [getLoggedIn, loggedIn, history, coingeckoDataApi, coinSearchId]);
 
 	//function to watch or unwatch a coin
 	const triggerWatchCoin = async () => {
@@ -182,15 +154,12 @@ const Coin = () => {
 		}
 	};
 
-
 	//get the current price from coin gecko then pass it into the coin the user is currently viewing
 	useEffect(() => {
 		async function callPrice() {
 			let newCoinBalance;
 			newCoinBalance = wallet.coins.filter((coin) => coin.coin === coinInfo.id);
 			setBalance(newCoinBalance[0].balance);
-
-			console.log(user, wallet)
 		}
 		if (
 			user !== null &&
@@ -201,10 +170,6 @@ const Coin = () => {
 			callPrice(); //only call this function if the user is active and has a wallet
 		}
 	}, [coinInfo, user, wallet]);
-
-	const setDaysFunction = (time) => {
-		setDays(time);
-	}
 
 	return (
 		<HelmetProvider>
@@ -226,15 +191,14 @@ const Coin = () => {
 					</div>
 					{/* Moved the coin to a new component */}
 					<CompleteCoin
-						setDaysFunction={setDaysFunction}
 						coinInfo={coinInfo}
-						asset={asset}
 						user={user}
 						watchingCoin={watchingCoin}
 						triggerWatchCoin={triggerWatchCoin}
 						matches={matches}
 						balance={balance}
 						wallet={wallet}
+						coinSearchId={coinSearchId}
 					/>
 				</div>
 				<ToastContainer autoClose={3000} />

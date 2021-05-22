@@ -84,7 +84,7 @@ const CompleteDashboard = (user, watchList, news) => {
 					</div>
 				</div>
 
-				<p className="watchListHeader">Watch List</p>
+				<p className="watchListHeader">Watchlist</p>
 				{watchListFunction()}
 				<p className="newsHeader">News</p>
 				{newsFunction()}
@@ -106,7 +106,7 @@ const CompleteDashboard = (user, watchList, news) => {
 						wallet.
 					</p>
 				</div>
-				<p className="watchListHeader">Watch List</p>
+				<p className="watchListHeader">Watchlist</p>
 				{watchListFunction()}
 				<p className="newsHeader">News</p>
 				{newsFunction()}
@@ -132,7 +132,7 @@ const CompleteDashboard = (user, watchList, news) => {
 						<RiNotification4Line />
 					</div>
 				</div>
-				<p className="watchListHeader">Watch List</p>
+				<p className="watchListHeader">Watchlist</p>
 				{watchListFunction()}
 				<p className="newsHeader">News</p>
 				{newsFunction()}

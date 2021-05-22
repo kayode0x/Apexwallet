@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://plotly.com/javascript/getting-started/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <!-- This page was last built at 2021-05-16 17:31 -->
+
+      
+
+      <link rel="canonical" href="https://plotly.com/javascript/getting-started/">
+
+      <!-- Media query magic - http://stackoverflow.com/questions/19945658/my-iphone-thinks-its-980px-wide -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script async="" src="./Getting Started _ JavaScript _ Plotly_files/gtm.js"></script><script src="./Getting Started _ JavaScript _ Plotly_files/instantsearch.js"></script>
+      <script src="./Getting Started _ JavaScript _ Plotly_files/polyfill.min.js"></script>
+      <link rel="stylesheet" href="./Getting Started _ JavaScript _ Plotly_files/bootstrap.min.css" crossorigin="anonymous">
+      <script src="./Getting Started _ JavaScript _ Plotly_files/jquery.min.js"></script>
+      <script src="./Getting Started _ JavaScript _ Plotly_files/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="./Getting Started _ JavaScript _ Plotly_files/bootstrap.min.js" crossorigin="anonymous"></script>
+
+      
+        
+        <!-- code highlighting -->
+        <script src="./Getting Started _ JavaScript _ Plotly_files/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        
+
+        <!-- Mathjax -->
+        <script type="text/javascript" src="./Getting Started _ JavaScript _ Plotly_files/MathJax.js"></script>
+
+        <!-- Plotly.js -->
+        <script src="./Getting Started _ JavaScript _ Plotly_files/plotly-latest.min.js"></script><style id="plotly.js-style-global"></style>
+
+        
+          <script src="./Getting Started _ JavaScript _ Plotly_files/d3.min.js"></script>
+        
+
+        
+      
+      <!--
+      //// Stylesheets
+      -->
+
+      <!-- Fonts -->
+      <link href="./Getting Started _ JavaScript _ Plotly_files/css" rel="stylesheet" type="text/css">
+
+      <link rel="stylesheet" href="./Getting Started _ JavaScript _ Plotly_files/font-awesome.min.css">
+
+      <!-- Main Stylesheets -->
+      <link rel="stylesheet" type="text/css" href="./Getting Started _ JavaScript _ Plotly_files/main.css">
+
+      <!-- LOCAL DEV STYLESHEET -->
+      <!--<link rel="stylesheet" type="text/css" href="http://api.plotly.dev/all_static/css/main.css">-->
+
+      <!-- Icon -->
+      <link rel="shortcut icon" href="https://plotly.com/img/favicon.ico">
+
+      <!-- Google Tags-->
+      <!-- Google Tag Manager Tag -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N6T2RXG');</script>
+
+
+
+    <!-- META TAGS -->
+    <!-- SEO Tags - title, meta_description -->
+<title>Getting Started |  JavaScript  | Plotly  </title>
+<meta name="description" content="Getting Started with plotly">
+
+<!-- Bing tags -->
+    <meta name="msvalidate.01" content="D319859A832F9F1D15A7646E2A42150A">
+<!-- Facebook tags -->
+    <meta property="og:title" content="Getting Started">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://help.plot.ly/images/twitter-default.png">
+    <meta property="og:description" content="Getting Started with plotly">
+    <meta property="og:url">
+    <meta property="fb:admins" content="1123751525">
+    <meta property="fb:admins" content="22418">
+
+<!-- twitter tags -->
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:title" content="Getting Started">
+    <meta name="twitter:url" content="https://plotly.com/javascript/getting-started/">
+    <meta name="twitter:description" content="Getting Started with plotly">
+    <meta name="twitter:image" content="https://help.plot.ly/images/twitter-default.png">
+    <meta name="twitter:site" content="@plotlygraphs">
+
+
+
+
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover, .MJXp-munder {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > *, .MJXp-munder > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+
+<body data-spy="scroll" data-target=".watch" style="position:relative;"><div id="MathJax_Message" style="display: none;"></div>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6T2RXG"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+<!--[if lt IE 10]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+	your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div class="header-container">
+    <div id="campaign-zero-banner">
+        ✊🏿 Black Lives Matter. Please consider donating to <a target="_blank" href="https://www.blackgirlscode.com/?utm_source=plotly&amp;utm_medium=graphing&amp;utm_campaign=july" style="color:deeppink">Black Girls Code</a> today.
+    </div>
+    <header class="header-main --default">
+        <div class="--wrap">
+            <div class="--wrap-left">
+                <div class="-identity">
+                    <a href="https://plotly.com/"><img src="./Getting Started _ JavaScript _ Plotly_files/plotly_graphing_libraries_1.png" style="height: 45px;"></a>
+                    <a href="https://plotly.com/graphing-libraries/"><img src="./Getting Started _ JavaScript _ Plotly_files/plotly_graphing_libraries_2.png" style="height: 45px;"></a>
+                    <div class="breadcrumb-nav">
+                        
+                            <a href="https://plotly.com/javascript">JavaScript</a>
+                        
+
+                        
+                        
+
+                        
+
+                        
+                        &gt;<a href="https://plotly.com/javascript/getting-started/#">Getting Started</a>
+                        
+
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div class="--wrap-right">
+                <nav class="--nav-meta" role="navigation">
+                    <ul>
+                        
+<iframe src="./Getting Started _ JavaScript _ Plotly_files/github-btn.html" style="padding-top: 5px;" frameborder="0" scrolling="0" width="160px" height="40px"></iframe>
+
+                        <li><a style="font-family: verdana, tahoma, open sans, sans-serif; font-size: 14px" href="https://plotly.com/get-pricing/">GET DASH PRICING</a></li>
+                        <li><a href="https://plotly.com/dash/?utm_source=dash_demo&amp;utm_medium=graphing_banner&amp;utm_campaign=plotly_js" data-mode="1" target="_blank" class="typeform-share button --enterprise-quaternary" style="font-family: verdana, tahoma, open sans, sans-serif;">GET DASH DEMO</a></li>                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+</div>
+
+
+<main class="--page page--single --index">
+
+	<div class="--wrap">
+		<!-- aside - Main Sidebar-->
+		<aside class="--sidebar-container">
+			<div class="--sidebar-fixed reference affix" data-spy="affix" id="where">
+				
+                        <button id="modal-button" type="button" data-toggle="modal" data-target="#myModal">
+                            <input id="modal-input" style="border-radius: 5px; width: 100%;" type="text" placeholder="   Search..." readonly="">
+                          </button>
+                    
+				<header class="--sidebar-header">On This Page</header>
+				<nav class="--sidebar-body watch" id="where">
+		  <ul class="--sidebar-list"><li class="--sidebar-item"><a href="https://plotly.com/javascript/getting-started/#download">Download</a></li><li class="--sidebar-item"><a href="https://plotly.com/javascript/getting-started/#plotlyjs-cdn">plotly.js CDN</a></li><li class="--sidebar-item"><a href="https://plotly.com/javascript/getting-started/#start-plotting">Start plotting!</a></li><li class="--sidebar-item"><a href="https://plotly.com/javascript/getting-started/#webpack-user">Webpack user?</a></li><li class="--sidebar-item"><a href="https://plotly.com/javascript/getting-started/#hello-world-example">Hello World Example</a></li></ul>
+
+
+				</nav>
+			</div>
+		</aside>
+		<!-- Main-->
+		<section class="--page-body --tutorial-index --base">
+			<header class="--welcome">
+				<div class="--welcome-body">
+					<!--div.--wrap-inner-->
+					<div class="--title">
+						<div class="--body">
+							<div class="nav-breadcrumb-container">
+    <div></div>
+    <div class="nav-breadcrumb-right">
+        <div class="--fork">
+            
+                
+                <a id="forklink" href="https://github.com/plotly/graphing-library-docs/tree/master/_posts/plotly_js/">
+            
+                    <div class="icon">
+                        <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                            <path fill="#000000" d="M2.6,10.59L8.38,4.8L10.07,6.5C9.83,7.35 10.22,8.28 11,8.73V14.27C10.4,14.61 10,15.26 10,16A2,2 0 0,0 12,18A2,2 0 0,0 14,16C14,15.26 13.6,14.61 13,14.27V9.41L15.07,11.5C15,11.65 15,11.82 15,12A2,2 0 0,0 17,14A2,2 0 0,0 19,12A2,2 0 0,0 17,10C16.82,10 16.65,10 16.5,10.07L13.93,7.5C14.19,6.57 13.71,5.55 12.78,5.16C12.35,5 11.9,4.96 11.5,5.07L9.8,3.38L10.59,2.6C11.37,1.81 12.63,1.81 13.41,2.6L21.4,10.59C22.19,11.37 22.19,12.63 21.4,13.41L13.41,21.4C12.63,22.19 11.37,22.19 10.59,21.4L2.6,13.41C1.81,12.63 1.81,11.37 2.6,10.59Z"></path>
+                        </svg>
+                    </div>
+                    <span>Suggest an edit to this page</span>
+                </a>
+        </div>
+    </div>
+
+</div>
+
+							
+							<h1>
+								Getting Started
+								
+								in JavaScript
+								
+							</h1>
+							<p>Getting Started with plotly </p>
+							<br>
+
+							
+							
+
+
+
+
+<div class="dash-plug">
+    <p>Building full-stack apps and dashboards with Plotly.js? 
+      <br>
+      Increase development speed by 2x-10x with <a href="https://plotly.com/dash">Dash</a>. 🏃
+  </p>
+</div>
+<br>
+
+
+
+<details>
+    <summary><span style="cursor: pointer; color: #506784 !important">New to Plotly?</span></summary>
+    
+        <p>Plotly is a <a href="https://plotly.com/javascript/is-plotly-free/">free and open-source</a> graphing library for JavaScript. We recommend you read our <a href="https://plotly.com/javascript/getting-started/">Getting Started guide</a> for the latest installation or upgrade instructions, then move on to our <a href="https://plotly.com/javascript/plotly-fundamentals/">Plotly Fundamentals tutorials</a> or dive straight in to some <a href="https://plotly.com/javascript/basic-charts/">Basic Charts tutorials</a>.</p>
+    
+</details>
+
+
+
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<!-- Start Plotly Basics Section -->
+			<section class="tutorial-content">
+
+				
+
+
+
+
+
+
+				    <section class="section">
+        <h2 id="download">Download</h2>
+        <div class="content-box">
+            <p>
+                Download the minified plotly.js source code and dependencies.
+            </p>
+
+            <p>
+                Include the downloaded scripts before the end of the &lt;/head&gt; tag in your HTML document:
+            </p>
+
+<pre><code class="hljs html xml"><span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">head</span></span></span><span class="hljs-tag">&gt;</span></span>
+	<span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">script</span></span></span><span class="hljs-tag"> </span><span class="hljs-attribute"><span class="hljs-tag"><span class="hljs-attribute">src</span></span></span><span class="hljs-tag">=</span><span class="hljs-value"><span class="hljs-tag"><span class="hljs-value">"plotly-latest.min.js"</span></span></span><span class="hljs-tag">&gt;</span></span><span class="undefined"></span><span class="hljs-tag"><span class="undefined"></span><span class="hljs-tag">&lt;/</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">script</span></span></span><span class="hljs-tag">&gt;</span></span>
+<span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">head</span></span></span><span class="hljs-tag">&gt;</span></span>
+</code></pre>
+
+        </div>
+
+        <p style="text-align: center;">
+  			<a class="button plotlyjs-download" href="./Getting Started _ JavaScript _ Plotly_files/plotly-latest.min.js" style="display: inline-block;" download="">
+				<i class="fa fa-download fa-lg"></i> Download&nbsp;plotly.js</a>
+		</p>
+
+    </section>
+
+    <section class="section">
+        <h2 id="plotlyjs-cdn">plotly.js CDN</h2>
+        <div class="content-box">
+            <p>
+                You can also use the ultrafast plotly.js CDN link. This CDN is graciously provided by the incredible team at <a href="https://fastly.com/">Fastly</a>.
+            </p>
+
+        <pre><code class="hljs html xml"><span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">head</span></span></span><span class="hljs-tag">&gt;</span></span>
+               <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">script</span></span></span><span class="hljs-tag"> </span><span class="hljs-attribute"><span class="hljs-tag"><span class="hljs-attribute">src</span></span></span><span class="hljs-tag">=</span><span class="hljs-value"><span class="hljs-tag"><span class="hljs-value">"https://cdn.plot.ly/plotly-latest.min.js"</span></span></span><span class="hljs-tag">&gt;</span></span><span class="undefined"></span><span class="hljs-tag"><span class="undefined"></span><span class="hljs-tag">&lt;/</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">script</span></span></span><span class="hljs-tag">&gt;</span></span>
+<span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">head</span></span></span><span class="hljs-tag">&gt;</span></span></code></pre>
+
+            <p>
+                Else, if you want to get a specific version of plotly.js, say 1.2.0:
+            </p>
+
+        <pre><code class="hljs html xml"><span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">head</span></span></span><span class="hljs-tag">&gt;</span></span>
+               <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">script</span></span></span><span class="hljs-tag"> </span><span class="hljs-attribute"><span class="hljs-tag"><span class="hljs-attribute">src</span></span></span><span class="hljs-tag">=</span><span class="hljs-value"><span class="hljs-tag"><span class="hljs-value">"https://cdn.plot.ly/plotly-1.2.0.min.js"</span></span></span><span class="hljs-tag">&gt;</span></span><span class="undefined"></span><span class="hljs-tag"><span class="undefined"></span><span class="hljs-tag">&lt;/</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">script</span></span></span><span class="hljs-tag">&gt;</span></span>
+<span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">head</span></span></span><span class="hljs-tag">&gt;</span></span></code></pre>
+
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 id="start-plotting">Start plotting!</h2>
+        <div class="content-box">
+            <p>
+                In your HTML document, create an empty DIV to draw the graph in:
+            </p>
+
+            <pre><code class="hljs html xml"><span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">div</span></span></span><span class="hljs-tag"> </span><span class="hljs-attribute"><span class="hljs-tag"><span class="hljs-attribute">id</span></span></span><span class="hljs-tag">=</span><span class="hljs-value"><span class="hljs-tag"><span class="hljs-value">"tester"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attribute"><span class="hljs-tag"><span class="hljs-attribute">style</span></span></span><span class="hljs-tag">=</span><span class="hljs-value"><span class="hljs-tag"><span class="hljs-value">"width:600px;height:250px;"</span></span></span><span class="hljs-tag">&gt;</span></span><span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-title"><span class="hljs-tag"><span class="hljs-title">div</span></span></span><span class="hljs-tag">&gt;</span></span></code></pre>
+
+            <p>
+                Now you can make interactive plotly.js charts  using <code class="no-padding">Plotly.newPlot()</code>.
+            </p>
+<pre><code class="hljs javascript">&lt;script&gt;
+	TESTER = <span class="hljs-built_in"><span class="hljs-built_in">document</span></span>.getElementById(<span class="hljs-string"><span class="hljs-string">'tester'</span></span>);
+	Plotly.newPlot( TESTER, [{
+	x: [<span class="hljs-number"><span class="hljs-number">1</span></span>, <span class="hljs-number"><span class="hljs-number">2</span></span>, <span class="hljs-number"><span class="hljs-number">3</span></span>, <span class="hljs-number"><span class="hljs-number">4</span></span>, <span class="hljs-number"><span class="hljs-number">5</span></span>],
+	y: [<span class="hljs-number"><span class="hljs-number">1</span></span>, <span class="hljs-number"><span class="hljs-number">2</span></span>, <span class="hljs-number"><span class="hljs-number">4</span></span>, <span class="hljs-number"><span class="hljs-number">8</span></span>, <span class="hljs-number"><span class="hljs-number">16</span></span>] }], {
+	margin: { t: <span class="hljs-number"><span class="hljs-number">0</span></span> } } );
+<span class="xml"><span class="hljs-tag"><span class="xml"><span class="hljs-tag">&lt;/</span></span><span class="hljs-title"><span class="xml"><span class="hljs-tag"><span class="hljs-title">script</span></span></span></span><span class="xml"><span class="hljs-tag">&gt;</span></span></span></span></code></pre>
+
+            <p>
+                Now you can pass Plotly.newPlot() either the ID of the DIV ("tester") or the DIV DOM element (<code class="no-padding">TESTER</code>).
+            </p>
+
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 id="webpack-user">Webpack user?</h2>
+        <div class="content-box">
+          <p>For plotly.js to build with Webpack you will need to install <a href="https://github.com/hughsk/ify-loader">ify-loader@v1.1.0+</a> and add it to your <code>webpack.config.json</code>. This adds Browserify transform compatibility to Webpack which is necessary for some plotly.js dependencies.</p>
+          <p>A repo that demonstrates how to build plotly.js with Webpack can be found <a href="https://github.com/rreusser/plotly-webpack">here</a>. In short add <code>ify-loader</code> to the <code>module</code> section in your <code>webpack.config.js</code>:</p>
+          <pre><code class="hljs javascript">
+  ...
+      <span class="hljs-built_in"><span class="hljs-built_in">module</span></span>: {
+          rules: [
+              {
+                  test: <span class="hljs-regexp"><span class="hljs-regexp">/\.js$/</span></span>,
+                  loader: <span class="hljs-string"><span class="hljs-string">'ify-loader'</span></span>
+              }
+          ]
+      },
+  ...
+          </code></pre>
+    </div></section>
+
+    <section class="section">
+        <h2 id="hello-world-example">Hello World Example</h2>
+        <div class="content-box">
+            <iframe width="100%" height="300" src="./Getting Started _ JavaScript _ Plotly_files/saved_resource.html" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+        </div>
+    </section>
+
+<div class="row centered btnrow">
+	<a href="https://plotly.com/javascript/" class="button no_underline">more examples</a>
+</div>
+
+<section class="sponsor--wrap">
+    <div class="sponsor--desc">Distribution powered by</div>
+    <div class="sponsor--title">
+        <a target="_blank" href="https://www.fastly.com/open-source">
+            <img src="./Getting Started _ JavaScript _ Plotly_files/fastly_logo.png" alt="Fastly">
+        </a>
+    </div>
+</section>
+				
+			</section>
+
+			
+
+			<a href="https://dash.plotly.com/"><img width="100%" style="margin-top: 20px;" src="./Getting Started _ JavaScript _ Plotly_files/dash.png"></a>
+
+			
+			<!--End Plotly Basics Section-->
+		</section>
+	</div>
+</main>
+
+
+<script>
+
+    var array = [];
+
+    $('.tutorial-content :header:not(h6)').each(function (i, e) {
+        var item = $(e);
+        var itemText = item.text();
+        var hash = itemText.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-').replace(/^-+|-+$/g, '').toLowerCase();
+        item.attr("id", hash);
+        array.push({text: itemText, tag: item.prop("tagName"), hash: hash});
+    });
+
+    $(".--sidebar-list").html(array.map(function(entry) {
+        var text = entry.text.replace(/[^a-z0-9\s\.:\-\?\!\(\))]/gi, '');
+        if(entry.tag.toLowerCase() < "h4"){
+            return('<li class="--sidebar-item"><a href="#' + entry.hash + '">' + text + '</a></li>');
+        }
+        else {
+            return('<li class="--sidebar-item"><a href="#' + entry.hash + '">' + text + '</a></li>');
+        }
+    }).join(""));
+
+
+    //$(".tutorial-content :header:not(h6)").append( "\<div class=\"icon copy\" data-tooltip=\"Click to copy direct link\"><svg style=\"width:24px;height:24px\" viewBox=\"0 0 24 24\"><path fill=\"#000000\" d=\"M10.59,13.41C11,13.8 11,14.44 10.59,14.83C10.2,15.22 9.56,15.22 9.17,14.83C7.22,12.88 7.22,9.71 9.17,7.76V7.76L12.71,4.22C14.66,2.27 17.83,2.27 19.78,4.22C21.73,6.17 21.73,9.34 19.78,11.29L18.29,12.78C18.3,11.96 18.17,11.14 17.89,10.36L18.36,9.88C19.54,8.71 19.54,6.81 18.36,5.64C17.19,4.46 15.29,4.46 14.12,5.64L10.59,9.17C9.41,10.34 9.41,12.24 10.59,13.41M13.41,9.17C13.8,8.78 14.44,8.78 14.83,9.17C16.78,11.12 16.78,14.29 14.83,16.24V16.24L11.29,19.78C9.34,21.73 6.17,21.73 4.22,19.78C2.27,17.83 2.27,14.66 4.22,12.71L5.71,11.22C5.7,12.04 5.83,12.86 6.11,13.65L5.64,14.12C4.46,15.29 4.46,17.19 5.64,18.36C6.81,19.54 8.71,19.54 9.88,18.36L13.41,14.83C14.59,13.66 14.59,11.76 13.41,10.59C13,10.2 13,9.56 13.41,9.17Z\"/> </svg> </div>");
+
+</script>
+
+
+<footer class="--footer-main">
+        <section class="--footer-top">
+            <div class="--wrap">
+                <ul class="--footer-body">
+                    <li class="--footer-column">
+                        <h6 style="color:#e763fa" class="--footer-heading">Products</h6>			
+                        <ul>
+                            <li><a href="https://plotly.com/dash/" target="_self">Dash</a></li>
+                            				
+                            				
+                            <li><a href="https://plotly.com/consulting-and-oem/" target="_self">Consulting and Training</a></li>
+                        </ul>
+                    </li>
+                    		
+                    <li class="--footer-column">
+                        <h6 style="color:#636efa" class="--footer-heading">Pricing</h6>			
+                        <ul>
+                            <li><a href="https://plotly.com/get-pricing/" target="_self">Enterprise Pricing</a></li>
+                            				
+                        </ul>
+                    </li>
+                    		
+                    <li class="--footer-column">
+                        <h6 style="color:#00cc96" class="--footer-heading">About Us</h6>			
+                        <ul>
+                            <li><a href="https://plotly.com/company/careers" target="_self">Careers</a></li>
+                            				
+                            <li><a href="https://plotly.com/resources/" target="_self">Resources</a></li>
+                            				
+                            <li><a href="https://medium.com/@plotlygraphs" target="_self">Blog</a></li>
+                            				
+                        </ul>
+                    </li>
+                    		
+                    <li class="--footer-column">
+                        <h6 style="color:#EF553B" class="--footer-heading">Support</h6>			
+                        <ul>
+                            <li><a href="https://community.plot.ly/" target="_self">Community Support</a></li>
+                            				
+                            <li><a href="https://plotly.com/graphing-libraries" target="_self">Documentation</a></li>
+                            				
+                        </ul>
+                    </li>
+                    		
+                    <li class="--footer-column">
+                        <h6 style="color:#119dff" class="--footer-heading">JOIN OUR MAILING LIST</h6>			
+                        <ul>
+                            				
+                            <li>
+                              <p class="subscribe-text"> Sign up to stay in the loop with all things Plotly — from Dash Club to product updates, webinars, and more!</p>
+                              <a href="https://go.plot.ly/subscription" class="subscribe-button" target="_blank">
+                                Subscribe
+                              </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="--footer-meta">
+            <div class="--wrap">
+                <div class="left">
+                    <article class="--copyright">Copyright © 2021 Plotly. All rights reserved.</article>
+                </div>
+                <div class="right">
+                    <article class="--tos"><a href="https://plotly.com/terms-of-service/" target="_blank">Terms of Service</a>
+                    </article>
+                    <article class="--privacy"><a href="https://plotly.com/privacy/" target="_blank">Privacy Policy</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+
+ 
+ <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" id="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <span style="float: left; padding-top:13px; padding-right:10px;"><i class="fa fa-search fa-lg"></i></span>
+        <div class="ais-search-box"><div class="ais-search-box"><input id="search-input" class="search-input ais-search-box--input" type="text" placeholder="" autocapitalize="off" autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" value=""></div></div>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <div id="search-results" class="search-results">
+          <div id="primary-search-results" class="primary-search-results"></div>
+          <div id="schema-search-results" class="schema-search-results"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+	window.plotly_doc_language = "plotly_js";
+</script>
+<!-- ALGOLIA SEARCH -->
+
+<script>
+  window.ALGOLIA_CONFIG = {
+    'applicationId': '7EK9KHJW8M',
+    'indexName': 'js_docs',
+    'apiKey': '4dae07ded6a721de73bde7356eec9280',
+    'baseurl': '/'
+  }
+</script>
+
+<script id="algolia__template" type="text/template">
+  
+    <div class="algolia__result">
+      <a class="algolia__result-link" onClick="$('#myModal').modal('toggle')" href="/{{ permalink }}">{{{ _highlightResult.name.value }}}</a>
+      <div class="algolia__result-text">{{{ _highlightResult.description.value }}}</div>
+    </div>
+  
+</script>
+<script id="algolia__secondary-template" type="text/template">
+  
+    <div class="algolia__secondary-result">
+      <a class="algolia__result-link" onClick="$('#myModal').modal('toggle')" href="/{{ permalink }}">{{{ _highlightResult.name.value }}}</a>
+      <div class="algolia__result-text">{{{ _highlightResult.description.value }}}</div>
+    </div>
+  
+</script>
+<script id="algolia__template--no-results" type="text/template">No results found.</script>
+<script src="./Getting Started _ JavaScript _ Plotly_files/hogan.min.js"></script>
+<script src="./Getting Started _ JavaScript _ Plotly_files/algolia.js"></script>
+
+ <!-- Hash offset Script -->
+<script src="./Getting Started _ JavaScript _ Plotly_files/hash_offset.js"></script>
+ <!-- Image Hover Script -->
+<script src="./Getting Started _ JavaScript _ Plotly_files/imghover.js"></script>
+ 
+<!-- code highlighting -->
+<script src="./Getting Started _ JavaScript _ Plotly_files/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+</body></html>

@@ -2,17 +2,47 @@ import { RotateSpinner } from 'react-spinners-kit';
 import { IconContext } from 'react-icons';
 import { BsStarFill, BsStar, BsLink45Deg } from 'react-icons/bs';
 import TradeTab from './TradeTab/TradeTab';
+import Graph from './Graph/Graph';
+import { useEffect, useState } from 'react';
 
-const CompleteCoin = ({
-	coinInfo,
-	asset,
-	user,
-	watchingCoin,
-	triggerWatchCoin,
-	matches,
-	wallet,
-	balance,
-}) => {
+const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches, wallet, balance, coinSearchId }) => {
+	let arr = [];
+	//api endpoint to get the coin chart.
+	const [days, setDays] = useState(1);
+	const coingeckoApi = `https://api.coingecko.com/api/v3/coins/${coinSearchId}/market_chart?vs_currency=usd&days=${days}&interval=1m`;
+	const [data, setData] = useState(null);
+	const [graphData, setGraphData] = useState(null);
+
+	// load the graph
+	useEffect(() => {
+		try {
+			fetch(coingeckoApi, {
+				headers: {
+					'content-type': 'application/json',
+				},
+			})
+				.then((res) => res.json())
+				.then((data) => setData(data.prices));
+		} catch (error) {
+			console.log('ERROR: ', error);
+		}
+	}, [coingeckoApi]);
+
+	useEffect(() => {
+		if (data !== null) {
+			data.forEach((item) => {
+				let newGraphDataX = {
+					name: `${coinSearchId}`,
+					price: parseFloat(item[1]).toFixed(2),
+				};
+
+				arr.push(newGraphDataX);
+			});
+			setGraphData(arr);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data, coinSearchId]);
+
 	//convert the mega numbers
 	const formatNumber = (n) => {
 		if (n < 1e3) return n;
@@ -52,11 +82,11 @@ const CompleteCoin = ({
 		}
 	};
 
-	if (coinInfo !== null && asset !== null && user !== null && wallet !== null) {
+	if (coinInfo !== null && user !== null && wallet !== null) {
 		return (
 			<>
 				<div className="graphDiv">
-					<p className="graphGoesHere">GRAPH GOES HERE</p>
+					<Graph coinInfoId={coinInfo.id} days={days} graphData={graphData} coinSearchId={coinSearchId} />
 					<div className="currentPriceAndPercentage">
 						<p className="currentPrice">${formatNumber(coinInfo.market_data.current_price.usd)}</p>
 						<p
@@ -84,20 +114,17 @@ const CompleteCoin = ({
 						)}
 					</div>
 					<div className="selectDays">
-						<div  className="active oneDay">
+						<div onClick={() => setDays(1)} className="active oneDay">
 							1D
 						</div>
-						<div className="oneWeek">
+						<div onClick={() => setDays(7)} className="oneWeek">
 							1W
 						</div>
-						<div  className="oneMonth">
+						<div onClick={() => setDays(30)} className="oneMonth">
 							1M
 						</div>
-						<div  className="oneYear">
+						<div onClick={() => setDays(365)} className="oneMonth">
 							1Y
-						</div>
-						<div  className="allTime">
-							All
 						</div>
 					</div>
 				</div>

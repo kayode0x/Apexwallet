@@ -4,5 +4,8 @@
         "toastify",
         "webfonts",
         "xchange"
+    ],
+    "cSpell.words": [
+        "plotly"
     ]
 }

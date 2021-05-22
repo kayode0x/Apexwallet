@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import BottomNav from '../../../components/BottomNav/BottomNav';
-import completeUser from './CompleteUser/CompleteUser'
+import completeUser from './CompleteUser/CompleteUser';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 
 const Wallet = () => {
@@ -96,7 +96,7 @@ const Wallet = () => {
 		if (market !== null && wallet !== null && user !== null) {
 			let arr = [];
 
-			if(wallet.coins !== undefined){
+			if (wallet.coins !== undefined) {
 				wallet.coins.forEach((coin) => {
 					const newCoin = coin;
 					//produce external data for the user's assets
@@ -135,7 +135,7 @@ const Wallet = () => {
 	//create a wallet
 	const handleCreateWallet = async (e) => {
 		e.preventDefault();
-		
+
 		setCreatingWallet(true);
 		try {
 			await axios
