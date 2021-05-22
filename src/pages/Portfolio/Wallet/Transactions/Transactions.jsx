@@ -6,19 +6,19 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
-import './Transactions.scss'
+import './Transactions.scss';
+import moment from 'moment';
 
 const Transactions = () => {
 	const history = useHistory();
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
-    const [user, setUser] = useState(null);
-    const [wallet, setWallet] = useState(null)
-    let isRendered = useRef(false);
-    //api endpoint:
-    const apiURL = 'https://api.apexwallet.app/api/v1';
+	const [user, setUser] = useState(null);
+	const [wallet, setWallet] = useState(null);
+	let isRendered = useRef(false);
+	//api endpoint:
+	const apiURL = 'https://api.apexwallet.app/api/v1';
 
-
-    useEffect(() => {
+	useEffect(() => {
 		isRendered.current = true;
 		async function load() {
 			await getLoggedIn();
@@ -63,36 +63,8 @@ const Transactions = () => {
 		};
 	}, [getLoggedIn, loggedIn, history]);
 
-
-
-
-	//format the transaction date
-	const formatDate = (dateStr) => {
-		var date = new Date(dateStr);
-
-		var monthNames = [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December',
-		];
-		var d = date.getDate();
-		var m = monthNames[date.getMonth()];
-		var y = date.getFullYear();
-
-		return `${d + ' ' + m + ' ' + y}`;
-	};
-
 	function getTransactions() {
-        if (user !== null && user.isActive === true && user.wallet !== undefined && wallet !== null) {
+		if (user !== null && user.isActive === true && user.wallet !== undefined && wallet !== null) {
 			return (
 				<>
 					{wallet.transactions.map((transaction) => (
@@ -126,7 +98,7 @@ const Transactions = () => {
 								<p>
 									{transaction.type} {transaction.coin}
 								</p>
-								<p>{formatDate(transaction.date)}</p>
+								<p>{moment(transaction.date).format('dddd, MMMM Do')}</p>
 							</div>
 							<div className="value">
 								<p>
@@ -145,15 +117,15 @@ const Transactions = () => {
 				</>
 			);
 		} else if (user !== null && user.wallet === undefined) {
-            return <p className="noWalletTransaction">Once you create a wallet, your transactions will show up here</p>
-        } else {
+			return <p className="noWalletTransaction">Once you create a wallet, your transactions will show up here</p>;
+		} else {
 			return (
 				<div className="loading">
 					<RotateSpinner size={40} color="#080809" />
 				</div>
 			);
 		}
-    }
+	}
 
 	return (
 		<div className="transactionsComponent">
@@ -165,6 +137,6 @@ const Transactions = () => {
 			</div>
 		</div>
 	);
-}
+};
 
 export default Transactions;

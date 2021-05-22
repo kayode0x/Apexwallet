@@ -7,6 +7,7 @@ import sunSVG from '../../../../assets/logo/sunSVG.svg';
 import { ImArrowDownLeft2, ImArrowUpRight2 } from 'react-icons/im';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import CardDesign from './CardDesign';
+import moment from 'moment';
 
 const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, matches) => {
 	let cardImage;
@@ -22,32 +23,6 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 	} else {
 		cardImage = saturnSVG;
 	}
-
-	//format the transaction date
-	const formatDate = (dateStr) => {
-		var date = new Date(dateStr);
-
-		var monthNames = [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December',
-		];
-		var d = date.getDate();
-		var m = monthNames[date.getMonth()];
-		var y = date.getFullYear();
-
-		return `${d + ' ' + m + ' ' + y}`;
-	};
-
 
 	const cardDesignFunction = () => {
 		return (
@@ -131,7 +106,7 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 							<p>
 								{transaction.type} {transaction.coin}
 							</p>
-							<p>{formatDate(transaction.date)}</p>
+							<p>{moment(transaction.date).format('dddd, MMMM Do')}</p>
 						</div>
 						<div className="value">
 							<p>
