@@ -117,11 +117,11 @@ const Wallet = () => {
 			}
 
 			function compare(a, b) {
-				if (a.name < b.name) {
-					return -1;
-				}
-				if (a.name > b.name) {
+				if (a.usdValue < b.usdValue) {
 					return 1;
+				}
+				if (a.usdValue > b.usdValue) {
+					return -1;
 				}
 				return 0;
 			}
