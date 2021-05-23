@@ -14,7 +14,7 @@ const Wallet = () => {
 	const history = useHistory();
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [wallet, setWallet] = useState(null);
-	const [market, setMarket] = useState(null);
+	const [prices, setPrices] = useState(null);
 	const [asset, setAsset] = useState(null);
 	const [user, setUser] = useState(null);
 	const [creatingWallet, setCreatingWallet] = useState(false);
@@ -74,7 +74,7 @@ const Wallet = () => {
 						.then((response) => response.json())
 						.then((data) => {
 							if (isRendered.current === true) {
-								setMarket(data);
+								setPrices(data);
 							} else {
 								return null;
 							}
@@ -92,22 +92,22 @@ const Wallet = () => {
 	}, [getLoggedIn, loggedIn, history]);
 
 	useEffect(() => {
-		if (market !== null && wallet !== null && user !== null) {
+		if (prices !== null && wallet !== null && user !== null) {
 			let arr = [];
 
 			if (wallet.coins !== undefined) {
 				wallet.coins.forEach((coin) => {
 					const newCoin = coin;
 					//produce external data for the user's assets
-					market.forEach((market) => {
-						if (market.id === newCoin.coin) {
+					prices.forEach((price) => {
+						if (price.id === newCoin.coin) {
 							let newCoinData = {
-								name: market.name,
-								symbol: market.symbol,
-								id: market.id,
-								usdValue: market.current_price * newCoin.balance,
-								price: market.current_price,
-								image: market.image,
+								name: price.name,
+								symbol: price.symbol,
+								id: price.id,
+								usdValue: price.current_price * newCoin.balance,
+								price: price.current_price,
+								image: price.image,
 								balance: newCoin.balance,
 							};
 							arr.push(newCoinData);
@@ -129,7 +129,7 @@ const Wallet = () => {
 			arr.sort(compare);
 			setAsset(arr);
 		}
-	}, [market, wallet, user]);
+	}, [prices, wallet, user]);
 
 	//create a wallet
 	const handleCreateWallet = async (e) => {

@@ -8,7 +8,7 @@ $lightBlue: #4e6ce4;
 $orange: #ef5116;
 $navyBlue: #262946;
 
-.market {
+.prices {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 5rem;
@@ -138,7 +138,7 @@ $navyBlue: #262946;
 			}
 		}
 
-		.marketAndTrade {
+		.pricesAndTrade {
 			display: flex;
 			width: 90%;
 			@media (max-width: 767px){
@@ -148,7 +148,7 @@ $navyBlue: #262946;
 			justify-content: space-between;
 		}
 
-		.marketInfo {
+		.pricesInfo {
 			display: flex;
 			flex-direction: row;
 			align-items: center;
@@ -161,8 +161,8 @@ $navyBlue: #262946;
 			margin-top: -0.5rem;
 			margin-bottom: 1rem;
 
-			.marketCap,
-			.marketVolume,
+			.pricesCap,
+			.pricesVolume,
 			.BTCDominance {
 				p:nth-child(1) {
 					color: $subColor;
@@ -181,10 +181,10 @@ $navyBlue: #262946;
 			}
 		}
 
-		.marketData {
+		.pricesData {
 			display: flex;
 			flex-direction: column;
-			align-items: center; //change back to flex-start if you want to edit each coin card in the market page.
+			align-items: center; //change back to flex-start if you want to edit each coin card in the prices page.
 			justify-content: center;
 			width: 100%;
 			margin-bottom: 3rem;

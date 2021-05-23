@@ -1,4 +1,4 @@
-import './Market.scss';
+import './Prices.scss';
 import AuthContext from '../../../components/Auth/AuthContext';
 import { useContext, useEffect, useState, useRef } from 'react';
 import axios from 'axios';
@@ -12,7 +12,7 @@ import BottomNav from '../../../components/BottomNav/BottomNav';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 // import { BsStarFill, BsStar } from 'react-icons/bs';
 
-const Market = () => {
+const Prices = () => {
 	const history = useHistory();
 	// const matches = useMediaQuery('(min-width:1171px)');
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
@@ -20,7 +20,7 @@ const Market = () => {
 	// const [canTrade, setCanTrade] = useState(false);
 	const [searchText, setSearchText] = useState('');
 	const [user, setUser] = useState(null);
-	const [market, setMarket] = useState(null);
+	const [prices, setPrices] = useState(null);
 	const [marketInfo, setMarketInfo] = useState(null);
 	let isRendered = useRef(false);
 
@@ -29,7 +29,7 @@ const Market = () => {
 		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20litecoin%2C%20tether%2C%20dogecoin%2C%20ethereum%2C%20ethereum-classic%2C%20ripple%2C%20binancecoin%2C%20cardano%2C%20usd-coin%2C%20tron%2C%20bitcoin-cash%2C%20polkadot%2C%20uniswap%2C%20dash%2C%20&order=market_cap_desc&per_page=100&page=1&sparkline=false';
 		// decentraland = %20decentraland%2C
 
-	const coingeckoMarketInfo = 'https://api.coingecko.com/api/v3/global';
+	const coingeckoPricesInfo = 'https://api.coingecko.com/api/v3/global';
 
 	useEffect(() => {
 		isRendered.current = true;
@@ -63,7 +63,7 @@ const Market = () => {
 						.then((response) => response.json())
 						.then((data) => {
 							if (isRendered.current === true){
-								setMarket(data)
+								setPrices(data)
 							} else {
 								return null;
 							}
@@ -73,7 +73,7 @@ const Market = () => {
 				}
 
 				try {
-					await fetch(coingeckoMarketInfo, {
+					await fetch(coingeckoPricesInfo, {
 						method: 'GET',
 						headers: {
 							'content-type': 'application/json',
@@ -111,8 +111,8 @@ const Market = () => {
 
 	let allCoins;
 	//search for a coin
-	if (market) {
-		allCoins = market.filter((coin) => coin.name.toLowerCase().includes(searchText.toLowerCase()));
+	if (prices) {
+		allCoins = prices.filter((coin) => coin.name.toLowerCase().includes(searchText.toLowerCase()));
 	}
 
 	const handleSearch = (e) => {
@@ -122,24 +122,24 @@ const Market = () => {
 
 	return (
 		<HelmetProvider>
-			<div className="market">
+			<div className="prices">
 				<Helmet>
 					<meta charSet="utf-8" />
-					<title>Market - Apex</title>
+					<title>Prices - Apex</title>
 				</Helmet>
 				<BottomNav />
 				<div className="container">
-					<p className="header">Market</p>
+					<p className="header">Prices</p>
 
-					{market ? (
+					{prices ? (
 						<>
 							{user && (
 								<>
-									<div className="marketAndTrade">
-										<div className="marketData">
+									<div className="pricesAndTrade">
+										<div className="pricesData">
 											{marketInfo && (
-												<div className="marketInfo">
-													<div className="marketCap">
+												<div className="pricesInfo">
+													<div className="pricesCap">
 														<p>Market Cap.</p>
 														<p>${formatNumber(marketInfo.total_market_cap.usd)}</p>
 														<p
@@ -164,7 +164,7 @@ const Market = () => {
 														</p>
 													</div>
 
-													<div className="marketVolume">
+													<div className="pricesVolume">
 														<p>Volume 24h</p>
 														<p>${formatNumber(marketInfo.total_volume.usd)}</p>
 														<p>-</p>
@@ -200,11 +200,7 @@ const Market = () => {
 												{/* <div className="sortBar">Sorting goes here</div> */}
 											</div>
 											{allCoins.map((coin) => (
-												<Link
-													className="coinList"
-													key={coin.id}
-													to={`/market/${coin.id}`}
-												>
+												<Link className="coinList" key={coin.id} to={`/prices/${coin.id}`}>
 													<div className="imageAndName">
 														<img className="coinImage" src={coin.image} alt={coin.name} />
 														<div className="coinNames">
@@ -252,4 +248,4 @@ const Market = () => {
 	);
 };
 
-export default Market;
+export default Prices;

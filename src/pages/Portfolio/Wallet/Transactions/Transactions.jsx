@@ -8,12 +8,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import './Transactions.scss';
 import moment from 'moment';
+import { IoChevronBack } from 'react-icons/io5';
 
 const Transactions = () => {
 	const history = useHistory();
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [user, setUser] = useState(null);
 	const [wallet, setWallet] = useState(null);
+	const [sorted, setSorted] = useState(null);
+	const [ctrlSorted, setCtrlSorted] = useState('all');
 	let isRendered = useRef(false);
 	//api endpoint:
 	const apiURL = 'https://api.apexwallet.app/api/v1';
@@ -48,6 +51,7 @@ const Transactions = () => {
 					});
 					if (isRendered.current === true) {
 						setWallet(wallet.data);
+						setSorted(wallet.data.transactions);
 					} else {
 						return null;
 					}
@@ -63,11 +67,90 @@ const Transactions = () => {
 		};
 	}, [getLoggedIn, loggedIn, history]);
 
+
+	// sort the wallet transactions by type
+	const sortFunction = (format) => {
+		if (wallet !== null && sorted !== null) {
+			if (format === 'all') {
+				setCtrlSorted('all')
+
+				function compare(a, b) {
+					if (a.date < b.date) {
+						return 1;
+					}
+					if (a.date > b.date) {
+						return -1;
+					}
+					return 0;
+				}
+
+				let newTransactions = wallet.transactions.sort(compare); //sort all transactions by 'date'
+				setSorted(newTransactions);
+
+			} else if (format === 'income') {
+				let incomeSort = wallet.transactions.filter((transaction) => transaction.type === 'Sold' || transaction.type === 'Free');
+				setSorted(incomeSort);
+				setCtrlSorted('income'); //sort all transactions by type 'income'
+			} else if (format === 'expense') {
+				let expenseSort = wallet.transactions.filter((transaction) => transaction.type === 'Bought');
+				setSorted(expenseSort);
+				setCtrlSorted('expense'); //sort all transactions by type 'expense'
+			} else if (format === 'amount'){
+				setCtrlSorted('amount');
+
+				function compare(a, b) {
+					if (a.amount < b.amount) {
+						return 1;
+					}
+					if (a.amount > b.amount) {
+						return -1;
+					}
+					return 0;
+				}
+
+				let amountSort = wallet.transactions.sort(compare);
+				setSorted(amountSort); //sort all transactions by type 'amount descending'
+			}
+		}
+	};
+
 	function getTransactions() {
-		if (user !== null && user.isActive === true && user.wallet !== undefined && wallet !== null) {
+		if (
+			user !== null &&
+			user.isActive === true &&
+			user.wallet !== undefined &&
+			wallet !== null && 
+			sorted !== null
+		) {
 			return (
 				<>
-					{wallet.transactions.map((transaction) => (
+					<div className="sortTransactions">
+						<div
+							onClick={() => sortFunction('all')}
+							className={ctrlSorted === 'all' ? 'active allTransactions' : 'allTransactions'}
+						>
+							All
+						</div>
+						<div
+							onClick={() => sortFunction('amount')}
+							className={ctrlSorted === 'amount' ? 'active allTransactionsAmount' : 'allTransactionsAmount'}
+						>
+							Amount
+						</div>
+						<div
+							onClick={() => sortFunction('income')}
+							className={ctrlSorted === 'income' ? 'active incomeTransactions' : 'incomeTransactions'}
+						>
+							Income
+						</div>
+						<div
+							onClick={() => sortFunction('expense')}
+							className={ctrlSorted === 'expense' ? 'active expenseTransactions' : 'expenseTransactions'}
+						>
+							Expense
+						</div>
+					</div>
+					{sorted.map((transaction) => (
 						<div className="walletTransaction" key={transaction._id}>
 							<div
 								style={{
@@ -130,7 +213,12 @@ const Transactions = () => {
 	return (
 		<div className="transactionsComponent">
 			<div className="container">
-				<p className="header">All Transactions</p>
+				<div className="header">
+					<div className="backEmoji" onClick={history.goBack}>
+						<IoChevronBack />
+					</div>
+					<p>All Transactions</p>
+				</div>
 				<div className="transactionsContainer">
 					{getTransactions()} <ToastContainer />
 				</div>

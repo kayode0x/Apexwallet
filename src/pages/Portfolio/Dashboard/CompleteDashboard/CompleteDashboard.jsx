@@ -13,7 +13,7 @@ const CompleteDashboard = (user, watchList, news) => {
 					<div>
 						<img src={coinsSVG} alt="coins" />
 						<p>Find an assortment of highlights and get a touch of each crypto to go for yourself.</p>
-						<a href="/market" className="allAssets">
+						<a href="/prices" className="allAssets">
 							<p>See all assets </p>
 						</a>
 					</div>
@@ -23,7 +23,7 @@ const CompleteDashboard = (user, watchList, news) => {
 			return (
 				<div className="watchListContainer">
 					{watchList.map((watchList, index) => (
-						<Link to={`/market/${watchList.id}`} className="watchListSubContainer" key={index}>
+						<Link to={`/prices/${watchList.id}`} className="watchListSubContainer" key={index}>
 							<img src={watchList.image} alt={watchList.name} />
 							<div className="nameAndSymbol">
 								<p>{watchList.name}</p>

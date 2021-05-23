@@ -4,6 +4,7 @@ $textColor: #080809;
 $subTextColor: #cbbaba;
 $blue: #2f52e0;
 $lightBlue: #4e6ce4;
+$borderColor: rgb(158, 158, 158);
 $orange: #ef5116;
 $navyBlue: #262946;
 
@@ -41,7 +42,6 @@ $navyBlue: #262946;
 				align-items: flex-start;
 			}
 			justify-content: center;
-			margin-top: 2rem;
 		}
 
 		.loading {
@@ -55,26 +55,36 @@ $navyBlue: #262946;
 			color: $textColor;
 			display: flex;
 			text-align: left;
-			align-self: center;
+			align-items: center;
 			font-size: 1.5rem;
-			// font-weight: bold;
-			margin-bottom: 0rem;
-			@media (max-width: 767px) {
-				align-self: flex-start;
+			width: 100%;
+			@media (min-width: 768px) and (max-width: 1023px) {
+				width: 90%;
+			}
+			margin-bottom: -1rem;
+
+			.backEmoji {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-right: 1rem;
 			}
 		}
 
 		.transactionsContainer {
 			width: 100%;
+			@media (min-width: 768px) and (max-width: 1023px) {
+				width: 90%;
+			}
 			padding: 1rem;
 		}
 
-        .noWalletTransaction {
-            display: flex;
-            align-self: center;
-            text-align: center;
-            justify-content : center;
-        }
+		.noWalletTransaction {
+			display: flex;
+			align-self: center;
+			text-align: center;
+			justify-content: center;
+		}
 
 		.transactionsHeader {
 			color: $textColor;
@@ -128,6 +138,33 @@ $navyBlue: #262946;
 				color: $textColor;
 				font-size: 1.05rem;
 				margin-left: auto;
+			}
+		}
+
+		.sortTransactions {
+			display: flex;
+			width: 100%;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 1rem;
+
+			.allTransactions,
+			.incomeTransactions,
+			.allTransactionsAmount {
+				margin-right: 0.5rem;
+				border-radius: 5px;
+				padding: 0 0.5rem;
+			}
+
+			.expenseTransactions {
+				border-radius: 5px;
+				padding: 0 0.5rem;
+			}
+
+			.active {
+				background: $lightBlue;
+				border: 1px solid $lightBlue;
+				color: $mainColor;
 			}
 		}
 	}

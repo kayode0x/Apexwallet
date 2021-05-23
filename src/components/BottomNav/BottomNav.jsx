@@ -26,14 +26,14 @@ const BottomNav = () => {
 				{matches ? splitLocation[1] === 'dashboard' ? <RiHome4Fill /> : <RiHome4Line /> : <p>Home</p>}
 			</Link>
 			<Link
-				to="/market"
-				style={{ animation: splitLocation[1] === 'market' ? 'navIconAnim .3s' : '' }}
-				className={splitLocation[1] === 'market' ? 'active marketIcon' : 'marketIcon'}
+				to="/prices"
+				style={{ animation: splitLocation[1] === 'prices' ? 'navIconAnim .3s' : '' }}
+				className={splitLocation[1] === 'prices' ? 'active pricesIcon' : 'pricesIcon'}
 			>
-				{matches ? <IoStatsChart /> : <p>Market</p>}
+				{matches ? <IoStatsChart /> : <p>Prices</p>}
 			</Link>
 			<Link to="#" className="tradeIcon">
-				{matches && <BsArrowUpDown /> }
+				{matches && <BsArrowUpDown />}
 			</Link>
 			<Link
 				to="/wallet"
