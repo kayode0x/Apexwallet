@@ -122,19 +122,19 @@ const TradeModal = ({ tradeModal }) => {
 						</div>
 						Sell
 					</div>
-					<div className="convertCrypto">
+					<div className="convertCrypto" onClick={() => alert('Coming soon ⏳')}>
 						<div className="tradeModalIcon">
 							<BsArrowRepeat />
 						</div>
 						Convert
 					</div>
-					<div className="sendCrypto">
+					<div className="sendCrypto" onClick={() => alert('Coming soon ⏳')}>
 						<div className="tradeModalIcon">
 							<BsArrowUpRight />
 						</div>
 						Send
 					</div>
-					<div className="receiveCrypto">
+					<div className="receiveCrypto" onClick={() => alert('Coming soon ⏳')}>
 						<div className="tradeModalIcon">
 							<BsArrowDownLeft />
 						</div>

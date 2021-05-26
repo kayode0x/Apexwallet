@@ -106,7 +106,6 @@ $borderColor: rgb(158, 158, 158);
 			@media (min-width: 768px) and (max-width: 1023px) {
 				width: 90%;
 			}
-			// border-radius: 5px;
 			color: $textColor;
 			text-align: center;
 			display: flex;
@@ -479,8 +478,8 @@ $borderColor: rgb(158, 158, 158);
 					color: $textColor;
 					position: relative;
 
-					.buyCoins,
-					.sellCoins,
+					.buyCoinsDesktop,
+					.sellCoinsDesktop,
 					.convertCoins {
 						position: absolute;
 						width: 100%;

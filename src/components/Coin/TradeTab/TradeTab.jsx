@@ -457,14 +457,14 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 
 			{/* Buy coins tab */}
 			<TabPanel value={value} index={0}>
-				<form onSubmit={handleBuyCoin} className="buyCoins">
+				<form onSubmit={handleBuyCoin} className="buyCoinsDesktop">
 					{buyCoinsFunction()}
 				</form>
 			</TabPanel>
 
 			{/* Sell coin tab */}
 			<TabPanel value={value} index={1}>
-				<form onSubmit={handleSellCoin} className="sellCoins">
+				<form onSubmit={handleSellCoin} className="sellCoinsDesktop">
 					{sellCoinsFunction()}
 				</form>
 			</TabPanel>

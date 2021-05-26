@@ -158,6 +158,9 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 										setAmountToBuyFiat(e.target.value);
 									}}
 									type="number"
+									pattern="[-+]?[0-9]*[.,]?[0-9]+"
+									formnovalidate="formnovalidate"
+									step="any"
 									min="1"
 									max="5000"
 									placeholder="1"
@@ -169,8 +172,11 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 								<input
 									value={amountToBuyCrypto}
 									onChange={(e) => setAmountToBuyCrypto(e.target.value)}
-									type="number"
 									placeholder="0"
+									type="number"
+									step="any"
+									pattern="[-+]?[0-9]*[.,]?[0-9]+"
+									formnovalidate="formnovalidate"
 								/>
 							</>
 						)}
@@ -187,40 +193,38 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 							<>You pay ${coinAmountToBuyCrypto(amountToBuyCrypto)}</>
 						)}
 					</p>
-					<Select
-						className="selectCoin"
-						value={coin}
-						onChange={handleChange}
-					>
-						<MenuItem value={'bitcoin'}>Bitcoin</MenuItem>
-						<MenuItem value={'ethereum'}>Ethereum</MenuItem>
-						<MenuItem value={'ethereum-classic'}>Ethereum Classic</MenuItem>
-						<MenuItem value={'dogecoin'}>Dogecoin</MenuItem>
-						<MenuItem value={'ripple'}>Ripple</MenuItem>
-						<MenuItem value={'tether'}>Tether</MenuItem>
-						<MenuItem value={'binancecoin'}>Binance Coin</MenuItem>
-						<MenuItem value={'cardano'}>Cardano</MenuItem>
-						<MenuItem value={'usd-coin'}>USD Coin</MenuItem>
-						<MenuItem value={'tron'}>Tron</MenuItem>
-						<MenuItem value={'bitcoin-cash'}>Bitcoin Cash</MenuItem>
-						<MenuItem value={'polkadot'}>Polkadot</MenuItem>
-						<MenuItem value={'uniswap'}>Uniswap</MenuItem>
-						<MenuItem value={'dash'}>Dash</MenuItem>
-						{/* <MenuItem value={'decentraland'}>Decentraland</MenuItem> */}
-					</Select>
-					<div className="coinAndWalletTab">
-						<div>
-							<p>USD balance</p> <span>${parseFloat(wallet.balance).toFixed(2)}</span>
+					<div className="selectBalanceAndBTN">
+						<Select className="selectCoin" value={coin} onChange={handleChange}>
+							<MenuItem value={'bitcoin'}>Bitcoin</MenuItem>
+							<MenuItem value={'ethereum'}>Ethereum</MenuItem>
+							<MenuItem value={'ethereum-classic'}>Ethereum Classic</MenuItem>
+							<MenuItem value={'dogecoin'}>Dogecoin</MenuItem>
+							<MenuItem value={'ripple'}>Ripple</MenuItem>
+							<MenuItem value={'tether'}>Tether</MenuItem>
+							<MenuItem value={'binancecoin'}>Binance Coin</MenuItem>
+							<MenuItem value={'cardano'}>Cardano</MenuItem>
+							<MenuItem value={'usd-coin'}>USD Coin</MenuItem>
+							<MenuItem value={'tron'}>Tron</MenuItem>
+							<MenuItem value={'bitcoin-cash'}>Bitcoin Cash</MenuItem>
+							<MenuItem value={'polkadot'}>Polkadot</MenuItem>
+							<MenuItem value={'uniswap'}>Uniswap</MenuItem>
+							<MenuItem value={'dash'}>Dash</MenuItem>
+							{/* <MenuItem value={'decentraland'}>Decentraland</MenuItem> */}
+						</Select>
+						<div className="coinAndWalletTab">
+							<div>
+								<p>USD balance</p> <span>${parseFloat(wallet.balance).toFixed(2)}</span>
+							</div>
+							<button disabled={buying ? true : false} type="submit">
+								{buying ? (
+									<p>Buying...</p>
+								) : (
+									<p>
+										Buy <span style={{ textTransform: 'capitalize' }}>{coinInfo.name}</span>
+									</p>
+								)}
+							</button>
 						</div>
-						<button disabled={buying ? true : false} type="submit">
-							{buying ? (
-								<p>Buying...</p>
-							) : (
-								<p>
-									Buy <span style={{ textTransform: 'capitalize' }}>{coinInfo.name}</span>
-								</p>
-							)}
-						</button>
 					</div>
 				</>
 			);

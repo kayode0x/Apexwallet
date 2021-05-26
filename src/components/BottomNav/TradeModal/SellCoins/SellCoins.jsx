@@ -153,8 +153,11 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 								<input
 									value={amountToSellFiat}
 									onChange={(e) => setAmountToSellFiat(e.target.value)}
-									type="number"
 									placeholder="1"
+									type="number"
+									step="any"
+									pattern="[-+]?[0-9]*[.,]?[0-9]+"
+									formnovalidate="formnovalidate"
 								/>
 							</>
 						) : (
@@ -163,8 +166,11 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 								<input
 									value={amountToSellCrypto}
 									onChange={(e) => setAmountToSellCrypto(e.target.value)}
-									type="number"
 									placeholder="0"
+									type="number"
+									step="any"
+									pattern="[-+]?[0-9]*[.,]?[0-9]+"
+									formnovalidate="formnovalidate"
 								/>
 							</>
 						)}
@@ -182,41 +188,43 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 							</>
 						)}
 					</p>
-					<Select className="selectCoin" value={coin} onChange={handleChange}>
-						<MenuItem value={'bitcoin'}>Bitcoin</MenuItem>
-						<MenuItem value={'ethereum'}>Ethereum</MenuItem>
-						<MenuItem value={'ethereum-classic'}>Ethereum Classic</MenuItem>
-						<MenuItem value={'dogecoin'}>Dogecoin</MenuItem>
-						<MenuItem value={'ripple'}>Ripple</MenuItem>
-						<MenuItem value={'tether'}>Tether</MenuItem>
-						<MenuItem value={'binancecoin'}>Binance Coin</MenuItem>
-						<MenuItem value={'cardano'}>Cardano</MenuItem>
-						<MenuItem value={'usd-coin'}>USD Coin</MenuItem>
-						<MenuItem value={'tron'}>Tron</MenuItem>
-						<MenuItem value={'bitcoin-cash'}>Bitcoin Cash</MenuItem>
-						<MenuItem value={'polkadot'}>Polkadot</MenuItem>
-						<MenuItem value={'uniswap'}>Uniswap</MenuItem>
-						<MenuItem value={'dash'}>Dash</MenuItem>
-						{/* <MenuItem value={'decentraland'}>Decentraland</MenuItem> */}
-					</Select>
-					<div className="coinAndWalletTab">
-						<div>
-							<p>
-								<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span> balance
-							</p>{' '}
-							<span style={{ textTransform: 'uppercase' }}>
-								{parseFloat(balance).toFixed(5)} {coinInfo.symbol}
-							</span>
-						</div>
-						<button disabled={selling ? true : false} type="submit">
-							{selling ? (
-								<p>Selling...</p>
-							) : (
+					<div className="selectBalanceAndBTN">
+						<Select className="selectCoin" value={coin} onChange={handleChange}>
+							<MenuItem value={'bitcoin'}>Bitcoin</MenuItem>
+							<MenuItem value={'ethereum'}>Ethereum</MenuItem>
+							<MenuItem value={'ethereum-classic'}>Ethereum Classic</MenuItem>
+							<MenuItem value={'dogecoin'}>Dogecoin</MenuItem>
+							<MenuItem value={'ripple'}>Ripple</MenuItem>
+							<MenuItem value={'tether'}>Tether</MenuItem>
+							<MenuItem value={'binancecoin'}>Binance Coin</MenuItem>
+							<MenuItem value={'cardano'}>Cardano</MenuItem>
+							<MenuItem value={'usd-coin'}>USD Coin</MenuItem>
+							<MenuItem value={'tron'}>Tron</MenuItem>
+							<MenuItem value={'bitcoin-cash'}>Bitcoin Cash</MenuItem>
+							<MenuItem value={'polkadot'}>Polkadot</MenuItem>
+							<MenuItem value={'uniswap'}>Uniswap</MenuItem>
+							<MenuItem value={'dash'}>Dash</MenuItem>
+							{/* <MenuItem value={'decentraland'}>Decentraland</MenuItem> */}
+						</Select>
+						<div className="coinAndWalletTab">
+							<div>
 								<p>
-									Sell <span style={{ textTransform: 'capitalize' }}>{coinInfo.name}</span>
-								</p>
-							)}
-						</button>
+									<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span> balance
+								</p>{' '}
+								<span style={{ textTransform: 'uppercase' }}>
+									{parseFloat(balance).toFixed(5)} {coinInfo.symbol}
+								</span>
+							</div>
+							<button disabled={selling ? true : false} type="submit">
+								{selling ? (
+									<p>Selling...</p>
+								) : (
+									<p>
+										Sell <span style={{ textTransform: 'capitalize' }}>{coinInfo.name}</span>
+									</p>
+								)}
+							</button>
+						</div>
 					</div>
 				</>
 			);
