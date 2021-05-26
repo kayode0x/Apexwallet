@@ -48,7 +48,7 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 				{/* Assets container */}
 				<p className="assetsHeader">Assets</p>
 				{asset.map((asset, index) => (
-					<Link to={`/wallet/${asset.id}`} className="asset" key={index}>
+					<Link to={`/prices/${asset.id}`} className="asset" key={index}>
 						<div className="imageAndName">
 							<img src={asset.image} alt={asset.name} />
 							<div className="nameAndSymbol">
