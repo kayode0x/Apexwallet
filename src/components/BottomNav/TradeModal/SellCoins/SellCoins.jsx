@@ -157,7 +157,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 									type="number"
 									step="any"
 									pattern="[-+]?[0-9]*[.,]?[0-9]+"
-									formnovalidate="formnovalidate"
+									formNoValidate="formnovalidate"
 								/>
 							</>
 						) : (
@@ -170,7 +170,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 									type="number"
 									step="any"
 									pattern="[-+]?[0-9]*[.,]?[0-9]+"
-									formnovalidate="formnovalidate"
+									formNoValidate="formnovalidate"
 								/>
 							</>
 						)}
@@ -193,6 +193,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 							<MenuItem value={'bitcoin'}>Bitcoin</MenuItem>
 							<MenuItem value={'ethereum'}>Ethereum</MenuItem>
 							<MenuItem value={'ethereum-classic'}>Ethereum Classic</MenuItem>
+							<MenuItem value={'litecoin'}>Litecoin</MenuItem>
 							<MenuItem value={'dogecoin'}>Dogecoin</MenuItem>
 							<MenuItem value={'ripple'}>Ripple</MenuItem>
 							<MenuItem value={'tether'}>Tether</MenuItem>
