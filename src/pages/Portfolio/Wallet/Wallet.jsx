@@ -168,7 +168,7 @@ const Wallet = () => {
 					<meta charSet="utf-8" />
 					<title>Wallet - Apex</title>
 				</Helmet>
-				<BottomNav />
+				<BottomNav prices={prices} />
 				<div className="container">
 					<p className="header">Wallet</p>
 

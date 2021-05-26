@@ -6,6 +6,7 @@ $blue: #2f52e0;
 $lightBlue: #4e6ce4;
 $orange: #ef5116;
 $navyBlue: #262946;
+$borderColor: rgb(170, 170, 170);
 
 .navbar {
 	position: fixed;
@@ -69,6 +70,80 @@ $navyBlue: #262946;
 				transform: scale(1);
 			}
 		}
+	}
+
+	.tradeModal {
+		position: fixed;
+		bottom: -150vh;
+		background-color: $mainColor;
+		width: 100%;
+		box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.15);
+		left: 0;
+		padding: 1rem 0;
+		// transition: all 0.8s ease-in;
+		z-index: 10;
+		display: none;
+		font-size: 1.15rem;
+		animation: tradeModalAnim 0.3s ease-in-out forwards;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		height: 40%;
+		@media (max-width: 1024px) and (orientation: landscape) {
+			height: 55%;
+		}
+	}
+
+	@keyframes tradeModalAnim {
+		from {
+			bottom: -150vh;
+		}
+
+		to {
+			bottom: 0;
+		}
+	}
+
+	.tradeModal.Show {
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		transition: all 0.8s ease-in;
+
+		.noWallet {
+			display: flex;
+			align-self: center;
+		}
+
+		.tradeModalIcon {
+			font-size: 1.5rem;
+			margin-right: 1rem;
+		}
+
+		.sendCrypto,
+		.receiveCrypto,
+		.convertCrypto,
+		.buyCrypto,
+		.sellCrypto {
+			display: flex;
+			margin-left: 1rem;
+			width: 90%;
+		}
+	}
+
+	.Overlay {
+		background-color: rgba(0, 0, 0, 0.55);
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		position: fixed;
+		display: none;
+		z-index: 5;
+	}
+
+	.Overlay.Show {
+		display: block;
 	}
 
 	.homeIcon,

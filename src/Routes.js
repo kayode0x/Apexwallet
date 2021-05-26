@@ -26,6 +26,7 @@ const Routes = () => {
 				<Route exact path="/wallet/transactions">
 					<Transactions />
 				</Route>
+
 				<Route exact path="/prices">
 					<Prices />
 				</Route>

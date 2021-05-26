@@ -5,6 +5,8 @@ import { RiUser3Line, RiUser3Fill } from 'react-icons/ri';
 import { BsArrowUpDown } from 'react-icons/bs';
 import { useLocation, Link } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useState } from 'react';
+import TradeModal from './TradeModal/TradeModal';
 
 const BottomNav = () => {
 	const matches = useMediaQuery('(max-width:767px)');
@@ -14,6 +16,8 @@ const BottomNav = () => {
 	const { pathname } = location;
 
 	const splitLocation = pathname.split('/');
+
+	const [tradeModal, setTradeModal] = useState(false);
 
 	return (
 		<div className="navbar">
@@ -32,7 +36,13 @@ const BottomNav = () => {
 			>
 				{matches ? <IoStatsChart /> : <p>Prices</p>}
 			</Link>
-			<Link to="#" className="tradeIcon">
+			<Link
+				to="#"
+				onClick={() => {
+					setTradeModal(!tradeModal);
+				}}
+				className="tradeIcon"
+			>
 				{matches && <BsArrowUpDown />}
 			</Link>
 			<Link
@@ -49,6 +59,9 @@ const BottomNav = () => {
 			>
 				{matches ? splitLocation[1] === 'account' ? <RiUser3Fill /> : <RiUser3Line /> : <p>Account</p>}
 			</Link>
+
+			<TradeModal tradeModal={tradeModal} />
+			<div className={`Overlay ${tradeModal ? 'Show' : ''}`} onClick={() => setTradeModal(!tradeModal)} />
 		</div>
 	);
 };

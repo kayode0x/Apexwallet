@@ -9,6 +9,8 @@ import { useHistory } from 'react-router-dom';
 import './Transactions.scss';
 import moment from 'moment';
 import { IoChevronBack } from 'react-icons/io5';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+import BottomNav from '../../../../components/BottomNav/BottomNav';
 
 const Transactions = () => {
 	const history = useHistory();
@@ -211,19 +213,26 @@ const Transactions = () => {
 	}
 
 	return (
-		<div className="transactionsComponent">
-			<div className="container">
-				<div className="header">
-					<div className="backEmoji" onClick={history.goBack}>
-						<IoChevronBack />
+		<HelmetProvider>
+			<div className="transactionsComponent">
+				<Helmet>
+					<meta charSet="utf-8" />
+					<title>Transactions - Apex</title>
+				</Helmet>
+				<BottomNav />
+				<div className="container">
+					<div className="header">
+						<div className="backEmoji" onClick={history.goBack}>
+							<IoChevronBack />
+						</div>
+						<p>All Transactions</p>
 					</div>
-					<p>All Transactions</p>
-				</div>
-				<div className="transactionsContainer">
-					{getTransactions()} <ToastContainer />
+					<div className="transactionsContainer">
+						{getTransactions()} <ToastContainer />
+					</div>
 				</div>
 			</div>
-		</div>
+		</HelmetProvider>
 	);
 };
 

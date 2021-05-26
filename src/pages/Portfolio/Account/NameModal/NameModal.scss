@@ -6,6 +6,7 @@ $blue: #2f52e0;
 $lightBlue: #4e6ce4;
 $orange: #ef5116;
 $navyBlue: #262946;
+$borderColor: rgb(158, 158, 158);
 
 .nameModalContainer {
 	position: absolute;
@@ -74,7 +75,7 @@ $navyBlue: #262946;
 					font-size: 1.15rem;
 					outline: none;
 					border-radius: 5px;
-					border: 2px solid $subColor;
+					border: 1px solid $borderColor;
 					padding: 0.75rem;
 					background: transparent;
 					color: $textColor;
@@ -91,11 +92,11 @@ $navyBlue: #262946;
 				input:focus {
 					border-radius: 5px;
 					outline: none;
-					border: 2px solid $lightBlue;
+					border: 1px solid $lightBlue;
 				}
 
 				input:hover {
-					border: 2px solid $lightBlue;
+					border: 1px solid $lightBlue;
 				}
 			}
 

@@ -56,7 +56,8 @@ $navyBlue: #262946;
 			display: flex;
 			text-align: left;
 			align-items: center;
-			font-size: 1.5rem;
+			justify-content: space-between;
+			font-size: 1.25rem;
 			width: 100%;
 			@media (min-width: 768px) and (max-width: 1023px) {
 				width: 90%;
@@ -68,6 +69,15 @@ $navyBlue: #262946;
 				align-items: center;
 				justify-content: center;
 				margin-right: 1rem;
+			}
+
+			p {
+				display: flex;
+				align-self: center;
+				justify-content: center;
+				justify-self: center;
+				width: 100%;
+				margin-left: -1rem;
 			}
 		}
 
@@ -154,16 +164,17 @@ $navyBlue: #262946;
 				margin-right: 0.5rem;
 				border-radius: 5px;
 				padding: 0 0.5rem;
+				color: $subColor;
 			}
 
 			.expenseTransactions {
 				border-radius: 5px;
 				padding: 0 0.5rem;
+				color: $subColor;
 			}
 
 			.active {
-				background: $lightBlue;
-				border: 1px solid $lightBlue;
+				background: $textColor;
 				color: $mainColor;
 			}
 		}
