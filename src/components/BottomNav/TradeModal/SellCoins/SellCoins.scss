@@ -11,17 +11,29 @@ $borderColor: rgb(170, 170, 170);
 .sellCoins {
 	height: 100%;
 	position: fixed;
-	bottom: -150vh;
+	top: 150vh;
 	background: $mainColor;
 	width: 100%;
+	@media (min-width: 768px) {
+		max-width: 30rem;
+		display: none;
+	}
 }
 
 .sellCoins.Show {
-	bottom: 0;
+	top: 0;
+	left: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	transition: all 0.8s ease-in;
+	transition: all .7s ease-in;
+
+	@media (min-width: 768px) {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: 10px;
+	}
 
 	.closeIcon {
 		font-size: 1.5rem;
@@ -38,9 +50,11 @@ $borderColor: rgb(170, 170, 170);
 		overflow: auto;
 
 		.header {
-			// margin-bottom: 10rem;
+			@media (min-width: 768px) {
+				margin-top: 1rem;
+			}
 			@media (max-width: 1024px) and (orientation: landscape) {
-				margin-bottom: 0;
+				margin-bottom: 10%;
 			}
 		}
 

@@ -90,11 +90,14 @@ const Transactions = () => {
 				setSorted(newTransactions);
 
 			} else if (format === 'income') {
-				let incomeSort = wallet.transactions.filter((transaction) => transaction.type === 'Sold' || transaction.type === 'Free');
+				let incomeSort = wallet.transactions.filter(
+					(transaction) =>
+						transaction.type === 'Sold' || transaction.type === 'Free' || transaction.type === 'Received'
+				);
 				setSorted(incomeSort);
 				setCtrlSorted('income'); //sort all transactions by type 'income'
 			} else if (format === 'expense') {
-				let expenseSort = wallet.transactions.filter((transaction) => transaction.type === 'Bought');
+				let expenseSort = wallet.transactions.filter((transaction) => transaction.type === 'Bought' || transaction.type === 'Sent');
 				setSorted(expenseSort);
 				setCtrlSorted('expense'); //sort all transactions by type 'expense'
 			} else if (format === 'amount'){
@@ -112,6 +115,30 @@ const Transactions = () => {
 
 				let amountSort = wallet.transactions.sort(compare);
 				setSorted(amountSort); //sort all transactions by type 'amount descending'
+			}
+		}
+	};
+
+	const transactionsFunc = (coin, type, amount) => {
+		if (wallet !== null) {
+			if (coin !== 'Dollars' && type === 'Sent') {
+				return (
+					<p>
+						-{amount}
+					</p>
+				);
+			} else if (coin !== 'Dollars' && type === 'Received') {
+				return (
+					<p>
+						{amount}
+					</p>
+				);
+			} else {
+				return (
+					<p>
+						<span>{type === 'Free' || type === 'Sold' || type === 'Received' ? '' : '-'}</span>${parseFloat(amount).toFixed(2)}
+					</p>
+				);
 			}
 		}
 	};
@@ -135,7 +162,9 @@ const Transactions = () => {
 						</div>
 						<div
 							onClick={() => sortFunction('amount')}
-							className={ctrlSorted === 'amount' ? 'active allTransactionsAmount' : 'allTransactionsAmount'}
+							className={
+								ctrlSorted === 'amount' ? 'active allTransactionsAmount' : 'allTransactionsAmount'
+							}
 						>
 							Amount
 						</div>
@@ -180,22 +209,11 @@ const Transactions = () => {
 								)}
 							</div>
 							<div className="memoAndDate">
-								<p>
-									{transaction.type} {transaction.coin}
-								</p>
+								<p>{transaction.name}</p>
 								<p>{moment(transaction.date).format('dddd, MMMM Do')}</p>
 							</div>
 							<div className="value">
-								<p>
-									<span>
-										{transaction.type === 'Free' ||
-										transaction.type === 'Sold' ||
-										transaction.type === 'Received'
-											? ''
-											: '-'}
-									</span>
-									${parseFloat(transaction.amount).toFixed(2)}
-								</p>
+								{transactionsFunc(transaction.coin, transaction.type, transaction.amount)}
 							</div>
 						</div>
 					))}

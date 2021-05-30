@@ -80,7 +80,6 @@ $borderColor: rgb(170, 170, 170);
 		box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.15);
 		left: 0;
 		padding: 1rem 0;
-		// transition: all 0.8s ease-in;
 		z-index: 10;
 		display: none;
 		font-size: 1.15rem;
@@ -88,6 +87,13 @@ $borderColor: rgb(170, 170, 170);
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
 		height: 40%;
+		@media (min-width: 768px) {
+			display: none;
+			width: 30rem;
+			height: 40%;
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
+		}
 		@media (max-width: 1024px) and (orientation: landscape) {
 			height: 55%;
 		}
@@ -109,6 +115,12 @@ $borderColor: rgb(170, 170, 170);
 		flex-direction: column;
 		justify-content: space-around;
 		transition: all 0.8s ease-in;
+		@media (min-width: 768px) {
+			display: flex;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
 
 		.noWallet {
 			display: flex;
@@ -150,6 +162,7 @@ $borderColor: rgb(170, 170, 170);
 	.pricesIcon,
 	.walletIcon,
 	.accountIcon,
+	.tradeIcon,
 	.logoApex {
 		display: flex;
 		flex-direction: column;

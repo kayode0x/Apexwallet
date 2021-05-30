@@ -41,7 +41,7 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 				<img className="cardSVG" src={cardImage} alt="Card Design" />
 			</div>
 		);
-	}
+	};
 	const assetsFunction = () => {
 		return (
 			<div className="assetsContainer">
@@ -67,6 +67,33 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 			</div>
 		);
 	};
+	const transactionsFunc = (coin, type, amount) => {
+		if (asset !== null && wallet !== null) {
+			if (coin !== 'Dollars' && type === 'Sent') {
+				let newSymbol = asset.filter((asset) => asset.id === coin);
+				return (
+					<p style={{ textTransform: 'uppercase' }}>
+						-{amount} {newSymbol[0].symbol}
+					</p>
+				);
+			} else if (coin !== 'Dollars' && type === 'Received') {
+				let newSymbol = asset.filter((asset) => asset.id === coin);
+				return (
+					<p style={{ textTransform: 'uppercase' }}>
+						{amount} {newSymbol[0].symbol}
+					</p>
+				);
+			} else {
+				return (
+					<p>
+						<span>{type === 'Free' || type === 'Sold' || type === 'Received' ? '' : '-'}</span>$
+						{parseFloat(amount).toFixed(2)}
+					</p>
+				);
+			}
+		}
+	};
+
 	const transactionsFunction = () => {
 		return (
 			<div className="transactionsContainer">
@@ -103,29 +130,17 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 							)}
 						</div>
 						<div className="memoAndDate">
-							<p>
-								{transaction.type} {transaction.coin}
-							</p>
+							<p>{transaction.name}</p>
 							<p>{moment(transaction.date).format('dddd, MMMM Do')}</p>
 						</div>
 						<div className="value">
-							<p>
-								<span>
-									{transaction.type === 'Free' ||
-									transaction.type === 'Sold' ||
-									transaction.type === 'Received'
-										? ''
-										: '-'}
-								</span>
-								${parseFloat(transaction.amount).toFixed(2)}
-							</p>
+							{transactionsFunc(transaction.coin, transaction.type, transaction.amount)}
 						</div>
 					</div>
 				))}
 			</div>
 		);
 	};
-
 
 	if (user !== null && user.isActive === true && user.wallet !== undefined && asset !== null && wallet !== null) {
 		return (

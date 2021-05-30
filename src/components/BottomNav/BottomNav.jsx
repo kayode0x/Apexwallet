@@ -43,6 +43,7 @@ const BottomNav = () => {
 				}}
 				className="tradeIcon"
 			>
+				{matches ? null : <p>Trade</p>}
 				{matches && <BsArrowUpDown />}
 			</Link>
 			<Link
