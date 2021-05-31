@@ -10,6 +10,7 @@ import axios from 'axios';
 import BottomNav from '../BottomNav/BottomNav';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import CompleteCoin from './CompleteCoin';
+import supportedCoins from '../../utils/supportedCoins'
 
 const Coin = () => {
 	//get the current location.
@@ -19,24 +20,7 @@ const Coin = () => {
 	const splitLocation = pathname.split('/');
 	const coinSearchId = splitLocation[2]; //coin id.
 
-	const supportedCoins = [
-		'bitcoin',
-		'ethereum',
-		'ethereum-classic',
-		'litecoin',
-		'dogecoin',
-		'ripple',
-		'tether',
-		'binancecoin',
-		'cardano',
-		'usd-coin',
-		'tron',
-		'bitcoin-cash',
-		'polkadot',
-		'uniswap',
-		'dash',
-		// 'decentraland',
-	];
+	
 
 	const history = useHistory();
 	const matches = useMediaQuery('(max-width:767px)');

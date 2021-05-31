@@ -54,10 +54,10 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 				});
 				setBuying(false);
 			} else {
-				let purchase = { coin: coinInfo.id, amount: amountToBuyFiat, type: 'buy' };
+				let purchase = { coin: coinInfo.id, amount: amountToBuyFiat};
 				try {
 					await axios
-						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
+						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
 								toast.dark(`Success 🚀`, {
@@ -112,10 +112,10 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 				);
 				setBuying(false);
 			} else {
-				let purchase = { coin: coinInfo.id, amount: convertedAmount, type: 'buy' };
+				let purchase = { coin: coinInfo.id, amount: convertedAmount };
 				try {
 					await axios
-						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
+						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
 								toast.dark(`Success 🚀`, {

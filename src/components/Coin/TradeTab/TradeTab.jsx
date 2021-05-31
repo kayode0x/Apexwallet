@@ -106,10 +106,10 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				});
 				setBuying(false);
 			} else {
-				let purchase = { coin: coinInfo.id, amount: amountToBuyFiat, type: 'buy' };
+				let purchase = { coin: coinInfo.id, amount: amountToBuyFiat };
 				try {
 					await axios
-						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
+						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
 								toast.dark(`Success 🚀`, {
@@ -164,18 +164,15 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				);
 				setBuying(false);
 			} else {
-				let purchase = { coin: coinInfo.id, amount: convertedAmount, type: 'buy' };
+				let purchase = { coin: coinInfo.id, amount: convertedAmount };
 				try {
 					await axios
-						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
+						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
-								toast.dark(
-									`Success 🚀`,
-									{
-										position: toast.POSITION.TOP_CENTER,
-									}
-								);
+								toast.dark(`Success 🚀`, {
+									position: toast.POSITION.TOP_CENTER,
+								});
 								setTimeout(() => {
 									window.location.reload();
 								}, 3000);
@@ -221,10 +218,10 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				});
 				setSelling(false);
 			} else {
-				let purchase = { coin: coinInfo.id, amount: convertedAmount, type: 'sell' };
+				let purchase = { coin: coinInfo.id, amount: convertedAmount };
 				try {
 					await axios
-						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
+						.post(`${apiURL}/coin/sell`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
 								toast.dark(`Success 🚀`, {
@@ -248,7 +245,6 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				setSelling(false);
 			}
 		} else if (sellType === 'crypto') {
-
 			if (amountToSellCrypto < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(6)) {
 				toast.dark(
 					`You can only sell a minimum of $2 ≈ ${parseFloat(
@@ -270,12 +266,12 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				);
 				setSelling(false);
 			} else {
-				let purchase = { coin: coinInfo.id, amount: amountToSellCrypto, type: 'sell' };
+				let purchase = { coin: coinInfo.id, amount: amountToSellCrypto };
 				try {
 					await axios
-						.post(`${apiURL}/coin`, purchase, { withCredentials: true })
+						.post(`${apiURL}/coin/sell`, purchase, { withCredentials: true })
 						.then((res) => {
-							if(res.status === 200){
+							if (res.status === 200) {
 								toast.dark(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
