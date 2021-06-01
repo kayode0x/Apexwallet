@@ -60,6 +60,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
+								setModalUpBuy(!modalUpBuy);
 								toast.dark(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
@@ -118,6 +119,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
+								setModalUpBuy(!modalUpBuy);
 								toast.dark(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});

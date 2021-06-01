@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import BuyCoins from './BuyCoins/BuyCoins';
 import SellCoins from './SellCoins/SellCoins';
+import Send from './SendxReceive/Send';
 
 const TradeModal = ({ tradeModal }) => {
 	const [wallet, setWallet] = useState(null);
@@ -15,6 +16,7 @@ const TradeModal = ({ tradeModal }) => {
 	let isRendered = useRef(false);
     const [modalUpBuy, setModalUpBuy] = useState(false);
     const [modalUpSell, setModalUpSell] = useState(false);
+	const [modalUpSend, setModalUpSend] = useState(false);
 
 	//ALL URLS HERE
 	//api endpoint to get the coin data.
@@ -128,7 +130,7 @@ const TradeModal = ({ tradeModal }) => {
 						</div>
 						Convert
 					</div>
-					<div className="sendCrypto" onClick={() => alert('Coming soon ⏳')}>
+					<div className="sendCrypto" onClick={() => setModalUpSend(!modalUpSend)}>
 						<div className="tradeModalIcon">
 							<BsArrowUpRight />
 						</div>
@@ -156,6 +158,17 @@ const TradeModal = ({ tradeModal }) => {
 						modalUpSell={modalUpSell}
 						setCoin={setCoin}
 						setModalUpSell={setModalUpSell}
+						coin={coin}
+						coinInfo={coinInfo}
+						user={user}
+						wallet={wallet}
+						balance={balance}
+					/>
+
+					<Send
+						modalUpSend={modalUpSend}
+						setCoin={setCoin}
+						setModalUpSend={setModalUpSend}
 						coin={coin}
 						coinInfo={coinInfo}
 						user={user}

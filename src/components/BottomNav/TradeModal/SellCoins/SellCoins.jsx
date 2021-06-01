@@ -69,6 +69,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						.post(`${apiURL}/coin/sell`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
+								setModalUpSell(!modalUpSell);
 								toast.dark(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
@@ -117,6 +118,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						.post(`${apiURL}/coin/sell`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
+								setModalUpSell(!modalUpSell);
 								toast.dark(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
