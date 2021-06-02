@@ -215,7 +215,6 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 							<MenuItem value={'polkadot'}>Polkadot</MenuItem>
 							<MenuItem value={'uniswap'}>Uniswap</MenuItem>
 							<MenuItem value={'dash'}>Dash</MenuItem>
-							{/* <MenuItem value={'decentraland'}>Decentraland</MenuItem> */}
 						</Select>
 						<div className="coinAndWalletTab">
 							<div>
