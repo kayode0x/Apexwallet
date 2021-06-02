@@ -7,24 +7,23 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import './SellCoins.scss'
+import './SellCoins.scss';
 
 const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user, wallet, balance }) => {
-		const [amountToSellFiat, setAmountToSellFiat] = useState(1);
-		const [amountToSellCrypto, setAmountToSellCrypto] = useState('');
-		const [sellType, setSellType] = useState('fiat');
-		const [selling, setSelling] = useState(false);
+	const [amountToSellFiat, setAmountToSellFiat] = useState(1);
+	const [amountToSellCrypto, setAmountToSellCrypto] = useState(0);
+	const [sellType, setSellType] = useState('fiat');
+	const [selling, setSelling] = useState(false);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 
-
 	//switch the way the user wants to buy coins, fiat or crypto
-		const handleSellTypeChange = () => {
-			if (sellType === 'fiat') {
-				setSellType('crypto');
-			} else if (sellType === 'crypto') {
-				setSellType('fiat');
-			}
-		};
+	const handleSellTypeChange = () => {
+		if (sellType === 'fiat') {
+			setSellType('crypto');
+		} else if (sellType === 'crypto') {
+			setSellType('fiat');
+		}
+	};
 
 	const handleChange = (event) => {
 		setCoin(event.target.value);
@@ -37,17 +36,17 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 		return parseFloat(amountToSellFiat / coinInfo.market_data.current_price.usd).toFixed(5);
 	};
 
+	//get the value of the amount to sell in fiat
+	const convertedAmount = () => parseFloat(amountToSellFiat / coinInfo.market_data.current_price.usd).toFixed(6);
+
 	//sell coin
 	const handleSellCoin = async (e) => {
 		e.preventDefault();
 		setSelling(true);
 
-		//get the value of the amount to sell in fiat
-		let convertedAmount = parseFloat(amountToSellFiat / coinInfo.market_data.current_price.usd).toFixed(6);
-
 		//first check the 'buy type' for necessary values
 		if (sellType === 'fiat') {
-			if (convertedAmount > parseFloat(balance).toFixed(5)) {
+			if (convertedAmount() > parseFloat(balance).toFixed(5)) {
 				toast.dark(
 					`Your ${coinInfo.symbol.toUpperCase()} balance is ${parseFloat(balance).toFixed(
 						5
@@ -63,7 +62,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 				});
 				setSelling(false);
 			} else {
-				let purchase = { coin: coinInfo.id, amount: convertedAmount };
+				let purchase = { coin: coinInfo.id, amount: convertedAmount() };
 				try {
 					await axios
 						.post(`${apiURL}/coin/sell`, purchase, { withCredentials: true })
@@ -112,7 +111,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 				);
 				setSelling(false);
 			} else {
-				let purchase = { coin: coinInfo.id, amount: amountToSellCrypto};
+				let purchase = { coin: coinInfo.id, amount: amountToSellCrypto };
 				try {
 					await axios
 						.post(`${apiURL}/coin/sell`, purchase, { withCredentials: true })
@@ -218,7 +217,19 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 									{parseFloat(balance).toFixed(5)} {coinInfo.symbol}
 								</span>
 							</div>
-							<button disabled={selling ? true : false} type="submit">
+							<button
+								//disable the "Buy Button" if the requirements are not met.
+								disabled={
+									selling || sellType === 'crypto'
+										? amountToSellCrypto > balance ||
+										  amountToSellCrypto <
+												parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(6)
+										: convertedAmount() > balance || amountToSellFiat < 2
+										? true
+										: false
+								}
+								type="submit"
+							>
 								{selling ? (
 									<p>Selling...</p>
 								) : (

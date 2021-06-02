@@ -156,9 +156,7 @@ $borderColor: rgb(170, 170, 170);
 				display: flex;
 				align-items: center;
 				font-size: 1.15rem;
-				@media (max-width: 768px) {
-					margin-bottom: 1rem;
-				}
+				margin-bottom: 1rem;
 			}
 
 			.coinAndWalletTab {

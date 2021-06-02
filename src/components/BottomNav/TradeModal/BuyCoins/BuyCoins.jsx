@@ -7,11 +7,11 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import './BuyCoins.scss'
+import './BuyCoins.scss';
 
 const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wallet }) => {
 	const [amountToBuyFiat, setAmountToBuyFiat] = useState(1);
-	const [amountToBuyCrypto, setAmountToBuyCrypto] = useState('');
+	const [amountToBuyCrypto, setAmountToBuyCrypto] = useState(0);
 	const [buyType, setBuyType] = useState('fiat');
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const [buying, setBuying] = useState(false);
@@ -25,7 +25,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 		}
 	};
 
-    const handleChange = (event) => {
+	const handleChange = (event) => {
 		setCoin(event.target.value);
 	};
 
@@ -35,6 +35,8 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 	const coinAmountToBuyCrypto = (amountToBuyCrypto) => {
 		return parseFloat(amountToBuyCrypto * coinInfo.market_data.current_price.usd).toFixed(2);
 	};
+
+	const convertedAmount = () => parseFloat(amountToBuyCrypto * coinInfo.market_data.current_price.usd).toFixed(5);
 
 	//buy coin
 	const handleBuyCoin = async (e) => {
@@ -49,12 +51,15 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 				});
 				setBuying(false);
 			} else if (amountToBuyFiat > wallet.balance) {
-				toast.dark(`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`, {
-					position: toast.POSITION.TOP_CENTER,
-				});
+				toast.dark(
+					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
+					{
+						position: toast.POSITION.TOP_CENTER,
+					}
+				);
 				setBuying(false);
 			} else {
-				let purchase = { coin: coinInfo.id, amount: amountToBuyFiat};
+				let purchase = { coin: coinInfo.id, amount: amountToBuyFiat };
 				try {
 					await axios
 						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
@@ -82,8 +87,6 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 				setBuying(false);
 			}
 		} else if (buyType === 'crypto') {
-			let convertedAmount = parseFloat(amountToBuyCrypto * coinInfo.market_data.current_price.usd).toFixed(5);
-
 			if (amountToBuyCrypto < 0) {
 				toast.dark(
 					`You can only buy a minimum of $2 ≈ ${parseFloat(
@@ -94,7 +97,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 					}
 				);
 				setBuying(false);
-			} else if (convertedAmount < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(5)) {
+			} else if (convertedAmount() < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(5)) {
 				toast.dark(
 					`You can only buy a minimum of $2 ≈ ${parseFloat(
 						2 / coinInfo.market_data.current_price.usd
@@ -104,7 +107,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 					}
 				);
 				setBuying(false);
-			} else if (convertedAmount > wallet.balance) {
+			} else if (convertedAmount() > wallet.balance) {
 				toast.dark(
 					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
 					{
@@ -113,7 +116,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 				);
 				setBuying(false);
 			} else {
-				let purchase = { coin: coinInfo.id, amount: convertedAmount };
+				let purchase = { coin: coinInfo.id, amount: convertedAmount() };
 				try {
 					await axios
 						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
@@ -218,7 +221,17 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 							<div>
 								<p>USD balance</p> <span>${parseFloat(wallet.balance).toFixed(2)}</span>
 							</div>
-							<button disabled={buying ? true : false} type="submit">
+							<button
+								//disable the "Buy Button" if the requirements are not met.
+								disabled={
+									buying || buyType === 'fiat'
+										? amountToBuyFiat < 2 || amountToBuyFiat > wallet.balance
+										: amountToBuyCrypto <= 0 || convertedAmount() > wallet.balance
+										? true
+										: false
+								}
+								type="submit"
+							>
 								{buying ? (
 									<p>Buying...</p>
 								) : (

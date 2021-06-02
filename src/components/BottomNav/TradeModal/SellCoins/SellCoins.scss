@@ -26,7 +26,7 @@ $borderColor: rgb(170, 170, 170);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	transition: all .7s ease-in;
+	transition: all 0.7s ease-in;
 
 	@media (min-width: 768px) {
 		top: 50%;
@@ -178,6 +178,14 @@ $borderColor: rgb(170, 170, 170);
 				button:hover {
 					cursor: pointer;
 					background: $blue;
+				}
+
+				button[disabled] {
+					background: $borderColor;
+				}
+
+				button[disabled]:hover {
+					cursor: not-allowed;
 				}
 
 				div:nth-child(3) {

@@ -10,8 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
 const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user, wallet, balance }) => {
-	const [amountToSendFiat, setAmountToSendFiat] = useState(1);
-	const [amountToSendCrypto, setAmountToSendCrypto] = useState('');
+	const [amountToSend, setAmountToSend] = useState(1);
 	const [sendType, setSendType] = useState('fiat');
 	const [recipient, setRecipient] = useState('');
 	const apiURL = 'https://api.apexwallet.app/api/v1';
@@ -37,12 +36,12 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 
 		//for sending cash
 		if (sendType === 'fiat') {
-			if (amountToSendFiat < 0) {
+			if (amountToSend < 0) {
 				toast.dark("You can't send less than $0", {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setSending(false);
-			} else if (amountToSendFiat > wallet.balance) {
+			} else if (amountToSend > wallet.balance) {
 				toast.dark(
 					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
 					{
@@ -51,13 +50,13 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 				);
 				setSending(false);
 			} else {
-				let body = { recipient: recipient, amount: amountToSendFiat };
+				let body = { recipient: recipient, amount: amountToSend };
 				try {
 					await axios
 						.post(`${apiURL}/wallet/send-cash`, body, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
-                                setModalUpSend(!modalUpSend);
+								setModalUpSend(!modalUpSend);
 								toast.dark(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
@@ -80,24 +79,24 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 			}
 		} //for sending crypto
 		else if (sendType === 'crypto') {
-			if (amountToSendCrypto < 0) {
+			if (amountToSend < 0) {
 				toast.dark(`You can't send below 0 ${coinInfo.id}`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setSending(false);
-			} else if (amountToSendCrypto > balance) {
+			} else if (amountToSend > balance) {
 				toast.dark(`Your balance is $${parseFloat(balance).toFixed(5)}, you can't send more than that`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setSending(false);
 			} else {
-				let body = { coin: coinInfo.id, amount: amountToSendCrypto, recipient: recipient };
+				let body = { coin: coinInfo.id, amount: amountToSend, recipient: recipient };
 				try {
 					await axios
 						.post(`${apiURL}/coin/send`, body, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
-                                setModalUpSend(!modalUpSend);
+								setModalUpSend(!modalUpSend);
 								toast.dark(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
@@ -134,37 +133,24 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 					</p>
 					<div className="input">
 						{sendType === 'fiat' ? (
-							<>
-								<span>USD</span>
-								<input
-									value={amountToSendFiat}
-									onChange={(e) => {
-										setAmountToSendFiat(e.target.value);
-									}}
-									type="number"
-									pattern="[-+]?[0-9]*[.,]?[0-9]+"
-									formNoValidate="formnovalidate"
-									step="any"
-									min="1"
-									max="5000"
-									placeholder="1"
-									required={true}
-								/>
-							</>
+							<span>USD</span>
 						) : (
-							<>
-								<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
-								<input
-									value={amountToSendCrypto}
-									onChange={(e) => setAmountToSendCrypto(e.target.value)}
-									placeholder="0"
-									type="number"
-									step="any"
-									pattern="[-+]?[0-9]*[.,]?[0-9]+"
-									formNoValidate="formnovalidate"
-								/>
-							</>
+							<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
 						)}
+						<input
+							value={amountToSend}
+							onChange={(e) => {
+								setAmountToSend(e.target.value);
+							}}
+							type="number"
+							pattern="[-+]?[0-9]*[.,]?[0-9]+"
+							formNoValidate="formnovalidate"
+							step="any"
+							min="0"
+							max="5000"
+							placeholder="0"
+							required={true}
+						/>
 						<div>
 							<BsArrowUpDown onClick={handleBuyTypeChange} />
 						</div>
@@ -214,7 +200,17 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 									</div>
 								</>
 							)}
-							<button disabled={sending ? true : false} type="submit">
+							<button
+								//disable the "Send Button" if the requirements are not met.
+								disabled={
+									sending || recipient === '' || amountToSend <= 0 || sendType === 'fiat'
+										? amountToSend > wallet.balance || amountToSend < 2
+										: amountToSend > balance
+										? true
+										: false
+								}
+								type="submit"
+							>
 								{sending ? (
 									<p>Sending...</p>
 								) : (
