@@ -46,12 +46,12 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 		//first check the 'buy type' for necessary values
 		if (buyType === 'fiat') {
 			if (amountToBuyFiat < 2) {
-				toast.dark(`You can only buy a minimum of $2 worth of ${coinInfo.symbol.toUpperCase()}`, {
+				toast.error(`You can only buy a minimum of $2 worth of ${coinInfo.symbol.toUpperCase()}`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setBuying(false);
 			} else if (amountToBuyFiat > wallet.balance) {
-				toast.dark(
+				toast.error(
 					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
 					{
 						position: toast.POSITION.TOP_CENTER,
@@ -66,7 +66,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpBuy(!modalUpBuy);
-								toast.dark(`Success 🚀`, {
+								toast.success(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
 								setTimeout(() => {
@@ -77,7 +77,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});
@@ -88,7 +88,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 			}
 		} else if (buyType === 'crypto') {
 			if (amountToBuyCrypto < 0) {
-				toast.dark(
+				toast.error(
 					`You can only buy a minimum of $2 ≈ ${parseFloat(
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(2)} ${coinInfo.symbol.toUpperCase()}`,
@@ -98,7 +98,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 				);
 				setBuying(false);
 			} else if (convertedAmount() < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(5)) {
-				toast.dark(
+				toast.error(
 					`You can only buy a minimum of $2 ≈ ${parseFloat(
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
@@ -108,7 +108,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 				);
 				setBuying(false);
 			} else if (convertedAmount() > wallet.balance) {
-				toast.dark(
+				toast.error(
 					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
 					{
 						position: toast.POSITION.TOP_CENTER,
@@ -123,7 +123,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpBuy(!modalUpBuy);
-								toast.dark(`Success 🚀`, {
+								toast.success(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
 								setTimeout(() => {
@@ -133,7 +133,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});

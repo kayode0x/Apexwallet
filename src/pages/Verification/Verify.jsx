@@ -30,7 +30,7 @@ const Verify = () => {
 					.then(async (res) => {
 						console.log('RES: ', res);
 						if (res.status === 200) {
-							await toast.dark(`${res.data}`, {
+							await toast.success(`${res.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 
@@ -43,7 +43,7 @@ const Verify = () => {
 					})
 					.catch(async (err) => {
 						//if error, display the custom error message from the server with toastify.
-						await toast.dark(`${err.response.data}`, {
+						await toast.error(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 						setTimeout(() => {

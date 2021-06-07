@@ -40,7 +40,7 @@ const Prices = () => {
 			} else if (loggedIn === true) {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.dark(`${err.response.data}`, {
+						await toast.error(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});

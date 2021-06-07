@@ -32,7 +32,7 @@ const Transactions = () => {
 			} else if (loggedIn === true) {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.dark(`${err.response.data}`, {
+						await toast.error(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
@@ -47,7 +47,7 @@ const Transactions = () => {
 
 				try {
 					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
-						await toast.dark(err.response.data, {
+						await toast.error(err.response.data, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});

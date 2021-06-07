@@ -48,7 +48,7 @@ const Login = () => {
 				})
 				.catch(async (err) => {
 					//if error, display the custom error message from the server with toastify.
-					await toast.dark(`${err.response.data}`, {
+					await toast.error(`${err.response.data}`, {
 						position: toast.POSITION.TOP_CENTER,
 					});
 				});

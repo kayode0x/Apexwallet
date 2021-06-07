@@ -30,7 +30,7 @@ const TradeModal = ({ tradeModal }) => {
 		async function load() {
 			try {
 				let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-					await toast.dark(`${err.response.data}`, {
+					await toast.error(`${err.response.data}`, {
 						position: toast.POSITION.TOP_CENTER,
 					});
 				});
@@ -46,7 +46,7 @@ const TradeModal = ({ tradeModal }) => {
 
 			try {
 				let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
-					await toast.dark(err.response.data, {
+					await toast.error(err.response.data, {
 						position: toast.POSITION.TOP_CENTER,
 					});
 				});

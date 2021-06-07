@@ -26,19 +26,19 @@ const ForgotPassword = () => {
 				.then(async (res) => {
 					if (res.status === 200) {
 						setEmailSent(true);
-						await toast.dark(`${res.data}`, {
+						await toast.success(`${res.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					}
 				})
 				.catch(async (err) => {
 					//if error, display the custom error message from the server with toastify.
-					await toast.dark(`${err.response.data}`, {
+					await toast.error(`${err.response.data}`, {
 						position: toast.POSITION.TOP_CENTER,
 					});
 				});
 		} catch (error) {
-			await toast.dark(`${error}`, {
+			await toast.error(`${error}`, {
 				position: toast.POSITION.TOP_CENTER,
 			});
 		}

@@ -11,7 +11,7 @@ import Select from '@material-ui/core/Select';
 
 const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user, wallet, balance }) => {
 	const [amountToSend, setAmountToSend] = useState(1);
-	const [sendType, setSendType] = useState('fiat');
+	const [sendType, setSendType] = useState('crypto');
 	const [recipient, setRecipient] = useState('');
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const [sending, setSending] = useState(false);
@@ -37,12 +37,12 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 		//for sending cash
 		if (sendType === 'fiat') {
 			if (amountToSend < 0) {
-				toast.dark("You can't send less than $0", {
+				toast.error("You can't send less than $0", {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setSending(false);
 			} else if (amountToSend > wallet.balance) {
-				toast.dark(
+				toast.error(
 					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
 					{
 						position: toast.POSITION.TOP_CENTER,
@@ -57,7 +57,7 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpSend(!modalUpSend);
-								toast.dark(`Success 🚀`, {
+								toast.success(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
 								setTimeout(() => {
@@ -68,7 +68,7 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});
@@ -80,12 +80,12 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 		} //for sending crypto
 		else if (sendType === 'crypto') {
 			if (amountToSend < 0) {
-				toast.dark(`You can't send below 0 ${coinInfo.id}`, {
+				toast.error(`You can't send below 0 ${coinInfo.id}`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setSending(false);
 			} else if (amountToSend > balance) {
-				toast.dark(`Your balance is $${parseFloat(balance).toFixed(5)}, you can't send more than that`, {
+				toast.error(`Your balance is $${parseFloat(balance).toFixed(5)}, you can't send more than that`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setSending(false);
@@ -97,7 +97,7 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpSend(!modalUpSend);
-								toast.dark(`Success 🚀`, {
+								toast.success(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
 								setTimeout(() => {
@@ -107,7 +107,7 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});
@@ -164,7 +164,7 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 								}}
 								type="text"
 								required={true}
-								placeholder="Recipient's Username"
+								placeholder="Username"
 							/>
 						</div>
 						{sendType === 'crypto' ? (
@@ -184,7 +184,6 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 								<MenuItem value={'polkadot'}>Polkadot</MenuItem>
 								<MenuItem value={'uniswap'}>Uniswap</MenuItem>
 								<MenuItem value={'dash'}>Dash</MenuItem>
-								{/* <MenuItem value={'decentraland'}>Decentraland</MenuItem> */}
 							</Select>
 						) : null}
 						<div className="coinAndWalletTab">

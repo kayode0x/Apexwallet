@@ -33,7 +33,7 @@ export default function PasswordModal({ user }) {
 		const userPassword = { currentPassword, confirmCurrentPassword, newPassword };
 		try {
 			if (currentPassword !== confirmCurrentPassword) {
-				toast.dark('Passwords do not match', {
+				toast.error('Passwords do not match', {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setChangingPassword(false);
@@ -42,7 +42,7 @@ export default function PasswordModal({ user }) {
 					.put(passwordChangeEndpoint, userPassword)
 					.then((res) => {
 						if (res.status === 200) {
-							toast.dark(`${res.data}`, {
+							toast.success(`${res.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 							handleCloseModal();
@@ -50,7 +50,7 @@ export default function PasswordModal({ user }) {
 						}
 					})
 					.catch(async (err) => {
-						toast.dark(`${err.response.data}`, {
+						toast.error(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 						setChangingPassword(false);

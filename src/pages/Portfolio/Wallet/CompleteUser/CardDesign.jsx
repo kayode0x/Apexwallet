@@ -38,7 +38,7 @@ export default function CardDesign({ user, BsThreeDotsVertical }) {
 					}
 				})
 				.catch(async (err) => {
-					await toast.dark(err.response.data, {
+					await toast.error(err.response.data, {
 						position: toast.POSITION.TOP_CENTER,
 					});
 					setChanging(false);

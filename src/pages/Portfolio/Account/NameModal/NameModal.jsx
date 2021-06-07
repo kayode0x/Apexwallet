@@ -29,12 +29,12 @@ export default function NameModal({ user }) {
 		const displayName = { name };
 		try {
 			if (name === '' || name.length === 0 || name.trim().length === 0) {
-				toast.dark('Name can not be blank', {
+				toast.error('Name can not be blank', {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setChangingName(false);
 			} else if (name.length > 20) {
-				toast.dark('Name can not be more than 20 characters', {
+				toast.error('Name can not be more than 20 characters', {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setChangingName(false);
@@ -44,7 +44,7 @@ export default function NameModal({ user }) {
 					.put(nameChangeEndpoint, displayName)
 					.then((res) => {
 						if (res.status === 200) {
-							toast.dark(`${res.data}`, {
+							toast.success(`${res.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 							handleCloseModal();
@@ -55,7 +55,7 @@ export default function NameModal({ user }) {
 						}
 					})
 					.catch(async (err) => {
-						toast.dark(`${err.response.data}`, {
+						toast.error(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 						setChangingName(false);

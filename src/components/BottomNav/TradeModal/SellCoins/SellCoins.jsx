@@ -37,7 +37,8 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 	};
 
 	//get the value of the amount to sell in fiat
-	const convertedAmount = () => parseFloat(amountToSellFiat / coinInfo.market_data.current_price.usd).toFixed(6);
+	const convertedAmount = () =>
+		Number(parseFloat(amountToSellFiat / coinInfo.market_data.current_price.usd).toFixed(6));
 
 	//sell coin
 	const handleSellCoin = async (e) => {
@@ -47,17 +48,17 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 		//first check the 'buy type' for necessary values
 		if (sellType === 'fiat') {
 			if (convertedAmount() > parseFloat(balance).toFixed(5)) {
-				toast.dark(
-					`Your ${coinInfo.symbol.toUpperCase()} balance is ${parseFloat(balance).toFixed(
+				toast.error(
+					`You have ${parseFloat(balance).toFixed(
 						5
-					)}, you can't sell more than that`,
+					)} ${coinInfo.symbol.toUpperCase()}, you can't sell more than that`,
 					{
 						position: toast.POSITION.TOP_CENTER,
 					}
 				);
 				setSelling(false);
 			} else if (amountToSellFiat < 1) {
-				toast.dark(`You can only sell a minimum of $1 worth of ${coinInfo.symbol.toUpperCase()}`, {
+				toast.error(`You can only sell a minimum of $1 worth of ${coinInfo.symbol.toUpperCase()}`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setSelling(false);
@@ -69,7 +70,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpSell(!modalUpSell);
-								toast.dark(`Success 🚀`, {
+								toast.success(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
 								setTimeout(() => {
@@ -80,7 +81,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});
@@ -91,7 +92,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 			}
 		} else if (sellType === 'crypto') {
 			if (amountToSellCrypto < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(6)) {
-				toast.dark(
+				toast.error(
 					`You can only sell a minimum of $2 ≈ ${parseFloat(
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
@@ -101,10 +102,11 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 				);
 				setSelling(false);
 			} else if (amountToSellCrypto > balance) {
-				toast.dark(
-					`Your ${coinInfo.symbol.toUpperCase()} balance is ${parseFloat(balance).toFixed(
+				console.log('2nd!!', convertedAmount(), parseFloat(balance).toFixed(5));
+				toast.error(
+					`You have ${parseFloat(balance).toFixed(
 						5
-					)}, you can't sell more than that`,
+					)} ${coinInfo.symbol.toUpperCase()}, you can't sell more than that`,
 					{
 						position: toast.POSITION.TOP_CENTER,
 					}
@@ -118,7 +120,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpSell(!modalUpSell);
-								toast.dark(`Success 🚀`, {
+								toast.success(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
 								setTimeout(() => {
@@ -128,7 +130,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});
@@ -219,11 +221,11 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 							<button
 								//disable the "Buy Button" if the requirements are not met.
 								disabled={
-									selling || sellType === 'crypto'
-										? amountToSellCrypto > balance ||
-										  amountToSellCrypto <
+									selling || sellType === 'fiat'
+										? convertedAmount() > balance || amountToSellFiat < 2
+										: Number(amountToSellCrypto) > balance ||
+										  Number(amountToSellCrypto) <
 												parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(6)
-										: convertedAmount() > balance || amountToSellFiat < 2
 										? true
 										: false
 								}

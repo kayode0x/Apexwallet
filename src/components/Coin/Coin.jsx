@@ -54,7 +54,7 @@ const Coin = () => {
 			} else if (loggedIn === true) {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.dark(`${err.response.data}`, {
+						await toast.error(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
@@ -71,7 +71,7 @@ const Coin = () => {
 
 				try {
 					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
-						await toast.dark(err.response.data, {
+						await toast.error(err.response.data, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
@@ -134,12 +134,12 @@ const Coin = () => {
 				? await axios //if the coin is being watched, send an unwatch request
 						.put(`${apiURL}/user/watch-list`, coinWatch)
 						.then(async (res) => {
-							await toast.dark(`${res.data}`, {
+							await toast.success(`${res.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						})
 						.catch(async (err) => {
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						})
@@ -147,12 +147,12 @@ const Coin = () => {
 				  await axios
 						.post(`${apiURL}/user/watch-list`, coinWatch)
 						.then(async (res) => {
-							await toast.dark(`${res.data}`, {
+							await toast.success(`${res.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						})
 						.catch(async (err) => {
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});

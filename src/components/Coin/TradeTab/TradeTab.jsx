@@ -96,12 +96,12 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 		//first check the 'buy type' for necessary values
 		if (buyType === 'fiat') {
 			if (amountToBuyFiat < 2) {
-				toast.dark(`You can only buy a minimum of $2 worth of ${coinInfo.symbol.toUpperCase()}`, {
+				toast.error(`You can only buy a minimum of $2 worth of ${coinInfo.symbol.toUpperCase()}`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setBuying(false);
 			} else if (amountToBuyFiat > wallet.balance) {
-				toast.dark(`Your USD balance is $${wallet.balance}, you can't buy more than that`, {
+				toast.error(`Your USD balance is $${wallet.balance}, you can't buy more than that`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setBuying(false);
@@ -112,7 +112,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
-								toast.dark(`Success 🚀`, {
+								toast.success(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
 								setTimeout(() => {
@@ -123,7 +123,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});
@@ -136,7 +136,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 			let convertedAmount = parseFloat(amountToBuyCrypto * coinInfo.market_data.current_price.usd).toFixed(5);
 
 			if (amountToBuyCrypto < 0) {
-				toast.dark(
+				toast.error(
 					`You can only buy a minimum of $2 ≈ ${parseFloat(
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
@@ -146,7 +146,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				);
 				setBuying(false);
 			} else if (convertedAmount < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(5)) {
-				toast.dark(
+				toast.error(
 					`You can only buy a minimum of $2 ≈ ${parseFloat(
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
@@ -156,7 +156,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				);
 				setBuying(false);
 			} else if (convertedAmount > wallet.balance) {
-				toast.dark(
+				toast.error(
 					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
 					{
 						position: toast.POSITION.TOP_CENTER,
@@ -170,7 +170,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
-								toast.dark(`Success 🚀`, {
+								toast.success(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
 								setTimeout(() => {
@@ -180,7 +180,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});
@@ -203,7 +203,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 		//first check the 'buy type' for necessary values
 		if (sellType === 'fiat') {
 			if (convertedAmount > parseFloat(balance).toFixed(5)) {
-				toast.dark(
+				toast.error(
 					`Your ${coinInfo.symbol.toUpperCase()} balance is ${parseFloat(balance).toFixed(
 						5
 					)}, you can't sell more than that`,
@@ -213,7 +213,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				);
 				setSelling(false);
 			} else if (amountToSellFiat < 1) {
-				toast.dark(`You can only sell a minimum of $1 worth of ${coinInfo.symbol.toUpperCase()}`, {
+				toast.error(`You can only sell a minimum of $1 worth of ${coinInfo.symbol.toUpperCase()}`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 				setSelling(false);
@@ -224,7 +224,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						.post(`${apiURL}/coin/sell`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
-								toast.dark(`Success 🚀`, {
+								toast.error(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
 								setTimeout(() => {
@@ -235,7 +235,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});
@@ -246,7 +246,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 			}
 		} else if (sellType === 'crypto') {
 			if (amountToSellCrypto < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(6)) {
-				toast.dark(
+				toast.error(
 					`You can only sell a minimum of $2 ≈ ${parseFloat(
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
@@ -256,7 +256,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				);
 				setSelling(false);
 			} else if (amountToSellCrypto > balance) {
-				toast.dark(
+				toast.error(
 					`Your ${coinInfo.symbol.toUpperCase()} balance is ${parseFloat(balance).toFixed(
 						5
 					)}, you can't sell more than that`,
@@ -272,7 +272,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						.post(`${apiURL}/coin/sell`, purchase, { withCredentials: true })
 						.then((res) => {
 							if (res.status === 200) {
-								toast.dark(`Success 🚀`, {
+								toast.success(`Success 🚀`, {
 									position: toast.POSITION.TOP_CENTER,
 								});
 								setTimeout(() => {
@@ -282,7 +282,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						})
 						.catch(async (err) => {
 							//toastify ROCKS!!
-							await toast.dark(`${err.response.data}`, {
+							await toast.error(`${err.response.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 						});

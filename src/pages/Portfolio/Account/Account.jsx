@@ -33,7 +33,7 @@ const Account = () => {
 			} else if (loggedIn === true) {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.dark(`${err.response.data}`, {
+						await toast.error(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
@@ -61,7 +61,7 @@ const Account = () => {
 				.post(`${apiURL}/auth/logout`)
 				.then(history.push('/login'))
 				.catch(async (err) => {
-					await toast.dark(`${err.response.data}`, {
+					await toast.error(`${err.response.data}`, {
 						position: toast.POSITION.TOP_CENTER,
 					});
 				});

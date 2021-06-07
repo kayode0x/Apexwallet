@@ -23,7 +23,7 @@ const Reset = () => {
 		e.preventDefault();
 
 		if (password !== confirmPassword) {
-			toast.dark('Passwords do not match', {
+			toast.error('Passwords do not match', {
 				position: toast.POSITION.TOP_CENTER,
 			});
 		} else {
@@ -39,7 +39,7 @@ const Reset = () => {
 					.put(`${apiURL}/auth/reset-password/`, user, { withCredentials: true })
 					.then(async (res) => {
 						if (res.status === 200) {
-							await toast.dark(`${res.data}`, {
+							await toast.success(`${res.data}`, {
 								position: toast.POSITION.TOP_CENTER,
 							});
 							history.push('/login');
@@ -47,14 +47,14 @@ const Reset = () => {
 					})
 					.catch(async (err) => {
 						//if error, display the custom error message from the server with toastify.
-						await toast.dark(`${err.response.data}`, {
+						await toast.error(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
 
 				setResetting(false);
 			} catch (error) {
-				await toast.dark(`${error}`, {
+				await toast.error(`${error}`, {
 					position: toast.POSITION.TOP_CENTER,
 				});
 

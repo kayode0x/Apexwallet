@@ -57,7 +57,7 @@ const SignUp = () => {
 				//if there is an error from the server, display it
 				.catch(async (err) => {
 					//toastify ROCKS!!
-					await toast.dark(`${err.response.data}`, {
+					await toast.error(`${err.response.data}`, {
 						position: toast.POSITION.TOP_CENTER,
 					});
 				});

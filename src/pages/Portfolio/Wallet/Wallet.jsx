@@ -36,7 +36,7 @@ const Wallet = () => {
 			} else if (loggedIn === true) {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.dark(`${err.response.data}`, {
+						await toast.error(`${err.response.data}`, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
@@ -51,7 +51,7 @@ const Wallet = () => {
 
 				try {
 					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
-						await toast.dark(err.response.data, {
+						await toast.error(err.response.data, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 					});
@@ -141,7 +141,7 @@ const Wallet = () => {
 				.post(`${apiURL}/wallet/`, { withCredentials: true })
 				.then(async (res) => {
 					if (res.status === 201) {
-						await toast.dark(res.data, {
+						await toast.success(res.data, {
 							position: toast.POSITION.TOP_CENTER,
 						});
 						setTimeout(() => {
@@ -150,7 +150,7 @@ const Wallet = () => {
 					}
 				})
 				.catch(async (err) => {
-					await toast.dark(err.response.data, {
+					await toast.error(err.response.data, {
 						position: toast.POSITION.TOP_CENTER,
 					});
 					setCreatingWallet(false);
