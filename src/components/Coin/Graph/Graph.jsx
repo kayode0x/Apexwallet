@@ -128,15 +128,15 @@ const Graph = ({ graphData, days, coinInfoId }) => {
 	};
 
 	return (
-		<ResponsiveContainer width="100%" height={days === 365 ? '100%' : '100%'}>
+		<ResponsiveContainer width="100%" height="100%">
 			<AreaChart
 				height={60}
 				width={200}
 				data={graphData}
 				margin={{
-					top: days === 365 ? 283 : 50,
+					top: days === 365 || days === 'max' ? 283 : 50,
 					left: 0,
-					bottom: days === 365 ? 0 : -100,
+					bottom: days === 365 || days === 'max' ? 0 : -100,
 				}}
 			>
 				<Tooltip content={<CustomTooltip />} />

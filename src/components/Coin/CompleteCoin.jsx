@@ -14,6 +14,7 @@ const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches,
 	const coingeckoApi = `https://api.coingecko.com/api/v3/coins/${coinSearchId}/market_chart?vs_currency=usd&days=${days}&interval=1m`;
 	const [data, setData] = useState(null);
 	const [graphData, setGraphData] = useState(null);
+	const max = 'max';
 
 	// load the graph
 	useEffect(() => {
@@ -130,6 +131,9 @@ const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches,
 						</div>
 						<div onClick={() => setDays(365)} className={days === 365 ? 'active' : ''}>
 							1Y
+						</div>
+						<div onClick={() => setDays(max)} className={days === max ? 'active' : ''}>
+							All
 						</div>
 					</div>
 				</div>
