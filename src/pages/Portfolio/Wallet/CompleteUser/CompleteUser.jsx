@@ -7,9 +7,14 @@ import sunSVG from '../../../../assets/logo/sunSVG.svg';
 import { ImArrowDownLeft2, ImArrowUpRight2 } from 'react-icons/im';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import CardDesign from './CardDesign';
-import moment from 'moment';
+import { useState } from 'react';
+import TransactionModal from '../Transactions/TransactionModal';
 
-const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, matches) => {
+const CompleteUser = ({ user, asset, wallet, handleCreateWallet, creatingWallet }) => {
+	//receipt modal.
+	const [transactionModal, setTransactionModal] = useState(false);
+	const [singleTransaction, setSingleTransaction] = useState(null);
+
 	let cardImage;
 
 	if ((user !== null && user.cardDesign) === 'saturnSVG') {
@@ -67,20 +72,18 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 			</div>
 		);
 	};
-	const transactionsFunc = (coin, type, amount) => {
+	const transactionsFunc = (coin, type, amount, symbol) => {
 		if (asset !== null && wallet !== null) {
-			if (coin !== 'Dollars' && type === 'Sent') {
-				let newSymbol = asset.filter((asset) => asset.id === coin);
+			if (coin !== 'Dollars' && coin !== 'USD' && type === 'Sent') {
 				return (
 					<p style={{ textTransform: 'uppercase' }}>
-						-{amount} {newSymbol[0].symbol}
+						-{amount} {symbol ? symbol : ''}
 					</p>
 				);
-			} else if (coin !== 'Dollars' && type === 'Received') {
-				let newSymbol = asset.filter((asset) => asset.id === coin);
+			} else if (coin !== 'Dollars' && coin !== 'USD' && type === 'Received') {
 				return (
 					<p style={{ textTransform: 'uppercase' }}>
-						{amount} {newSymbol[0].symbol}
+						{amount} {symbol ? symbol : ''}
 					</p>
 				);
 			} else {
@@ -103,7 +106,14 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 					<a href="/wallet/transactions">See All</a>
 				</div>
 				{wallet.transactions.slice(0, 5).map((transaction) => (
-					<div className="walletTransaction" key={transaction._id}>
+					<div
+						onClick={() => {
+							setTransactionModal(!transactionModal);
+							setSingleTransaction(transaction);
+						}}
+						className="walletTransaction"
+						key={transaction._id}
+					>
 						<div
 							style={{
 								background:
@@ -130,11 +140,16 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 							)}
 						</div>
 						<div className="memoAndDate">
+							<p>{transaction.coin}</p>
 							<p>{transaction.name}</p>
-							<p>{moment(transaction.date).format('dddd, MMMM Do')}</p>
 						</div>
 						<div className="value">
-							{transactionsFunc(transaction.coin, transaction.type, transaction.amount)}
+							{transactionsFunc(
+								transaction.coin,
+								transaction.type,
+								transaction.amount,
+								transaction.symbol
+							)}
 						</div>
 					</div>
 				))}
@@ -150,6 +165,15 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 					{assetsFunction()}
 					{transactionsFunction()}
 				</div>
+				<TransactionModal
+					setTransactionModal={setTransactionModal}
+					singleTransaction={singleTransaction}
+					transactionModal={transactionModal}
+				/>
+				<div
+					className={`Overlay ${transactionModal ? 'Show' : ''}`}
+					onClick={() => setTransactionModal(!transactionModal)}
+				/>
 			</div>
 		);
 	} else if (user !== null && user.isActive === false) {
@@ -190,4 +214,4 @@ const completeUser = (user, asset, wallet, handleCreateWallet, creatingWallet, m
 	}
 };
 
-export default completeUser;
+export default CompleteUser;

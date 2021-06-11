@@ -1,0 +1,127 @@
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
+$blue: #2f52e0;
+$lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
+$borderColor: rgb(170, 170, 170);
+
+.transactionModal {
+	position: fixed;
+	bottom: -150vh;
+	background-color: $mainColor;
+	width: 100%;
+	box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.15);
+	left: 0;
+	padding: 1rem 0;
+	z-index: 10;
+	display: none;
+	font-size: 1.15rem;
+	animation: transactionModalAnim 0.3s ease-in-out forwards;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	height: 40%;
+	@media (min-width: 768px) {
+		display: none;
+		width: 25rem;
+		height: 20rem;
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		border-bottom-left-radius: 20px;
+		border-bottom-right-radius: 20px;
+	}
+	@media (max-width: 1024px) and (orientation: landscape) {
+		height: 40%;
+	}
+}
+
+@keyframes transactionModalAnim {
+	from {
+		bottom: -150vh;
+	}
+
+	to {
+		bottom: 0;
+	}
+}
+
+.transactionModal.Show {
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: space-around;
+	transition: all 0.8s ease-in;
+	@media (min-width: 768px) {
+		display: flex;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.amountAndDate {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 80%;
+
+		.amount {
+			font-size: 2.5rem;
+		}
+
+		.memo {
+			margin-top: -2rem;
+			font-size: 1rem;
+			color: $subColor;
+            text-align: center;
+		}
+	}
+
+	hr {
+		border-top: 2px dashed #000;
+		width: 75%;
+	}
+
+	.status {
+		margin-bottom: 2rem;
+        .completeCheck {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            .icon {
+                height: 1.25rem;
+                width: 1.25rem;
+                display: flex;
+                align-items: center;
+                border-radius: 100%;
+                font-size: 5rem;
+                margin-right: .25rem;
+                background: #C2FEDB;
+                color: #12A550;
+            }
+        }
+	}
+
+	.date,
+	.status {
+		display: flex;
+		width: 80%;
+		align-items: center;
+		justify-content: space-around;
+
+		p:nth-child(1) {
+			margin-right: auto;
+			text-align: left;
+		}
+
+		p:nth-child(2) {
+			font-size: 0.95rem;
+			text-align: right;
+			color: $subColor;
+		}
+	}
+}

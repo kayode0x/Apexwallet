@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import BottomNav from '../../../components/BottomNav/BottomNav';
-import completeUser from './CompleteUser/CompleteUser';
+import CompleteUser from './CompleteUser/CompleteUser';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 
 const Wallet = () => {
@@ -173,7 +173,7 @@ const Wallet = () => {
 					<p className="header">Wallet</p>
 
 					{/* Moved the complete user to a separate function */}
-					{completeUser(user, asset, wallet, handleCreateWallet, creatingWallet, matches)}
+					<CompleteUser user={user} asset={asset} wallet={wallet} handleCreateWallet={handleCreateWallet} creatingWallet={creatingWallet} matches={matches} />
 				</div>
 				<ToastContainer autoClose={3000} />
 			</div>

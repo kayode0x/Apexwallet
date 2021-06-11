@@ -7,10 +7,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import './Transactions.scss';
-import moment from 'moment';
 import { IoChevronBack } from 'react-icons/io5';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import BottomNav from '../../../../components/BottomNav/BottomNav';
+import TransactionModal from './TransactionModal';
 
 const Transactions = () => {
 	const history = useHistory();
@@ -19,6 +19,9 @@ const Transactions = () => {
 	const [wallet, setWallet] = useState(null);
 	const [sorted, setSorted] = useState(null);
 	const [ctrlSorted, setCtrlSorted] = useState('all');
+	//receipt modal.
+	const [transactionModal, setTransactionModal] = useState(false);
+	const [singleTransaction, setSingleTransaction] = useState(null);
 	let isRendered = useRef(false);
 	//api endpoint:
 	const apiURL = 'https://api.apexwallet.app/api/v1';
@@ -69,12 +72,11 @@ const Transactions = () => {
 		};
 	}, [getLoggedIn, loggedIn, history]);
 
-
 	// sort the wallet transactions by type
 	const sortFunction = (format) => {
 		if (wallet !== null && sorted !== null) {
 			if (format === 'all') {
-				setCtrlSorted('all')
+				setCtrlSorted('all');
 
 				function compare(a, b) {
 					if (a.date < b.date) {
@@ -88,7 +90,6 @@ const Transactions = () => {
 
 				let newTransactions = wallet.transactions.sort(compare); //sort all transactions by 'date'
 				setSorted(newTransactions);
-
 			} else if (format === 'income') {
 				let incomeSort = wallet.transactions.filter(
 					(transaction) =>
@@ -97,10 +98,12 @@ const Transactions = () => {
 				setSorted(incomeSort);
 				setCtrlSorted('income'); //sort all transactions by type 'income'
 			} else if (format === 'expense') {
-				let expenseSort = wallet.transactions.filter((transaction) => transaction.type === 'Bought' || transaction.type === 'Sent');
+				let expenseSort = wallet.transactions.filter(
+					(transaction) => transaction.type === 'Bought' || transaction.type === 'Sent'
+				);
 				setSorted(expenseSort);
 				setCtrlSorted('expense'); //sort all transactions by type 'expense'
-			} else if (format === 'amount'){
+			} else if (format === 'amount') {
 				setCtrlSorted('amount');
 
 				function compare(a, b) {
@@ -119,24 +122,25 @@ const Transactions = () => {
 		}
 	};
 
-	const transactionsFunc = (coin, type, amount) => {
+	const transactionsFunc = (coin, type, amount, symbol) => {
 		if (wallet !== null) {
-			if (coin !== 'Dollars' && type === 'Sent') {
+			if (coin !== 'Dollars' && coin !== 'USD' && type === 'Sent') {
 				return (
-					<p>
-						-{amount}
+					<p style={{ textTransform: 'uppercase' }}>
+						-{amount} {symbol ? symbol : ''}
 					</p>
 				);
-			} else if (coin !== 'Dollars' && type === 'Received') {
+			} else if (coin !== 'Dollars' && coin !== 'USD' && type === 'Received') {
 				return (
-					<p>
-						{amount}
+					<p style={{ textTransform: 'uppercase' }}>
+						{amount} {symbol ? symbol : ''}
 					</p>
 				);
 			} else {
 				return (
 					<p>
-						<span>{type === 'Free' || type === 'Sold' || type === 'Received' ? '' : '-'}</span>${parseFloat(amount).toFixed(2)}
+						<span>{type === 'Free' || type === 'Sold' || type === 'Received' ? '' : '-'}</span>$
+						{parseFloat(amount).toFixed(2)}
 					</p>
 				);
 			}
@@ -148,7 +152,7 @@ const Transactions = () => {
 			user !== null &&
 			user.isActive === true &&
 			user.wallet !== undefined &&
-			wallet !== null && 
+			wallet !== null &&
 			sorted !== null
 		) {
 			return (
@@ -182,7 +186,14 @@ const Transactions = () => {
 						</div>
 					</div>
 					{sorted.map((transaction) => (
-						<div className="walletTransaction" key={transaction._id}>
+						<div
+							onClick={() => {
+								setTransactionModal(!transactionModal);
+								setSingleTransaction(transaction);
+							}}
+							className="walletTransaction"
+							key={transaction._id}
+						>
 							<div
 								style={{
 									background:
@@ -209,11 +220,16 @@ const Transactions = () => {
 								)}
 							</div>
 							<div className="memoAndDate">
+								<p>{transaction.coin}</p>
 								<p>{transaction.name}</p>
-								<p>{moment(transaction.date).format('dddd, MMMM Do')}</p>
 							</div>
 							<div className="value">
-								{transactionsFunc(transaction.coin, transaction.type, transaction.amount)}
+								{transactionsFunc(
+									transaction.coin,
+									transaction.type,
+									transaction.amount,
+									transaction.symbol
+								)}
 							</div>
 						</div>
 					))}
@@ -246,7 +262,17 @@ const Transactions = () => {
 						<p>All Transactions</p>
 					</div>
 					<div className="transactionsContainer">
-						{getTransactions()} <ToastContainer />
+						{getTransactions()}
+						<TransactionModal
+							setTransactionModal={setTransactionModal}
+							singleTransaction={singleTransaction}
+							transactionModal={transactionModal}
+						/>
+						<div
+							className={`Overlay ${transactionModal ? 'Show' : ''}`}
+							onClick={() => setTransactionModal(!transactionModal)}
+						/>
+						<ToastContainer />
 					</div>
 				</div>
 			</div>

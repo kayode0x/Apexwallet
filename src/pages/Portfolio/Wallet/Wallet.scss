@@ -380,12 +380,13 @@ $navyBlue: #262946;
 			justify-content: space-between;
 			width: 100%;
 			margin-top: -0.5rem;
+			transition: all 0.2s ease-in;
 
 			.transactionIcon {
 				padding: 0.55rem;
 				border-radius: 5px;
 				font-weight: bold;
-				font-size: 1.5rem;
+				font-size: 1rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -401,21 +402,49 @@ $navyBlue: #262946;
 				p:nth-child(1) {
 					font-size: 1rem;
 					color: $textColor;
-					// background: #000;
 				}
 
 				p:nth-child(2) {
-					font-size: 0.85rem;
+					font-size: .9rem;
+					@media (min-width: 768px){
+						font-size: .95rem;
+					}
 					margin-top: -0.75rem;
 					color: $subColor;
+					width: 150px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 			}
 
 			.value {
+				min-width: 4rem;
 				color: $textColor;
-				font-size: 1.05rem;
+				font-size: 1rem;
 				margin-left: auto;
+				text-align: right;
 			}
+		}
+
+		.walletTransaction:hover {
+			cursor: pointer;
+			transform: translateY(-5%);
 		}
 	}
 }
+
+.Overlay {
+		background-color: rgba(0, 0, 0, 0.55);
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		position: fixed;
+		display: none;
+		z-index: 5;
+	}
+
+	.Overlay.Show {
+		display: block;
+	}
