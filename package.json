@@ -21,8 +21,10 @@
     "react-moment": "^1.1.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-scroll-motion": "^0.2.1",
     "react-spinners-kit": "^1.9.1",
     "react-toastify": "^7.0.4",
+    "reactjs-media": "^1.5.1",
     "recharts": "^2.0.9",
     "web-vitals": "^1.0.1"
   },

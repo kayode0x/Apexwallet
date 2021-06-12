@@ -85,7 +85,7 @@ const Account = () => {
 							<div className="accountInfo">
 								<div className="userDetails">
 									<div className="nameAndImage">
-										<div className="cameraIcon">
+										<div onClick={() => alert('Coming Soon.')} className="cameraIcon">
 											<IoCamera />
 										</div>
 										{/* <div className="imgDiv">{user.username.charAt(0).toUpperCase()}</div> */}
@@ -108,7 +108,7 @@ const Account = () => {
 
 									<StatusModal user={user} />
 
-									<div className="helpAndSupportField">
+									<div onClick={() => alert('Coming Soon.')} className="helpAndSupportField">
 										<div className="accountIcons">
 											<BiSupport />
 										</div>
@@ -118,7 +118,7 @@ const Account = () => {
 										</div>
 									</div>
 
-									<div className="privacyField">
+									<div onClick={() => alert('Coming Soon.')} className="privacyField">
 										<div className="accountIcons">
 											<MdSecurity />
 										</div>
@@ -127,7 +127,7 @@ const Account = () => {
 											<FiChevronRight />
 										</div>
 									</div>
-									<div className="aboutUsField">
+									<div onClick={() => alert('Coming Soon.')} className="aboutUsField">
 										<div className="accountIcons">
 											<MdInfo />
 										</div>
@@ -143,8 +143,8 @@ const Account = () => {
 									Sign Out
 								</button>
 
-								<p className="walletVersion">v 0.02 - pre beta</p>
-								<p className="copyright">&copy; Werrey Inc, 2021</p>
+								<p className="walletVersion">v1 - beta 🚀</p>
+								<p className="copyright">Apex Wallet, from Werrey Inc 🦄. &copy; 2021</p>
 							</div>
 						</>
 					) : (

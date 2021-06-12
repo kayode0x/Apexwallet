@@ -1,25 +1,82 @@
 import './LandingPage.scss';
-import rocketLogo from '../../assets/logo/appl-1f680-160.png'
 import { Link } from 'react-router-dom';
+import bitcoin from '../../assets/landingLogos/bitcoin.png';
+import ethereum from '../../assets/landingLogos/ethereum.png';
+import tether from '../../assets/landingLogos/tether.png';
+import dogecoin from '../../assets/landingLogos/dogecoin.png';
+import binanceCoin from '../../assets/landingLogos/binance-coin.png';
+import cardano from '../../assets/landingLogos/cardano.png';
+import usdCoin from '../../assets/landingLogos/usd-coin.png';
+import uniswap from '../../assets/landingLogos/uniswap.png';
+import bitcoinCash from '../../assets/landingLogos/bitcoin-cash.png';
+import xrp from '../../assets/landingLogos/xrp.png';
+import tron from '../../assets/landingLogos/tron.png';
+import ethereumClassic from '../../assets/landingLogos/ethereum-classic.png';
+import litecoin from '../../assets/landingLogos/litecoin.png';
+import dash from '../../assets/landingLogos/dash.png';
+import polkadot from '../../assets/landingLogos/polkadot-new.png';
+import SectionOne from './SectionOne/SectionOne'
 
 const LandingPage = () => {
 	return (
 		<>
-			{/* <div id="stars"></div> */}
 			<div className="landingPage">
+				{/* All the logos go here */}
+				<div className="coinLogo bitcoin">
+					<img src={bitcoin} alt="bitcoin" />
+				</div>
+				<div className="coinLogo ethereum">
+					<img src={ethereum} alt="ethereum" />
+				</div>
+				<div className="coinLogo tether">
+					<img src={tether} alt="tether" />
+				</div>
+				<div className="coinLogo dogecoin">
+					<img src={dogecoin} alt="dogecoin" />
+				</div>
+				<div className="coinLogo binanceCoin">
+					<img src={binanceCoin} alt="binanceCoin" />
+				</div>
+				<div className="coinLogo polkadot">
+					<img src={polkadot} alt="polkadot" />
+				</div>
+				<div className="coinLogo usdCoin">
+					<img src={usdCoin} alt="usdCoin" />
+				</div>
+				<div className="coinLogo uniswap">
+					<img src={uniswap} alt="uniswap" />
+				</div>
+				<div className="coinLogo bitcoinCash">
+					<img src={bitcoinCash} alt="bitcoinCash" />
+				</div>
+				<div className="coinLogo xrp">
+					<img src={xrp} alt="xrp" />
+				</div>
+				<div className="coinLogo cardano">
+					<img src={cardano} alt="cardano" />
+				</div>
+				<div className="coinLogo tron">
+					<img src={tron} alt="tron" />
+				</div>
+				<div className="coinLogo ethereumClassic">
+					<img src={ethereumClassic} alt="ethereumClassic" />
+				</div>
+				<div className="coinLogo litecoin">
+					<img src={litecoin} alt="litecoin" />
+				</div>
+				<div className="coinLogo dash">
+					<img src={dash} alt="dash" />
+				</div>
 				<div className="mainContainer">
-					<div className="logo">
-						<img src={rocketLogo} alt="rocket" />
-					</div>
 					<div className="container">
-						<div className="name">Apex</div>
-						<div className="mainText">
-							Get real time market information on your favorite cryptocurrencies, watch them to keep
-							track and also trade virtually, <span>risk free</span>.
-						</div>
+						<p className="mainText">
+							Learn how cryptocurrencies work by 
+							<span> simulating</span> basically anything you can do with a real crypto wallet, plus extra
+							features.
+						</p>
 						<div className="buttons">
 							<Link to="/signup" className="signupBtn">
-								Sign Up
+								Get Started
 							</Link>
 							<Link to="/login" className="loginBtn">
 								Login
@@ -27,8 +84,10 @@ const LandingPage = () => {
 						</div>
 					</div>
 				</div>
-				<footer>&#169; Werrey Inc, 2021.</footer>
+				<footer>Apex Wallet, from Werrey Inc 🦄</footer>
 			</div>
+
+			<SectionOne />
 		</>
 	);
 };
