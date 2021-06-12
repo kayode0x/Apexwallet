@@ -57,9 +57,7 @@ const SignUp = () => {
 				//if there is an error from the server, display it
 				.catch(async (err) => {
 					//toastify ROCKS!!
-					await toast.error(`${err.response.data}`, {
-						position: toast.POSITION.TOP_CENTER,
-					});
+					await toast.error(`${err.response.data}`, {});
 				});
 			setSigningIn(false);
 		} catch (error) {
@@ -148,8 +146,7 @@ const SignUp = () => {
 				</div>
 			</div>
 
-			{/* {DON'T FORGET THE TOAST CONTAINER } */}
-			<ToastContainer autoClose={3000} />
+			<ToastContainer hideProgressBar autoClose={3000} />
 		</HelmetProvider>
 	);
 };

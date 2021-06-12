@@ -13,6 +13,8 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 	const [amountToSend, setAmountToSend] = useState(1);
 	const [sendType, setSendType] = useState('crypto');
 	const [recipient, setRecipient] = useState('');
+	const [memo, setMemo] = useState('');
+	const [proceedToSend, setProceedToSend] = useState(false);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const [sending, setSending] = useState(false);
 
@@ -38,19 +40,23 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 		if (sendType === 'fiat') {
 			if (amountToSend < 0) {
 				toast.error("You can't send less than $0", {
-					position: toast.POSITION.TOP_CENTER,
+					hideProgressBar: true,
 				});
 				setSending(false);
 			} else if (amountToSend > wallet.balance) {
 				toast.error(
 					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setSending(false);
+			} else if (memo !== '' && memo.length > 50) {
+				console.log('HERE');
+				toast.error(`Memo can not be longer than 50 characters`, { hideProgressBar: true });
+				setSending(false);
 			} else {
-				let body = { recipient: recipient, amount: amountToSend };
+				let body = { recipient: recipient, memo: memo, amount: amountToSend };
 				try {
 					await axios
 						.post(`${apiURL}/wallet/send-cash`, body, { withCredentials: true })
@@ -58,7 +64,7 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 							if (res.status === 200) {
 								setModalUpSend(!modalUpSend);
 								toast.success(`Success 🚀`, {
-									position: toast.POSITION.TOP_CENTER,
+									hideProgressBar: true,
 								});
 								setTimeout(() => {
 									window.location.reload();
@@ -67,9 +73,8 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 							console.log('DATA: ', res.data);
 						})
 						.catch(async (err) => {
-							//toastify ROCKS!!
 							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								hideProgressBar: true,
 							});
 						});
 				} catch (error) {
@@ -81,16 +86,25 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 		else if (sendType === 'crypto') {
 			if (amountToSend < 0) {
 				toast.error(`You can't send below 0 ${coinInfo.id}`, {
-					position: toast.POSITION.TOP_CENTER,
+					hideProgressBar: true,
 				});
 				setSending(false);
 			} else if (amountToSend > balance) {
 				toast.error(`Your balance is $${parseFloat(balance).toFixed(5)}, you can't send more than that`, {
-					position: toast.POSITION.TOP_CENTER,
+					hideProgressBar: true,
 				});
 				setSending(false);
+			} else if (memo !== '' && memo.length > 50) {
+				toast.error(`Memo can not be longer than 50 characters`, { hideProgressBar: true });
+				setSending(false);
 			} else {
-				let body = { coin: coinInfo.id, amount: amountToSend, recipient: recipient };
+				let body = {
+					coin: coinInfo.id,
+					amount: amountToSend,
+					memo: memo,
+					recipient: recipient,
+					method: recipient.length > 20 ? 'address' : 'username', //method stays like this because apex usernames can't be longer than 20 characters, but if the recipient value comes in more than that, then it's definitely an address
+				};
 				try {
 					await axios
 						.post(`${apiURL}/coin/send`, body, { withCredentials: true })
@@ -98,7 +112,7 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 							if (res.status === 200) {
 								setModalUpSend(!modalUpSend);
 								toast.success(`Success 🚀`, {
-									position: toast.POSITION.TOP_CENTER,
+									hideProgressBar: true,
 								});
 								setTimeout(() => {
 									window.location.reload();
@@ -106,9 +120,8 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 							}
 						})
 						.catch(async (err) => {
-							//toastify ROCKS!!
 							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								hideProgressBar: true,
 							});
 						});
 				} catch (error) {
@@ -156,73 +169,105 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 						</div>
 					</div>
 					<div className="selectBalanceAndBTN">
-						<div className="input2">
-							<input
-								value={recipient}
-								onChange={(e) => {
-									setRecipient(e.target.value);
-								}}
-								type="text"
-								required={true}
-								placeholder="Username"
-							/>
-						</div>
-						{sendType === 'crypto' ? (
-							<Select className="selectCoin" value={coin} onChange={handleChange}>
-								<MenuItem value={'bitcoin'}>Bitcoin</MenuItem>
-								<MenuItem value={'ethereum'}>Ethereum</MenuItem>
-								<MenuItem value={'ethereum-classic'}>Ethereum Classic</MenuItem>
-								<MenuItem value={'litecoin'}>Litecoin</MenuItem>
-								<MenuItem value={'dogecoin'}>Dogecoin</MenuItem>
-								<MenuItem value={'ripple'}>Ripple</MenuItem>
-								<MenuItem value={'tether'}>Tether</MenuItem>
-								<MenuItem value={'binancecoin'}>Binance Coin</MenuItem>
-								<MenuItem value={'cardano'}>Cardano</MenuItem>
-								<MenuItem value={'usd-coin'}>USD Coin</MenuItem>
-								<MenuItem value={'tron'}>Tron</MenuItem>
-								<MenuItem value={'bitcoin-cash'}>Bitcoin Cash</MenuItem>
-								<MenuItem value={'polkadot'}>Polkadot</MenuItem>
-								<MenuItem value={'uniswap'}>Uniswap</MenuItem>
-								<MenuItem value={'dash'}>Dash</MenuItem>
-							</Select>
-						) : null}
-						<div className="coinAndWalletTab">
-							{sendType === 'fiat' ? (
-								<div>
-									<p>USD balance</p> <span>${parseFloat(wallet.balance).toFixed(2)}</span>
+						{proceedToSend ? (
+							<>
+								<div className="input2">
+									<input
+										value={recipient}
+										onChange={(e) => {
+											setRecipient(e.target.value);
+										}}
+										type="text"
+										required={true}
+										placeholder={sendType === 'fiat' ? 'Username' : 'Username or Address'}
+									/>
 								</div>
+								<div className="input2">
+									<input
+										value={memo}
+										onChange={(e) => {
+											setMemo(e.target.value);
+										}}
+										type="text"
+										placeholder="Add a Memo (Optional)"
+									/>
+								</div>
+							</>
+						) : (
+							<>
+								{sendType === 'crypto' ? (
+									<Select className="selectCoin" value={coin} onChange={handleChange}>
+										<MenuItem value={'bitcoin'}>Bitcoin</MenuItem>
+										<MenuItem value={'ethereum'}>Ethereum</MenuItem>
+										<MenuItem value={'ethereum-classic'}>Ethereum Classic</MenuItem>
+										<MenuItem value={'litecoin'}>Litecoin</MenuItem>
+										<MenuItem value={'dogecoin'}>Dogecoin</MenuItem>
+										<MenuItem value={'ripple'}>Ripple</MenuItem>
+										<MenuItem value={'tether'}>Tether</MenuItem>
+										<MenuItem value={'binancecoin'}>Binance Coin</MenuItem>
+										<MenuItem value={'cardano'}>Cardano</MenuItem>
+										<MenuItem value={'usd-coin'}>USD Coin</MenuItem>
+										<MenuItem value={'tron'}>Tron</MenuItem>
+										<MenuItem value={'bitcoin-cash'}>Bitcoin Cash</MenuItem>
+										<MenuItem value={'polkadot'}>Polkadot</MenuItem>
+										<MenuItem value={'uniswap'}>Uniswap</MenuItem>
+										<MenuItem value={'dash'}>Dash</MenuItem>
+									</Select>
+								) : null}
+							</>
+						)}
+
+						<div className="coinAndWalletTab">
+							{proceedToSend ? (
+								/* Only show this button if the user is ready to send */
+								<button
+									//disable the "Send Button" if the requirements are not met.
+									disabled={sending || recipient === '' ? true : false}
+									type="submit"
+								>
+									{sending ? (
+										<p>Sending...</p>
+									) : (
+										<p>
+											Send{' '}
+											{sendType === 'fiat' ? (
+												<span> Cash </span>
+											) : (
+												<span style={{ textTransform: 'capitalize' }}>{coinInfo.name}</span>
+											)}
+										</p>
+									)}
+								</button>
 							) : (
 								<>
-									<div>
-										<p>{coinInfo.symbol.toUpperCase()} balance</p>{' '}
-										<span>{parseFloat(balance).toFixed(5)}</span>
-									</div>
+									{sendType === 'fiat' ? (
+										<div>
+											<p>USD balance</p> <span>${parseFloat(wallet.balance).toFixed(2)}</span>
+										</div>
+									) : (
+										<>
+											<div>
+												<p>{coinInfo.symbol.toUpperCase()} balance</p>{' '}
+												<span>{parseFloat(balance).toFixed(5)}</span>
+											</div>
+										</>
+									)}
+									{/* Only show this button when the user is NOT ready to send*/}
+									<button
+										//disable the "Send Button" if the requirements are not met.
+										disabled={
+											amountToSend <= 0 || sendType === 'fiat'
+												? amountToSend > wallet.balance || amountToSend < 2
+												: amountToSend > balance
+												? true
+												: false
+										}
+										onClick={() => setProceedToSend(true)}
+									>
+										<p>Proceed</p>
+									</button>
 								</>
 							)}
-							<button
-								//disable the "Send Button" if the requirements are not met.
-								disabled={
-									sending || recipient === '' || amountToSend <= 0 || sendType === 'fiat'
-										? amountToSend > wallet.balance || amountToSend < 2
-										: amountToSend > balance
-										? true
-										: false
-								}
-								type="submit"
-							>
-								{sending ? (
-									<p>Sending...</p>
-								) : (
-									<p>
-										Send{' '}
-										{sendType === 'fiat' ? (
-											<span> Cash </span>
-										) : (
-											<span style={{ textTransform: 'capitalize' }}>{coinInfo.name}</span>
-										)}
-									</p>
-								)}
-							</button>
 						</div>
 					</div>
 				</>
@@ -238,7 +283,10 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 
 	return (
 		<div className={`send ${modalUpSend ? 'Show' : ''}`}>
-			<div className="closeIcon" onClick={() => setModalUpSend(!modalUpSend)}>
+			<div
+				className="closeIcon"
+				onClick={() => (proceedToSend ? setProceedToSend(false) : setModalUpSend(!modalUpSend))}
+			>
 				<IoClose />
 			</div>
 

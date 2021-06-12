@@ -11,27 +11,27 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Reset = () => {
 	const history = useHistory();
-
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
 	const [resetting, setResetting] = useState(false);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const token = urlParams.get('token');
+
+	if (token === null) {
+		history.push('/forgot-password');
+	}
 
 	const handleReset = async (e) => {
 		e.preventDefault();
 
 		if (password !== confirmPassword) {
-			toast.error('Passwords do not match', {
-				position: toast.POSITION.TOP_CENTER,
-			});
+			toast.error('Passwords do not match', {});
 		} else {
 			setResetting(true);
-
-			const queryString = window.location.search;
-			const urlParams = new URLSearchParams(queryString);
-			const token = urlParams.get('token');
 			const user = { password, confirmPassword, token };
 
 			try {
@@ -39,24 +39,18 @@ const Reset = () => {
 					.put(`${apiURL}/auth/reset-password/`, user, { withCredentials: true })
 					.then(async (res) => {
 						if (res.status === 200) {
-							await toast.success(`${res.data}`, {
-								position: toast.POSITION.TOP_CENTER,
-							});
+							await toast.success(`${res.data}`, {});
 							history.push('/login');
 						}
 					})
 					.catch(async (err) => {
 						//if error, display the custom error message from the server with toastify.
-						await toast.error(`${err.response.data}`, {
-							position: toast.POSITION.TOP_CENTER,
-						});
+						await toast.error(`${err.response.data}`, {});
 					});
 
 				setResetting(false);
 			} catch (error) {
-				await toast.error(`${error}`, {
-					position: toast.POSITION.TOP_CENTER,
-				});
+				await toast.error(`${error}`, {});
 
 				setResetting(false);
 			}
@@ -135,8 +129,8 @@ const Reset = () => {
 					</form>
 				</div>
 			</div>
-			{/* {DON'T FORGET THE TOASTIFY} */}
-			<ToastContainer autoClose={3000} />
+
+			<ToastContainer hideProgressBar autoClose={3000} />
 		</HelmetProvider>
 	);
 };

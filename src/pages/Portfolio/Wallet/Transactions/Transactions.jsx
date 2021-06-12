@@ -35,9 +35,7 @@ const Transactions = () => {
 			} else if (loggedIn === true) {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(`${err.response.data}`, {
-							position: toast.POSITION.TOP_CENTER,
-						});
+						await toast.error(`${err.response.data}`, {});
 					});
 					if (isRendered.current === true) {
 						setUser(user.data);
@@ -51,7 +49,7 @@ const Transactions = () => {
 				try {
 					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
 						await toast.error(err.response.data, {
-							position: toast.POSITION.TOP_CENTER,
+							
 						});
 					});
 					if (isRendered.current === true) {
@@ -272,7 +270,7 @@ const Transactions = () => {
 							className={`Overlay ${transactionModal ? 'Show' : ''}`}
 							onClick={() => setTransactionModal(!transactionModal)}
 						/>
-						<ToastContainer />
+						<ToastContainer hideProgressBar autoClose={3000}/>
 					</div>
 				</div>
 			</div>

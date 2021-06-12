@@ -53,13 +53,13 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						5
 					)} ${coinInfo.symbol.toUpperCase()}, you can't sell more than that`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setSelling(false);
 			} else if (amountToSellFiat < 1) {
 				toast.error(`You can only sell a minimum of $1 worth of ${coinInfo.symbol.toUpperCase()}`, {
-					position: toast.POSITION.TOP_CENTER,
+					hideProgressBar: true,
 				});
 				setSelling(false);
 			} else {
@@ -71,7 +71,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 							if (res.status === 200) {
 								setModalUpSell(!modalUpSell);
 								toast.success(`Success 🚀`, {
-									position: toast.POSITION.TOP_CENTER,
+									hideProgressBar: true,
 								});
 								setTimeout(() => {
 									window.location.reload();
@@ -80,9 +80,8 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 							console.log('DATA: ', res.data);
 						})
 						.catch(async (err) => {
-							//toastify ROCKS!!
 							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								hideProgressBar: true,
 							});
 						});
 				} catch (error) {
@@ -97,7 +96,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setSelling(false);
@@ -108,7 +107,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						5
 					)} ${coinInfo.symbol.toUpperCase()}, you can't sell more than that`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setSelling(false);
@@ -121,7 +120,7 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 							if (res.status === 200) {
 								setModalUpSell(!modalUpSell);
 								toast.success(`Success 🚀`, {
-									position: toast.POSITION.TOP_CENTER,
+									hideProgressBar: true,
 								});
 								setTimeout(() => {
 									window.location.reload();
@@ -129,9 +128,8 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 							}
 						})
 						.catch(async (err) => {
-							//toastify ROCKS!!
 							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								hideProgressBar: true,
 							});
 						});
 				} catch (error) {

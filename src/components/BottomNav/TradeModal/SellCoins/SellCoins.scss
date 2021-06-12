@@ -206,3 +206,10 @@ $borderColor: rgb(170, 170, 170);
 		}
 	}
 }
+
+.loading {
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

@@ -22,7 +22,7 @@ $borderColor: rgb(170, 170, 170);
 	animation: transactionModalAnim 0.3s ease-in-out forwards;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
-	height: 40%;
+	height: 45%;
 	@media (min-width: 768px) {
 		display: none;
 		width: 25rem;
@@ -33,7 +33,7 @@ $borderColor: rgb(170, 170, 170);
 		border-bottom-right-radius: 20px;
 	}
 	@media (max-width: 1024px) and (orientation: landscape) {
-		height: 40%;
+		height: 70%;
 	}
 }
 
@@ -70,10 +70,12 @@ $borderColor: rgb(170, 170, 170);
 
 		.amount {
 			font-size: 2.5rem;
+			text-align: center;
 		}
 
 		.memo {
-			margin-top: -2rem;
+			margin-top: -2.25rem;
+			margin-bottom: .5rem;
 			font-size: 1rem;
 			color: $subColor;
             text-align: center;
@@ -106,7 +108,13 @@ $borderColor: rgb(170, 170, 170);
         }
 	}
 
+    .date,
+    .name {
+        margin-bottom: -1rem;
+    }
+
 	.date,
+    .name,
 	.status {
 		display: flex;
 		width: 80%;
@@ -122,6 +130,7 @@ $borderColor: rgb(170, 170, 170);
 			font-size: 0.95rem;
 			text-align: right;
 			color: $subColor;
+			text-transform: capitalize;
 		}
 	}
 }

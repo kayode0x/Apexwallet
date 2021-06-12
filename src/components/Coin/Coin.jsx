@@ -10,7 +10,7 @@ import axios from 'axios';
 import BottomNav from '../BottomNav/BottomNav';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import CompleteCoin from './CompleteCoin';
-import supportedCoins from '../../utils/supportedCoins'
+import supportedCoins from '../../utils/supportedCoins';
 
 const Coin = () => {
 	//get the current location.
@@ -19,8 +19,6 @@ const Coin = () => {
 	//split the location to get just the coin id.
 	const splitLocation = pathname.split('/');
 	const coinSearchId = splitLocation[2]; //coin id.
-
-	
 
 	const history = useHistory();
 	const matches = useMediaQuery('(max-width:767px)');
@@ -54,9 +52,7 @@ const Coin = () => {
 			} else if (loggedIn === true) {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(`${err.response.data}`, {
-							position: toast.POSITION.TOP_CENTER,
-						});
+						await toast.error(`${err.response.data}`, {});
 					});
 
 					if (isRendered.current === true) {
@@ -71,9 +67,7 @@ const Coin = () => {
 
 				try {
 					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(err.response.data, {
-							position: toast.POSITION.TOP_CENTER,
-						});
+						await toast.error(err.response.data, {});
 					});
 					if (isRendered.current === true) {
 						setWallet(wallet.data);
@@ -134,27 +128,19 @@ const Coin = () => {
 				? await axios //if the coin is being watched, send an unwatch request
 						.put(`${apiURL}/user/watch-list`, coinWatch)
 						.then(async (res) => {
-							await toast.success(`${res.data}`, {
-								position: toast.POSITION.TOP_CENTER,
-							});
+							await toast.info(`${res.data}`, {});
 						})
 						.catch(async (err) => {
-							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
-							});
+							await toast.error(`${err.response.data}`, {});
 						})
 				: //if it's not being watched, add to watch list
 				  await axios
 						.post(`${apiURL}/user/watch-list`, coinWatch)
 						.then(async (res) => {
-							await toast.success(`${res.data}`, {
-								position: toast.POSITION.TOP_CENTER,
-							});
+							await toast.info(`${res.data}`, {});
 						})
 						.catch(async (err) => {
-							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
-							});
+							await toast.error(`${err.response.data}`, {});
 						});
 		} catch (error) {
 			console.log('ERROR: ' + error);
@@ -212,7 +198,7 @@ const Coin = () => {
 						coinSearchId={coinSearchId}
 					/>
 				</div>
-				<ToastContainer autoClose={3000} />
+				<ToastContainer hideProgressBar autoClose={3000} />
 			</div>
 		</HelmetProvider>
 	);

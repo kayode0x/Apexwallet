@@ -40,10 +40,14 @@ const TransactionModal = ({ singleTransaction, transactionModal }) => {
 								singleTransaction.symbol
 							)}
 						</p>
-						<p className="memo">{singleTransaction.memo ? singleTransaction.memo : singleTransaction.name}</p>
+						<p className="memo">{singleTransaction.memo && singleTransaction.memo}</p>
 					</div>
 
 					<hr />
+					<div className="name">
+						<p>Info</p>
+						<p>{singleTransaction.name}</p>
+					</div>
 
 					<div className="date">
 						<p>Date</p>

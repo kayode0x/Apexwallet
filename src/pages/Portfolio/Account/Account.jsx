@@ -34,7 +34,7 @@ const Account = () => {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
 						await toast.error(`${err.response.data}`, {
-							position: toast.POSITION.TOP_CENTER,
+							
 						});
 					});
 					if (isRendered.current === true) {
@@ -62,7 +62,7 @@ const Account = () => {
 				.then(history.push('/login'))
 				.catch(async (err) => {
 					await toast.error(`${err.response.data}`, {
-						position: toast.POSITION.TOP_CENTER,
+						
 					});
 				});
 		} catch (error) {
@@ -153,7 +153,7 @@ const Account = () => {
 						</div>
 					)}
 				</div>
-				<ToastContainer autoClose={3000} />
+				<ToastContainer hideProgressBar autoClose={3000} />
 			</div>
 		</HelmetProvider>
 	);

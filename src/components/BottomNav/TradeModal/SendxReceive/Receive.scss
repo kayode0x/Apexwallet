@@ -1,0 +1,160 @@
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
+$blue: #2f52e0;
+$lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
+$borderColor: rgb(170, 170, 170);
+
+.send {
+	height: 100%;
+	position: fixed;
+	top: 150vh;
+	background: $mainColor;
+	width: 100%;
+	@media (min-width: 768px) {
+		max-width: 30rem;
+		display: none;
+	}
+}
+
+.send.Show {
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transition: all 0.7s ease-in;
+
+	@media (min-width: 768px) {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: 10px;
+	}
+
+	.closeIcon {
+		font-size: 1.5rem;
+		top: 2%;
+		right: 3%;
+		position: absolute;
+	}
+	.receiveDiv {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+		overflow: auto;
+
+		.header {
+			@media (min-width: 768px) {
+				margin-top: 1rem;
+			}
+			@media (max-width: 1024px) and (orientation: landscape) {
+				margin-bottom: 10%;
+			}
+		}
+
+		.selectBalanceAndBTN {
+			width: 90%;
+			display: flex;
+			flex-direction: column;
+			@media (max-width: 767px) and (orientation: portrait) {
+				position: absolute;
+				bottom: 5%;
+			}
+
+			@media (min-width: 768px) {
+				margin-top: 2rem;
+			}
+
+			.selectCoin {
+				height: 4rem;
+				width: 100%;
+				display: flex;
+				align-items: center;
+				font-size: 1.15rem;
+			}
+
+			.usernameAndAddress {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 1rem;
+				border: 1px solid $borderColor;
+				border-radius: 5px;
+
+				.container {
+					padding: 1rem;
+					display: flex;
+					align-items: flex-start;
+					margin-top: 0rem;
+				}
+
+				.iconAndName {
+					display: flex;
+
+					.icon {
+						transition: all 0.2s ease-in;
+					}
+
+					.icon:hover {
+						cursor: pointer;
+						color: $lightBlue;
+					}
+				}
+
+				p {
+					font-size: 0.95rem;
+					color: $subColor;
+				}
+
+				span {
+					font-size: 1.15rem;
+					margin-right: 0.5rem;
+				}
+			}
+
+			button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 4rem;
+				width: 100%;
+				font-size: 1.15rem;
+				padding: 1rem;
+				border-radius: 5px;
+				outline: none;
+				border: none;
+				color: $mainColor;
+				font-weight: bold;
+				background: $lightBlue;
+				transition: 0.5s;
+				margin-top: 1rem;
+			}
+
+			button:hover {
+				cursor: pointer;
+				background: $blue;
+			}
+
+			button[disabled] {
+				background: $borderColor;
+			}
+
+			button[disabled]:hover {
+				cursor: not-allowed;
+			}
+		}
+	}
+}
+
+.loading {
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

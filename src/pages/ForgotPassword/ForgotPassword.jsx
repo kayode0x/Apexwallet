@@ -26,21 +26,15 @@ const ForgotPassword = () => {
 				.then(async (res) => {
 					if (res.status === 200) {
 						setEmailSent(true);
-						await toast.success(`${res.data}`, {
-							position: toast.POSITION.TOP_CENTER,
-						});
+						await toast.success(`${res.data}`, {});
 					}
 				})
 				.catch(async (err) => {
 					//if error, display the custom error message from the server with toastify.
-					await toast.error(`${err.response.data}`, {
-						position: toast.POSITION.TOP_CENTER,
-					});
+					await toast.error(`${err.response.data}`, {});
 				});
 		} catch (error) {
-			await toast.error(`${error}`, {
-				position: toast.POSITION.TOP_CENTER,
-			});
+			await toast.error(`${error}`, {});
 		}
 		setResetting(false);
 	};
@@ -88,8 +82,8 @@ const ForgotPassword = () => {
 					</Link>
 				</div>
 			</div>
-			{/* {DON'T FORGET THE TOASTIFY} */}
-			<ToastContainer autoClose={3000} />
+
+			<ToastContainer hideProgressBar autoClose={3000} />
 		</HelmetProvider>
 	);
 };

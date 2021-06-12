@@ -36,9 +36,7 @@ const Wallet = () => {
 			} else if (loggedIn === true) {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(`${err.response.data}`, {
-							position: toast.POSITION.TOP_CENTER,
-						});
+						await toast.error(`${err.response.data}`, {});
 					});
 					if (isRendered.current === true) {
 						setUser(user.data);
@@ -51,9 +49,7 @@ const Wallet = () => {
 
 				try {
 					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(err.response.data, {
-							position: toast.POSITION.TOP_CENTER,
-						});
+						await toast.error(err.response.data, {});
 					});
 					if (isRendered.current === true) {
 						setWallet(wallet.data);
@@ -141,18 +137,14 @@ const Wallet = () => {
 				.post(`${apiURL}/wallet/`, { withCredentials: true })
 				.then(async (res) => {
 					if (res.status === 201) {
-						await toast.success(res.data, {
-							position: toast.POSITION.TOP_CENTER,
-						});
+						await toast.success(res.data, {});
 						setTimeout(() => {
 							window.location.reload();
 						}, 2000);
 					}
 				})
 				.catch(async (err) => {
-					await toast.error(err.response.data, {
-						position: toast.POSITION.TOP_CENTER,
-					});
+					await toast.error(err.response.data, {});
 					setCreatingWallet(false);
 				});
 		} catch (error) {
@@ -173,9 +165,16 @@ const Wallet = () => {
 					<p className="header">Wallet</p>
 
 					{/* Moved the complete user to a separate function */}
-					<CompleteUser user={user} asset={asset} wallet={wallet} handleCreateWallet={handleCreateWallet} creatingWallet={creatingWallet} matches={matches} />
+					<CompleteUser
+						user={user}
+						asset={asset}
+						wallet={wallet}
+						handleCreateWallet={handleCreateWallet}
+						creatingWallet={creatingWallet}
+						matches={matches}
+					/>
 				</div>
-				<ToastContainer autoClose={3000} />
+				<ToastContainer hideProgressBar autoClose={3000} />
 			</div>
 		</HelmetProvider>
 	);

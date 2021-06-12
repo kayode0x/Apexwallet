@@ -47,14 +47,14 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 		if (buyType === 'fiat') {
 			if (amountToBuyFiat < 2) {
 				toast.error(`You can only buy a minimum of $2 worth of ${coinInfo.symbol.toUpperCase()}`, {
-					position: toast.POSITION.TOP_CENTER,
+					hideProgressBar: true,
 				});
 				setBuying(false);
 			} else if (amountToBuyFiat > wallet.balance) {
 				toast.error(
 					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setBuying(false);
@@ -67,7 +67,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 							if (res.status === 200) {
 								setModalUpBuy(!modalUpBuy);
 								toast.success(`Success 🚀`, {
-									position: toast.POSITION.TOP_CENTER,
+									hideProgressBar: true,
 								});
 								setTimeout(() => {
 									window.location.reload();
@@ -76,9 +76,8 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 							console.log('DATA: ', res.data);
 						})
 						.catch(async (err) => {
-							//toastify ROCKS!!
 							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								hideProgressBar: true,
 							});
 						});
 				} catch (error) {
@@ -93,7 +92,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(2)} ${coinInfo.symbol.toUpperCase()}`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setBuying(false);
@@ -103,7 +102,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setBuying(false);
@@ -111,7 +110,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 				toast.error(
 					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setBuying(false);
@@ -124,7 +123,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 							if (res.status === 200) {
 								setModalUpBuy(!modalUpBuy);
 								toast.success(`Success 🚀`, {
-									position: toast.POSITION.TOP_CENTER,
+									hideProgressBar: true,
 								});
 								setTimeout(() => {
 									window.location.reload();
@@ -132,9 +131,8 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 							}
 						})
 						.catch(async (err) => {
-							//toastify ROCKS!!
 							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								hideProgressBar: true,
 							});
 						});
 				} catch (error) {

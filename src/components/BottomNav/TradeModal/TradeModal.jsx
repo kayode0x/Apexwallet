@@ -6,17 +6,20 @@ import axios from 'axios';
 import BuyCoins from './BuyCoins/BuyCoins';
 import SellCoins from './SellCoins/SellCoins';
 import Send from './SendxReceive/Send';
+import Receive from './SendxReceive/Receive';
 
 const TradeModal = ({ tradeModal }) => {
 	const [wallet, setWallet] = useState(null);
 	const [balance, setBalance] = useState(null);
+	const [address, setAddress] = useState(null);
 	const [user, setUser] = useState(null);
 	const [coinInfo, setCoinInfo] = useState(null);
 	const [coin, setCoin] = useState('bitcoin');
 	let isRendered = useRef(false);
-    const [modalUpBuy, setModalUpBuy] = useState(false);
-    const [modalUpSell, setModalUpSell] = useState(false);
+	const [modalUpBuy, setModalUpBuy] = useState(false);
+	const [modalUpSell, setModalUpSell] = useState(false);
 	const [modalUpSend, setModalUpSend] = useState(false);
+	const [modalUpReceive, setModalUpReceive] = useState(false);
 
 	//ALL URLS HERE
 	//api endpoint to get the coin data.
@@ -31,7 +34,7 @@ const TradeModal = ({ tradeModal }) => {
 			try {
 				let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
 					await toast.error(`${err.response.data}`, {
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					});
 				});
 
@@ -47,7 +50,7 @@ const TradeModal = ({ tradeModal }) => {
 			try {
 				let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
 					await toast.error(err.response.data, {
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					});
 				});
 				if (isRendered.current === true) {
@@ -95,6 +98,7 @@ const TradeModal = ({ tradeModal }) => {
 				setBalance(0);
 			} else {
 				setBalance(newCoinBalance[0].balance);
+				setAddress(newCoinBalance[0]._id);
 			}
 		}
 		if (
@@ -107,10 +111,9 @@ const TradeModal = ({ tradeModal }) => {
 		}
 	}, [coinInfo, user, wallet]);
 
-
-    function showTab(){
-        if (user !== null && user.wallet !== undefined){
-            return (
+	function showTab() {
+		if (user !== null && user.wallet !== undefined) {
+			return (
 				<>
 					<div className="buyCrypto" onClick={() => setModalUpBuy(!modalUpBuy)}>
 						<div className="tradeModalIcon">
@@ -136,7 +139,7 @@ const TradeModal = ({ tradeModal }) => {
 						</div>
 						Send
 					</div>
-					<div className="receiveCrypto" onClick={() => alert('Coming soon ⏳')}>
+					<div className="receiveCrypto" onClick={() => setModalUpReceive(!modalUpReceive)}>
 						<div className="tradeModalIcon">
 							<BsArrowDownLeft />
 						</div>
@@ -175,14 +178,23 @@ const TradeModal = ({ tradeModal }) => {
 						wallet={wallet}
 						balance={balance}
 					/>
+
+					<Receive
+						modalUpReceive={modalUpReceive}
+						setModalUpReceive={setModalUpReceive}
+						setCoin={setCoin}
+						coin={coin}
+						coinInfo={coinInfo}
+						user={user}
+						wallet={wallet}
+						address={address}
+					/>
 				</>
 			);
-        } else if (user !== null && user.wallet === undefined){
-            return (
-                <p className="noWallet">Only available to users with a wallet</p>
-            )
-        }
-    }
+		} else if (user !== null && user.wallet === undefined) {
+			return <p className="noWallet">Only available to users with a wallet</p>;
+		}
+	}
 
 	return <div className={`tradeModal ${tradeModal ? 'Show' : ''}`}>{showTab()}</div>;
 };

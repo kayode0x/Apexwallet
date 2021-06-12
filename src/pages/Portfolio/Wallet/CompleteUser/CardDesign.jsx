@@ -38,9 +38,7 @@ export default function CardDesign({ user, BsThreeDotsVertical }) {
 					}
 				})
 				.catch(async (err) => {
-					await toast.error(err.response.data, {
-						position: toast.POSITION.TOP_CENTER,
-					});
+					await toast.error(err.response.data, {});
 					setChanging(false);
 				});
 		} catch (err) {
@@ -114,7 +112,7 @@ export default function CardDesign({ user, BsThreeDotsVertical }) {
 					</div>
 				</Fade>
 			</Modal>
-			<ToastContainer autoClose={3000} />
+			<ToastContainer hideProgressBar autoClose={3000} />
 		</div>
 	);
 }

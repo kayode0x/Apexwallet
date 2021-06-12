@@ -97,12 +97,12 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 		if (buyType === 'fiat') {
 			if (amountToBuyFiat < 2) {
 				toast.error(`You can only buy a minimum of $2 worth of ${coinInfo.symbol.toUpperCase()}`, {
-					position: toast.POSITION.TOP_CENTER,
+					hideProgressBar: true,
 				});
 				setBuying(false);
 			} else if (amountToBuyFiat > wallet.balance) {
 				toast.error(`Your USD balance is $${wallet.balance}, you can't buy more than that`, {
-					position: toast.POSITION.TOP_CENTER,
+					hideProgressBar: true,
 				});
 				setBuying(false);
 			} else {
@@ -113,7 +113,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						.then((res) => {
 							if (res.status === 200) {
 								toast.success(`Success 🚀`, {
-									position: toast.POSITION.TOP_CENTER,
+									hideProgressBar: true,
 								});
 								setTimeout(() => {
 									window.location.reload();
@@ -122,9 +122,8 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 							console.log('DATA: ', res.data);
 						})
 						.catch(async (err) => {
-							//toastify ROCKS!!
 							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								hideProgressBar: true,
 							});
 						});
 				} catch (error) {
@@ -141,7 +140,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setBuying(false);
@@ -151,7 +150,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setBuying(false);
@@ -159,7 +158,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 				toast.error(
 					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setBuying(false);
@@ -171,7 +170,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						.then((res) => {
 							if (res.status === 200) {
 								toast.success(`Success 🚀`, {
-									position: toast.POSITION.TOP_CENTER,
+									hideProgressBar: true,
 								});
 								setTimeout(() => {
 									window.location.reload();
@@ -179,9 +178,8 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 							}
 						})
 						.catch(async (err) => {
-							//toastify ROCKS!!
 							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								hideProgressBar: true,
 							});
 						});
 				} catch (error) {
@@ -208,13 +206,13 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						5
 					)}, you can't sell more than that`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setSelling(false);
 			} else if (amountToSellFiat < 1) {
 				toast.error(`You can only sell a minimum of $1 worth of ${coinInfo.symbol.toUpperCase()}`, {
-					position: toast.POSITION.TOP_CENTER,
+					hideProgressBar: true,
 				});
 				setSelling(false);
 			} else {
@@ -225,7 +223,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						.then((res) => {
 							if (res.status === 200) {
 								toast.error(`Success 🚀`, {
-									position: toast.POSITION.TOP_CENTER,
+									hideProgressBar: true,
 								});
 								setTimeout(() => {
 									window.location.reload();
@@ -234,9 +232,8 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 							console.log('DATA: ', res.data);
 						})
 						.catch(async (err) => {
-							//toastify ROCKS!!
 							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								hideProgressBar: true,
 							});
 						});
 				} catch (error) {
@@ -251,7 +248,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						2 / coinInfo.market_data.current_price.usd
 					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setSelling(false);
@@ -261,7 +258,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						5
 					)}, you can't sell more than that`,
 					{
-						position: toast.POSITION.TOP_CENTER,
+						hideProgressBar: true,
 					}
 				);
 				setSelling(false);
@@ -273,7 +270,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 						.then((res) => {
 							if (res.status === 200) {
 								toast.success(`Success 🚀`, {
-									position: toast.POSITION.TOP_CENTER,
+									hideProgressBar: true,
 								});
 								setTimeout(() => {
 									window.location.reload();
@@ -281,9 +278,8 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 							}
 						})
 						.catch(async (err) => {
-							//toastify ROCKS!!
 							await toast.error(`${err.response.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								hideProgressBar: true,
 							});
 						});
 				} catch (error) {

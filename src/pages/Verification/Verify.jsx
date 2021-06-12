@@ -9,10 +9,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
 const Verify = () => {
-    const history = useHistory();
+	const history = useHistory();
 	const [verifying, setVerifying] = useState(false);
 
-    useEffect(() => {
+	useEffect(() => {
 		async function verifyUser() {
 			setVerifying(true);
 			const queryString = window.location.search;
@@ -25,14 +25,12 @@ const Verify = () => {
 			const apiURL = 'https://api.apexwallet.app/api/v1';
 
 			try {
-                await axios
+				await axios
 					.put(`${apiURL}/auth/verify`, user, { withCredentials: true })
 					.then(async (res) => {
 						console.log('RES: ', res);
 						if (res.status === 200) {
-							await toast.success(`${res.data}`, {
-								position: toast.POSITION.TOP_CENTER,
-							});
+							await toast.success(`${res.data}`, {});
 
 							setTimeout(() => {
 								history.push('/login');
@@ -43,24 +41,20 @@ const Verify = () => {
 					})
 					.catch(async (err) => {
 						//if error, display the custom error message from the server with toastify.
-						await toast.error(`${err.response.data}`, {
-							position: toast.POSITION.TOP_CENTER,
-						});
+						await toast.error(`${err.response.data}`, {});
 						setTimeout(() => {
 							history.push('/login');
 						}, 3000);
 					});
-            } catch (error) {
-                console.log(error)
-            }
+			} catch (error) {
+				console.log(error);
+			}
 
 			setVerifying(false);
 		}
 
-
-        verifyUser();
-	}, [history])
-
+		verifyUser();
+	}, [history]);
 
 	return (
 		<HelmetProvider>
@@ -77,11 +71,10 @@ const Verify = () => {
 					<div className="verifying">{verifying && <RotateSpinner size={50} color="#000" />}</div>
 				</div>
 			</div>
-			{/* {DON'T FORGET THE TOASTIFY} */}
-			<ToastContainer autoClose={3000} />
+
+			<ToastContainer hideProgressBar autoClose={3000} />
 		</HelmetProvider>
 	);
-
 };
 
 export default Verify;

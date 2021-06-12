@@ -35,7 +35,7 @@ const Dashboard = () => {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
 						await toast.error(`${err.response.data}`, {
-							position: toast.POSITION.TOP_CENTER,
+							
 						});
 					});
 					if (isRendered.current === true) {
@@ -131,7 +131,7 @@ const Dashboard = () => {
 					<p className="header">Home</p>
 					{CompleteDashboard(user, watchList, news)}
 				</div>
-				<ToastContainer autoClose={3000} />
+				<ToastContainer hideProgressBar autoClose={3000} />
 			</div>
 		</HelmetProvider>
 	);

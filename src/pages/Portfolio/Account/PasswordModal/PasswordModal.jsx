@@ -34,7 +34,7 @@ export default function PasswordModal({ user }) {
 		try {
 			if (currentPassword !== confirmCurrentPassword) {
 				toast.error('Passwords do not match', {
-					position: toast.POSITION.TOP_CENTER,
+					
 				});
 				setChangingPassword(false);
 			} else {
@@ -43,7 +43,7 @@ export default function PasswordModal({ user }) {
 					.then((res) => {
 						if (res.status === 200) {
 							toast.success(`${res.data}`, {
-								position: toast.POSITION.TOP_CENTER,
+								
 							});
 							handleCloseModal();
 							setChangingPassword(false);
@@ -51,7 +51,7 @@ export default function PasswordModal({ user }) {
 					})
 					.catch(async (err) => {
 						toast.error(`${err.response.data}`, {
-							position: toast.POSITION.TOP_CENTER,
+							
 						});
 						setChangingPassword(false);
 					});
@@ -140,7 +140,7 @@ export default function PasswordModal({ user }) {
 					</div>
 				</Fade>
 			</Modal>
-			<ToastContainer autoClose={3000} />
+			<ToastContainer hideProgressBar autoClose={3000} />
 		</div>
 	);
 }

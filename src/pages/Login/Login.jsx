@@ -48,9 +48,7 @@ const Login = () => {
 				})
 				.catch(async (err) => {
 					//if error, display the custom error message from the server with toastify.
-					await toast.error(`${err.response.data}`, {
-						position: toast.POSITION.TOP_CENTER,
-					});
+					await toast.error(`${err.response.data}`, {});
 				});
 
 			//after the try operation, stop the button animation
@@ -129,8 +127,7 @@ const Login = () => {
 				</div>
 			</div>
 
-			{/* {DON'T FORGET THE TOASTIFY} */}
-			<ToastContainer autoClose={3000} />
+			<ToastContainer hideProgressBar autoClose={3000} />
 		</HelmetProvider>
 	);
 };
