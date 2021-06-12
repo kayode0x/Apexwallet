@@ -86,7 +86,7 @@ const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinIn
 	};
 
 	return (
-		<div className={`send ${modalUpReceive ? 'Show' : ''}`}>
+		<div className={`receive ${modalUpReceive ? 'Show' : ''}`}>
 			<div className="closeIcon" onClick={() => setModalUpReceive(!modalUpReceive)}>
 				<IoClose />
 			</div>

@@ -8,7 +8,7 @@ $orange: #ef5116;
 $navyBlue: #262946;
 $borderColor: rgb(170, 170, 170);
 
-.send {
+.receive {
 	height: 100%;
 	position: fixed;
 	top: 150vh;
@@ -20,7 +20,7 @@ $borderColor: rgb(170, 170, 170);
 	}
 }
 
-.send.Show {
+.receive.Show {
 	top: 0;
 	left: 0;
 	display: flex;
