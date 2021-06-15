@@ -1,1 +1,0 @@
-bitcoin, litecoin, tether, dogecoin, ethereum, ethereum-classic, ripple, binancecoin, cardano, usd-coin, tron, bitcoin-cash, polkadot, uniswap, dash, 
