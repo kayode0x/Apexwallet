@@ -50,11 +50,11 @@ const CompleteDashboard = (user, watchList, news) => {
 	const newsFunction = () => {
 		let newsLength = 10;
 		return news.slice(0, newsLength).map((news) => (
-			<a className="newsDiv" key={news.id} href={news.url}>
+			<a className="newsDiv" key={news.id} target="_blank" rel="noopener noreferrer" href={news.url}>
 				<div className="titleAndAuthor">
 					<p>{news.title}</p>
 					<p>
-						<span>{news.source_info.name}</span>{' '}<span>&#8226;</span>{' '}
+						<span>{news.source_info.name}</span> <span>&#8226;</span>{' '}
 						<span>{moment.unix(news.published_on).startOf('hour').fromNow()}</span>
 					</p>
 				</div>

@@ -7,13 +7,42 @@ import { GoUnverified, GoVerified } from 'react-icons/go';
 import notAllowedIcon from '../../../../assets/logo/appl-274c-160.png';
 import allowedIcon from '../../../../assets/logo/appl-2705-160.png';
 import moneyMouth from '../../../../assets/logo/moneyMouth.png';
-import unamusedEmoji from '../../../../assets/logo/unamusedEmoji.png';
 import { FiChevronRight } from 'react-icons/fi';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function StatusModal({ user }) {
 	const [openModal, setOpenModal] = useState(false);
 	const handleOpenModal = () => setOpenModal(true);
 	const handleCloseModal = () => setOpenModal(false);
+	const [sending, setSending] = useState(false);
+	const apiURL = 'https://api.apexwallet.app/api/v1';
+
+	const handleNewVerification = async () => {
+		setSending(true);
+		console.log('HERE')
+		try {
+			await axios
+				.post(`${apiURL}/auth/resend-verification-link`)
+				.then((res) => {
+					if (res.status === 200) {
+						toast.success(`${res.data}`, {
+							hideProgressBar: true,
+						});
+						handleCloseModal();
+						setSending(false);
+					}
+				})
+				.catch(async (err) => {
+					await toast.error(`${err.response.data}`, {});
+					setSending(false);
+				});
+		} catch (error) {
+			console.log('Error: ' + error);
+			setSending(false);
+		}
+	};
 
 	return (
 		<div style={{ width: '100%' }}>
@@ -90,7 +119,10 @@ export default function StatusModal({ user }) {
 									<p>Track assets</p>
 								</div>
 
-								<div className="privilegesNote">
+								<div
+									onClick={() => user.isActive === false && handleNewVerification()}
+									className="privilegesNote"
+								>
 									{user.isActive === true ? (
 										<>
 											<p>
@@ -101,8 +133,9 @@ export default function StatusModal({ user }) {
 									) : (
 										<>
 											<p>
-												Account unverified! There's nothing much you can do yet
-												<img src={unamusedEmoji} alt="unamused emoji" />
+												{sending
+													? 'Sending...'
+													: 'Account unverified! Click here to resend a verification email'}
 											</p>
 										</>
 									)}

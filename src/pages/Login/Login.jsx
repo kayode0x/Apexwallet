@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
 	const history = useHistory();
 	const { getLoggedIn } = useContext(AuthContext);
-	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [loggingIn, setLoggingIn] = useState(false);
@@ -29,7 +29,7 @@ const Login = () => {
 
 		//use try catch to prevent open hole
 		try {
-			const user = { email, password };
+			const user = { username, password };
 			await axios
 				.post(`${apiURL}/auth/login`, user, { withCredentials: true })
 				.then((res) => {
@@ -80,16 +80,16 @@ const Login = () => {
 					</div>
 
 					<form onSubmit={handleLogin}>
-						<div className="email">
-							<label htmlFor="email">Email</label>
+						<div className="username">
+							<label htmlFor="username">Username</label>
 							<input
-								type="email"
-								id="email"
-								name="email"
-								placeholder="johndoe@example.com"
+								type="text"
+								id="username"
+								name="username"
+								placeholder="johndoe"
 								required
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
+								value={username}
+								onChange={(e) => setUsername(e.target.value)}
 							/>
 						</div>
 

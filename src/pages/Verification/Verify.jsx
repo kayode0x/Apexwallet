@@ -33,8 +33,8 @@ const Verify = () => {
 							await toast.success(`${res.data}`, {});
 
 							setTimeout(() => {
-								history.push('/login');
-							}, 5000);
+								history.push('/dashboard');
+							}, 3000);
 
 							setVerifying(false);
 						}

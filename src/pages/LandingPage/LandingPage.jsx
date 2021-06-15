@@ -70,7 +70,7 @@ const LandingPage = () => {
 				<div className="mainContainer">
 					<div className="container">
 						<p className="mainText">
-							Learn how cryptocurrencies work by 
+							Learn how cryptocurrencies works by 
 							<span> simulating</span> basically anything you can do with a real crypto wallet, plus extra
 							features.
 						</p>
@@ -84,7 +84,7 @@ const LandingPage = () => {
 						</div>
 					</div>
 				</div>
-				<footer>Apex Wallet, from Werrey Inc 🦄</footer>
+				<footer>Apex Wallet, from Werrey Inc.</footer>
 			</div>
 
 			<SectionOne />

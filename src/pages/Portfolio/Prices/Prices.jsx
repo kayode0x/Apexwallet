@@ -10,7 +10,7 @@ import { BiSearch } from 'react-icons/bi';
 import { RotateSpinner } from 'react-spinners-kit';
 import BottomNav from '../../../components/BottomNav/BottomNav';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-// import { BsStarFill, BsStar } from 'react-icons/bs';
+import { FcCalculator } from 'react-icons/fc';
 
 const Prices = () => {
 	const history = useHistory();
@@ -197,8 +197,10 @@ const Prices = () => {
 												</div>
 												{/* <div className="sortBar">Sorting goes here</div> */}
 											</div>
+
 											{allCoins.map((coin) => (
 												<Link className="coinList" key={coin.id} to={`/prices/${coin.id}`}>
+													{console.log(coin)}
 													<div className="imageAndName">
 														<img className="coinImage" src={coin.image} alt={coin.name} />
 														<div className="coinNames">

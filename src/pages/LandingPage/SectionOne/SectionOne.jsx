@@ -71,7 +71,7 @@ const SectionOne = () => {
 							<img src={News} alt="news" />
 						</div>
 						<span>
-							See the latest things going on to keep yourself informed, and also tips on how do do stuffs.
+							See the latest things going on to keep yourself informed, and also tips on how to trade, hold etc.
 						</span>
 					</div>
 				</div>
@@ -208,7 +208,7 @@ const SectionOne = () => {
 					</div>
 				</div>
 
-				<footer>Apex Wallet, from Werrey Inc 🦄. &copy; 2021</footer>
+				<footer>Apex Wallet, from Werrey Inc. &copy; 2021</footer>
 			</div>
 		</>
 	);

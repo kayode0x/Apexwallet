@@ -121,7 +121,7 @@ const SignUp = () => {
 								id="password"
 								minLength="6"
 								name="password"
-								placeholder="Chose a strong password"
+								placeholder="Choose a strong password"
 								required
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}

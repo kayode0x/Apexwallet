@@ -144,7 +144,7 @@ const Account = () => {
 								</button>
 
 								<p className="walletVersion">v1 - beta 🚀</p>
-								<p className="copyright">Apex Wallet, from Werrey Inc 🦄. &copy; 2021</p>
+								<p className="copyright">Apex Wallet, from Werrey Inc. &copy; 2021</p>
 							</div>
 						</>
 					) : (

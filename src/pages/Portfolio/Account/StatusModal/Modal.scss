@@ -69,6 +69,7 @@ $navyBlue: #262946;
             text-align: center;
             align-items: center;
             justify-content: center;
+            transition: all .5s ease;
             img {
                 margin-bottom: -.21rem;
                 margin-right: 0;
@@ -77,6 +78,10 @@ $navyBlue: #262946;
             padding: 0 1rem;
             border-radius: 10px;
             margin-bottom: 1rem;
+        }
+        .privilegesNote:hover {
+            cursor: pointer;
+            background: rgba($color: #000000, $alpha: .7);
         }
 	}
 }

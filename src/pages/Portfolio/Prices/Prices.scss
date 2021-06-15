@@ -74,11 +74,67 @@ $navyBlue: #262946;
 			text-align: right;
 		}
 
+		.verifiedWithWallet {
+			margin-bottom: -0.5rem;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			align-self: center;
+			width: 100%;
+			@media (min-width: 768px) and (max-width: 1023px) {
+				width: 100%;
+			}
+			justify-content: space-between;
+
+			.balanceDiv {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+
+				.balanceHeader {
+					font-size: 0.95rem;
+					margin-top: 0.25rem;
+					color: $subColor;
+				}
+
+				.balanceUSD {
+					margin-top: -0.75rem;
+					font-size: 1.25rem;
+					font-weight: bold;
+					text-align: center;
+				}
+			}
+
+			.notificationIcon {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.5rem;
+				margin-top: -0.5rem;
+				border: 1px solid $borderColor;
+				color: $subColor;
+				border-radius: 50%;
+				width: 3rem;
+				height: 3rem;
+				position: relative;
+
+				span {
+					height: 0.5rem;
+					width: 0.5rem;
+					background: #000;
+					border-radius: 50%;
+					position: absolute;
+					top: 25%;
+					right: 31%;
+				}
+			}
+		}
+
 		.searchAndSort {
 			display: flex;
 			flex-direction: column;
 			width: 70%;
-			margin-bottom: 1rem;
+			// margin-bottom: 1rem;
 
 			@media (max-width: 1170px) {
 				width: 100%;
