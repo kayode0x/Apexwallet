@@ -5,12 +5,10 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory, Link } from 'react-router-dom';
-// import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { BiSearch } from 'react-icons/bi';
 import { RotateSpinner } from 'react-spinners-kit';
 import BottomNav from '../../../components/BottomNav/BottomNav';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { FcCalculator } from 'react-icons/fc';
 
 const Prices = () => {
 	const history = useHistory();

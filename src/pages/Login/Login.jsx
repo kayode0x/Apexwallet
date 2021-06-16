@@ -86,7 +86,7 @@ const Login = () => {
 								type="text"
 								id="username"
 								name="username"
-								placeholder="johndoe"
+								placeholder="johndoe99"
 								required
 								value={username}
 								onChange={(e) => setUsername(e.target.value)}
