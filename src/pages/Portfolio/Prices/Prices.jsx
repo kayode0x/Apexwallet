@@ -162,7 +162,7 @@ const Prices = () => {
 				return 0;
 			}
 
-			allCoins = allCoins.sort(compare);
+			allCoins = allCoins.sort(compare)
 
 			if (search === true) {
 				allCoins = allCoins.filter((coin) => coin.name.toLowerCase().includes(searchText.toLowerCase()));
