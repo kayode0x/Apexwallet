@@ -9,6 +9,8 @@ import { BiSearch } from 'react-icons/bi';
 import { RotateSpinner } from 'react-spinners-kit';
 import BottomNav from '../../../components/BottomNav/BottomNav';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+// import { FcCalculator } from 'react-icons/fc';
+import { IoClose, IoCalculator } from 'react-icons/io5';
 
 const Prices = () => {
 	const history = useHistory();
@@ -17,9 +19,12 @@ const Prices = () => {
 	// const [wallet, setWallet] = useState(null);
 	// const [canTrade, setCanTrade] = useState(false);
 	const [searchText, setSearchText] = useState('');
+	const [search, setSearch] = useState(false);
 	const [user, setUser] = useState(null);
 	const [prices, setPrices] = useState(null);
 	const [marketInfo, setMarketInfo] = useState(null);
+	const [sort, setSort] = useState('all');
+	const [searchActive, setSearchActive] = useState(false);
 	let isRendered = useRef(false);
 
 	const apiURL = 'https://api.apexwallet.app/api/v1';
@@ -108,13 +113,62 @@ const Prices = () => {
 	let allCoins;
 	//search for a coin
 	if (prices) {
-		allCoins = prices.filter((coin) => coin.name.toLowerCase().includes(searchText.toLowerCase()));
-	}
+		if (sort === 'all') {
+			function compare(a, b) {
+				if (a.market_cap < b.market_cap) {
+					return 1;
+				}
+				if (a.market_cap > b.market_cap) {
+					return -1;
+				}
+				return 0;
+			}
 
-	const handleSearch = (e) => {
-		e.preventDefault();
-		setSearchText(e.target.value.toLowerCase());
-	};
+			allCoins = prices.sort(compare);
+			if (search === true) {
+				allCoins = prices.filter((coin) => coin.name.toLowerCase().includes(searchText.toLowerCase()));
+			}
+		} else if (sort === 'price') {
+			function compare(a, b) {
+				if (a.current_price < b.current_price) {
+					return 1;
+				}
+				if (a.current_price > b.current_price) {
+					return -1;
+				}
+				return 0;
+			}
+
+			allCoins = prices.sort(compare);
+
+			if (search === true) {
+				allCoins = allCoins.filter((coin) => coin.name.toLowerCase().includes(searchText.toLowerCase()));
+			}
+		} else if (sort === 'gainers') {
+			allCoins = prices.filter((coin) => coin.price_change_percentage_24h > 0);
+
+			if (search === true) {
+				allCoins = allCoins.filter((coin) => coin.name.toLowerCase().includes(searchText.toLowerCase()));
+			}
+		} else if (sort === 'losers') {
+			allCoins = prices.filter((coin) => coin.price_change_percentage_24h < 0);
+			function compare(a, b) {
+				if (a.price_change_percentage_24h > b.price_change_percentage_24h) {
+					return 1;
+				}
+				if (a.price_change_percentage_24h < b.price_change_percentage_24h) {
+					return -1;
+				}
+				return 0;
+			}
+
+			allCoins = allCoins.sort(compare);
+
+			if (search === true) {
+				allCoins = allCoins.filter((coin) => coin.name.toLowerCase().includes(searchText.toLowerCase()));
+			}
+		}
+	}
 
 	return (
 		<HelmetProvider>
@@ -134,10 +188,16 @@ const Prices = () => {
 									<div className="pricesAndTrade">
 										<div className="pricesData">
 											{marketInfo && (
-												<div className="pricesInfo">
-													<div className="pricesCap">
-														<p>Market Cap.</p>
-														<p>${formatNumber(marketInfo.total_market_cap.usd)}</p>
+												<div className="calculatorAndMarketInfo">
+													<div className="marketInfoDiv">
+														<p className="marketInfoHeader">
+															Market is{' '}
+															<span>
+																{marketInfo.market_cap_change_percentage_24h_usd < 0
+																	? 'down'
+																	: 'up'}
+															</span>
+														</p>
 														<p
 															style={{
 																color:
@@ -145,6 +205,7 @@ const Prices = () => {
 																		? '#FF1B1C'
 																		: '#68df44',
 															}}
+															className="marketPercent"
 														>
 															<span>
 																{marketInfo.market_cap_change_percentage_24h_usd < 0
@@ -160,45 +221,73 @@ const Prices = () => {
 														</p>
 													</div>
 
-													<div className="pricesVolume">
-														<p>Volume 24h</p>
-														<p>${formatNumber(marketInfo.total_volume.usd)}</p>
-														<p>-</p>
-													</div>
-
-													<div className="BTCDominance">
-														<p>BTC Dominance</p>
-														<p>
-															{Math.round(
-																(marketInfo.market_cap_percentage.btc +
-																	Number.EPSILON) *
-																	100
-															) / 100}
-															%
-														</p>
-
-														<p>-</p>
+													<div className="calculatorIcon">
+														<IoCalculator
+															onClick={() => alert('Quick converter coming soon.')}
+														/>
 													</div>
 												</div>
 											)}
 											<div className="searchAndSort">
-												<div className="searchBar">
-													<input
-														type="text"
-														required
-														placeholder="Search for an asset"
-														onChange={handleSearch}
-													/>
-													<div className="searchIcon">
-														<BiSearch />
+												{searchActive ? null : (
+													<div className="sortBar">
+														<p>Sort By</p>
+														<div
+															onClick={() => setSort('all')}
+															className={sort === 'all' ? 'active' : ''}
+														>
+															All
+														</div>
+														<div
+															onClick={() => setSort('price')}
+															className={sort === 'price' ? 'active' : ''}
+														>
+															Price
+														</div>
+														<div
+															onClick={() => setSort('gainers')}
+															className={sort === 'gainers' ? 'active' : ''}
+														>
+															Gainers
+														</div>
+														<div
+															onClick={() => setSort('losers')}
+															className={sort === 'losers' ? 'active' : ''}
+														>
+															Losers
+														</div>
+													</div>
+												)}
+												<div
+													style={{ width: searchActive ? '100%' : '20%' }}
+													className="searchBar"
+												>
+													{searchActive && (
+														<input
+															style={{ width: searchActive ? '100%' : '10%' }}
+															type="text"
+															required
+															placeholder="Search for an asset"
+															onChange={(e) => {
+																setSearchText(e.target.value.toLowerCase());
+																setSearch(true);
+															}}
+														/>
+													)}
+													<div
+														onClick={() => {
+															setSearchActive(!searchActive);
+															setSearchText('');
+														}}
+														className={searchActive ? 'searchIcon' : 'searchIcon inactive'}
+													>
+														{searchActive ? <IoClose /> : <BiSearch />}
 													</div>
 												</div>
-												{/* <div className="sortBar">Sorting goes here</div> */}
 											</div>
 
 											{allCoins.map((coin) => (
 												<Link className="coinList" key={coin.id} to={`/prices/${coin.id}`}>
-													{console.log(coin)}
 													<div className="imageAndName">
 														<img className="coinImage" src={coin.image} alt={coin.name} />
 														<div className="coinNames">
@@ -229,7 +318,6 @@ const Prices = () => {
 												</Link>
 											))}
 										</div>
-										{/* {matches && <div className="marketTrade">x</div>} */}
 									</div>
 								</>
 							)}
