@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { MdContentCopy } from 'react-icons/md';
+import QRCode from 'qrcode.react';
 
 const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinInfo, user, wallet, address }) => {
 	const handleChange = (event) => {
@@ -13,7 +14,7 @@ const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinIn
 	};
 
 	const receiveFunction = () => {
-		if (coinInfo !== null && user !== null && wallet !== null) {
+		if (coinInfo !== null && user !== null && wallet !== null && address !== null) {
 			return (
 				<>
 					<p className="header">
@@ -22,8 +23,24 @@ const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinIn
 					</p>
 					<div className="selectBalanceAndBTN">
 						<div className="usernameAndAddress">
-							<div className="container">
-								<p>Username</p>
+							<div className="containerx">
+								<QRCode
+									level={'L'}
+									includeMargin={false}
+									renderAs={'svg'}
+									imageSettings={{
+										src: 'https://appzonk.com/apex/',
+										x: null,
+										y: null,
+										height: 40,
+										width: 40,
+										excavate: true,
+									}}
+									className="qrCode"
+									size={220}
+									value={address}
+								/>
+								{/* <p>Username</p>
 								<div className="iconAndName">
 									<span>{user.username}</span>
 									<div
@@ -37,7 +54,7 @@ const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinIn
 									>
 										<MdContentCopy />
 									</div>
-								</div>
+								</div> */}
 								<p>{coinInfo.symbol.toUpperCase()} Address</p>
 								<div className="iconAndName">
 									<span>{address}</span>
@@ -72,7 +89,28 @@ const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinIn
 							<MenuItem value={'uniswap'}>Uniswap</MenuItem>
 							<MenuItem value={'dash'}>Dash</MenuItem>
 						</Select>
-						<button onClick={() => setModalUpReceive(!modalUpReceive)}>Close</button>
+						<button
+							onClick={() => {
+								if (navigator.share) {
+									navigator
+										.share({
+											title: `Share ${coinInfo.name} address`,
+											url: coinInfo.address,
+										})
+										.then(() => {
+											console.log('Thanks for sharing!');
+										})
+										.catch(console.error);
+								} else {
+									navigator.clipboard.writeText(address);
+									toast.success(`Copied ${coinInfo.symbol.toUpperCase()} Address`, {
+										hideProgressBar: true,
+									});
+								}
+							}}
+						>
+							Share Address
+						</button>
 					</div>
 				</>
 			);

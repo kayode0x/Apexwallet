@@ -216,6 +216,27 @@ $navyBlue: #262946;
 					color: $mainColor;
 				}
 			}
+
+			@keyframes sortAnimOut {
+				from {
+					opacity: 1;
+					transform: translateX(0);
+				}
+				to {
+					opacity: 0;
+					transform: translateX(-100%);
+				}
+			}
+			@keyframes sortAnimIn {
+				from {
+					opacity: 0;
+					transform: translateX(-100%);
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
 		}
 
 		.pricesAndTrade {

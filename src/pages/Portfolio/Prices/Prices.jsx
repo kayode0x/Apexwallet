@@ -162,7 +162,7 @@ const Prices = () => {
 				return 0;
 			}
 
-			allCoins = allCoins.sort(compare)
+			allCoins = allCoins.sort(compare);
 
 			if (search === true) {
 				allCoins = allCoins.filter((coin) => coin.name.toLowerCase().includes(searchText.toLowerCase()));
@@ -230,7 +230,14 @@ const Prices = () => {
 											)}
 											<div className="searchAndSort">
 												{searchActive ? null : (
-													<div className="sortBar">
+													<div
+														style={{
+															animation: searchActive
+																? 'sortAnimOut .3s ease forwards'
+																: 'sortAnimIn .3s ease forwards',
+														}}
+														className="sortBar"
+													>
 														<p>Sort By</p>
 														<div
 															onClick={() => setSort('all')}

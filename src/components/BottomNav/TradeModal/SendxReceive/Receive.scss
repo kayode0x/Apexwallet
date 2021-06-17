@@ -82,20 +82,31 @@ $borderColor: rgb(170, 170, 170);
 			.usernameAndAddress {
 				width: 100%;
 				display: flex;
+				align-items: center;
 				flex-direction: column;
+				justify-content: center;
 				margin-bottom: 1rem;
-				border: 1px solid $borderColor;
-				border-radius: 5px;
 
-				.container {
+				.containerx {
 					padding: 1rem;
+					width: 90%;
 					display: flex;
-					align-items: flex-start;
+					flex-direction: column;
+					align-items: center;
 					margin-top: 0rem;
+					justify-content: center;
+					border: 1px solid $borderColor;
+					border-radius: 5px;
+					// background: #000;
+
+					.qrCode {
+						padding: 1rem 3rem;
+					}
 				}
 
 				.iconAndName {
 					display: flex;
+					align-self: flex-start;
 
 					.icon {
 						transition: all 0.2s ease-in;
@@ -108,8 +119,11 @@ $borderColor: rgb(170, 170, 170);
 				}
 
 				p {
+					display: flex;
+					align-self: flex-start;
 					font-size: 0.95rem;
 					color: $subColor;
+					margin-bottom: 0rem;
 				}
 
 				span {
@@ -134,6 +148,9 @@ $borderColor: rgb(170, 170, 170);
 				background: $lightBlue;
 				transition: 0.5s;
 				margin-top: 1rem;
+				@media (min-width: 768px){
+					margin-bottom: 1.5rem;
+				}
 			}
 
 			button:hover {

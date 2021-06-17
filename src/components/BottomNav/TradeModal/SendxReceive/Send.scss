@@ -122,6 +122,7 @@ $borderColor: rgb(170, 170, 170);
 
 			.input2 {
 				width: 100%;
+				position: relative;
 				margin-bottom: 1rem;
 
 				input {
@@ -148,6 +149,15 @@ $borderColor: rgb(170, 170, 170);
 						border: 1px solid $textColor;
 					}
 				}
+
+				.qrCode {
+					position: absolute;
+					font-size: 1.5rem;
+					top: 25%;
+					right: 5%;
+					background: $mainColor;
+				}
+
 			}
 
 			.selectCoin {
@@ -238,4 +248,56 @@ $borderColor: rgb(170, 170, 170);
 	top: 45%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.qrSendModal {
+	height: 100%;
+	position: fixed;
+	top: 150vh;
+	background: $mainColor;
+	width: 100%;
+	@media (min-width: 768px) {
+		max-width: 30rem;
+		display: none;
+	}
+}
+
+.qrSendModal.Show {
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transition: all 0.7s ease-in;
+	z-index: 4;
+
+	.closeQr {
+		position: absolute;
+		color: $mainColor;
+		z-index: 5;
+		font-size: 2rem;
+		top: 1%;
+		right: 3%;
+		background: rgba(0, 0, 0, 0.4);
+		display: flex;
+		height: 3rem;
+		width: 3rem;
+		border-radius: 100%;
+		align-items: center;
+		justify-content: center;
+	}
+
+	@media (min-width: 768px) {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: 10px;
+	}
+
+	.qrText {
+		font-size: 1.25rem;
+		@media (min-width:768px){
+			display: none;
+		}
+	}
 }

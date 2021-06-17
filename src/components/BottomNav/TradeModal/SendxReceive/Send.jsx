@@ -1,4 +1,4 @@
-import { IoClose } from 'react-icons/io5';
+import { IoClose, IoQrCodeOutline } from 'react-icons/io5';
 import './Send.scss';
 import { RotateSpinner } from 'react-spinners-kit';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import QrReader from 'react-qr-reader';
 
 const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user, wallet, balance }) => {
 	const [amountToSend, setAmountToSend] = useState(1);
@@ -17,6 +18,8 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 	const [proceedToSend, setProceedToSend] = useState(false);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const [sending, setSending] = useState(false);
+	const [qr, setQr] = useState('Scan a QR code to send');
+	const [qrModal, setQrModal] = useState(false);
 
 	//switch the way the user wants to buy coins, fiat or crypto
 	const handleBuyTypeChange = () => {
@@ -29,6 +32,24 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 
 	const handleChange = (event) => {
 		setCoin(event.target.value);
+	};
+
+	//scan qrCode
+	const handleScan = (data) => {
+		if (data) {
+			setQr('Found an address: ' + data);
+			setTimeout(() => {
+				setRecipient(data);
+				setQrModal(false);
+				setQr('Scan a QR code to send');
+			}, 2000);
+		}
+	};
+
+	const handleError = (error) => {
+		toast.error(error, {
+			hideProgressBar: true,
+		});
 	};
 
 	//buy coin
@@ -132,6 +153,24 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 		}
 	};
 
+	const qrSendModal = () => {
+		return (
+			<div className={`qrSendModal ${qrModal ? 'Show' : ''}`}>
+				<div className="closeQr" onClick={() => setQrModal(false)}>
+					<IoClose />
+				</div>
+				<QrReader
+					className="qrScanner"
+					delay={100}
+					onError={handleError}
+					onScan={handleScan}
+					style={{ width: '100%' }}
+				/>
+				<p className="qrText">{qr}</p>
+			</div>
+		);
+	};
+
 	const sendFunction = () => {
 		if (coinInfo !== null && user !== null && wallet !== null) {
 			return (
@@ -181,6 +220,11 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 										required={true}
 										placeholder={sendType === 'fiat' ? 'Username' : 'Username or Address'}
 									/>
+									{sendType === 'crypto' && (
+										<div className="qrCode">
+											<IoQrCodeOutline onClick={() => setQrModal(true)} />
+										</div>
+									)}
 								</div>
 								<div className="input2">
 									<input
@@ -292,6 +336,7 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 
 			<form onSubmit={handleSend} className="sendForm">
 				{sendFunction()}
+				{qrSendModal()}
 			</form>
 		</div>
 	);
