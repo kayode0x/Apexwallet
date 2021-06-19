@@ -3,8 +3,40 @@ import { RiNotification4Line } from 'react-icons/ri';
 import coinsSVG from '../../../../assets/logo/coinsSVG.svg';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { IoClose } from 'react-icons/io5';
+import { useState } from 'react';
 
 const CompleteDashboard = (user, watchList, news) => {
+	const [notifications, setNotifications] = useState(true);
+
+	const notificationsFunction = () => {
+		const randomNumber = Math.floor(Math.random() * 3 + 1);
+
+		if(randomNumber === 1) {
+			return (
+				<div style={{ display: notifications ? 'block' : 'none' }}>
+					<p>🚨 New on v1.1 beta 🚨 </p>
+					<p>You can now send and receive coins with a QR code.</p>
+				</div>
+			);
+		} else if(randomNumber === 2) {
+			return (
+				<div>
+					<p>🚨 New on v1.1 beta 🚨 </p>
+					<p>Decentraland, Shiba, Solana, Chainlink and Stellar have been added.</p>
+				</div>
+			);
+		} else if (randomNumber === 3) {
+			return (
+				<div>
+					<p>🚨 New on v1.1 beta 🚨 </p>
+					<p>New way to sort prices and search for a coin.</p>
+				</div>
+			);
+		}
+
+	}
+
 	const watchListFunction = () => {
 		let length = watchList.length;
 		if (length === 0) {
@@ -131,6 +163,12 @@ const CompleteDashboard = (user, watchList, news) => {
 						<span></span>
 						<RiNotification4Line />
 					</div>
+				</div>
+				<div style={{ display: notifications ? 'block' : 'none' }} className="notificationDiv">
+					<div className="closeIcon" onClick={() => setNotifications(false)}>
+						<IoClose />
+					</div>
+					{notificationsFunction()}
 				</div>
 				<p className="watchListHeader">Watchlist</p>
 				{watchListFunction()}
