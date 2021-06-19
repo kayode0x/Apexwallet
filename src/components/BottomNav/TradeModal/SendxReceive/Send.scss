@@ -157,7 +157,6 @@ $borderColor: rgb(170, 170, 170);
 					right: 5%;
 					background: $mainColor;
 				}
-
 			}
 
 			.selectCoin {
@@ -270,18 +269,27 @@ $borderColor: rgb(170, 170, 170);
 	align-items: center;
 	transition: all 0.7s ease-in;
 	z-index: 4;
+	border-radius: 10px;
+	// background: #000;
+
+	.qrScanner section {
+		border-radius: 0px;
+	}
+
+	.qrScanner section div {
+		box-shadow: unset !important;
+	}
 
 	.closeQr {
 		position: absolute;
 		color: $mainColor;
 		z-index: 5;
-		font-size: 2rem;
-		top: 1%;
-		right: 3%;
+		font-size: 1.5rem;
+		top: 0.75%;
+		right: 1.5%;
 		background: rgba(0, 0, 0, 0.4);
 		display: flex;
-		height: 3rem;
-		width: 3rem;
+		padding: 0.5rem;
 		border-radius: 100%;
 		align-items: center;
 		justify-content: center;
@@ -296,7 +304,7 @@ $borderColor: rgb(170, 170, 170);
 
 	.qrText {
 		font-size: 1.25rem;
-		@media (min-width:768px){
+		@media (min-width: 768px) {
 			display: none;
 		}
 	}

@@ -54,6 +54,18 @@ const Graph = ({ graphData, days, coinInfoId }) => {
 		} else if (coinInfoId === 'decentraland') {
 			mainColor = '#e64a19';
 			return mainColor;
+		} else if (coinInfoId === 'shia-inu') {
+			mainColor = '#f90201';
+			return mainColor;
+		} else if (coinInfoId === 'solana') {
+			mainColor = '#7b1fa2';
+			return mainColor;
+		} else if (coinInfoId === 'stellar') {
+			mainColor = '#212121';
+			return mainColor;
+		} else if (coinInfoId === 'chainlink') {
+			mainColor = '#315acb';
+			return mainColor;
 		}
 	};
 
@@ -106,12 +118,23 @@ const Graph = ({ graphData, days, coinInfoId }) => {
 		} else if (coinInfoId === 'decentraland') {
 			subColor = '#ffccbc';
 			return subColor;
+		} else if (coinInfoId === 'shiba-inu') {
+			subColor = '#fca501';
+			return subColor;
+		} else if (coinInfoId === 'solana') {
+			subColor = '#e1bee7';
+			return subColor;
+		} else if (coinInfoId === 'stellar') {
+			subColor = '#bdbdbd';
+			return subColor;
+		} else if (coinInfoId === 'chainlink') {
+			subColor = '#bbdefb';
+			return subColor;
 		}
 	};
 
 	const CustomTooltip = ({ active, payload }) => {
 		if (active && payload && payload.length) {
-			
 			return (
 				<div className="custom-tooltip">
 					{days === 1 ? (
@@ -139,6 +162,7 @@ const Graph = ({ graphData, days, coinInfoId }) => {
 					bottom: days === 365 || days === 'max' ? 0 : -100,
 				}}
 			>
+				{console.log(graphData)}
 				<Tooltip content={<CustomTooltip />} />
 				<Area
 					type="monotone"

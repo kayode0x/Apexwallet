@@ -159,13 +159,16 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 				<div className="closeQr" onClick={() => setQrModal(false)}>
 					<IoClose />
 				</div>
-				<QrReader
-					className="qrScanner"
-					delay={100}
-					onError={handleError}
-					onScan={handleScan}
-					style={{ width: '100%' }}
-				/>
+				{/* Prevent the cameras from staying on when not in use. */}
+				{qrModal && (
+					<QrReader
+						className="qrScanner"
+						delay={100}
+						onError={handleError}
+						onScan={handleScan}
+						style={{ width: '100%' }}
+					/>
+				)}
 				<p className="qrText">{qr}</p>
 			</div>
 		);
@@ -256,6 +259,11 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 										<MenuItem value={'polkadot'}>Polkadot</MenuItem>
 										<MenuItem value={'uniswap'}>Uniswap</MenuItem>
 										<MenuItem value={'dash'}>Dash</MenuItem>
+										<MenuItem value={'decentraland'}>Decentraland</MenuItem>
+										<MenuItem value={'shiba-inu'}>Shiba Inu</MenuItem>
+										<MenuItem value={'stellar'}>Stellar</MenuItem>
+										<MenuItem value={'chainlink'}>Chainlink</MenuItem>
+										<MenuItem value={'solana'}>Solana</MenuItem>
 									</Select>
 								) : null}
 							</>

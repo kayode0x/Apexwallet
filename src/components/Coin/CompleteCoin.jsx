@@ -4,9 +4,9 @@ import { BsStarFill, BsStar, BsLink45Deg } from 'react-icons/bs';
 import TradeTab from './TradeTab/TradeTab';
 import Graph from './Graph/Graph';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches, wallet, balance, coinSearchId }) => {
-	
 	//initialize the array that stores the graph data
 	let arr = [];
 	//api endpoint to get the coin chart.
@@ -57,6 +57,17 @@ const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches,
 		if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + 'B';
 		if (n >= 1e12) return +(n / 1e12).toFixed(1) + 'T';
 	};
+
+	//since shiba inu has problems with the graph, alert the user.
+	useEffect(() => {
+		const customId = 'custom-id-yes';
+		if (graphData !== null && coinSearchId === 'shiba-inu') {
+			toast.error(`${coinSearchId} has problems with the graph, this problem is from the API provider.`, {
+				toastId: customId,
+			});
+		}
+	}, [graphData, coinSearchId]);
+
 	const balanceFunction = () => {
 		if (user.isActive === false) {
 			return (
@@ -169,7 +180,7 @@ const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches,
 					{matches ? null : (
 						<div className="tradeCoinAndAboutCoin">
 							<div className="aboutCoin">
-								<p>{coinInfo.description.en}</p>
+								<p>{coinInfo.description.en === '' ? 'No data available' : coinInfo.description.en}</p>
 								<p>Resources</p>
 								<span>
 									<BsLink45Deg /> <a href={coinInfo.links.homepage[0]}>Official Website</a>
@@ -183,7 +194,7 @@ const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches,
 					{matches && (
 						<div className="tradeCoinAndAboutCoinMobile">
 							<div className="aboutCoinMobile">
-								<p>{coinInfo.description.en}</p>
+								<p>{coinInfo.description.en === '' ? 'No data available' : coinInfo.description.en}</p>
 								<p>Resources</p>
 								<span>
 									<BsLink45Deg /> <a href={coinInfo.links.homepage[0]}>Official Website</a>
@@ -197,7 +208,7 @@ const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches,
 	} else {
 		return (
 			<div className="loading">
-				<RotateSpinner size={40} color="#080809" />
+				<RotateSpinner size={50} color="#080809" />
 			</div>
 		);
 	}

@@ -1,0 +1,67 @@
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
+$blue: #2f52e0;
+$lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
+
+
+.sectionFour {
+	min-height: 55vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(#96d0ff, 0.2);
+
+	.container {
+		padding: 1rem;
+		display: flex;
+		align-items: center;
+		max-width: 1200px;
+		width: 100%;
+		justify-content: space-around;
+		flex-direction: column;
+
+		.getStarted {
+			text-align: center;
+			width: 100%;
+			font-size: 2.25rem;
+			font-weight: bold;
+			color: $textColor;
+			@media (max-width: 768px) {
+				font-size: 1.75rem;
+			}
+		}
+
+		.coinLogo {
+			margin-bottom: 1rem;
+		}
+
+		.logos {
+			display: flex;
+			flex-wrap: wrap;
+			width: min-width;
+			width: 100%;
+			align-items: center;
+			justify-content: center;
+
+			img {
+				margin-right: 1rem;
+				position: relative;
+				height: 4rem;
+				@media (max-width: 768px) {
+					height: 2.5rem;
+				}
+				transition: all 0.5s ease;
+			}
+		}
+		.moreCoins {
+			text-align: center;
+		}
+	}
+}
+
+

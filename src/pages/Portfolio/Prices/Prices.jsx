@@ -1,4 +1,6 @@
 import './Prices.scss';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import AuthContext from '../../../components/Auth/AuthContext';
 import { useContext, useEffect, useState, useRef } from 'react';
 import axios from 'axios';
@@ -25,12 +27,17 @@ const Prices = () => {
 	const [marketInfo, setMarketInfo] = useState(null);
 	const [sort, setSort] = useState('all');
 	const [searchActive, setSearchActive] = useState(false);
+	const [converter, setConverter] = useState(false);
+	const [coinValue, setCoinValue] = useState(1);
+	const [coinFrom, setCoinFrom] = useState('bitcoin');
+	const [coinTo, setCoinTo] = useState('usd');
+	const [calculatedData, setCalculatedData] = useState('Loading...');
+
 	let isRendered = useRef(false);
 
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const coingeckoApi =
-		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20litecoin%2C%20tether%2C%20dogecoin%2C%20ethereum%2C%20ethereum-classic%2C%20ripple%2C%20binancecoin%2C%20cardano%2C%20usd-coin%2C%20tron%2C%20bitcoin-cash%2C%20polkadot%2C%20uniswap%2C%20dash%2C%20&order=market_cap_desc&per_page=100&page=1&sparkline=false';
-	// decentraland = %20decentraland%2C
+		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20ethereum%2C%20ethereum-classic%2C%20litecoin%2C%20dogecoin%2C%20ripple%2C%20tether%2C%20binancecoin%2C%20cardano%2C%20usd-coin%2C%20tron%2C%20bitcoin-cash%2C%20polkadot%2C%20uniswap%2C%20dash%2C%20decentraland%2C%20shiba-inu%2C%20stellar%2C%20chainlink%2C%20solana&order=market_cap_desc&per_page=100&page=1&sparkline=false';
 
 	const coingeckoPricesInfo = 'https://api.coingecko.com/api/v3/global';
 
@@ -108,6 +115,116 @@ const Prices = () => {
 		if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + 'M';
 		if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + 'B';
 		if (n >= 1e12) return +(n / 1e12).toFixed(1) + 'T';
+	};
+
+	const handleChangeFrom = (event) => {
+		setCoinFrom(event.target.value);
+	};
+
+	const handleChangeTo = (event) => {
+		setCoinTo(event.target.value);
+	};
+
+	useEffect(() => {
+		const converterUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${coinFrom}&vs_currencies=${coinTo}`;
+		async function loadConverter() {
+			try {
+				await fetch(converterUrl, {
+					method: 'GET',
+					headers: {
+						'content-type': 'application/json',
+					},
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						setCalculatedData(data[coinFrom][coinTo]);
+						console.log(data[coinFrom][coinTo]);
+					});
+			} catch (error) {
+				console.log('ERROR: ' + error);
+			}
+		}
+
+		loadConverter();
+	}, [coinFrom, coinTo]);
+
+	//function for quick converter
+	const quickConverter = () => {
+		return (
+			<div className={`converterModal ${converter ? 'Show' : ''}`}>
+				<div className="container">
+					<span>Quick Converter</span>
+					<input
+						placeholder="Enter Amount to Convert"
+						type="number"
+						step="all"
+						value={coinValue}
+						onChange={(e) => setCoinValue(e.target.value)}
+					/>
+					<Select className="selectCoinFrom" value={coinFrom} onChange={handleChangeFrom}>
+						<MenuItem value={'bitcoin'}>Bitcoin</MenuItem>
+						<MenuItem value={'ethereum'}>Ethereum</MenuItem>
+						<MenuItem value={'ethereum-classic'}>Ethereum Classic</MenuItem>
+						<MenuItem value={'litecoin'}>Litecoin</MenuItem>
+						<MenuItem value={'dogecoin'}>Dogecoin</MenuItem>
+						<MenuItem value={'ripple'}>Ripple</MenuItem>
+						<MenuItem value={'tether'}>Tether</MenuItem>
+						<MenuItem value={'binancecoin'}>Binance Coin</MenuItem>
+						<MenuItem value={'cardano'}>Cardano</MenuItem>
+						<MenuItem value={'usd-coin'}>USD Coin</MenuItem>
+						<MenuItem value={'tron'}>Tron</MenuItem>
+						<MenuItem value={'bitcoin-cash'}>Bitcoin Cash</MenuItem>
+						<MenuItem value={'polkadot'}>Polkadot</MenuItem>
+						<MenuItem value={'uniswap'}>Uniswap</MenuItem>
+						<MenuItem value={'dash'}>Dash</MenuItem>
+						<MenuItem value={'decentraland'}>Decentraland</MenuItem>
+						<MenuItem value={'shiba-inu'}>Shiba Inu</MenuItem>
+						<MenuItem value={'stellar'}>Stellar</MenuItem>
+						<MenuItem value={'chainlink'}>Chainlink</MenuItem>
+						<MenuItem value={'solana'}>Solana</MenuItem>
+					</Select>
+					<Select className="selectCoinTo" value={coinTo} onChange={handleChangeTo}>
+						<MenuItem value={'usd'}>US Dollar</MenuItem>
+						<MenuItem value={'btc'}>Bitcoin</MenuItem>
+						<MenuItem value={'eth'}>Ethereum</MenuItem>
+						<MenuItem value={'ltc'}>Litecoin</MenuItem>
+						<MenuItem value={'xrp'}>Ripple</MenuItem>
+						<MenuItem value={'bnb'}>Binance Coin</MenuItem>
+						<MenuItem value={'xlm'}>Stellar</MenuItem>
+						<MenuItem value={'link'}>Chainlink</MenuItem>
+						<MenuItem value={'eos'}>EOS</MenuItem>
+						<MenuItem value={'bch'}>Bitcoin Cash</MenuItem>
+						<MenuItem value={'dot'}>Polkadot</MenuItem>
+						<MenuItem value={'yfi'}>Yearn</MenuItem>
+						<MenuItem value={'dash'}>Dash</MenuItem>
+						<MenuItem value={'eur'}>Euro</MenuItem>
+						<MenuItem value={'gbp'}>Pound Sterling</MenuItem>
+						<MenuItem value={'cny'}>Chinese Yuan</MenuItem>
+						<MenuItem value={'chf'}>Swiss Franc</MenuItem>
+						<MenuItem value={'aed'}>UAE Dirham</MenuItem>
+						<MenuItem value={'ars'}>Argentine Peso</MenuItem>
+						<MenuItem value={'aud'}>Australian Dollar</MenuItem>
+						<MenuItem value={'bhd'}>Bahraini Dinar</MenuItem>
+						<MenuItem value={'brl'}>Brazilian Real</MenuItem>
+						<MenuItem value={'cad'}>Canadian Dollar</MenuItem>
+						<MenuItem value={'inr'}>Indian Rupee</MenuItem>
+						<MenuItem value={'jpy'}>Japanese Yen</MenuItem>
+						<MenuItem value={'mxn'}>Mexican Peso</MenuItem>
+						<MenuItem value={'myr'}>Malaysian ringgit</MenuItem>
+						<MenuItem value={'ngn'}>Nigerian Naira</MenuItem>
+						<MenuItem value={'sar'}>Saudi Riyal</MenuItem>
+						<MenuItem value={'sgd'}>Singapore Dollar</MenuItem>
+						<MenuItem value={'zar'}>South African Rand</MenuItem>
+						<MenuItem value={'xag'}>Silver</MenuItem>
+						<MenuItem value={'xau'}>Gold</MenuItem>
+						<MenuItem value={'sats'}>Satoshi</MenuItem>
+					</Select>
+					<p>
+						{coinValue} {coinFrom.toUpperCase()} = {coinValue * calculatedData} {coinTo.toUpperCase()}
+					</p>
+				</div>
+			</div>
+		);
 	};
 
 	let allCoins;
@@ -222,9 +339,7 @@ const Prices = () => {
 													</div>
 
 													<div className="calculatorIcon">
-														<IoCalculator
-															onClick={() => alert('Quick converter coming soon.')}
-														/>
+														<IoCalculator onClick={() => setConverter(true)} />
 													</div>
 												</div>
 											)}
@@ -334,6 +449,8 @@ const Prices = () => {
 							<RotateSpinner size={40} color="#080809" />
 						</div>
 					)}
+					{quickConverter()}
+					<div className={`Overlay ${converter ? 'Show' : ''}`} onClick={() => setConverter(!converter)} />
 				</div>
 				<ToastContainer hideProgressBar autoClose={3000} />
 			</div>

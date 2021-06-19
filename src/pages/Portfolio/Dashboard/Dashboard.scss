@@ -12,7 +12,6 @@ $borderColor: rgb(158, 158, 158);
 	display: flex;
 	justify-content: center;
 	margin-bottom: 3rem;
-	// height: 100vh;
 	@media (max-width: 767px) {
 		margin-bottom: 10rem;
 	}
@@ -26,7 +25,7 @@ $borderColor: rgb(158, 158, 158);
 	}
 	@media (min-width: 768px) and (max-width: 1023px){
 		height: 95vh;
-		width: 90%;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
@@ -41,8 +40,8 @@ $borderColor: rgb(158, 158, 158);
 		padding: 0 1rem;
 
 		@media (min-width: 768px) {
-			max-width: 600px;
-			width: 100%;
+			max-width: 900px;
+			width: 90%;
 			padding: 2rem;
 			align-items: flex-start;
 			justify-content: center;

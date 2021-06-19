@@ -14,7 +14,11 @@ const supportedCoins = [
 	'polkadot',
 	'uniswap',
 	'dash',
-	// 'decentraland',
+	'decentraland',
+	'shiba-inu',
+	'stellar',
+	'chainlink',
+	'solana',
 ];
 
 module.exports = supportedCoins;
