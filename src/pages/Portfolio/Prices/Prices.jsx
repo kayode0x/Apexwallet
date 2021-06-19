@@ -15,10 +15,7 @@ import { IoClose, IoCalculator } from 'react-icons/io5';
 
 const Prices = () => {
 	const history = useHistory();
-	// const matches = useMediaQuery('(min-width:1171px)');
 	const { loggedIn, getLoggedIn } = useContext(AuthContext);
-	// const [wallet, setWallet] = useState(null);
-	// const [canTrade, setCanTrade] = useState(false);
 	const [searchText, setSearchText] = useState('');
 	const [search, setSearch] = useState(false);
 	const [user, setUser] = useState(null);

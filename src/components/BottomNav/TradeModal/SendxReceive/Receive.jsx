@@ -44,14 +44,6 @@ const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinIn
 										level={'L'}
 										includeMargin={false}
 										renderAs={'svg'}
-										imageSettings={{
-											src: 'https://appzonk.com/apex/',
-											x: null,
-											y: null,
-											height: 40,
-											width: 40,
-											excavate: true,
-										}}
 										className="qrCode"
 										size={220}
 										value={address}
@@ -122,8 +114,7 @@ const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinIn
 									if (navigator.share) {
 										navigator
 											.share({
-												title: `Share ${coinInfo.name} address`,
-												url: coinInfo.address,
+												text: `${coinInfo.address}`,
 											})
 											.then(() => {
 												console.log('Thanks for sharing!');

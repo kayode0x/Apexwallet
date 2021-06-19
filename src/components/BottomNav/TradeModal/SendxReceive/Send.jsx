@@ -163,7 +163,7 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 				{qrModal && (
 					<QrReader
 						className="qrScanner"
-						delay={100}
+						delay={300}
 						onError={handleError}
 						onScan={handleScan}
 						style={{ width: '100%' }}

@@ -143,7 +143,7 @@ const Account = () => {
 									Sign Out
 								</button>
 
-								<p className="walletVersion">v1 - beta 🚀</p>
+								<p className="walletVersion">v1.1 - beta 🚀</p>
 								<p className="copyright">
 									from <br />
 									<span>Werrey Inc</span>

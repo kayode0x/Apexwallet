@@ -304,6 +304,10 @@ $borderColor: rgb(170, 170, 170);
 
 	.qrText {
 		font-size: 1.25rem;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		@media (min-width: 768px) {
 			display: none;
 		}
