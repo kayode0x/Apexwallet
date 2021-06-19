@@ -127,18 +127,12 @@ const Coin = () => {
 			watchingCoin
 				? await axios //if the coin is being watched, send an unwatch request
 						.put(`${apiURL}/user/watch-list`, coinWatch)
-						.then(async (res) => {
-							await toast.info(`${res.data}`, {});
-						})
 						.catch(async (err) => {
 							await toast.error(`${err.response.data}`, {});
 						})
 				: //if it's not being watched, add to watch list
 				  await axios
 						.post(`${apiURL}/user/watch-list`, coinWatch)
-						.then(async (res) => {
-							await toast.info(`${res.data}`, {});
-						})
 						.catch(async (err) => {
 							await toast.error(`${err.response.data}`, {});
 						});

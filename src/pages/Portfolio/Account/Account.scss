@@ -290,9 +290,15 @@ $navyBlue: #262946;
 			}
 
 			.copyright {
-				font-size: 0.95rem;
+				font-size: 0.85rem;
 				color: $subColor;
-				margin-top: -0.5rem;
+				margin-top: 0.25rem;
+
+				span {
+					font-size: 0.95rem;
+					color: $textColor;
+					font-weight: bold;
+				}
 			}
 		}
 	}

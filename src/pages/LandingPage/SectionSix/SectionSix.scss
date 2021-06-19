@@ -1,0 +1,87 @@
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
+$blue: #2f52e0;
+$lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
+
+
+
+.sectionSix {
+	min-height: 30vh;
+	background: #000;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.container {
+		display: flex;
+		align-items: center;
+		max-width: 900px;
+		width: 100%;
+		justify-content: space-between;
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
+
+		.support {
+			padding: 1rem;
+			max-width: 30rem;
+			font-size: 1.5rem;
+			@media (max-width: 768px) {
+				font-size: 1.25rem;
+				text-align: center;
+			}
+			color: $mainColor;
+			span {
+				font-weight: bold;
+				color: $mainColor;
+			}
+		}
+
+		.contact {
+			font-size: 1rem;
+			color: $mainColor;
+			display: flex;
+			flex-direction: column;
+			@media (max-width: 768px) {
+				align-items: center;
+			}
+
+			.icons {
+				font-size: 2rem;
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+			}
+
+			.instagram,
+			.twitter {
+				text-decoration: none;
+				color: $mainColor;
+				transition: all 0.3s ease;
+			}
+
+			.instagram:hover,
+			.twitter:hover {
+				cursor: pointer;
+				color: $lightBlue;
+			}
+
+			.instagram {
+				margin-left: 1rem;
+			}
+		}
+	}
+
+	footer {
+		padding: 1rem;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		color: $mainColor;
+	}
+}

@@ -144,12 +144,15 @@ const Account = () => {
 								</button>
 
 								<p className="walletVersion">v1 - beta 🚀</p>
-								<p className="copyright">Apex Wallet, from Werrey Inc. &copy; 2021</p>
+								<p className="copyright">
+									from <br />
+									<span>Werrey Inc</span>
+								</p>
 							</div>
 						</>
 					) : (
 						<div className="loading">
-							<RotateSpinner size={40} color="#080809" />
+							<RotateSpinner size={50} color="#080809" />
 						</div>
 					)}
 				</div>

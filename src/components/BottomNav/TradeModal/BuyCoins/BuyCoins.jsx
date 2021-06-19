@@ -190,10 +190,10 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 					<p className="amountYouGet">
 						{buyType === 'fiat' ? (
 							<>
-								You get {coinAmountToBuy(amountToBuyFiat)} {coinInfo.symbol.toUpperCase()}
+								{coinAmountToBuy(amountToBuyFiat)} {coinInfo.symbol.toUpperCase()}
 							</>
 						) : (
-							<>You pay ${coinAmountToBuyCrypto(amountToBuyCrypto)}</>
+							<>${coinAmountToBuyCrypto(amountToBuyCrypto)}</>
 						)}
 					</p>
 					<div className="selectBalanceAndBTN">
@@ -213,6 +213,11 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 							<MenuItem value={'polkadot'}>Polkadot</MenuItem>
 							<MenuItem value={'uniswap'}>Uniswap</MenuItem>
 							<MenuItem value={'dash'}>Dash</MenuItem>
+							<MenuItem value={'decentraland'}>Decentraland</MenuItem>
+							<MenuItem value={'shiba-inu'}>Shiba Inu</MenuItem>
+							<MenuItem value={'stellar'}>Stellar</MenuItem>
+							<MenuItem value={'chainlink'}>Chainlink</MenuItem>
+							<MenuItem value={'solana'}>Solana</MenuItem>
 						</Select>
 						<div className="coinAndWalletTab">
 							<div>

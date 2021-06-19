@@ -182,10 +182,10 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 
 					<p className="amountYouGet">
 						{sellType === 'crypto' ? (
-							<> You get ${coinAmountToSellCrypto(amountToSellCrypto)} </>
+							<> ${coinAmountToSellCrypto(amountToSellCrypto)} </>
 						) : (
 							<>
-								You pay {coinAmountToSellFiat(amountToSellFiat)} {coinInfo.symbol.toUpperCase()}{' '}
+								{coinAmountToSellFiat(amountToSellFiat)} {coinInfo.symbol.toUpperCase()}{' '}
 							</>
 						)}
 					</p>
@@ -206,6 +206,11 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 							<MenuItem value={'polkadot'}>Polkadot</MenuItem>
 							<MenuItem value={'uniswap'}>Uniswap</MenuItem>
 							<MenuItem value={'dash'}>Dash</MenuItem>
+							<MenuItem value={'decentraland'}>Decentraland</MenuItem>
+							<MenuItem value={'shiba-inu'}>Shiba Inu</MenuItem>
+							<MenuItem value={'stellar'}>Stellar</MenuItem>
+							<MenuItem value={'chainlink'}>Chainlink</MenuItem>
+							<MenuItem value={'solana'}>Solana</MenuItem>
 						</Select>
 						<div className="coinAndWalletTab">
 							<div>
