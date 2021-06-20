@@ -108,7 +108,7 @@ const Routes = () => {
 
 			//updateSite function to update data without reloading the page
 			updateUserData();
-			setInterval( updateUserData, 10000); //update every 10 seconds
+			setInterval( updateUserData, 30000); //update every 30 seconds
 
 			updatePrices();
 			setInterval(updatePrices, 30000); //update every 30 seconds

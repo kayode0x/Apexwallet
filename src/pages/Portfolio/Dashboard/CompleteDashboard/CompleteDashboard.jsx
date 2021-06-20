@@ -4,38 +4,29 @@ import coinsSVG from '../../../../assets/logo/coinsSVG.svg';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { IoClose } from 'react-icons/io5';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const CompleteDashboard = (user, watchList, news) => {
 	const [notifications, setNotifications] = useState(true);
-
+	let notificationDiv = useRef(Math.floor(Math.random() * 2 + 1))
 	const notificationsFunction = () => {
-		const randomNumber = Math.floor(Math.random() * 3 + 1);
-
-		if(randomNumber === 1) {
+		
+		if (notificationDiv.current === 1) {
 			return (
 				<div style={{ display: notifications ? 'block' : 'none' }}>
 					<p>🚨 New on v1.1 beta 🚨 </p>
 					<p>You can now send and receive coins with a QR code.</p>
 				</div>
 			);
-		} else if(randomNumber === 2) {
+		} else {
 			return (
 				<div>
 					<p>🚨 New on v1.1 beta 🚨 </p>
 					<p>Decentraland, Shiba, Solana, Chainlink and Stellar have been added.</p>
 				</div>
 			);
-		} else if (randomNumber === 3) {
-			return (
-				<div>
-					<p>🚨 New on v1.1 beta 🚨 </p>
-					<p>New way to sort prices and search for a coin.</p>
-				</div>
-			);
 		}
-
-	}
+	};
 
 	const watchListFunction = () => {
 		let length = watchList.length;
