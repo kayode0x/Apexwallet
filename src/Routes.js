@@ -56,7 +56,7 @@ const Routes = () => {
 		isRendered.current = true;
 		async function load() {
 			//updateSite function to update data without reloading the page
-			const updateSite = async () => {
+			const updateUserData = async () => {
 				try {
 					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
 						await toast.error(`${err.response.data}`, {});
@@ -83,7 +83,9 @@ const Routes = () => {
 				} catch (error) {
 					console.log('ERROR2: ', error);
 				}
+			};
 
+			const updatePrices = async () => {
 				try {
 					await fetch(walletAssetUrl, {
 						method: 'GET',
@@ -102,14 +104,14 @@ const Routes = () => {
 				} catch (error) {
 					console.log('ERROR: ' + error);
 				}
-			};
+			}
 
 			//updateSite function to update data without reloading the page
-			updateSite();
+			updateUserData();
+			setInterval( updateUserData, 10000); //update every 10 seconds
 
-			setInterval(() => {
-				updateSite(); //update every 10 seconds
-			}, 10000);
+			updatePrices();
+			setInterval(updatePrices, 30000); //update every 30 seconds
 
 			try {
 				const cryptoCompareAPIKey = process.env.REACT_APP_CRYPTO_COMPARE_API;
