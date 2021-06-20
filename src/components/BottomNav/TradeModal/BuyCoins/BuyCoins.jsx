@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import './BuyCoins.scss';
 
-const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wallet }) => {
+const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setTradeModal, tradeModal, setCoin, coinInfo, user, wallet }) => {
 	const [amountToBuyFiat, setAmountToBuyFiat] = useState(1);
 	const [amountToBuyCrypto, setAmountToBuyCrypto] = useState(0);
 	const [buyType, setBuyType] = useState('fiat');
@@ -66,14 +66,11 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpBuy(!modalUpBuy);
+								setTradeModal(!tradeModal);
 								toast.success(`Success 🚀`, {
 									hideProgressBar: true,
 								});
-								setTimeout(() => {
-									window.location.reload();
-								}, 3000);
 							}
-							console.log('DATA: ', res.data);
 						})
 						.catch(async (err) => {
 							await toast.error(`${err.response.data}`, {
@@ -122,12 +119,10 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setCoin, coinInfo, user, wa
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpBuy(!modalUpBuy);
+								setTradeModal(!tradeModal);
 								toast.success(`Success 🚀`, {
 									hideProgressBar: true,
 								});
-								setTimeout(() => {
-									window.location.reload();
-								}, 3000);
 							}
 						})
 						.catch(async (err) => {

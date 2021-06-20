@@ -103,7 +103,7 @@ const CompleteUser = ({ user, asset, wallet, handleCreateWallet, creatingWallet 
 				{/* Transactions Container */}
 				<div className="transactionsHeader">
 					<p>Transactions</p>
-					<a href="/wallet/transactions">See All</a>
+					<Link to="/wallet/transactions">See All</Link>
 				</div>
 				{wallet.transactions.slice(0, 5).map((transaction) => (
 					<div

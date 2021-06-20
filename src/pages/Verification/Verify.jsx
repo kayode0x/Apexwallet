@@ -28,7 +28,6 @@ const Verify = () => {
 				await axios
 					.put(`${apiURL}/auth/verify`, user, { withCredentials: true })
 					.then(async (res) => {
-						console.log('RES: ', res);
 						if (res.status === 200) {
 							await toast.success(`${res.data}`, {});
 

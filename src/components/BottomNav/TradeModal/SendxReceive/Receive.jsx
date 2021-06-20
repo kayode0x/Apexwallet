@@ -114,10 +114,10 @@ const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinIn
 									if (navigator.share) {
 										navigator
 											.share({
-												text: `${coinInfo.address}`,
+												text: address,
 											})
 											.then(() => {
-												console.log('Thanks for sharing!');
+												navigator.vibrate(200);
 											})
 											.catch(console.error);
 									} else {

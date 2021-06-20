@@ -9,7 +9,18 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import './SellCoins.scss';
 
-const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user, wallet, balance }) => {
+const SellCoins = ({
+	modalUpSell,
+	coin,
+	setModalUpSell,
+	setTradeModal,
+	tradeModal,
+	setCoin,
+	coinInfo,
+	user,
+	wallet,
+	balance,
+}) => {
 	const [amountToSellFiat, setAmountToSellFiat] = useState(1);
 	const [amountToSellCrypto, setAmountToSellCrypto] = useState(0);
 	const [sellType, setSellType] = useState('fiat');
@@ -70,14 +81,11 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpSell(!modalUpSell);
+								setTradeModal(!tradeModal);
 								toast.success(`Success 🚀`, {
 									hideProgressBar: true,
 								});
-								setTimeout(() => {
-									window.location.reload();
-								}, 3000);
 							}
-							console.log('DATA: ', res.data);
 						})
 						.catch(async (err) => {
 							await toast.error(`${err.response.data}`, {
@@ -101,7 +109,6 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 				);
 				setSelling(false);
 			} else if (amountToSellCrypto > balance) {
-				console.log('2nd!!', convertedAmount(), parseFloat(balance).toFixed(5));
 				toast.error(
 					`You have ${parseFloat(balance).toFixed(
 						5
@@ -119,12 +126,10 @@ const SellCoins = ({ modalUpSell, coin, setModalUpSell, setCoin, coinInfo, user,
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpSell(!modalUpSell);
+								setTradeModal(!tradeModal);
 								toast.success(`Success 🚀`, {
 									hideProgressBar: true,
 								});
-								setTimeout(() => {
-									window.location.reload();
-								}, 3000);
 							}
 						})
 						.catch(async (err) => {

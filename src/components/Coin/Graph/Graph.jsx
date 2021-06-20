@@ -162,7 +162,6 @@ const Graph = ({ graphData, days, coinInfoId }) => {
 					bottom: days === 365 || days === 'max' ? 0 : -100,
 				}}
 			>
-				{console.log(graphData)}
 				<Tooltip content={<CustomTooltip />} />
 				<Area
 					type="monotone"

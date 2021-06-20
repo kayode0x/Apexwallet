@@ -8,7 +8,7 @@ import SellCoins from './SellCoins/SellCoins';
 import Send from './SendxReceive/Send';
 import Receive from './SendxReceive/Receive';
 
-const TradeModal = ({ tradeModal }) => {
+const TradeModal = ({ tradeModal, setTradeModal }) => {
 	const [wallet, setWallet] = useState(null);
 	const [balance, setBalance] = useState(null);
 	const [address, setAddress] = useState(null);
@@ -147,6 +147,8 @@ const TradeModal = ({ tradeModal }) => {
 					</div>
 
 					<BuyCoins
+						tradeModal={tradeModal}
+						setTradeModal={setTradeModal}
 						modalUpBuy={modalUpBuy}
 						setCoin={setCoin}
 						setModalUpBuy={setModalUpBuy}
@@ -158,6 +160,8 @@ const TradeModal = ({ tradeModal }) => {
 					/>
 
 					<SellCoins
+						tradeModal={tradeModal}
+						setTradeModal={setTradeModal}
 						modalUpSell={modalUpSell}
 						setCoin={setCoin}
 						setModalUpSell={setModalUpSell}
@@ -169,6 +173,8 @@ const TradeModal = ({ tradeModal }) => {
 					/>
 
 					<Send
+						tradeModal={tradeModal}
+						setTradeModal={setTradeModal}
 						modalUpSend={modalUpSend}
 						setCoin={setCoin}
 						setModalUpSend={setModalUpSend}

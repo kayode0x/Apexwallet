@@ -61,7 +61,7 @@ const BottomNav = () => {
 				{matches ? splitLocation[1] === 'account' ? <RiUser3Fill /> : <RiUser3Line /> : <p>Account</p>}
 			</Link>
 
-			<TradeModal tradeModal={tradeModal} />
+			<TradeModal setTradeModal={setTradeModal} tradeModal={tradeModal} />
 			<div className={`Overlay ${tradeModal ? 'Show' : ''}`} onClick={() => setTradeModal(!tradeModal)} />
 		</div>
 	);

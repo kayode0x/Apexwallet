@@ -21,7 +21,6 @@ export default function StatusModal({ user }) {
 
 	const handleNewVerification = async () => {
 		setSending(true);
-		console.log('HERE')
 		try {
 			await axios
 				.post(`${apiURL}/auth/resend-verification-link`)

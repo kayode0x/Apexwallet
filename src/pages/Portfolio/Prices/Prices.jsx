@@ -1,10 +1,8 @@
 import './Prices.scss';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import AuthContext from '../../../components/Auth/AuthContext';
-import { useContext, useEffect, useState, useRef } from 'react';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory, Link } from 'react-router-dom';
 import { BiSearch } from 'react-icons/bi';
@@ -13,14 +11,10 @@ import BottomNav from '../../../components/BottomNav/BottomNav';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { IoClose, IoCalculator } from 'react-icons/io5';
 
-const Prices = () => {
+const Prices = ({ user, prices, marketInfo, loggedIn }) => {
 	const history = useHistory();
-	const { loggedIn, getLoggedIn } = useContext(AuthContext);
 	const [searchText, setSearchText] = useState('');
 	const [search, setSearch] = useState(false);
-	const [user, setUser] = useState(null);
-	const [prices, setPrices] = useState(null);
-	const [marketInfo, setMarketInfo] = useState(null);
 	const [sort, setSort] = useState('all');
 	const [searchActive, setSearchActive] = useState(false);
 	const [converter, setConverter] = useState(false);
@@ -29,80 +23,11 @@ const Prices = () => {
 	const [coinTo, setCoinTo] = useState('usd');
 	const [calculatedData, setCalculatedData] = useState('Loading...');
 
-	let isRendered = useRef(false);
-
-	const apiURL = 'https://api.apexwallet.app/api/v1';
-	const coingeckoApi =
-		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20ethereum%2C%20ethereum-classic%2C%20litecoin%2C%20dogecoin%2C%20ripple%2C%20tether%2C%20binancecoin%2C%20cardano%2C%20usd-coin%2C%20tron%2C%20bitcoin-cash%2C%20polkadot%2C%20uniswap%2C%20dash%2C%20decentraland%2C%20shiba-inu%2C%20stellar%2C%20chainlink%2C%20solana&order=market_cap_desc&per_page=100&page=1&sparkline=false';
-
-	const coingeckoPricesInfo = 'https://api.coingecko.com/api/v3/global';
-
 	useEffect(() => {
-		isRendered.current = true;
-		async function load() {
-			await getLoggedIn();
-			if (loggedIn === false) {
-				history.push('/login');
-			} else if (loggedIn === true) {
-				try {
-					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(`${err.response.data}`, {});
-					});
-					if (isRendered.current === true) {
-						setUser(user.data);
-					} else {
-						return null;
-					}
-				} catch (error) {
-					console.log('ERROR' + error);
-				}
-
-				try {
-					await fetch(coingeckoApi, {
-						method: 'GET',
-						headers: {
-							'content-type': 'application/json',
-						},
-					})
-						.then((response) => response.json())
-						.then((data) => {
-							if (isRendered.current === true) {
-								setPrices(data);
-							} else {
-								return null;
-							}
-						});
-				} catch (error) {
-					console.log('ERROR: ' + error);
-				}
-
-				try {
-					await fetch(coingeckoPricesInfo, {
-						method: 'GET',
-						headers: {
-							'content-type': 'application/json',
-						},
-					})
-						.then((response) => response.json())
-						.then((data) => {
-							if (isRendered.current === true) {
-								setMarketInfo(data.data);
-							} else {
-								return null;
-							}
-						});
-				} catch (error) {
-					console.log('ERROR: ' + error);
-				}
-			}
+		if (loggedIn === false) {
+			history.push('/login');
 		}
-
-		load();
-
-		return () => {
-			isRendered.current = false;
-		};
-	}, [getLoggedIn, loggedIn, history]);
+	}, [loggedIn, history]);
 
 	//convert the mega numbers
 	const formatNumber = (n) => {
@@ -134,7 +59,6 @@ const Prices = () => {
 					.then((response) => response.json())
 					.then((data) => {
 						setCalculatedData(data[coinFrom][coinTo]);
-						console.log(data[coinFrom][coinTo]);
 					});
 			} catch (error) {
 				console.log('ERROR: ' + error);
@@ -149,7 +73,6 @@ const Prices = () => {
 		return (
 			<div className={`converterModal ${converter ? 'Show' : ''}`}>
 				<div className="container">
-					<span>Quick Converter</span>
 					<input
 						placeholder="Enter Amount to Convert"
 						type="number"

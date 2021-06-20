@@ -49,9 +49,6 @@ export default function NameModal({ user }) {
 							});
 							handleCloseModal();
 							setChangingName(false);
-							setTimeout(() => {
-								window.location.reload();
-							}, 2000);
 						}
 					})
 					.catch(async (err) => {

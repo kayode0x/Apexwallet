@@ -1,6 +1,5 @@
 import './Account.scss';
-import AuthContext from '../../../components/Auth/AuthContext';
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,42 +16,15 @@ import { FiChevronRight } from 'react-icons/fi';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { IoCamera } from 'react-icons/io5';
 
-const Account = () => {
+const Account = ({ loggedIn, user }) => {
 	const history = useHistory();
-	const { loggedIn, getLoggedIn } = useContext(AuthContext);
-	const [user, setUser] = useState(null);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
-	let isRendered = useRef(false);
 
 	useEffect(() => {
-		isRendered.current = true;
-		async function load() {
-			await getLoggedIn();
-			if (loggedIn === false) {
-				history.push('/login');
-			} else if (loggedIn === true) {
-				try {
-					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(`${err.response.data}`, {
-							
-						});
-					});
-					if (isRendered.current === true) {
-						setUser(user.data);
-					} else {
-						return null;
-					}
-				} catch (error) {
-					console.log('ERROR' + error);
-				}
-			}
+		if (loggedIn === false) {
+			history.push('/login');
 		}
-		load();
-
-		return () => {
-			isRendered.current = false;
-		};
-	}, [getLoggedIn, loggedIn, history]);
+	}, [loggedIn, history]);
 
 	//log the user out
 	const handleLogOut = async () => {
@@ -61,9 +33,7 @@ const Account = () => {
 				.post(`${apiURL}/auth/logout`)
 				.then(history.push('/login'))
 				.catch(async (err) => {
-					await toast.error(`${err.response.data}`, {
-						
-					});
+					await toast.error(`${err.response.data}`, {});
 				});
 		} catch (error) {
 			console.log('Error: ' + error);

@@ -10,7 +10,18 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import QrReader from 'react-qr-reader';
 
-const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user, wallet, balance }) => {
+const SendCoins = ({
+	modalUpSend,
+	setModalUpSend,
+	setTradeModal,
+	tradeModal,
+	coin,
+	setCoin,
+	coinInfo,
+	user,
+	wallet,
+	balance,
+}) => {
 	const [amountToSend, setAmountToSend] = useState(1);
 	const [sendType, setSendType] = useState('crypto');
 	const [recipient, setRecipient] = useState('');
@@ -73,7 +84,6 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 				);
 				setSending(false);
 			} else if (memo !== '' && memo.length > 50) {
-				console.log('HERE');
 				toast.error(`Memo can not be longer than 50 characters`, { hideProgressBar: true });
 				setSending(false);
 			} else {
@@ -84,14 +94,11 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpSend(!modalUpSend);
+								setTradeModal(!tradeModal);
 								toast.success(`Success 🚀`, {
 									hideProgressBar: true,
 								});
-								setTimeout(() => {
-									window.location.reload();
-								}, 3000);
 							}
-							console.log('DATA: ', res.data);
 						})
 						.catch(async (err) => {
 							await toast.error(`${err.response.data}`, {
@@ -132,12 +139,10 @@ const SendCoins = ({ modalUpSend, setModalUpSend, coin, setCoin, coinInfo, user,
 						.then((res) => {
 							if (res.status === 200) {
 								setModalUpSend(!modalUpSend);
+								setTradeModal(!tradeModal);
 								toast.success(`Success 🚀`, {
 									hideProgressBar: true,
 								});
-								setTimeout(() => {
-									window.location.reload();
-								}, 3000);
 							}
 						})
 						.catch(async (err) => {

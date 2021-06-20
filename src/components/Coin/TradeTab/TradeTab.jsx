@@ -115,11 +115,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 								toast.success(`Success 🚀`, {
 									hideProgressBar: true,
 								});
-								setTimeout(() => {
-									window.location.reload();
-								}, 3000);
 							}
-							console.log('DATA: ', res.data);
 						})
 						.catch(async (err) => {
 							await toast.error(`${err.response.data}`, {
@@ -172,9 +168,6 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 								toast.success(`Success 🚀`, {
 									hideProgressBar: true,
 								});
-								setTimeout(() => {
-									window.location.reload();
-								}, 3000);
 							}
 						})
 						.catch(async (err) => {
@@ -225,11 +218,7 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 								toast.error(`Success 🚀`, {
 									hideProgressBar: true,
 								});
-								setTimeout(() => {
-									window.location.reload();
-								}, 3000);
 							}
-							console.log('DATA: ', res.data);
 						})
 						.catch(async (err) => {
 							await toast.error(`${err.response.data}`, {
@@ -272,9 +261,6 @@ export default function TradeTab({ user, wallet, coinInfo, balance }) {
 								toast.success(`Success 🚀`, {
 									hideProgressBar: true,
 								});
-								setTimeout(() => {
-									window.location.reload();
-								}, 3000);
 							}
 						})
 						.catch(async (err) => {

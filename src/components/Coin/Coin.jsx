@@ -65,37 +65,47 @@ const Coin = () => {
 					console.log('ERROR' + error);
 				}
 
-				try {
-					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(err.response.data, {});
-					});
-					if (isRendered.current === true) {
-						setWallet(wallet.data);
-					} else {
-						return null;
+				async function update() {
+					try {
+						let wallet = await axios
+							.get(`${apiURL}/wallet/`, { withCredentials: true })
+							.catch(async (err) => {
+								await toast.error(err.response.data, {});
+							});
+						if (isRendered.current === true) {
+							setWallet(wallet.data);
+						} else {
+							return null;
+						}
+					} catch (error) {
+						console.log('ERROR2: ', error);
 					}
-				} catch (error) {
-					console.log('ERROR2: ', error);
+
+					try {
+						await fetch(coingeckoDataApi, {
+							method: 'GET',
+							headers: {
+								'content-type': 'application/json',
+							},
+						})
+							.then((response) => response.json())
+							.then((data) => {
+								if (isRendered.current === true) {
+									setCoinInfo(data);
+								} else {
+									return null;
+								}
+							});
+					} catch (error) {
+						console.log('ERROR: ' + error);
+					}
 				}
 
-				try {
-					await fetch(coingeckoDataApi, {
-						method: 'GET',
-						headers: {
-							'content-type': 'application/json',
-						},
-					})
-						.then((response) => response.json())
-						.then((data) => {
-							if (isRendered.current === true) {
-								setCoinInfo(data);
-							} else {
-								return null;
-							}
-						});
-				} catch (error) {
-					console.log('ERROR: ' + error);
-				}
+				update();
+
+				setInterval(() => {
+					update();
+				}, 10000);
 
 				if (isRendered.current === true) {
 					//okay this part gets the current coin id and saves it in case the page re-renders.

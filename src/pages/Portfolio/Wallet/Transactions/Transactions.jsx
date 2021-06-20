@@ -1,9 +1,7 @@
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { ImArrowDownLeft2, ImArrowUpRight2 } from 'react-icons/im';
 import { RotateSpinner } from 'react-spinners-kit';
-import AuthContext from '../../../../components/Auth/AuthContext';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import './Transactions.scss';
@@ -12,63 +10,18 @@ import { HelmetProvider, Helmet } from 'react-helmet-async';
 import BottomNav from '../../../../components/BottomNav/BottomNav';
 import TransactionModal from './TransactionModal';
 
-const Transactions = () => {
+const Transactions = ({ user, wallet, loggedIn, sorted, setSorted }) => {
 	const history = useHistory();
-	const { loggedIn, getLoggedIn } = useContext(AuthContext);
-	const [user, setUser] = useState(null);
-	const [wallet, setWallet] = useState(null);
-	const [sorted, setSorted] = useState(null);
 	const [ctrlSorted, setCtrlSorted] = useState('all');
 	//receipt modal.
 	const [transactionModal, setTransactionModal] = useState(false);
 	const [singleTransaction, setSingleTransaction] = useState(null);
-	let isRendered = useRef(false);
-	//api endpoint:
-	const apiURL = 'https://api.apexwallet.app/api/v1';
 
 	useEffect(() => {
-		isRendered.current = true;
-		async function load() {
-			await getLoggedIn();
-			if (loggedIn === false) {
-				history.push('/login');
-			} else if (loggedIn === true) {
-				try {
-					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(`${err.response.data}`, {});
-					});
-					if (isRendered.current === true) {
-						setUser(user.data);
-					} else {
-						return null;
-					}
-				} catch (error) {
-					console.log('ERROR: ' + error);
-				}
-
-				try {
-					let wallet = await axios.get(`${apiURL}/wallet/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(err.response.data, {
-							
-						});
-					});
-					if (isRendered.current === true) {
-						setWallet(wallet.data);
-						setSorted(wallet.data.transactions);
-					} else {
-						return null;
-					}
-				} catch (error) {
-					console.log('ERROR2: ', error);
-				}
-			}
+		if (loggedIn === false) {
+			history.push('/login');
 		}
-		load();
-
-		return () => {
-			isRendered.current = false;
-		};
-	}, [getLoggedIn, loggedIn, history]);
+	}, [loggedIn, history]);
 
 	// sort the wallet transactions by type
 	const sortFunction = (format) => {
@@ -254,7 +207,7 @@ const Transactions = () => {
 				<BottomNav />
 				<div className="container">
 					<div className="header">
-						<div className="backEmoji" onClick={history.goBack}>
+						<div className="backEmoji" onClick={() => history.push('/wallet')}>
 							<IoChevronBack />
 						</div>
 						<p>All Transactions</p>
@@ -270,7 +223,7 @@ const Transactions = () => {
 							className={`Overlay ${transactionModal ? 'Show' : ''}`}
 							onClick={() => setTransactionModal(!transactionModal)}
 						/>
-						<ToastContainer hideProgressBar autoClose={3000}/>
+						<ToastContainer hideProgressBar autoClose={3000} />
 					</div>
 				</div>
 			</div>
