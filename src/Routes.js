@@ -67,7 +67,7 @@ const Routes = () => {
 						return null;
 					}
 				} catch (error) {
-					console.log('ERROR' + error.response);
+					console.log('ERROR' + error);
 				}
 
 				try {
@@ -106,12 +106,16 @@ const Routes = () => {
 				}
 			}
 
-			//updateSite function to update data without reloading the page
-			updateUserData();
-			setInterval( updateUserData, 30000); //update every 30 seconds
+			if(loggedIn === true){
+				//updateSite function to update data without reloading the page
+				updateUserData();
+				setInterval(updateUserData, 15000); //update every 15 seconds
+			}
 
-			updatePrices();
-			setInterval(updatePrices, 30000); //update every 30 seconds
+			if (loggedIn === true) {
+				updatePrices();
+				setInterval(updatePrices, 30000); //update every 30 seconds
+			}
 
 			try {
 				const cryptoCompareAPIKey = process.env.REACT_APP_CRYPTO_COMPARE_API;
@@ -185,7 +189,7 @@ const Routes = () => {
 				</Route>
 
 				<Route exact path="/prices/:coin">
-					<Coin />
+					<Coin loggedIn={loggedIn} user={user} wallet={wallet} />
 				</Route>
 
 				<Route exact path="/account">

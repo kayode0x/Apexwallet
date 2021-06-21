@@ -263,29 +263,42 @@ $borderColor: rgb(158, 158, 158);
 			}
 
 			.notificationIcon {
-				// margin-left: auto;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				font-size: 1.35rem;
-				// background: #000;
 				margin-top: -0.5rem;
 				border: 1px solid $borderColor;
-				color: $subColor;
+				color: $textColor;
 				border-radius: 50%;
 				width: 3rem;
 				height: 3rem;
 				position: relative;
 
-				span {
+				.activeNotification {
 					height: 0.5rem;
 					width: 0.5rem;
-					background: #000;
+					background: red;
 					border-radius: 50%;
 					position: absolute;
 					top: 25%;
-					right: 31%;
+					right: 29%;
 				}
+			}
+
+			.Overlay {
+				background-color: rgba(0, 0, 0, 0.55);
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				position: fixed;
+				display: none;
+				z-index: 5;
+			}
+
+			.Overlay.Show {
+				display: block;
 			}
 		}
 
@@ -393,13 +406,12 @@ $borderColor: rgb(158, 158, 158);
 
 			.closeIcon {
 				font-size: 1.5rem;
-				padding: .5rem;
+				padding: 0.5rem;
 				top: 5%;
 				right: 1%;
 				position: absolute;
-				background:rgba(0, 0, 0, 0.5);
+				background: rgba(0, 0, 0, 0.5);
 				border-radius: 100%;
-
 			}
 
 			div {

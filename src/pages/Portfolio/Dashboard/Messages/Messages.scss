@@ -1,0 +1,192 @@
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
+$blue: #2f52e0;
+$lightBlue: #4e6ce4;
+$orange: #ef5116;
+$navyBlue: #262946;
+$borderColor: rgb(170, 170, 170);
+
+.messages,
+.messageModal {
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 150vw;
+	background: $mainColor;
+	width: 100%;
+	@media (min-width: 768px) {
+		max-width: 30rem;
+		height: 50%;
+	}
+}
+
+.messages.Show,
+.messageModal.Show {
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: scroll;
+	@media (max-width: 767px) {
+		transition: all 0.7s ease-in;
+	}
+	z-index: 6;
+
+	@media (min-width: 768px) {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: 10px;
+	}
+
+	.closeIcon {
+		font-size: 1.5rem;
+		top: 2%;
+		right: 3%;
+		position: absolute;
+	}
+	.messagesHeader {
+		font-size: 1.35rem;
+		margin-top: 1rem;
+		margin-bottom: 2rem;
+		@media (min-width: 768px) {
+			margin-top: 2rem;
+			font-size: 1.75rem;
+		}
+		color: $textColor;
+	}
+
+	.noMessages {
+		font-size: 1rem;
+		margin-top: -0.5rem;
+		color: $subColor;
+	}
+
+	.messagesDiv {
+		width: 90%;
+		height: fit-content;
+		padding: 1rem;
+
+		.messageTitle {
+			font-size: 1.05rem;
+			margin-top: -1rem;
+		}
+
+		.messageText {
+			font-size: 1rem;
+			margin-top: -1rem;
+			color: $subColor;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 3; /* number of lines to show */
+			-webkit-box-orient: vertical;
+		}
+
+		.fromAndDate {
+			display: flex;
+			align-items: center;
+			font-size: 0.9rem;
+			color: $subColor;
+			margin-top: -1.45rem;
+
+			.messageFrom {
+				// background: #000;
+				margin-left: 0.25rem;
+
+				.fromSpan {
+					height: 1rem;
+					width: 1rem;
+					font-size: 1rem;
+					margin-right: 0.25rem;
+				}
+			}
+		}
+	}
+}
+
+.messageModal.Show {
+	.closeIcon {
+		font-size: 2rem;
+		top: 5%;
+		@media (max-width: 767px){
+			top: 2%;
+		}
+		left: 4%;
+		position: absolute;
+	}
+	@media (max-width: 767px) {
+		animation: messageSlideIn 0.7s ease-in forwards;
+	}
+
+	.container {
+		width: 90%;
+		height: fit-content;
+		padding: 1rem;
+		display: flex;
+		align-items: center;
+	}
+
+	.messageTitle {
+		display: flex;
+		font-size: 1.35rem;
+		@media (max-width: 767px){
+			margin-top: 3rem;
+			align-self: flex-start;
+		}
+	}
+
+	img {
+		height: 50%;
+		width: 100%;
+		border-radius: 10px;
+		margin-bottom: 1rem;
+	}
+
+	.messageText {
+		font-size: 1.15rem;
+		color: $subColor;
+		margin-top: -.5rem;
+		line-height: 1.95;
+	}
+
+	.fromAndDate {
+		align-self: flex-start;
+			display: flex;
+			align-items: center;
+			font-size: 0.9rem;
+			color: $subColor;
+			margin-top: -1.45rem;
+
+			.messageFrom {
+				margin-left: 0.25rem;
+
+				.fromSpan {
+					height: 1rem;
+					width: 1rem;
+					font-size: 1rem;
+					margin-right: 0.25rem;
+				}
+			}
+		}
+}
+
+@keyframes messageSlideIn {
+	from {
+		left: 150vw;
+	}
+
+	to {
+		left: 0;
+	}
+}
+
+.loading {
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

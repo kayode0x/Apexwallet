@@ -1,6 +1,5 @@
 import './Coin.scss';
-import AuthContext from '../Auth/AuthContext';
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -12,7 +11,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import CompleteCoin from './CompleteCoin';
 import supportedCoins from '../../utils/supportedCoins';
 
-const Coin = () => {
+const Coin = ({ user, wallet, loggedIn }) => {
 	//get the current location.
 	const location = useLocation();
 	const { pathname } = location;
@@ -22,14 +21,9 @@ const Coin = () => {
 
 	const history = useHistory();
 	const matches = useMediaQuery('(max-width:767px)');
-	const { loggedIn, getLoggedIn } = useContext(AuthContext);
-	const [wallet, setWallet] = useState(null);
 	const [balance, setBalance] = useState(null);
-	const [user, setUser] = useState(null);
 	const [coinInfo, setCoinInfo] = useState(null);
-	const [watchingCoin, setWatchingCoin] = useState(false);
-	const watchingRef = useRef(null);
-	const watchingArrayRef = useRef(null);
+	const [watchingCoin, setWatchingCoin] = useState(undefined);
 	let isRendered = useRef(false);
 
 	//in case someone tries to use an unsupported coin in the link
@@ -46,41 +40,10 @@ const Coin = () => {
 	useEffect(() => {
 		isRendered.current = true;
 		async function load() {
-			await getLoggedIn();
 			if (loggedIn === false) {
 				history.push('/login');
 			} else if (loggedIn === true) {
-				try {
-					let user = await axios.get(`${apiURL}/user/`, { withCredentials: true }).catch(async (err) => {
-						await toast.error(`${err.response.data}`, {});
-					});
-
-					if (isRendered.current === true) {
-						setUser(user.data);
-						watchingArrayRef.current = user.data.watchList; //saves the watchList array as a ref hook to save in case of re-render.
-					} else {
-						return null;
-					}
-				} catch (error) {
-					console.log('ERROR' + error);
-				}
-
 				async function update() {
-					try {
-						let wallet = await axios
-							.get(`${apiURL}/wallet/`, { withCredentials: true })
-							.catch(async (err) => {
-								await toast.error(err.response.data, {});
-							});
-						if (isRendered.current === true) {
-							setWallet(wallet.data);
-						} else {
-							return null;
-						}
-					} catch (error) {
-						console.log('ERROR2: ', error);
-					}
-
 					try {
 						await fetch(coingeckoDataApi, {
 							method: 'GET',
@@ -107,15 +70,20 @@ const Coin = () => {
 					update();
 				}, 10000);
 
-				if (isRendered.current === true) {
-					//okay this part gets the current coin id and saves it in case the page re-renders.
-					watchingRef.current = (obj) => obj.coinId === coinSearchId; //check if the current coin is in the user's watch list
-					if (watchingArrayRef.current.some(watchingRef.current) === true) {
-						setWatchingCoin(true); //if yes, set the coin state to watching (true)
-					} else {
-						setWatchingCoin(false); //if no, set the coin state to not watching (false)
+				//check if the user is watching the coin in question.
+				const checkWatchingCoin = () => {
+					if (user !== null) {
+						//check if a coin with the coinId matches the coinSearchId
+						const watching = user.watchList.filter((watching) => watching.coinId === coinSearchId);
+
+						//if yes, then the user is watching the coin in question.
+						if (watching.length > 0 && watching[0].coinId === coinSearchId) {
+							setWatchingCoin(true);
+						} else setWatchingCoin(false);
 					}
-				}
+				};
+
+				checkWatchingCoin();
 			}
 		}
 
@@ -124,7 +92,7 @@ const Coin = () => {
 		return () => {
 			isRendered.current = false;
 		};
-	}, [getLoggedIn, loggedIn, history, coingeckoDataApi, coinSearchId]);
+	}, [loggedIn, user, history, coingeckoDataApi, coinSearchId]);
 
 	//function to watch or unwatch a coin
 	const triggerWatchCoin = async () => {
@@ -141,11 +109,9 @@ const Coin = () => {
 							await toast.error(`${err.response.data}`, {});
 						})
 				: //if it's not being watched, add to watch list
-				  await axios
-						.post(`${apiURL}/user/watch-list`, coinWatch)
-						.catch(async (err) => {
-							await toast.error(`${err.response.data}`, {});
-						});
+				  await axios.post(`${apiURL}/user/watch-list`, coinWatch).catch(async (err) => {
+						await toast.error(`${err.response.data}`, {});
+				  });
 		} catch (error) {
 			console.log('ERROR: ' + error);
 		}

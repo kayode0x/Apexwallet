@@ -19,7 +19,6 @@ export default function CardDesign({ user, BsThreeDotsVertical }) {
 		setOpenModal(false);
 	};
 	const [changing, setChanging] = useState(false);
-	// const [cardDesign, setCardDesign] = useState('');
 
 	const cardDesignEndpoint = 'https://api.apexwallet.app/api/v1/user/card-design';
 
@@ -33,9 +32,9 @@ export default function CardDesign({ user, BsThreeDotsVertical }) {
 			await axios
 				.put(cardDesignEndpoint, newCardDesign)
 				.then(async (res) => {
-					if (res.status === 200) {
-						window.location.reload();
-					}
+					await toast.success(res.data, {});
+					setChanging(false);
+					setOpenModal(false);
 				})
 				.catch(async (err) => {
 					await toast.error(err.response.data, {});

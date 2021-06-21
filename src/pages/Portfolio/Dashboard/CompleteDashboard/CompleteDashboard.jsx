@@ -1,16 +1,20 @@
 import { RotateSpinner } from 'react-spinners-kit';
-import { RiNotification4Line } from 'react-icons/ri';
+import { RiNotification4Fill } from 'react-icons/ri';
 import coinsSVG from '../../../../assets/logo/coinsSVG.svg';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { IoClose } from 'react-icons/io5';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import Messages from '../Messages/Messages';
 
 const CompleteDashboard = (user, watchList, news) => {
 	const [notifications, setNotifications] = useState(true);
-	let notificationDiv = useRef(Math.floor(Math.random() * 2 + 1))
+	const [hasNotifications, setHasNotifications] = useState(undefined);
+	const [modalUpMessages, setModalUpMessages] = useState(false);
+	const [messageModal, setMessageModal] = useState(false);
+	let notificationDiv = useRef(Math.floor(Math.random() * 2 + 1));
+
 	const notificationsFunction = () => {
-		
 		if (notificationDiv.current === 1) {
 			return (
 				<div style={{ display: notifications ? 'block' : 'none' }}>
@@ -27,6 +31,19 @@ const CompleteDashboard = (user, watchList, news) => {
 			);
 		}
 	};
+
+	useEffect(() => {
+		const checkNotifications = () => {
+			if (user !== null) {
+				const hasMessagesCheck = user.messages.filter((message) => message.isRead === false);
+				if (hasMessagesCheck.length > 0) {
+					setHasNotifications(true);
+				} else setHasNotifications(false);
+			}
+		};
+
+		checkNotifications();
+	}, [user]);
 
 	const watchListFunction = () => {
 		let length = watchList.length;
@@ -151,9 +168,23 @@ const CompleteDashboard = (user, watchList, news) => {
 					</div>
 
 					<div className="notificationIcon">
-						<span></span>
-						<RiNotification4Line />
+						{hasNotifications && <span className="activeNotification"></span>}
+						<RiNotification4Fill onClick={() => setModalUpMessages(true)} />
+						<Messages
+							messageModal={messageModal}
+							setMessageModal={setMessageModal}
+							user={user}
+							modalUpMessages={modalUpMessages}
+							setModalUpMessages={setModalUpMessages}
+						/>
 					</div>
+					<div
+						className={`Overlay ${modalUpMessages ? 'Show' : ''}`}
+						onClick={() => {
+							setModalUpMessages(false);
+							setMessageModal(false);
+						}}
+					/>
 				</div>
 				<div style={{ display: notifications ? 'block' : 'none' }} className="notificationDiv">
 					<div className="closeIcon" onClick={() => setNotifications(false)}>
