@@ -17,7 +17,6 @@ const Messages = ({ user, modalUpMessages, setModalUpMessages, messageModal, set
 		if (message.hasModal === true) {
 			setMessageModal(true);
 			setSingleMessage(message);
-			console.log(message.hasModal);
 		}
 	};
 
@@ -29,19 +28,17 @@ const Messages = ({ user, modalUpMessages, setModalUpMessages, messageModal, set
 						<BsArrowLeft />
 					</div>
 					<p className="messageTitle">{message.title}</p>
-					{message.image && (
-						<img src={message.image} alt={message.title} />
-					)}
-					<p className="messageText">{message.text}</p>
+					{message.image && <img src={message.image} alt={message.title} />}
 					<div className="fromAndDate">
-						<p className="messageDate">{moment(message.date).startOf('hour').fromNow()}</p>
 						{message.from && (
 							<p className="messageFrom">
-								<span className="fromSpan">&#8226;</span>
 								{message.from}
+								<span className="fromSpan">&#8226;</span>
 							</p>
 						)}
+						<p className="messageDate">{moment(message.date).startOf('hour').fromNow()}</p>
 					</div>
+					<p className="messageText">{message.text}</p>
 				</div>
 			</div>
 		);
@@ -72,6 +69,15 @@ const Messages = ({ user, modalUpMessages, setModalUpMessages, messageModal, set
 				>
 					<IoClose />
 				</div>
+				<div
+					className="closeIconMobile"
+					onClick={() => {
+						setModalUpMessages(false);
+						setMessageModal(false);
+					}}
+				>
+					<BsArrowLeft />
+				</div>
 				<div className="messagesHeader">Notifications</div>
 
 				{/* sort each message by date */}
@@ -98,7 +104,7 @@ const Messages = ({ user, modalUpMessages, setModalUpMessages, messageModal, set
 								<p
 									style={{
 										fontWeight: message.isRead ? '500' : 'bold',
-										color: message.isRead ? '#080809' : '#2f52e0',
+										color: message.isRead ? '#080809' : '#0066ff',
 									}}
 									className="messageTitle"
 								>

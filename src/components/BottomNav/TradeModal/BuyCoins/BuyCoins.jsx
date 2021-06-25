@@ -15,6 +15,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setTradeModal, tradeModal, 
 	const [buyType, setBuyType] = useState('fiat');
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 	const [buying, setBuying] = useState(false);
+	const [vibrate, setVibrate] = useState(false);
 
 	//switch the way the user wants to buy coins, fiat or crypto
 	const handleBuyTypeChange = () => {
@@ -138,6 +139,19 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setTradeModal, tradeModal, 
 		}
 	};
 
+	//try to vibrate the input
+	const vibrateInput = () => {
+		setVibrate(true);
+		setTimeout(() => {
+			setVibrate(false);
+		}, 500);
+	};
+
+	//onChange multiple state change
+	const onChangeMultiple = (e) => {
+		setAmountToBuyFiat(e.target.value);
+		coinAmountToBuy(amountToBuyFiat);
+	};
 	const buyCoinsFunction = () => {
 		if (coinInfo !== null && user !== null && wallet !== null) {
 			return (
@@ -150,10 +164,20 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setTradeModal, tradeModal, 
 							<>
 								<span>USD</span>
 								<input
+									style={{
+										animation: vibrate && 'vibrateInput .5s ease forwards',
+									}}
 									value={amountToBuyFiat}
 									onChange={(e) => {
-										coinAmountToBuy(amountToBuyFiat);
-										setAmountToBuyFiat(e.target.value);
+										amountToBuyFiat.toString().length <= 7 && onChangeMultiple(e);
+										amountToBuyFiat.toString().length >= 8 &&
+											setAmountToBuyFiat(
+												amountToBuyFiat
+													.toString()
+													.substring(0, e.target.value.toString().length - 0)
+											);
+
+										amountToBuyFiat.toString().length >= 8 && vibrateInput();
 									}}
 									type="number"
 									pattern="[-+]?[0-9]*[.,]?[0-9]+"
@@ -168,8 +192,22 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setTradeModal, tradeModal, 
 							<>
 								<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
 								<input
+									style={{
+										animation: vibrate && 'vibrateInput .5s ease forwards',
+									}}
 									value={amountToBuyCrypto}
-									onChange={(e) => setAmountToBuyCrypto(e.target.value)}
+									onChange={(e) => {
+										amountToBuyCrypto.toString().length <= 7 &&
+											setAmountToBuyCrypto(e.target.value);
+										amountToBuyCrypto.toString().length >= 8 &&
+											setAmountToBuyCrypto(
+												amountToBuyCrypto
+													.toString()
+													.substring(0, e.target.value.toString().length - 0)
+											);
+
+										amountToBuyCrypto.toString().length >= 8 && vibrateInput();
+									}}
 									placeholder="0"
 									type="number"
 									step="any"

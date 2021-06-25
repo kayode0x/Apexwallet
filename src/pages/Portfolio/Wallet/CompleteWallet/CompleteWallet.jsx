@@ -4,7 +4,7 @@ import saturnSVG from '../../../../assets/logo/saturnSVG.svg';
 import alienSVG from '../../../../assets/logo/alienSVG.svg';
 import astronautSVG from '../../../../assets/logo/astronautSVG.svg';
 import sunSVG from '../../../../assets/logo/sunSVG.svg';
-import { ImArrowDownLeft2, ImArrowUpRight2 } from 'react-icons/im';
+import { ImArrowDownLeft2, ImArrowUpRight2, ImLoop2 } from 'react-icons/im';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import CardDesign from './CardDesign';
 import { useState } from 'react';
@@ -86,6 +86,12 @@ const CompleteUser = ({ user, asset, wallet, handleCreateWallet, creatingWallet 
 						{amount} {symbol ? symbol : ''}
 					</p>
 				);
+			} else if (coin !== 'Dollars' && coin !== 'USD' && type === 'Converted') {
+				return (
+					<p style={{ textTransform: 'uppercase' }}>
+						-{amount} {symbol ? symbol : ''}
+					</p>
+				);
 			} else {
 				return (
 					<p>
@@ -94,6 +100,51 @@ const CompleteUser = ({ user, asset, wallet, handleCreateWallet, creatingWallet 
 					</p>
 				);
 			}
+		}
+	};
+
+	//get the icon background based on the transaction type
+	const getIconBg = (type) => {
+		let color;
+		if (type === 'Received' || type === 'Free' || type === 'Sold') {
+			color = '#C2FEDB';
+			return color;
+		} else if (type === 'Bought' || type === 'Sent') {
+			color = '#FDC4CC';
+			return color;
+		} else if (type === 'Converted') {
+			color = '#bbdefb';
+			return color;
+		}
+	};
+
+	//get the icon color based on the transaction type
+	const getIconColor = (type) => {
+		let color;
+		if (type === 'Received' || type === 'Free' || type === 'Sold') {
+			color = '#12A550';
+			return color;
+		} else if (type === 'Bought' || type === 'Sent') {
+			color = '#F71735';
+			return color;
+		} else if (type === 'Converted') {
+			color = '#1565c0';
+			return color;
+		}
+	};
+
+	//get the icon based on the transaction type
+	const getIcon = (type) => {
+		let icon;
+		if (type === 'Received' || type === 'Free' || type === 'Sold') {
+			icon = <ImArrowDownLeft2 />;
+			return icon;
+		} else if (type === 'Bought' || type === 'Sent') {
+			icon = <ImArrowUpRight2 />;
+			return icon;
+		} else if (type === 'Converted') {
+			icon = <ImLoop2 />;
+			return icon;
 		}
 	};
 
@@ -116,28 +167,12 @@ const CompleteUser = ({ user, asset, wallet, handleCreateWallet, creatingWallet 
 					>
 						<div
 							style={{
-								background:
-									transaction.type === 'Free' ||
-									transaction.type === 'Sold' ||
-									transaction.type === 'Received'
-										? '#C2FEDB'
-										: '#FDC4CC',
-								color:
-									transaction.type === 'Free' ||
-									transaction.type === 'Sold' ||
-									transaction.type === 'Received'
-										? '#12A550'
-										: '#F71735',
+								background: getIconBg(transaction.type),
+								color: getIconColor(transaction.type),
 							}}
 							className="transactionIcon"
 						>
-							{transaction.type === 'Free' ||
-							transaction.type === 'Sold' ||
-							transaction.type === 'Received' ? (
-								<ImArrowDownLeft2 />
-							) : (
-								<ImArrowUpRight2 />
-							)}
+							{getIcon(transaction.type)}
 						</div>
 						<div className="memoAndDate">
 							<p>{transaction.coin}</p>

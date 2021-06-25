@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ImArrowDownLeft2, ImArrowUpRight2 } from 'react-icons/im';
+import { ImArrowDownLeft2, ImArrowUpRight2, ImLoop2 } from 'react-icons/im';
 import { RotateSpinner } from 'react-spinners-kit';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -87,6 +87,12 @@ const Transactions = ({ user, wallet, loggedIn, sorted, setSorted }) => {
 						{amount} {symbol ? symbol : ''}
 					</p>
 				);
+			} else if (coin !== 'Dollars' && coin !== 'USD' && type === 'Converted') {
+				return (
+					<p style={{ textTransform: 'uppercase' }}>
+						-{amount} {symbol ? symbol : ''}
+					</p>
+				);
 			} else {
 				return (
 					<p>
@@ -95,6 +101,51 @@ const Transactions = ({ user, wallet, loggedIn, sorted, setSorted }) => {
 					</p>
 				);
 			}
+		}
+	};
+
+	//get the icon background based on the transaction type
+	const getIconBg = (type) => {
+		let color;
+		if (type === 'Received' || type === 'Free' || type === 'Sold') {
+			color = '#C2FEDB';
+			return color;
+		} else if (type === 'Bought' || type === 'Sent') {
+			color = '#FDC4CC';
+			return color;
+		} else if (type === 'Converted') {
+			color = '#bbdefb';
+			return color;
+		}
+	};
+
+	//get the icon color based on the transaction type
+	const getIconColor = (type) => {
+		let color;
+		if (type === 'Received' || type === 'Free' || type === 'Sold') {
+			color = '#12A550';
+			return color;
+		} else if (type === 'Bought' || type === 'Sent') {
+			color = '#F71735';
+			return color;
+		} else if (type === 'Converted') {
+			color = '#1565c0';
+			return color;
+		}
+	};
+
+	//get the icon based on the transaction type
+	const getIcon = (type) => {
+		let icon;
+		if (type === 'Received' || type === 'Free' || type === 'Sold') {
+			icon = <ImArrowDownLeft2 />;
+			return icon;
+		} else if (type === 'Bought' || type === 'Sent') {
+			icon = <ImArrowUpRight2 />;
+			return icon;
+		} else if (type === 'Converted') {
+			icon = <ImLoop2 />;
+			return icon;
 		}
 	};
 
@@ -147,28 +198,12 @@ const Transactions = ({ user, wallet, loggedIn, sorted, setSorted }) => {
 						>
 							<div
 								style={{
-									background:
-										transaction.type === 'Free' ||
-										transaction.type === 'Sold' ||
-										transaction.type === 'Received'
-											? '#C2FEDB'
-											: '#FDC4CC',
-									color:
-										transaction.type === 'Free' ||
-										transaction.type === 'Sold' ||
-										transaction.type === 'Received'
-											? '#12A550'
-											: '#F71735',
+									background: getIconBg(transaction.type),
+									color: getIconColor(transaction.type),
 								}}
 								className="transactionIcon"
 							>
-								{transaction.type === 'Free' ||
-								transaction.type === 'Sold' ||
-								transaction.type === 'Received' ? (
-									<ImArrowDownLeft2 />
-								) : (
-									<ImArrowUpRight2 />
-								)}
+								{getIcon(transaction.type)}
 							</div>
 							<div className="memoAndDate">
 								<p>{transaction.coin}</p>

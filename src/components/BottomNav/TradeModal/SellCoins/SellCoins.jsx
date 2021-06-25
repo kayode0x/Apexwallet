@@ -21,10 +21,11 @@ const SellCoins = ({
 	wallet,
 	balance,
 }) => {
-	const [amountToSellFiat, setAmountToSellFiat] = useState(1);
-	const [amountToSellCrypto, setAmountToSellCrypto] = useState(0);
+	const [amountToSellFiat, setAmountToSellFiat] = useState(2);
+	const [amountToSellCrypto, setAmountToSellCrypto] = useState(0.01);
 	const [sellType, setSellType] = useState('fiat');
 	const [selling, setSelling] = useState(false);
+	const [vibrate, setVibrate] = useState(false);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 
 	//switch the way the user wants to buy coins, fiat or crypto
@@ -145,6 +146,14 @@ const SellCoins = ({
 		}
 	};
 
+	//try to vibrate the input
+	const vibrateInput = () => {
+		setVibrate(true);
+		setTimeout(() => {
+			setVibrate(false);
+		}, 500);
+	};
+
 	const SellCoinsFunction = () => {
 		if (coinInfo !== null && user !== null && wallet !== null) {
 			return (
@@ -155,10 +164,23 @@ const SellCoins = ({
 					<div className="input">
 						{sellType === 'fiat' ? (
 							<>
-								<span>$</span>
+								<span>USD</span>
 								<input
+									style={{
+										animation: vibrate && 'vibrateInput .5s ease forwards',
+									}}
 									value={amountToSellFiat}
-									onChange={(e) => setAmountToSellFiat(e.target.value)}
+									onChange={(e) => {
+										amountToSellFiat.toString().length <= 7 && setAmountToSellFiat(e.target.value);
+										amountToSellFiat.toString().length >= 8 &&
+											setAmountToSellFiat(
+												amountToSellFiat
+													.toString()
+													.substring(0, e.target.value.toString().length - 0)
+											);
+
+										amountToSellFiat.toString().length >= 8 && vibrateInput();
+									}}
 									placeholder="1"
 									type="number"
 									step="any"
@@ -170,8 +192,22 @@ const SellCoins = ({
 							<>
 								<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
 								<input
+									style={{
+										animation: vibrate && 'vibrateInput .5s ease forwards',
+									}}
 									value={amountToSellCrypto}
-									onChange={(e) => setAmountToSellCrypto(e.target.value)}
+									onChange={(e) => {
+										amountToSellCrypto.toString().length <= 7 &&
+											setAmountToSellCrypto(e.target.value);
+										amountToSellCrypto.toString().length >= 8 &&
+											setAmountToSellCrypto(
+												amountToSellCrypto
+													.toString()
+													.substring(0, e.target.value.toString().length - 0)
+											);
+
+										amountToSellCrypto.toString().length >= 8 && vibrateInput();
+									}}
 									placeholder="0"
 									type="number"
 									step="any"

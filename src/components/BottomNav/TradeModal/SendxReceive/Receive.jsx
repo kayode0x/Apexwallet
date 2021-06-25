@@ -38,7 +38,7 @@ const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinIn
 					</p>
 					<div className="selectBalanceAndBTN">
 						<div className="usernameAndAddress">
-							<div className="containerx">
+							<div className="qrContainer">
 								{userCoins.includes(coinInfo.id) ? (
 									<QRCode
 										level={'L'}
@@ -50,21 +50,6 @@ const ReceiveCoins = ({ modalUpReceive, setModalUpReceive, coin, setCoin, coinIn
 									/>
 								) : null}
 
-								{/* <p>Username</p>
-								<div className="iconAndName">
-									<span>{user.username}</span>
-									<div
-										onClick={() => {
-											navigator.clipboard.writeText(user.username);
-											toast.success(`Copied Username`, {
-												hideProgressBar: true,
-											});
-										}}
-										className="icon"
-									>
-										<MdContentCopy />
-									</div>
-								</div> */}
 								{userCoins.includes(coinInfo.id) && <p>{coinInfo.symbol.toUpperCase()} Address</p>}
 								<div className="iconAndName">
 									<span>

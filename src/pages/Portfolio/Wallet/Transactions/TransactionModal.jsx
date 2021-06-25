@@ -8,13 +8,19 @@ const TransactionModal = ({ singleTransaction, transactionModal }) => {
 			if (coin !== 'Dollars' && coin !== 'USD' && type === 'Sent') {
 				return (
 					<span style={{ textTransform: 'uppercase' }}>
-						-{amount} {symbol ? symbol : ''}
+						-{amount} {symbol && symbol}
 					</span>
 				);
 			} else if (coin !== 'Dollars' && coin !== 'USD' && type === 'Received') {
 				return (
 					<span style={{ textTransform: 'uppercase' }}>
-						{amount} {symbol ? symbol : ''}
+						{amount} {symbol && symbol}
+					</span>
+				);
+			} else if (coin !== 'Dollars' && coin !== 'USD' && type === 'Converted') {
+				return (
+					<span style={{ textTransform: 'uppercase' }}>
+						-{amount} {symbol && symbol}
 					</span>
 				);
 			} else {

@@ -31,6 +31,7 @@ const SendCoins = ({
 	const [sending, setSending] = useState(false);
 	const [qr, setQr] = useState('Scan a QR code to send');
 	const [qrModal, setQrModal] = useState(false);
+	const [vibrate, setVibrate] = useState(false);
 
 	//switch the way the user wants to buy coins, fiat or crypto
 	const handleBuyTypeChange = () => {
@@ -178,6 +179,13 @@ const SendCoins = ({
 			</div>
 		);
 	};
+	//try to vibrate the input
+	const vibrateInput = () => {
+		setVibrate(true);
+		setTimeout(() => {
+			setVibrate(false);
+		}, 500);
+	};
 
 	const sendFunction = () => {
 		if (coinInfo !== null && user !== null && wallet !== null) {
@@ -198,9 +206,18 @@ const SendCoins = ({
 							<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
 						)}
 						<input
+							style={{
+								animation: vibrate && 'vibrateInput .5s ease forwards',
+							}}
 							value={amountToSend}
 							onChange={(e) => {
-								setAmountToSend(e.target.value);
+								amountToSend.toString().length <= 7 && setAmountToSend(e.target.value);
+								amountToSend.toString().length >= 8 &&
+									setAmountToSend(
+										amountToSend.toString().substring(0, e.target.value.toString().length - 0)
+									);
+
+								amountToSend.toString().length >= 8 && vibrateInput();
 							}}
 							type="number"
 							pattern="[-+]?[0-9]*[.,]?[0-9]+"

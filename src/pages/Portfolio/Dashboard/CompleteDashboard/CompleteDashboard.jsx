@@ -12,7 +12,7 @@ const CompleteDashboard = (user, watchList, news) => {
 	const [hasNotifications, setHasNotifications] = useState(undefined);
 	const [modalUpMessages, setModalUpMessages] = useState(false);
 	const [messageModal, setMessageModal] = useState(false);
-	let notificationDiv = useRef(Math.floor(Math.random() * 2 + 1));
+	let notificationDiv = useRef(Math.floor(Math.random() * 3 + 1));
 
 	const notificationsFunction = () => {
 		if (notificationDiv.current === 1) {
@@ -20,6 +20,13 @@ const CompleteDashboard = (user, watchList, news) => {
 				<div style={{ display: notifications ? 'block' : 'none' }}>
 					<p>🚨 New on v1.1 beta 🚨 </p>
 					<p>You can now send and receive coins with a QR code.</p>
+				</div>
+			);
+		} else if (notificationDiv.current === 2) {
+			return (
+				<div>
+					<p>🚨 New on v1.1 beta 🚨 </p>
+					<p>Coin conversion is live 🚀. You can now convert coins you own to another.</p>
 				</div>
 			);
 		} else {

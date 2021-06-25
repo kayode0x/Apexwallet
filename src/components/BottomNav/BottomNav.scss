@@ -2,8 +2,8 @@ $mainColor: #f1f2f4;
 $subColor: #5d5c5f;
 $textColor: #080809;
 $subTextColor: #cbbaba;
-$blue: #2f52e0;
-$lightBlue: #4e6ce4;
+$blue: #0066ff;
+$lightBlue: #64b5f6;
 $orange: #ef5116;
 $navyBlue: #262946;
 $borderColor: rgb(170, 170, 170);
@@ -22,7 +22,6 @@ $borderColor: rgb(170, 170, 170);
 
 	@media (min-width: 768px) {
 		position: sticky;
-		width: 30rem;
 		width: 100%;
 		max-width: 1000px;
 		display: flex;
@@ -94,8 +93,8 @@ $borderColor: rgb(170, 170, 170);
 			border-bottom-left-radius: 10px;
 			border-bottom-right-radius: 10px;
 		}
-		@media (max-width: 1024px) and (orientation: landscape) {
-			height: 55%;
+		@media (max-width: 812px) and (orientation: landscape) {
+			height: 90%;
 		}
 	}
 

@@ -7,6 +7,7 @@ import BuyCoins from './BuyCoins/BuyCoins';
 import SellCoins from './SellCoins/SellCoins';
 import Send from './SendxReceive/Send';
 import Receive from './SendxReceive/Receive';
+import ConvertCoins from './ConvertCoins/ConvertCoins';
 
 const TradeModal = ({ tradeModal, setTradeModal }) => {
 	const [wallet, setWallet] = useState(null);
@@ -20,6 +21,7 @@ const TradeModal = ({ tradeModal, setTradeModal }) => {
 	const [modalUpSell, setModalUpSell] = useState(false);
 	const [modalUpSend, setModalUpSend] = useState(false);
 	const [modalUpReceive, setModalUpReceive] = useState(false);
+	const [modalUpConvert, setModalUpConvert] = useState(false);
 
 	//ALL URLS HERE
 	//api endpoint to get the coin data.
@@ -127,7 +129,7 @@ const TradeModal = ({ tradeModal, setTradeModal }) => {
 						</div>
 						Sell
 					</div>
-					<div className="convertCrypto" onClick={() => alert('Coming soon ⏳')}>
+					<div className="convertCrypto" onClick={() => setModalUpConvert(!modalUpConvert)}>
 						<div className="tradeModalIcon">
 							<BsArrowRepeat />
 						</div>
@@ -194,6 +196,19 @@ const TradeModal = ({ tradeModal, setTradeModal }) => {
 						user={user}
 						wallet={wallet}
 						address={address}
+					/>
+
+					<ConvertCoins
+						tradeModal={tradeModal}
+						setTradeModal={setTradeModal}
+						modalUpConvert={modalUpConvert}
+						setModalUpConvert={setModalUpConvert}
+						setCoin={setCoin}
+						coin={coin}
+						coinInfo={coinInfo}
+						user={user}
+						wallet={wallet}
+						balance={balance}
 					/>
 				</>
 			);

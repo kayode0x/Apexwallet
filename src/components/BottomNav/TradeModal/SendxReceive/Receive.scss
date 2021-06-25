@@ -2,8 +2,8 @@ $mainColor: #f1f2f4;
 $subColor: #5d5c5f;
 $textColor: #080809;
 $subTextColor: #cbbaba;
-$blue: #2f52e0;
-$lightBlue: #4e6ce4;
+$blue: #0066ff;
+$lightBlue: #64b5f6;
 $orange: #ef5116;
 $navyBlue: #262946;
 $borderColor: rgb(170, 170, 170);
@@ -40,6 +40,8 @@ $borderColor: rgb(170, 170, 170);
 		top: 2%;
 		right: 3%;
 		position: absolute;
+		z-index: 4;
+		cursor: pointer;
 	}
 	.receiveDiv {
 		width: 100%;
@@ -48,6 +50,7 @@ $borderColor: rgb(170, 170, 170);
 		align-items: center;
 		height: 100%;
 		overflow: auto;
+		position: relative;
 
 		.header {
 			@media (min-width: 768px) {
@@ -87,7 +90,7 @@ $borderColor: rgb(170, 170, 170);
 				justify-content: center;
 				margin-bottom: 1rem;
 
-				.containerx {
+				.qrContainer {
 					padding: 1rem;
 					width: 90%;
 					display: flex;
@@ -97,7 +100,6 @@ $borderColor: rgb(170, 170, 170);
 					justify-content: center;
 					border: 1px solid $borderColor;
 					border-radius: 5px;
-					// background: #000;
 
 					.qrCode {
 						padding: 1rem 3rem;
@@ -145,7 +147,7 @@ $borderColor: rgb(170, 170, 170);
 				border: none;
 				color: $mainColor;
 				font-weight: bold;
-				background: $lightBlue;
+				background: $blue;
 				transition: 0.5s;
 				margin-top: 1rem;
 				@media (min-width: 768px){
@@ -155,7 +157,7 @@ $borderColor: rgb(170, 170, 170);
 
 			button:hover {
 				cursor: pointer;
-				background: $blue;
+				background: $lightBlue;
 			}
 
 			button[disabled] {

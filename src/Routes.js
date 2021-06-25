@@ -104,12 +104,13 @@ const Routes = () => {
 				} catch (error) {
 					console.log('ERROR: ' + error);
 				}
-			}
+			};
 
-			if(loggedIn === true){
+			//only call updateSite if the user is logged in
+			if (loggedIn === true) {
 				//updateSite function to update data without reloading the page
 				updateUserData();
-				setInterval(updateUserData, 15000); //update every 15 seconds
+				setInterval(updateUserData, 5000); //update every 5 seconds
 			}
 
 			if (loggedIn === true) {

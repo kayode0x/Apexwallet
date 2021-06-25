@@ -2,8 +2,8 @@ $mainColor: #f1f2f4;
 $subColor: #5d5c5f;
 $textColor: #080809;
 $subTextColor: #cbbaba;
-$blue: #2f52e0;
-$lightBlue: #4e6ce4;
+$blue: #0066ff;
+$lightBlue: #64b5f6;
 $orange: #ef5116;
 $navyBlue: #262946;
 $borderColor: rgb(170, 170, 170);
@@ -47,11 +47,26 @@ $borderColor: rgb(170, 170, 170);
 		top: 2%;
 		right: 3%;
 		position: absolute;
+		@media (max-width: 767px) {
+			display: none;
+		}
+	}
+	.closeIconMobile {
+		font-size: 2rem;
+		top: 5%;
+		@media (max-width: 767px) {
+			top: 2%;
+		}
+		left: 4%;
+		position: absolute;
+		@media (min-width: 768px) {
+			display: none;
+		}
 	}
 	.messagesHeader {
 		font-size: 1.35rem;
 		margin-top: 1rem;
-		margin-bottom: 2rem;
+		margin-bottom: 1rem;
 		@media (min-width: 768px) {
 			margin-top: 2rem;
 			font-size: 1.75rem;
@@ -77,7 +92,7 @@ $borderColor: rgb(170, 170, 170);
 
 		.messageText {
 			font-size: 1rem;
-			margin-top: -1rem;
+			margin-top: -0.75rem;
 			color: $subColor;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -112,11 +127,12 @@ $borderColor: rgb(170, 170, 170);
 	.closeIcon {
 		font-size: 2rem;
 		top: 5%;
-		@media (max-width: 767px){
+		@media (max-width: 767px) {
 			top: 2%;
 		}
 		left: 4%;
 		position: absolute;
+		display: block;
 	}
 	@media (max-width: 767px) {
 		animation: messageSlideIn 0.7s ease-in forwards;
@@ -133,7 +149,7 @@ $borderColor: rgb(170, 170, 170);
 	.messageTitle {
 		display: flex;
 		font-size: 1.35rem;
-		@media (max-width: 767px){
+		@media (max-width: 767px) {
 			margin-top: 3rem;
 			align-self: flex-start;
 		}
@@ -143,35 +159,38 @@ $borderColor: rgb(170, 170, 170);
 		height: 50%;
 		width: 100%;
 		border-radius: 10px;
-		margin-bottom: 1rem;
+		margin-bottom: 1.5rem;
+		margin-top: -.5rem;
 	}
 
 	.messageText {
 		font-size: 1.15rem;
 		color: $subColor;
-		margin-top: -.5rem;
+		margin-top: -0.5rem;
 		line-height: 1.95;
 	}
 
 	.fromAndDate {
 		align-self: flex-start;
-			display: flex;
-			align-items: center;
-			font-size: 0.9rem;
-			color: $subColor;
-			margin-top: -1.45rem;
+		display: flex;
+		align-items: center;
+		font-size: 0.9rem;
+		color: $subColor;
+		margin-top: -1.75rem;
 
-			.messageFrom {
+		.messageFrom {
+			font-weight: bold;
+
+			.fromSpan {
+				height: 1rem;
+				width: 1rem;
+				font-size: 1rem;
 				margin-left: 0.25rem;
 
-				.fromSpan {
-					height: 1rem;
-					width: 1rem;
-					font-size: 1rem;
-					margin-right: 0.25rem;
-				}
+				margin-right: 0.25rem;
 			}
 		}
+	}
 }
 
 @keyframes messageSlideIn {
