@@ -58,7 +58,7 @@ $navyBlue: #262946;
 			font-size: 1.5rem;
 			font-weight: bold;
 			text-transform: capitalize;
-			@media(min-width: 768px){
+			@media (min-width: 768px) {
 				display: none;
 			}
 		}
@@ -69,7 +69,7 @@ $navyBlue: #262946;
 			border-radius: 5px;
 			color: $textColor;
 			text-align: center;
-			@media (max-width: 767px){
+			@media (max-width: 767px) {
 				max-width: 25rem;
 			}
 			display: flex;
@@ -87,7 +87,7 @@ $navyBlue: #262946;
 					position: relative;
 					display: flex;
 					justify-content: center;
-					@media (max-width: 767px){
+					@media (max-width: 767px) {
 						width: 100%;
 					}
 					width: 45%;
@@ -100,7 +100,7 @@ $navyBlue: #262946;
 					position: absolute;
 					bottom: 10%;
 					left: 27%;
-					@media (max-width: 767px){
+					@media (max-width: 767px) {
 						left: 20%;
 					}
 					font-size: 1.25rem;
@@ -113,12 +113,14 @@ $navyBlue: #262946;
 					display: flex;
 					align-items: center;
 					justify-content: center;
-
 				}
 
 				img {
+					height: auto;
 					height: 6rem;
-					width: auto;
+					width: 6rem;
+					border-radius: 100%;
+					background: #000;
 				}
 
 				.nameAndStatus {
@@ -186,7 +188,7 @@ $navyBlue: #262946;
 
 						.displayValue {
 							font-size: 1.05rem;
-							font-weight:500;
+							font-weight: 500;
 							color: $textColor;
 							max-width: 95%;
 							word-break: break-word;
@@ -234,8 +236,8 @@ $navyBlue: #262946;
 				}
 
 				.statusField,
-				.helpAndSupportField,
-				.privacyField,
+				.learnField,
+				.reachOutField,
 				.aboutUsField {
 					width: 100%;
 					display: flex;
@@ -264,7 +266,11 @@ $navyBlue: #262946;
 				align-self: center;
 				width: 50%;
 				max-width: 10rem;
-				background: rgba(#13151b, 1);
+				background-image: radial-gradient(
+					circle farthest-corner at 10% 20%,
+					rgba(226, 37, 37, 1) 0%,
+					rgba(211, 49, 49, 1) 82.8%
+				);
 				padding: 1rem 0rem;
 				margin-top: 2rem;
 				border-radius: 10px;
@@ -278,8 +284,8 @@ $navyBlue: #262946;
 			.signOut:hover {
 				background-image: radial-gradient(
 					circle farthest-corner at 10% 20%,
-					rgba(226, 37, 37, 1) 0%,
-					rgba(211, 49, 49, 1) 82.8%
+					rgb(240, 94, 94) 0%,
+					rgb(230, 97, 97) 82.8%
 				);
 				color: $mainColor;
 				cursor: pointer;
@@ -303,4 +309,52 @@ $navyBlue: #262946;
 			}
 		}
 	}
+}
+.imageModal {
+	position: fixed;
+	bottom: -150vh;
+	background-color: $mainColor;
+	width: 100%;
+	box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.15);
+	left: 0;
+	padding: 1rem 0;
+	z-index: 10;
+	display: none;
+	font-size: 1.15rem;
+	animation: imageModal 0.3s ease-in-out forwards;
+	border-radius: 10px;
+	height: 40%;
+	@media (max-width: 767px) {
+		max-width: 20rem;
+	}
+	@media (min-width: 768px) {
+		display: none;
+		width: 30rem;
+		height: 28rem;
+	}
+	@media (max-width: 812px) and (orientation: landscape) {
+		height: 90%;
+	}
+}
+
+@keyframes imageModal {
+	from {
+		top: 60%;
+	}
+
+	to {
+		top: 50%;
+	}
+}
+
+.imageModal.Show {
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	transition: all 0.8s ease-in;
+	display: flex;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }

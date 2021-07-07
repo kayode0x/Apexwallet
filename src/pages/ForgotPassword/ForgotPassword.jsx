@@ -4,16 +4,17 @@ import { useState } from 'react';
 import { RotateSpinner } from 'react-spinners-kit';
 import { Link } from 'react-router-dom';
 import { IoChevronBack } from 'react-icons/io5';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useTitle from '../../utils/useTitle'
 
 const ForgotPassword = () => {
 	const [email, setEmail] = useState('');
 	const [resetting, setResetting] = useState(false);
 	const [emailSent, setEmailSent] = useState(false);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
+	useTitle('Forgot Password | Apexwallet');
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
@@ -40,12 +41,8 @@ const ForgotPassword = () => {
 	};
 
 	return (
-		<HelmetProvider>
+		<>
 			<div className="forgotPassword">
-				<Helmet>
-					<meta charSet="utf-8" />
-					<title>Forgot Password - Apex</title>
-				</Helmet>
 				<div className="container">
 					<div className="header">{emailSent ? 'Email Sent!' : 'Reset Password'}</div>
 
@@ -84,7 +81,7 @@ const ForgotPassword = () => {
 			</div>
 
 			<ToastContainer hideProgressBar autoClose={3000} />
-		</HelmetProvider>
+		</>
 	);
 };
 

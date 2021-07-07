@@ -18,6 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import AuthContext from './components/Auth/AuthContext';
 import { useContext } from 'react';
+import AboutUs from './pages/AboutUs/AboutUs';
 
 const Routes = () => {
 	//the links
@@ -115,7 +116,7 @@ const Routes = () => {
 
 			if (loggedIn === true) {
 				updatePrices();
-				setInterval(updatePrices, 30000); //update every 30 seconds
+				setInterval(updatePrices, 45000); //update every 30 seconds
 			}
 
 			try {
@@ -157,7 +158,7 @@ const Routes = () => {
 
 		//only load if the user is logged in
 		if (loggedIn === true) {
-			load(); 
+			load();
 		}
 
 		return () => {
@@ -216,6 +217,10 @@ const Routes = () => {
 
 				<Route path="/verify">
 					<Verify />
+				</Route>
+
+				<Route path="/about">
+					<AboutUs />
 				</Route>
 
 				<Route exact path="/">

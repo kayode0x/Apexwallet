@@ -8,7 +8,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { BiSearch } from 'react-icons/bi';
 import { RotateSpinner } from 'react-spinners-kit';
 import BottomNav from '../../../components/BottomNav/BottomNav';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import useTitle from '../../../utils/useTitle';
 import { IoClose, IoCalculator } from 'react-icons/io5';
 
 const Prices = ({ user, prices, marketInfo, loggedIn }) => {
@@ -22,6 +22,7 @@ const Prices = ({ user, prices, marketInfo, loggedIn }) => {
 	const [coinFrom, setCoinFrom] = useState('bitcoin');
 	const [coinTo, setCoinTo] = useState('usd');
 	const [calculatedData, setCalculatedData] = useState('Loading...');
+	useTitle('Prices | Apexwallet');
 
 	useEffect(() => {
 		if (loggedIn === false) {
@@ -207,12 +208,8 @@ const Prices = ({ user, prices, marketInfo, loggedIn }) => {
 	}
 
 	return (
-		<HelmetProvider>
+		<>
 			<div className="prices">
-				<Helmet>
-					<meta charSet="utf-8" />
-					<title>Prices - Apex</title>
-				</Helmet>
 				<BottomNav />
 				<div className="container">
 					<p className="header">Prices</p>
@@ -373,7 +370,7 @@ const Prices = ({ user, prices, marketInfo, loggedIn }) => {
 				</div>
 				<ToastContainer hideProgressBar autoClose={3000} />
 			</div>
-		</HelmetProvider>
+		</>
 	);
 };
 

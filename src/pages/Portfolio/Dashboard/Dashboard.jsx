@@ -4,12 +4,13 @@ import { useHistory } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BottomNav from '../../../components/BottomNav/BottomNav';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import useTitle from '../../../utils/useTitle'
 import CompleteDashboard from './CompleteDashboard/CompleteDashboard';
 
 const Dashboard = ({user, prices, news, loggedIn}) => {
 	const history = useHistory();
 	const [watchList, setWatchList] = useState(null);
+	useTitle('Home | Apexwallet');
 
 	useEffect(() => {
 		if (loggedIn === false) {
@@ -46,12 +47,8 @@ const Dashboard = ({user, prices, news, loggedIn}) => {
 	}, [prices, user]);
 
 	return (
-		<HelmetProvider>
+		<>
 			<div className="dashboard">
-				<Helmet>
-					<meta charSet="utf-8" />
-					<title>Home - Apex</title>
-				</Helmet>
 				<BottomNav />
 				<div className="container">
 					<p className="header">Home</p>
@@ -59,7 +56,7 @@ const Dashboard = ({user, prices, news, loggedIn}) => {
 				</div>
 				<ToastContainer hideProgressBar autoClose={3000} />
 			</div>
-		</HelmetProvider>
+		</>
 	);
 };
 

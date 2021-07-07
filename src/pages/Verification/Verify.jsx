@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react';
 import { RotateSpinner } from 'react-spinners-kit';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import useTitle from '../../utils/useTitle';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
 const Verify = () => {
 	const history = useHistory();
 	const [verifying, setVerifying] = useState(false);
+	useTitle('Verify | Apexwallet');
 
 	useEffect(() => {
 		async function verifyUser() {
@@ -56,12 +57,8 @@ const Verify = () => {
 	}, [history]);
 
 	return (
-		<HelmetProvider>
+		<>
 			<div className="verify">
-				<Helmet>
-					<meta charSet="utf-8" />
-					<title>Verify - Apex</title>
-				</Helmet>
 				<div className="container">
 					<div className="assets">
 						<img src={astronaut} alt="astronaut" />
@@ -72,7 +69,7 @@ const Verify = () => {
 			</div>
 
 			<ToastContainer hideProgressBar autoClose={3000} />
-		</HelmetProvider>
+		</>
 	);
 };
 

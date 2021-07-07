@@ -1,0 +1,64 @@
+$mainColor: #f1f2f4;
+$subColor: #5d5c5f;
+$textColor: #080809;
+$subTextColor: #cbbaba;
+$blue: #0066ff;
+$lightBlue: #64b5f6;
+$orange: #ef5116;
+$navyBlue: #262946;
+$borderColor: rgb(158, 158, 158);
+
+.learnModalContainer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-45%, -50%);
+	width: 100%;
+	max-width: 20rem;
+	outline: none;
+	border: none;
+
+	@media (max-width: 480px) {
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.learnModalSubContainer {
+		background: $mainColor;
+		flex-direction: column;
+		height: 18rem;
+		border-radius: 10px;
+		padding: 1rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+
+        .header {
+            position: absolute;
+            top: 7%;
+            font-size: 1.25rem;
+        }
+
+        .status {
+            background: red;
+            padding: .2rem .35rem;
+            border-radius: 5px;
+            font-size: .85rem;
+            color: $mainColor;
+            font-weight: bold;
+            position: absolute;
+            top: 12%;
+        }
+
+        .body {
+            margin-top: 4rem;
+
+            .intro {
+                opacity: 0.7;
+                font-size: 1.15rem;
+                line-height: 1.35;
+            }
+        }
+	}
+}

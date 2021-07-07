@@ -3,12 +3,10 @@ import { RiNotification4Fill } from 'react-icons/ri';
 import coinsSVG from '../../../../assets/logo/coinsSVG.svg';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { IoClose } from 'react-icons/io5';
 import { useState, useRef, useEffect } from 'react';
 import Messages from '../Messages/Messages';
 
 const CompleteDashboard = (user, watchList, news) => {
-	const [notifications, setNotifications] = useState(true);
 	const [hasNotifications, setHasNotifications] = useState(undefined);
 	const [modalUpMessages, setModalUpMessages] = useState(false);
 	const [messageModal, setMessageModal] = useState(false);
@@ -17,7 +15,7 @@ const CompleteDashboard = (user, watchList, news) => {
 	const notificationsFunction = () => {
 		if (notificationDiv.current === 1) {
 			return (
-				<div style={{ display: notifications ? 'block' : 'none' }}>
+				<div>
 					<p>🚨 New on v1.1 beta 🚨 </p>
 					<p>You can now send and receive coins with a QR code.</p>
 				</div>
@@ -193,12 +191,7 @@ const CompleteDashboard = (user, watchList, news) => {
 						}}
 					/>
 				</div>
-				<div style={{ display: notifications ? 'block' : 'none' }} className="notificationDiv">
-					<div className="closeIcon" onClick={() => setNotifications(false)}>
-						<IoClose />
-					</div>
-					{notificationsFunction()}
-				</div>
+				<div className="notificationDiv">{notificationsFunction()}</div>
 				<p className="watchListHeader">Watchlist</p>
 				{watchListFunction()}
 				<p className="newsHeader">News</p>

@@ -8,7 +8,7 @@ const SectionTwo = () => {
 		<div className="sectionTwo">
 			<div className="featuresHeader">
 				<p>Learn the basics</p>
-				<p>Apex Wallet helps you learn how things work, from the basics to when you should buy/sell. </p>
+				<p>Apexwallet helps you learn how things work, from the basics to when you should buy/sell. </p>
 			</div>
 			<div className="container">
 				<div className="feature one">

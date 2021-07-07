@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import BottomNav from '../../../components/BottomNav/BottomNav';
 import CompleteWallet from './CompleteWallet/CompleteWallet';
-import { HelmetProvider, Helmet } from 'react-helmet-async';
+import useTitle from '../../../utils/useTitle';
 
 const Wallet = ({ user, wallet, prices, loggedIn }) => {
 	const history = useHistory();
@@ -15,6 +15,7 @@ const Wallet = ({ user, wallet, prices, loggedIn }) => {
 	const [creatingWallet, setCreatingWallet] = useState(false);
 	//breakpoint set at mobile only
 	const matches = useMediaQuery('(max-width:767px)');
+	useTitle('Wallet | Apexwallet');
 
 	//api endpoint.
 	const apiURL = 'https://api.apexwallet.app/api/v1';
@@ -89,12 +90,8 @@ const Wallet = ({ user, wallet, prices, loggedIn }) => {
 	};
 
 	return (
-		<HelmetProvider>
+		<>
 			<div className="wallet">
-				<Helmet>
-					<meta charSet="utf-8" />
-					<title>Wallet - Apex</title>
-				</Helmet>
 				<BottomNav prices={prices} />
 				<div className="container">
 					<p className="header">Wallet</p>
@@ -111,7 +108,7 @@ const Wallet = ({ user, wallet, prices, loggedIn }) => {
 				</div>
 				<ToastContainer hideProgressBar autoClose={3000} />
 			</div>
-		</HelmetProvider>
+		</>
 	);
 };
 

@@ -4,9 +4,10 @@ import SectionTwo from './SectionTwo/SectionTwo';
 import SectionFive from './SectionFive/SectionFive';
 import SectionFour from './SectionFour/SectionFour';
 import SectionSix from './SectionSix/SectionSix';
-
+import useTitle from '../../utils/useTitle';
 
 const LandingPage = () => {
+	useTitle('Apexwallet');
 	return (
 		<>
 			<SectionOne />

@@ -34,7 +34,7 @@ const Coin = ({ user, wallet, loggedIn }) => {
 	//api endpoint to get the coin data.
 	const coingeckoDataApi = `https://api.coingecko.com/api/v3/coins/${coinSearchId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=true`;
 
-	//global api for Apex Wallet.
+	//global api for Apexwallet.
 	const apiURL = 'https://api.apexwallet.app/api/v1';
 
 	useEffect(() => {

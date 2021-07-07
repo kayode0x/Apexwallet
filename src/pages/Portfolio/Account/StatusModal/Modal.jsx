@@ -83,13 +83,6 @@ export default function StatusModal({ user }) {
 										src={user.isActive === true ? allowedIcon : notAllowedIcon}
 										alt="not allowed"
 									/>
-									<p>Send and Receive crypto</p>
-								</div>
-								<div>
-									<img
-										src={user.isActive === true ? allowedIcon : notAllowedIcon}
-										alt="not allowed"
-									/>
 									<p>Buy and Sell crypto</p>
 								</div>
 								<div>
@@ -97,7 +90,18 @@ export default function StatusModal({ user }) {
 										src={user.isActive === true ? allowedIcon : notAllowedIcon}
 										alt="not allowed"
 									/>
-									<p>Coin Conversion (TBA)</p>
+									<p>Send and Receive crypto</p>
+								</div>
+								<div>
+									<img
+										src={user.isActive === true ? allowedIcon : notAllowedIcon}
+										alt="not allowed"
+									/>
+									<p>Coin Conversion</p>
+								</div>
+								<div>
+									<img src={allowedIcon} alt="not allowed" />
+									<p>Track assets</p>
 								</div>
 								<div>
 									<img
@@ -105,17 +109,6 @@ export default function StatusModal({ user }) {
 										alt="not allowed"
 									/>
 									<p>Coin Locking (TBA)</p>
-								</div>
-								<div>
-									<img
-										src={user.isActive === true ? allowedIcon : notAllowedIcon}
-										alt="not allowed"
-									/>
-									<p>Borrow crypto (TBA)</p>
-								</div>
-								<div>
-									<img src={allowedIcon} alt="not allowed" />
-									<p>Track assets</p>
 								</div>
 
 								<div

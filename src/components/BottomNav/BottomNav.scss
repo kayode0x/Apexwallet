@@ -31,11 +31,13 @@ $borderColor: rgb(170, 170, 170);
 
 	a {
 		text-decoration: none;
-		color: $subColor;
+		color: $textColor;
+		opacity: 0.5;
 	}
 
 	a.active {
 		color: $textColor;
+		opacity: 1;
 	}
 
 	.tradeIcon {
@@ -47,7 +49,9 @@ $borderColor: rgb(170, 170, 170);
 			height: 3.5rem;
 			border-radius: 50%;
 			font-size: 1.5rem;
+			font-weight: bold;
 			color: $mainColor;
+			opacity: 1;
 			background: $textColor;
 			width: 3.5rem;
 			margin-top: -2rem;
@@ -82,7 +86,6 @@ $borderColor: rgb(170, 170, 170);
 		z-index: 10;
 		display: none;
 		font-size: 1.15rem;
-		animation: tradeModalAnim 0.3s ease-in-out forwards;
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
 		height: 40%;
@@ -95,16 +98,6 @@ $borderColor: rgb(170, 170, 170);
 		}
 		@media (max-width: 812px) and (orientation: landscape) {
 			height: 90%;
-		}
-	}
-
-	@keyframes tradeModalAnim {
-		from {
-			bottom: -150vh;
-		}
-
-		to {
-			bottom: 0;
 		}
 	}
 
@@ -136,6 +129,7 @@ $borderColor: rgb(170, 170, 170);
 		.convertCrypto,
 		.buyCrypto,
 		.sellCrypto {
+			cursor: pointer;
 			display: flex;
 			margin-left: 1rem;
 			width: 90%;
@@ -167,14 +161,15 @@ $borderColor: rgb(170, 170, 170);
 		flex-direction: column;
 		align-items: center;
 		font-size: 1.35rem;
+		font-weight: bold;
 
 		@media (min-width: 768px) {
 			flex-direction: row;
-			font-size: 1.5rem;
+			font-size: 1.35rem;
+			font-weight: normal;
 			align-items: center;
 			justify-content: center;
 			margin-left: 2rem;
-			// background: #000;
 		}
 
 		p {
@@ -188,5 +183,9 @@ $borderColor: rgb(170, 170, 170);
 				margin-bottom: -0.25rem;
 			}
 		}
+	}
+
+	.logoApex {
+		margin-top: 1.55rem;
 	}
 }

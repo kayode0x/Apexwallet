@@ -5,7 +5,7 @@ import { RotateSpinner } from 'react-spinners-kit';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import useTitle from '../../utils/useTitle'
 import AuthContext from '../../components/Auth/AuthContext';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -20,7 +20,7 @@ const SignUp = () => {
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [signingIn, setSigningIn] = useState(false);
 	const apiURL = 'https://api.apexwallet.app/api/v1';
-	//breakpoint set at mobile only
+	useTitle('SignUp | Apexwallet');
 
 	//handle the signup request from the form
 	const handleSignUp = async (e) => {
@@ -72,12 +72,8 @@ const SignUp = () => {
 	};
 
 	return (
-		<HelmetProvider>
+		<>
 			<div className="signup">
-				<Helmet>
-					<meta charSet="utf-8" />
-					<title>Signup - Apex</title>
-				</Helmet>
 				<div className="container">
 					<div className="header">Sign Up</div>
 
@@ -147,7 +143,7 @@ const SignUp = () => {
 			</div>
 
 			<ToastContainer hideProgressBar autoClose={3000} />
-		</HelmetProvider>
+		</>
 	);
 };
 

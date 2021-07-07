@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { RotateSpinner } from 'react-spinners-kit';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import useTitle from '../../utils/useTitle'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,6 +24,8 @@ const Reset = () => {
 	if (token === null) {
 		history.push('/forgot-password');
 	}
+
+	useTitle('Reset Password | Apexwallet');
 
 	const handleReset = async (e) => {
 		e.preventDefault();
@@ -66,12 +68,8 @@ const Reset = () => {
 	};
 
 	return (
-		<HelmetProvider>
+		<>
 			<div className="reset">
-				<Helmet>
-					<meta charSet="utf-8" />
-					<title>Reset Password - Apex</title>
-				</Helmet>
 				<div className="container">
 					<div className="header">Reset Password </div>
 
@@ -131,7 +129,7 @@ const Reset = () => {
 			</div>
 
 			<ToastContainer hideProgressBar autoClose={3000} />
-		</HelmetProvider>
+		</>
 	);
 };
 

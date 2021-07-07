@@ -1,7 +1,7 @@
 import './BottomNav.scss';
-import { RiHome4Fill, RiHome4Line } from 'react-icons/ri';
-import { IoWalletOutline, IoWallet, IoStatsChart } from 'react-icons/io5';
-import { RiUser3Line, RiUser3Fill } from 'react-icons/ri';
+import { HiOutlineHome } from 'react-icons/hi';
+import { IoWalletOutline } from 'react-icons/io5';
+import { RiUser3Line, RiBarChartLine } from 'react-icons/ri';
 import { BsArrowUpDown } from 'react-icons/bs';
 import { useLocation, Link } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -27,14 +27,14 @@ const BottomNav = () => {
 				style={{ animation: splitLocation[1] === 'dashboard' ? 'navIconAnim .3s' : '' }}
 				className={splitLocation[1] === 'dashboard' ? 'active homeIcon' : 'homeIcon'}
 			>
-				{matches ? splitLocation[1] === 'dashboard' ? <RiHome4Fill /> : <RiHome4Line /> : <p>Home</p>}
+				{matches ? <HiOutlineHome /> : <p>Home</p>}
 			</Link>
 			<Link
 				to="/prices"
 				style={{ animation: splitLocation[1] === 'prices' ? 'navIconAnim .3s' : '' }}
 				className={splitLocation[1] === 'prices' ? 'active pricesIcon' : 'pricesIcon'}
 			>
-				{matches ? <IoStatsChart /> : <p>Prices</p>}
+				{matches ? <RiBarChartLine /> : <p>Prices</p>}
 			</Link>
 			<Link
 				to="#"
@@ -51,14 +51,14 @@ const BottomNav = () => {
 				style={{ animation: splitLocation[1] === 'wallet' ? 'navIconAnim .3s' : '' }}
 				className={splitLocation[1] === 'wallet' ? 'active walletIcon' : 'walletIcon'}
 			>
-				{matches ? splitLocation[1] === 'wallet' ? <IoWallet /> : <IoWalletOutline /> : <p>Wallet</p>}
+				{matches ? <IoWalletOutline /> : <p>Wallet</p>}
 			</Link>
 			<Link
 				to="/account"
 				style={{ animation: splitLocation[1] === 'account' ? 'navIconAnim .3s' : '' }}
 				className={splitLocation[1] === 'account' ? 'active accountIcon' : 'accountIcon'}
 			>
-				{matches ? splitLocation[1] === 'account' ? <RiUser3Fill /> : <RiUser3Line /> : <p>Account</p>}
+				{matches ? <RiUser3Line /> : <p>Account</p>}
 			</Link>
 
 			<TradeModal setTradeModal={setTradeModal} tradeModal={tradeModal} />
