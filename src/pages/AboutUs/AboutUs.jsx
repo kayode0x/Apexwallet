@@ -8,14 +8,16 @@ import sakuna from '../../assets/logo/sakunaRed.JPG';
 import shelby from '../../assets/logo/shelby.jpeg';
 import kakashi from '../../assets/logo/kakashi.jpeg';
 import beerus from '../../assets/logo/beerus.jpeg';
-import useTitle from '../../utils/useTitle'
+import useTitle from '../../utils/useTitle';
+import Nav from '../../components/TopNav/Nav';
 
 const AboutUs = () => {
 	const matches = useMediaQuery('(max-width:768px)');
-	useTitle('About Us | Apexwallet')
-	
+	useTitle('About Us | Apexwallet');
+
 	return (
 		<div className="aboutUs">
+			<Nav />
 			<div className="container">
 				<div className="headerAndImage">
 					<img src={walletIMG} alt="wallet" />
