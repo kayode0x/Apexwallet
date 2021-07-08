@@ -7,9 +7,9 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { IoChevronBack } from 'react-icons/io5';
 import axios from 'axios';
 import BottomNav from '../BottomNav/BottomNav';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import CompleteCoin from './CompleteCoin';
 import supportedCoins from '../../utils/supportedCoins';
+import useTitle from '../../utils/useTitle';
 
 const Coin = ({ user, wallet, loggedIn }) => {
 	//get the current location.
@@ -138,39 +138,35 @@ const Coin = ({ user, wallet, loggedIn }) => {
 		}
 	}, [coinInfo, user, wallet]);
 
+	useTitle(coinInfo ? `${coinInfo.name} | Apexwallet` : `${coinSearchId} | Apexwallet`);
+
 	return (
-		<HelmetProvider>
-			<div className="coin">
-				<Helmet>
-					<meta charSet="utf-8" />
-					<title>{coinInfo ? coinInfo.name : coinSearchId} - Apex</title>
-				</Helmet>
-				<BottomNav />
-				<div className="container">
-					<div className="header">
-						<div className="coinBackEmoji" onClick={history.goBack}>
-							<IoChevronBack />
-						</div>
-						<div className="coinImageAndName">
-							{coinInfo && <img src={coinInfo.image.large} alt={coinInfo.symbol} />}
-							<p>{coinInfo ? coinInfo.name : coinSearchId}</p>
-						</div>
+		<div className="coin">
+			<BottomNav />
+			<div className="container">
+				<div className="header">
+					<div className="coinBackEmoji" onClick={history.goBack}>
+						<IoChevronBack />
 					</div>
-					{/* Moved the coin to a new component */}
-					<CompleteCoin
-						coinInfo={coinInfo}
-						user={user}
-						watchingCoin={watchingCoin}
-						triggerWatchCoin={triggerWatchCoin}
-						matches={matches}
-						balance={balance}
-						wallet={wallet}
-						coinSearchId={coinSearchId}
-					/>
+					<div className="coinImageAndName">
+						{coinInfo && <img src={coinInfo.image.large} alt={coinInfo.symbol} />}
+						<p>{coinInfo ? coinInfo.name : coinSearchId}</p>
+					</div>
 				</div>
-				<ToastContainer hideProgressBar autoClose={3000} />
+				{/* Moved the coin to a new component */}
+				<CompleteCoin
+					coinInfo={coinInfo}
+					user={user}
+					watchingCoin={watchingCoin}
+					triggerWatchCoin={triggerWatchCoin}
+					matches={matches}
+					balance={balance}
+					wallet={wallet}
+					coinSearchId={coinSearchId}
+				/>
 			</div>
-		</HelmetProvider>
+			<ToastContainer hideProgressBar autoClose={3000} />
+		</div>
 	);
 };
 

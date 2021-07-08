@@ -18,7 +18,10 @@ export default function Learn() {
 				<div className="accountIcons">
 					<GiWhiteBook />
 				</div>
-				<p>Learning Center</p>
+				<p>Learn</p>
+				<span>
+					Coming Soon
+				</span>
 				<div className="editIcon">
 					<FiChevronRight />
 				</div>
@@ -36,12 +39,11 @@ export default function Learn() {
 					<div className="learnModalContainer">
 						<div className="learnModalSubContainer">
 							<div className="header">Learn</div>
-							<p className="status">Coming Soon</p>
 							<div className="body">
 								<p className="intro">
-									We'll teach you all you need to know regarding cryptocurrencies, from the fundamentals
-									to when to buy and sell. We'll also provide you with market updates and predictions.
-									It is user-friendly for beginners as well as seasoned traders.
+									We'll teach you all you need to know regarding cryptocurrencies, from the
+									fundamentals to when to buy and sell. We'll also provide you with market updates and
+									predictions. It is user-friendly for beginners as well as seasoned traders.
 								</p>
 							</div>
 						</div>

@@ -36,23 +36,12 @@ $borderColor: rgb(158, 158, 158);
 
         .header {
             position: absolute;
-            top: 7%;
-            font-size: 1.25rem;
-        }
-
-        .status {
-            background: red;
-            padding: .2rem .35rem;
-            border-radius: 5px;
-            font-size: .85rem;
-            color: $mainColor;
-            font-weight: bold;
-            position: absolute;
-            top: 12%;
+            top: 8%;
+            font-size: 1.5rem;
         }
 
         .body {
-            margin-top: 4rem;
+            margin-top: 1.5rem;
 
             .intro {
                 opacity: 0.7;

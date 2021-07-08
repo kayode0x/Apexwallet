@@ -224,7 +224,7 @@ $navyBlue: #262946;
 						right: 7%;
 						padding: 0 0.75rem;
 						height: 1.5rem;
-						font-size: 0.9rem;
+						font-size: 0.8rem;
 						color: $mainColor;
 						font-weight: bold;
 					}
@@ -232,6 +232,24 @@ $navyBlue: #262946;
 					.editIcon {
 						margin-left: auto;
 						font-size: 1.25rem;
+					}
+				}
+
+				.learnField {
+					position: relative;
+					span {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						position: absolute;
+						top: 25%;
+						right: 7%;
+						background: rgba(226, 37, 37, 1);
+						padding: 0.2rem 0.35rem;
+						border-radius: 5px;
+						font-size: 0.8rem;
+						color: $mainColor;
+						font-weight: bold;
 					}
 				}
 

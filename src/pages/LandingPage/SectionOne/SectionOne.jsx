@@ -1,5 +1,6 @@
 import './SectionOne.scss';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import PricesIMG from '../../../assets/mockups/IMG_5420.PNG';
 import bitcoin from '../../../assets/landingLogos/bitcoin.png';
 import ethereum from '../../../assets/landingLogos/ethereum.png';
@@ -16,10 +17,47 @@ import ethereumClassic from '../../../assets/landingLogos/ethereum-classic.png';
 import litecoin from '../../../assets/landingLogos/litecoin.png';
 import dash from '../../../assets/landingLogos/dash.png';
 import polkadot from '../../../assets/landingLogos/polkadot-new.png';
+import { Cross as Hamburger } from 'hamburger-react';
 
 const SectionOne = () => {
+	const [navOpen, setNavOpen] = useState(false);
+	//prevent scrolling when the navbar is open
+	if (navOpen === true) {
+		var bodyOpen = document.getElementsByTagName('BODY')[0];
+		bodyOpen.style.overflow = 'hidden';
+	} else {
+		var bodyClose = document.getElementsByTagName('BODY')[0];
+		bodyClose.style.overflow = 'auto';
+	}
+
 	return (
 		<div className="sectionOne">
+			<nav>
+				<Link to="/" className="logo">
+					Apexwallet
+				</Link>
+				<div className="desktop">
+					<Link to="/learn">Learn</Link>
+					<Link to="/about">About Us</Link>
+					<Link to="/login">Sign In</Link>
+					<Link className="signupBtn" to="/signup">
+						Get Started
+					</Link>
+				</div>
+				<div className="mobile">
+					<Hamburger size={25} toggled={navOpen} toggle={setNavOpen} />
+				</div>
+			</nav>
+			{navOpen && (
+				<div className="mobileNav">
+					<Link to="/learn">Learn</Link>
+					<Link to="/about">About Us</Link>
+					<Link to="/login">Sign In</Link>
+					<Link className="signupBtn" to="/signup">
+						Get Started
+					</Link>
+				</div>
+			)}
 			<div className="container">
 				<div className="coinLogo bitcoin">
 					<img src={bitcoin} alt="bitcoin" />

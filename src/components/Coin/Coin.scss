@@ -207,13 +207,14 @@ $borderColor: rgb(158, 158, 158);
 					background: transparent;
 					border-radius: 5px;
 					color: $textColor;
+					opacity: 0.5;
 					transition: all 0.3s ease;
 				}
 
 				div.active {
-					color: $mainColor;
+					color: $textColor;
+					opacity: 1;
 					font-weight: bold;
-					background: $textColor;
 				}
 			}
 
@@ -313,7 +314,7 @@ $borderColor: rgb(158, 158, 158);
 				display: flex;
 				align-self: center;
 				border: 1px solid $borderColor;
-				border-radius: 5px;
+				border-radius: 10px;
 
 				div {
 					display: flex;
@@ -473,7 +474,7 @@ $borderColor: rgb(158, 158, 158);
 					border: 1px solid $borderColor;
 					width: 50%;
 					margin-left: auto;
-					height: 20rem;
+					height: 30rem;
 					border-radius: 5px;
 					color: $textColor;
 					position: relative;
@@ -583,13 +584,13 @@ $borderColor: rgb(158, 158, 158);
 								border: none;
 								color: $mainColor;
 								font-weight: bold;
-								background: $lightBlue;
+								background: $blue;
 								transition: 0.5s;
 							}
 
 							button:hover {
 								cursor: pointer;
-								background: $blue;
+								background: $lightBlue;
 							}
 
 							div:nth-child(3) {

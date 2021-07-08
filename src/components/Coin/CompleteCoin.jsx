@@ -208,7 +208,7 @@ const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches,
 	} else {
 		return (
 			<div className="loading">
-				<RotateSpinner size={50} color="#080809" />
+				<RotateSpinner size={40} color="#080809" />
 			</div>
 		);
 	}

@@ -1,451 +1,100 @@
-import axios from 'axios';
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
-import { BsArrowUpDown } from 'react-icons/bs';
-import { toast } from 'react-toastify';
+import { useState, useEffect, useRef } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
+import './TradeTab.scss';
+import BuyCoins from './BuyTab/Buy';
+import SellCoins from './SellTab/Sell';
 
-function TabPanel(props) {
-	const { children, value, index, ...other } = props;
+const TradeTab = ({ coinInfo, user, wallet }) => {
+	const [balance, setBalance] = useState(null);
+	const [coin, setCoin] = useState(coinInfo.id);
+	const [newCoinInfo, setNewCoinInfo] = useState(coinInfo);
+	const [activeNav, setActiveNav] = useState('buy');
+	let isRendered = useRef(false);
+
+	const coingeckoDataApi = `https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=true`;
+
+	useEffect(() => {
+		isRendered.current = true;
+		async function load() {
+			try {
+				await fetch(coingeckoDataApi, {
+					method: 'GET',
+					headers: {
+						'content-type': 'application/json',
+					},
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						if (isRendered.current === true) {
+							setNewCoinInfo(data);
+						} else {
+							return null;
+						}
+					});
+			} catch (error) {
+				console.log('ERROR: ' + error);
+			}
+		}
+
+		load();
+
+		return () => {
+			isRendered.current = false;
+		};
+	}, [coingeckoDataApi, coin]);
+
+	//get the balance
+	useEffect(() => {
+		async function callPrice() {
+			let newCoinBalance;
+			newCoinBalance = wallet.coins.filter((coin) => coin.coin === newCoinInfo.id);
+			if (newCoinBalance[0] === undefined) {
+				setBalance(0);
+			} else {
+				setBalance(newCoinBalance[0].balance);
+			}
+		}
+		if (
+			user !== null &&
+			user.isActive === true &&
+			(user.wallet !== undefined) & (wallet !== null) &&
+			newCoinInfo !== null
+		) {
+			callPrice(); //only call this function if the user is active and has a wallet
+		}
+	}, [newCoinInfo, user, wallet]);
 
 	return (
-		<div
-			role="tabpanel"
-			hidden={value !== index}
-			id={`simple-tabpanel-${index}`}
-			aria-labelledby={`simple-tab-${index}`}
-			{...other}
-		>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					<div>{children}</div>
-				</Box>
+		<div className="tradeTab">
+			<div className="nav">
+				<div onClick={() => setActiveNav('buy')} className={activeNav === 'buy' ? 'active' : ''}>
+					Buy
+				</div>
+				<div onClick={() => setActiveNav('sell')} className={activeNav === 'sell' ? 'active' : ''}>
+					Sell
+				</div>
+			</div>
+			{user.wallet !== undefined ? (
+				<div className="form">
+					{activeNav === 'buy' && (
+						<BuyCoins newCoinInfo={newCoinInfo} user={user} wallet={wallet} coin={coin} setCoin={setCoin} />
+					)}
+					{activeNav === 'sell' && (
+						<SellCoins
+							newCoinInfo={newCoinInfo}
+							user={user}
+							wallet={wallet}
+							coin={coin}
+							setCoin={setCoin}
+							balance={balance}
+						/>
+					)}
+				</div>
+			) : (
+				<p>Please create a wallet to trade {coinInfo.name}</p>
 			)}
 		</div>
 	);
-}
-
-TabPanel.propTypes = {
-	children: PropTypes.node,
-	index: PropTypes.number.isRequired,
-	value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
-	return {
-		id: `simple-tab-${index}`,
-		'aria-controls': `simple-tabpanel-${index}`,
-	};
-}
-
-export default function TradeTab({ user, wallet, coinInfo, balance }) {
-	const [value, setValue] = useState(0);
-	const [amountToBuyFiat, setAmountToBuyFiat] = useState(1);
-	const [amountToBuyCrypto, setAmountToBuyCrypto] = useState('');
-	const [amountToSellFiat, setAmountToSellFiat] = useState(1);
-	const [amountToSellCrypto, setAmountToSellCrypto] = useState('');
-	const [buyType, setBuyType] = useState('fiat');
-	const [sellType, setSellType] = useState('fiat');
-	const apiURL = 'https://api.apexwallet.app/api/v1';
-	const [buying, setBuying] = useState(false);
-	const [selling, setSelling] = useState(false);
-
-	const handleChange = (event, newValue) => {
-		setValue(newValue);
-	};
-
-	//switch the way the user wants to buy coins, fiat or crypto
-	const handleBuyTypeChange = () => {
-		if (buyType === 'fiat') {
-			setBuyType('crypto');
-		} else if (buyType === 'crypto') {
-			setBuyType('fiat');
-		}
-	};
-
-	const handleSellTypeChange = () => {
-		if (sellType === 'fiat') {
-			setSellType('crypto');
-		} else if (sellType === 'crypto') {
-			setSellType('fiat');
-		}
-	};
-
-	const coinAmountToBuy = (amountToBuyFiat) => {
-		return parseFloat(amountToBuyFiat / coinInfo.market_data.current_price.usd).toFixed(5);
-	};
-	const coinAmountToBuyCrypto = (amountToBuyCrypto) => {
-		return parseFloat(amountToBuyCrypto * coinInfo.market_data.current_price.usd).toFixed(2);
-	};
-
-	const coinAmountToSellCrypto = (amountToSellCrypto) => {
-		return parseFloat(amountToSellCrypto * coinInfo.market_data.current_price.usd).toFixed(2);
-	};
-	const coinAmountToSellFiat = (amountToSellFiat) => {
-		return parseFloat(amountToSellFiat / coinInfo.market_data.current_price.usd).toFixed(5);
-	};
-
-	//buy coin
-	const handleBuyCoin = async (e) => {
-		e.preventDefault();
-		setBuying(true);
-
-		//first check the 'buy type' for necessary values
-		if (buyType === 'fiat') {
-			if (amountToBuyFiat < 2) {
-				toast.error(`You can only buy a minimum of $2 worth of ${coinInfo.symbol.toUpperCase()}`, {
-					hideProgressBar: true,
-				});
-				setBuying(false);
-			} else if (amountToBuyFiat > wallet.balance) {
-				toast.error(`Your USD balance is $${wallet.balance}, you can't buy more than that`, {
-					hideProgressBar: true,
-				});
-				setBuying(false);
-			} else {
-				let purchase = { coin: coinInfo.id, amount: amountToBuyFiat };
-				try {
-					await axios
-						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
-						.then((res) => {
-							if (res.status === 200) {
-								toast.success(`Success 🚀`, {
-									hideProgressBar: true,
-								});
-							}
-						})
-						.catch(async (err) => {
-							await toast.error(`${err.response.data}`, {
-								hideProgressBar: true,
-							});
-						});
-				} catch (error) {
-					console.log('Error: ', error);
-				}
-				setBuying(false);
-			}
-		} else if (buyType === 'crypto') {
-			let convertedAmount = parseFloat(amountToBuyCrypto * coinInfo.market_data.current_price.usd).toFixed(5);
-
-			if (amountToBuyCrypto < 0) {
-				toast.error(
-					`You can only buy a minimum of $2 ≈ ${parseFloat(
-						2 / coinInfo.market_data.current_price.usd
-					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
-					{
-						hideProgressBar: true,
-					}
-				);
-				setBuying(false);
-			} else if (convertedAmount < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(5)) {
-				toast.error(
-					`You can only buy a minimum of $2 ≈ ${parseFloat(
-						2 / coinInfo.market_data.current_price.usd
-					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
-					{
-						hideProgressBar: true,
-					}
-				);
-				setBuying(false);
-			} else if (convertedAmount > wallet.balance) {
-				toast.error(
-					`Your USD balance is $${parseFloat(wallet.balance).toFixed(2)}, you can't buy more than that`,
-					{
-						hideProgressBar: true,
-					}
-				);
-				setBuying(false);
-			} else {
-				let purchase = { coin: coinInfo.id, amount: convertedAmount };
-				try {
-					await axios
-						.post(`${apiURL}/coin/buy`, purchase, { withCredentials: true })
-						.then((res) => {
-							if (res.status === 200) {
-								toast.success(`Success 🚀`, {
-									hideProgressBar: true,
-								});
-							}
-						})
-						.catch(async (err) => {
-							await toast.error(`${err.response.data}`, {
-								hideProgressBar: true,
-							});
-						});
-				} catch (error) {
-					console.log('Error: ', error);
-				}
-				setBuying(false);
-			}
-		}
-	};
-
-	//sell coin
-	const handleSellCoin = async (e) => {
-		e.preventDefault();
-		setSelling(true);
-
-		//get the value of the amount to sell in fiat
-		let convertedAmount = parseFloat(amountToSellFiat / coinInfo.market_data.current_price.usd).toFixed(6);
-
-		//first check the 'buy type' for necessary values
-		if (sellType === 'fiat') {
-			if (convertedAmount > parseFloat(balance).toFixed(5)) {
-				toast.error(
-					`Your ${coinInfo.symbol.toUpperCase()} balance is ${parseFloat(balance).toFixed(
-						5
-					)}, you can't sell more than that`,
-					{
-						hideProgressBar: true,
-					}
-				);
-				setSelling(false);
-			} else if (amountToSellFiat < 1) {
-				toast.error(`You can only sell a minimum of $1 worth of ${coinInfo.symbol.toUpperCase()}`, {
-					hideProgressBar: true,
-				});
-				setSelling(false);
-			} else {
-				let purchase = { coin: coinInfo.id, amount: convertedAmount };
-				try {
-					await axios
-						.post(`${apiURL}/coin/sell`, purchase, { withCredentials: true })
-						.then((res) => {
-							if (res.status === 200) {
-								toast.error(`Success 🚀`, {
-									hideProgressBar: true,
-								});
-							}
-						})
-						.catch(async (err) => {
-							await toast.error(`${err.response.data}`, {
-								hideProgressBar: true,
-							});
-						});
-				} catch (error) {
-					console.log('Error: ', error);
-				}
-				setSelling(false);
-			}
-		} else if (sellType === 'crypto') {
-			if (amountToSellCrypto < parseFloat(2 / coinInfo.market_data.current_price.usd).toFixed(6)) {
-				toast.error(
-					`You can only sell a minimum of $2 ≈ ${parseFloat(
-						2 / coinInfo.market_data.current_price.usd
-					).toFixed(6)} ${coinInfo.symbol.toUpperCase()}`,
-					{
-						hideProgressBar: true,
-					}
-				);
-				setSelling(false);
-			} else if (amountToSellCrypto > balance) {
-				toast.error(
-					`Your ${coinInfo.symbol.toUpperCase()} balance is ${parseFloat(balance).toFixed(
-						5
-					)}, you can't sell more than that`,
-					{
-						hideProgressBar: true,
-					}
-				);
-				setSelling(false);
-			} else {
-				let purchase = { coin: coinInfo.id, amount: amountToSellCrypto };
-				try {
-					await axios
-						.post(`${apiURL}/coin/sell`, purchase, { withCredentials: true })
-						.then((res) => {
-							if (res.status === 200) {
-								toast.success(`Success 🚀`, {
-									hideProgressBar: true,
-								});
-							}
-						})
-						.catch(async (err) => {
-							await toast.error(`${err.response.data}`, {
-								hideProgressBar: true,
-							});
-						});
-				} catch (error) {
-					console.log('Error: ', error);
-				}
-				setSelling(false);
-			}
-		}
-	};
-
-	//allow only verified users with a wallet to trade.
-	const buyCoinsFunction = () => {
-		if (user.wallet !== undefined) {
-			return (
-				<>
-					<div className="input">
-						{buyType === 'fiat' ? (
-							<>
-								<span>$</span>
-								<input
-									value={amountToBuyFiat}
-									onChange={(e) => {
-										coinAmountToBuy(amountToBuyFiat);
-										setAmountToBuyFiat(e.target.value);
-									}}
-									type="number"
-									min="1"
-									max="5000"
-									placeholder="1"
-								/>
-							</>
-						) : (
-							<>
-								<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
-								<input
-									value={amountToBuyCrypto}
-									onChange={(e) => setAmountToBuyCrypto(e.target.value)}
-									type="number"
-									placeholder="0"
-								/>
-							</>
-						)}
-						<div>
-							<BsArrowUpDown onClick={handleBuyTypeChange} />
-						</div>
-					</div>
-					<p className="amountYouGet">
-						{buyType === 'fiat' ? (
-							<>
-								You get {coinAmountToBuy(amountToBuyFiat)} {coinInfo.symbol.toUpperCase()}
-							</>
-						) : (
-							<>You Pay ${coinAmountToBuyCrypto(amountToBuyCrypto)}</>
-						)}
-					</p>
-					<div className="coinAndWalletTab">
-						<div>
-							<p>USD balance</p> <span>${parseFloat(wallet.balance).toFixed(2)}</span>
-						</div>
-						<button disabled={buying ? true : false} type="submit">
-							{buying ? (
-								<p>Buying...</p>
-							) : (
-								<p>
-									BUY <span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
-								</p>
-							)}
-						</button>
-						<div>
-							<p>
-								<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span> balance
-							</p>
-							<span style={{ textTransform: 'uppercase' }}>
-								{parseFloat(balance).toFixed(5)} {coinInfo.symbol} ≈ $
-								{parseFloat(balance * coinInfo.market_data.current_price.usd).toFixed(2)}
-							</span>
-						</div>
-					</div>
-				</>
-			);
-		} else if (user.wallet === undefined) {
-			return <p className="noWalletTrade">Only available to users with a wallet</p>;
-		}
-	};
-
-	const sellCoinsFunction = () => {
-		if (user.wallet !== undefined) {
-			return (
-				<>
-					<div className="input">
-						{sellType === 'fiat' ? (
-							<>
-								<span>$</span>
-								<input
-									value={amountToSellFiat}
-									onChange={(e) => setAmountToSellFiat(e.target.value)}
-									type="number"
-									placeholder="1"
-								/>
-							</>
-						) : (
-							<>
-								<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
-								<input
-									value={amountToSellCrypto}
-									onChange={(e) => setAmountToSellCrypto(e.target.value)}
-									type="number"
-									placeholder="0"
-								/>
-							</>
-						)}
-						<div>
-							<BsArrowUpDown onClick={handleSellTypeChange} />
-						</div>
-					</div>
-
-					<p className="amountYouGet">
-						{sellType === 'crypto' ? (
-							<> You get ${coinAmountToSellCrypto(amountToSellCrypto)} </>
-						) : (
-							<>
-								You Pay {coinAmountToSellFiat(amountToSellFiat)} {coinInfo.symbol.toUpperCase()}{' '}
-							</>
-						)}
-					</p>
-					<div className="coinAndWalletTab">
-						<div>
-							<p>
-								<span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span> balance
-							</p>{' '}
-							<span style={{ textTransform: 'uppercase' }}>
-								{parseFloat(balance).toFixed(5)} {coinInfo.symbol}
-							</span>
-						</div>
-						<button disabled={selling ? true : false} type="submit">
-							{selling ? (
-								<p>Selling...</p>
-							) : (
-								<p>
-									SELL <span style={{ textTransform: 'uppercase' }}>{coinInfo.symbol}</span>
-								</p>
-							)}
-						</button>
-					</div>
-				</>
-			);
-		} else if (user.wallet === undefined) {
-			return <p className="noWalletTrade">Only available to users with a wallet</p>;
-		}
-	};
-
-	return (
-		<Box sx={{ width: '100%' }}>
-			<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-				<Tabs
-					style={{ position: 'relative', left: '20%', width: '70%' }}
-					value={value}
-					textColor="inherit"
-					indicatorColor="primary"
-					onChange={handleChange}
-					aria-label="basic tabs example"
-				>
-					<Tab style={{ fontWeight: 'bold' }} label="Buy" {...a11yProps(0)} />
-					<Tab style={{ fontWeight: 'bold' }} label="Sell" {...a11yProps(1)} />
-				</Tabs>
-			</Box>
-
-			{/* Buy coins tab */}
-			<TabPanel value={value} index={0}>
-				<form onSubmit={handleBuyCoin} className="buyCoinsDesktop">
-					{buyCoinsFunction()}
-				</form>
-			</TabPanel>
-
-			{/* Sell coin tab */}
-			<TabPanel value={value} index={1}>
-				<form onSubmit={handleSellCoin} className="sellCoinsDesktop">
-					{sellCoinsFunction()}
-				</form>
-			</TabPanel>
-		</Box>
-	);
-}
+export default TradeTab;

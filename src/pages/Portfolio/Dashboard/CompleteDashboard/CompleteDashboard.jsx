@@ -16,21 +16,21 @@ const CompleteDashboard = (user, watchList, news) => {
 		if (notificationDiv.current === 1) {
 			return (
 				<div>
-					<p>🚨 New on v1.1 beta 🚨 </p>
+					<p>New on v1.1 beta</p>
 					<p>You can now send and receive coins with a QR code.</p>
 				</div>
 			);
 		} else if (notificationDiv.current === 2) {
 			return (
 				<div>
-					<p>🚨 New on v1.1 beta 🚨 </p>
+					<p>New on v1.1 beta</p>
 					<p>Coin conversion is live 🚀. You can now convert coins you own to another.</p>
 				</div>
 			);
 		} else {
 			return (
 				<div>
-					<p>🚨 New on v1.1 beta 🚨 </p>
+					<p>New on v1.1 beta</p>
 					<p>Decentraland, Shiba, Solana, Chainlink and Stellar have been added.</p>
 				</div>
 			);

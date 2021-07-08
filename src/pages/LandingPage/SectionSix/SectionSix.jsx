@@ -22,7 +22,7 @@ const SectionSix = () => {
 				</div>
 			</div>
 
-			<footer>Apexwallet, from Decover Inc. &copy; 2021</footer>
+			<footer>Apexwallet, from Decover &copy; 2021</footer>
 		</div>
 	);
 };

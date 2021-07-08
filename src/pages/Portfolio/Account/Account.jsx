@@ -108,7 +108,7 @@ const Account = ({ loggedIn, user }) => {
 							<p className="walletVersion">v1.1 - beta 🚀</p>
 							<p className="copyright">
 								from <br />
-								<span>Decover Inc</span>
+								<span>Decover</span>
 							</p>
 						</div>
 
@@ -121,7 +121,7 @@ const Account = ({ loggedIn, user }) => {
 					</>
 				) : (
 					<div className="loading">
-						<RotateSpinner size={50} color="#080809" />
+						<RotateSpinner size={40} color="#080809" />
 					</div>
 				)}
 			</div>

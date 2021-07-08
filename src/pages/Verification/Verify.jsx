@@ -64,7 +64,7 @@ const Verify = () => {
 						<img src={astronaut} alt="astronaut" />
 						<div className="circle"></div>
 					</div>
-					<div className="verifying">{verifying && <RotateSpinner size={50} color="#000" />}</div>
+					<div className="verifying">{verifying && <RotateSpinner size={40} color="#000" />}</div>
 				</div>
 			</div>
 
