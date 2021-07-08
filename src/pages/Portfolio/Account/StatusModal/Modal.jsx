@@ -48,7 +48,7 @@ export default function StatusModal({ user }) {
 			<div className="statusField" onClick={handleOpenModal}>
 				<div className="accountIcons">{user.isActive === true ? <GoVerified /> : <GoUnverified />}</div>
 				<p>Status</p>
-				<span style={{ background: user.isActive === true ? '#109648' : '#BF211E' }}>
+				<span style={{ background: user.isActive === true ? '#109648' : 'rgba(226, 37, 37, 1)' }}>
 					{user.isActive === true ? 'Verified' : 'Unverified'}
 				</span>
 				<div className="editIcon">

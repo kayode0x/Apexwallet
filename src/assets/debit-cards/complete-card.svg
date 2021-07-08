@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="804.97" height="471" viewBox="0 0 804.97 471">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="CARD_" data-name="CARD " width="804.97" height="471" rx="20" fill="#fcc2ce"/>
+    </clipPath>
+  </defs>
+  <g id="complete-card" transform="translate(-2593.205 -61)">
+    <g id="_66_-_DESIGN_CARD" data-name="66 - DESIGN CARD" transform="translate(1943.955 -4818)">
+      <g id="CARD_2" data-name="CARD " transform="translate(649.25 4879)">
+        <rect id="CARD_3" data-name="CARD " width="804.97" height="471" rx="20" fill="#fcc2ce"/>
+        <g id="Clip" clip-path="url(#clip-path)">
+          <path id="SHAPE" d="M560.039,4166.28l-.019-.029c.81-.461,1.592-.975,2.4-1.43,99.67-55.969,386.431-89.988,802.377,285.175,227.4,493.76-33.222,672.51-132.893,728.479-.811.456-1.664.861-2.48,1.312l-.019-.028-176.923,99.35-177.031,99.41h0l-78.088,43.849-.038-.058-487.935-420.6L128.033,4408.948l-.038-.058,232.28-130.436h0l22.839-12.824Z" transform="translate(-649.25 -4820.409)" fill="#2c295e" opacity="0.671"/>
+          <path id="SHAPE-2" data-name="SHAPE" d="M487.485,4666l-.016-.023c.665-.378,1.309-.8,1.976-1.171,81.953-45.825,361.407-137.513,684.722,187.307,163.02,414.443-54.319,600.551-136.273,646.377-.666.373-1.369.7-2.04,1.073l-.015-.024L890.363,5580.88,744.8,5662.273h0l-64.208,35.9-.031-.048L280.37,5351.883l-148.1-487.2-.031-.047,190.993-106.8h0l18.779-10.5Z" transform="translate(-649.25 -4858.492)" fill="#323056" opacity="0.749"/>
+        </g>
+      </g>
+    </g>
+    <g id="card-number" transform="translate(2643.827 275.5)">
+      <text id="_4756_" data-name=" 4756 " transform="translate(0 35)" fill="#fff" font-size="50" font-family="Helvetica-Bold, Helvetica" font-weight="700"><tspan x="0" y="0" xml:space="preserve"> 4756 </tspan></text>
+      <text id="_9018" data-name=" 9018" transform="translate(413.59 35)" fill="#fff" font-size="50" font-family="Helvetica-Bold, Helvetica" font-weight="700"><tspan x="0" y="0" xml:space="preserve"> 9018</tspan></text>
+      <g id="CIRCLES_HIDE" data-name="CIRCLES HIDE" transform="translate(160 8.5)">
+        <path id="CIRCLES_HIDE-2" data-name="CIRCLES HIDE" d="M79.96,7A7.111,7.111,0,0,1,94.179,7,7.11,7.11,0,0,1,79.96,7ZM53.311,7A7.111,7.111,0,0,1,67.53,7a7.111,7.111,0,0,1-14.22,0ZM26.649,7a7.111,7.111,0,0,1,14.22,0,7.111,7.111,0,0,1-14.22,0ZM0,7A7.054,7.054,0,0,1,7.11,0a7.054,7.054,0,0,1,7.109,7A7.055,7.055,0,0,1,7.11,14,7.056,7.056,0,0,1,0,7Z" fill="#fff"/>
+        <path id="CIRCLES_HIDE-3" data-name="CIRCLES HIDE" d="M79.97,7A7.112,7.112,0,0,1,94.191,7,7.112,7.112,0,0,1,79.97,7ZM53.311,7A7.112,7.112,0,0,1,67.532,7,7.112,7.112,0,0,1,53.311,7ZM26.661,7a7.111,7.111,0,0,1,14.22,0,7.111,7.111,0,0,1-14.22,0ZM0,7A7.054,7.054,0,0,1,7.112,0a7.054,7.054,0,0,1,7.11,7,7.056,7.056,0,0,1-7.11,7A7.056,7.056,0,0,1,0,7Z" transform="translate(124.398)" fill="#fff"/>
+      </g>
+    </g>
+    <g id="MASTERCARD_-_WHITE_LOGO_-_STYLE_1" data-name="MASTERCARD - WHITE LOGO - STYLE 1" transform="translate(3227.622 411.613)">
+      <ellipse id="WHITE" cx="35.98" cy="35.97" rx="35.98" ry="35.97" transform="translate(44.97)" fill="#fff" opacity="0.6"/>
+      <ellipse id="WHITE-2" data-name="WHITE" cx="35.98" cy="35.97" rx="35.98" ry="35.97" fill="#fff"/>
+    </g>
+  </g>
+</svg>

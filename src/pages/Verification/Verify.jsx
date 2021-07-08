@@ -1,5 +1,5 @@
 import './Verify.scss';
-import astronaut from '../../assets/logo/astronaut-ingravity.svg';
+// import astronaut from '../../assets/logo/astronaut-ingravity.svg';
 import { useState, useEffect } from 'react';
 import { RotateSpinner } from 'react-spinners-kit';
 import { useHistory } from 'react-router-dom';
@@ -60,10 +60,10 @@ const Verify = () => {
 		<>
 			<div className="verify">
 				<div className="container">
-					<div className="assets">
+					{/* <div className="assets">
 						<img src={astronaut} alt="astronaut" />
 						<div className="circle"></div>
-					</div>
+					</div> */}
 					<div className="verifying">{verifying && <RotateSpinner size={40} color="#000" />}</div>
 				</div>
 			</div>

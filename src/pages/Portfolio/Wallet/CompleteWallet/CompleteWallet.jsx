@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { RotateSpinner } from 'react-spinners-kit';
-import saturnSVG from '../../../../assets/logo/saturnSVG.svg';
-import alienSVG from '../../../../assets/logo/alienSVG.svg';
-import astronautSVG from '../../../../assets/logo/astronautSVG.svg';
-import sunSVG from '../../../../assets/logo/sunSVG.svg';
 import { ImArrowDownLeft2, ImArrowUpRight2, ImLoop2 } from 'react-icons/im';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import CardDesign from './CardDesign';
 import { useState } from 'react';
 import TransactionModal from '../Transactions/TransactionModal';
+import type1 from '../../../../assets/debit-cards/complete-card.svg';
+import type2 from '../../../../assets/debit-cards/complete-card2.svg';
+import type3 from '../../../../assets/debit-cards/complete-card3.svg';
+import type4 from '../../../../assets/debit-cards/complete-card4.svg';
 
 const CompleteUser = ({ user, asset, wallet, handleCreateWallet, creatingWallet }) => {
 	//receipt modal.
@@ -17,34 +17,35 @@ const CompleteUser = ({ user, asset, wallet, handleCreateWallet, creatingWallet 
 
 	let cardImage;
 
-	if ((user !== null && user.cardDesign) === 'saturnSVG') {
-		cardImage = saturnSVG;
-	} else if ((user !== null && user.cardDesign) === 'alienSVG') {
-		cardImage = alienSVG;
-	} else if ((user !== null && user.cardDesign) === 'astronautSVG') {
-		cardImage = astronautSVG;
-	} else if ((user !== null && user.cardDesign) === 'sunSVG') {
-		cardImage = sunSVG;
+	if ((user !== null && user.cardDesign) === 'type-1') {
+		cardImage = type1;
+	} else if ((user !== null && user.cardDesign) === 'type-2') {
+		cardImage = type2;
+	} else if ((user !== null && user.cardDesign) === 'type-3') {
+		cardImage = type3;
+	} else if ((user !== null && user.cardDesign) === 'type-4') {
+		cardImage = type4;
 	} else {
-		cardImage = saturnSVG;
+		cardImage = type1;
 	}
 
 	const cardDesignFunction = () => {
 		return (
-			<div className={user.cardDesign ? user.cardDesign : 'saturnSVG'}>
-				<CardDesign BsThreeDotsVertical={BsThreeDotsVertical} />
-				<div className="apexWallet">Apex Card</div>
-				<div className="cardBalance">
-					<p>
-						<span>$</span>
-						{parseFloat(wallet.balance).toFixed(2)}
-					</p>
+			<>
+				<div className="cardDesign">
+					<CardDesign BsThreeDotsVertical={BsThreeDotsVertical} />
+					<img className="newCard" src={cardImage} alt="" />
+					<div className="cardName">
+						<p>{user.name ? user.name : user.username}</p>
+					</div>
+					<div className="cardBalance">
+						<p>
+							<span>$</span>
+							{parseFloat(wallet.balance).toFixed(2)}
+						</p>
+					</div>
 				</div>
-				<p className="cardNumber">
-					<span>6732</span> <span>9239</span> <span>4344</span> <span>2230</span>
-				</p>
-				<img className="cardSVG" src={cardImage} alt="Card Design" />
-			</div>
+			</>
 		);
 	};
 	const assetsFunction = () => {

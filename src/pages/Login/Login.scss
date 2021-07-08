@@ -7,199 +7,227 @@ $lightBlue: #64b5f6;
 $orange: #ef5116;
 $navyBlue: #262946;
 
-
 .login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 3rem;
-    @media (max-width: 768px) and (orientation: landscape) {
-        margin-bottom: 5rem;
-    }
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 3rem;
+	@media (max-width: 768px) and (orientation: landscape) {
+		margin-bottom: 5rem;
+	}
 
-    @media (min-width: 768px){
-        height: 95vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+	@media (min-width: 768px) {
+		height: 95vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
-    .assets {
-        position: absolute;
-        z-index: -2;
-        top: -10%;
-        left: -15%;
-        @media (max-width: 481px){    
-            top: -20%;
-            left: -20%;
-        }
-        @media (min-width: 768px) and (max-width: 1024px){     
-            top: -10%;
-            left: -20%;
-        }
+	.assets {
+		position: absolute;
+		z-index: -2;
+		top: -10%;
+		left: -15%;
+		@media (max-width: 481px) {
+			top: -20%;
+			left: -20%;
+		}
+		@media (min-width: 768px) and (max-width: 1024px) {
+			top: -10%;
+			left: -20%;
+		}
 
-        img {
-            position: absolute;
-            height: 4rem;
-            top: 50%;
-            left: 100%;
-            transform: rotate(-20deg) scaleX(-1);
-            color: $textColor;
-            animation: astronautAnim 5s ease-in-out infinite forwards;
-            @media (max-width: 481px){
-                height: 3rem;
-            }
-            @media (max-width: 768px) and (orientation: landscape) {
-                top: 30%;
-            }
+		img {
+			position: absolute;
+			height: 4rem;
+			top: 50%;
+			left: 100%;
+			transform: rotate(-20deg) scaleX(-1);
+			color: $textColor;
+			animation: astronautAnim 5s ease-in-out infinite forwards;
+			@media (max-width: 481px) {
+				height: 3rem;
+			}
+			@media (max-width: 768px) and (orientation: landscape) {
+				top: 30%;
+			}
 
-            @keyframes astronautAnim {
-                0% {
-                    transform: translateY(0%) rotate(-20deg) scaleX(-1);
-                }
+			@keyframes astronautAnim {
+				0% {
+					transform: translateY(0%) rotate(-20deg) scaleX(-1);
+				}
 
-                25% {
-                    transform: translateY(10%) rotate(-20deg) scaleX(-1);
-                }
+				25% {
+					transform: translateY(10%) rotate(-20deg) scaleX(-1);
+				}
 
-                50% {
-                    transform: translateY(-10%) rotate(-20deg) scaleX(-1);
-                }
+				50% {
+					transform: translateY(-10%) rotate(-20deg) scaleX(-1);
+				}
 
-                75% {
-                    transform: translateY(10%) rotate(-20deg) scaleX(-1);
-                }
+				75% {
+					transform: translateY(10%) rotate(-20deg) scaleX(-1);
+				}
 
-                100% {
-                    transform: translateY(0%) rotate(-20deg) scaleX(-1);
-                }
-            }
-        }
+				100% {
+					transform: translateY(0%) rotate(-20deg) scaleX(-1);
+				}
+			}
+		}
 
+		.circle {
+			height: 30rem;
+			width: 30rem;
+			opacity: 1;
+			border-radius: 100%;
+			background: linear-gradient(to left, $blue, #b8c4f4);
+			animation: circleAnim 5s ease-in-out infinite forwards;
+			@keyframes circleAnim {
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			}
+			@media (max-width: 768px) {
+				height: 20rem;
+				width: 20rem;
+			}
+			@media (max-width: 481px) {
+				height: 16rem;
+				width: 16rem;
+			}
+		}
+	}
 
-        .circle {
-            height: 30rem;
-            width: 30rem;
-            opacity: 1;
-            border-radius: 100%;
-            background: linear-gradient(to left, $blue, #B8C4F4);
-            animation: circleAnim 5s ease-in-out infinite forwards;
-            @keyframes circleAnim {
-                from {
-                    transform: rotate(0deg);
-                }
-                to {
-                    transform: rotate(360deg);
-                }
-            }
-            @media (max-width: 768px){     
-                height: 20rem;
-                width: 20rem;
-            }
-            @media (max-width: 481px){     
-                height: 16rem;
-                width: 16rem;
-            }
-        }
-    }
-    
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        max-width: 30rem;
-        width: 100%;
-        margin-top: 8rem;
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 30rem;
+		width: 100%;
+		margin-top: 2rem;
         @media (min-width: 768px){
-            margin-top: -10rem;
+            margin-top: -2rem;
         }
 
-        .header {
-            color: $textColor;
-            font-size: 2rem;
-        }
+		.header {
+			color: $textColor;
+			display: flex;
+			flex-direction: column;
 
-        form {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+			p {
+				text-align: center;
+				font-size: 1.75rem;
+				font-weight: bold;
+			}
 
-            .username, .password {
-                display: flex;
-                flex-direction: column;
-                color: $textColor;
-                width: 90%;
-                max-width: 20rem;
-                position: relative;
+			span {
+				text-align: center;
+				opacity: 0.8;
+				margin-top: -1rem;
+			}
+		}
 
-                label {
-                    margin-top: 1.5rem;
-                    margin-bottom: .5rem;
-                    color: $textColor;
-                }
+		form {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 
-                input {
-                    font-size: 1.15rem;
-                    outline: none;
-                    border-radius: 5px;
-                    border: 2px solid $subColor;
-                    padding: .75rem;
-                    background: transparent;
-                    color: $textColor;
-                    transition: all .2s ease-in;
-                }
-                @media (min-width: 768px) {
-                    input:hover {
-                        border: 2px solid $blue;
-                    }
-                }
-                input:focus {
-                    border: 2px solid $lightBlue;
-                }
+			.username,
+			.password {
+				display: flex;
+				flex-direction: column;
+				color: $textColor;
+				width: 90%;
+				max-width: 20rem;
+				position: relative;
 
-                .eyeIcons {
-                    position: absolute;
-                    top: 65%;
-                    right: 5%;
-                    cursor: pointer;
-                    font-size: 1.15rem;
-                }
-            }
+				label {
+					margin-top: 1.5rem;
+					margin-bottom: 0.5rem;
+					color: $textColor;
+				}
 
-            button {
-                margin-top: 2rem;
-                width: 85%;
-                max-width: 20rem;
-                height: 3rem;
-                border: none;
-                border-radius: 5px;
-                background: $blue;
-                font-size: 1.15rem;
-                font-weight: bold;
-                color: $mainColor;
-                transition: all .2s ease-in;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            button:hover {
-                cursor: pointer;
-                transform: translateY(-10%);
-            }
-        }
-        .forgotPass {
-            text-decoration: none;
-            color: $subColor;
-            margin-top: 1.5rem;
-            font-size: 1.15rem;
-        }
+				input {
+					font-size: 1.15rem;
+					outline: none;
+					border-radius: 5px;
+					border: 1px solid $subColor;
+					padding: 0.75rem;
+					background: transparent;
+					color: $textColor;
+					transition: all 0.2s ease-in;
+				}
+				@media (min-width: 768px) {
+					input:hover {
+						border: 1px solid $blue;
+					}
+				}
+				input:focus {
+					border: 1px solid $lightBlue;
+				}
 
-        .newUser {
-            text-decoration: none;
-            color: $subColor;
-            margin-top: 1.5rem;
-            font-size: 1.15rem;
-        }
-    }
+				.eyeIcons {
+					position: absolute;
+					top: 52%;
+					right: 5%;
+					cursor: pointer;
+					font-size: 1.15rem;
+				}
+			}
+
+			button {
+				margin-top: 1.5rem;
+				width: 85%;
+				max-width: 20rem;
+				height: 3rem;
+				border: none;
+				border-radius: 5px;
+				background: $blue;
+				font-size: 1.15rem;
+				font-weight: bold;
+				color: $mainColor;
+				transition: all 0.2s ease-in;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			button:hover {
+				cursor: pointer;
+				transform: translateY(-10%);
+			}
+		}
+		.forgotPass {
+			text-decoration: none;
+			color: $subColor;
+			margin-top: 0.5rem;
+			font-size: 0.95rem;
+			margin-left: auto;
+			transition: all 0.3s ease-in;
+		}
+
+		.forgotPass:hover {
+			text-decoration: underline;
+			color: $textColor;
+		}
+
+		.newUser {
+			text-decoration: none;
+			color: $subColor;
+			margin-top: 1.5rem;
+			font-size: 1.05rem;
+
+			span {
+				transition: all 0.3s ease-in;
+				font-weight: bold;
+			}
+			span:hover {
+				text-decoration: underline;
+				color: $textColor;
+			}
+		}
+	}
 }

@@ -1,5 +1,5 @@
 import './Login.scss';
-import astronaut from '../../assets/logo/astronaut-ingravity.svg';
+// import astronaut from '../../assets/logo/astronaut-ingravity.svg';
 import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { RotateSpinner } from 'react-spinners-kit';
@@ -70,12 +70,15 @@ const Login = () => {
 		<>
 			<div className="login">
 				<div className="container">
-					<div className="header">Welcome Back</div>
+					<div className="header">
+						<p>Welcome Back!</p>
+						<span>Sign in to continue</span>
+					</div>
 
-					<div className="assets">
+					{/* <div className="assets">
 						<img src={astronaut} alt="astronaut" />
 						<div className="circle"></div>
-					</div>
+					</div> */}
 
 					<form onSubmit={handleLogin}>
 						<div className="username">
@@ -109,18 +112,18 @@ const Login = () => {
 									<BsEyeFill onClick={togglePassword} />
 								)}
 							</div>
+
+							<Link to="/forgot-password" className="forgotPass">
+								Forgot Password?
+							</Link>
 						</div>
 
 						<button disabled={loggingIn ? true : false} type="submit">
 							{loggingIn ? <RotateSpinner size={30} color="#fff" /> : 'Login'}
 						</button>
 					</form>
-
-					<Link to="/forgot-password" className="forgotPass">
-						Forgot password?
-					</Link>
 					<Link to="/signup" className="newUser">
-						New user? <span>Sign Up here 🚀</span>
+						Don't have an account? - <span>Sign Up</span>
 					</Link>
 				</div>
 			</div>

@@ -1,5 +1,5 @@
 import './Reset.scss';
-import astronaut from '../../assets/logo/astronaut-ingravity.svg';
+// import astronaut from '../../assets/logo/astronaut-ingravity.svg';
 import { useState } from 'react';
 import { RotateSpinner } from 'react-spinners-kit';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
@@ -71,12 +71,17 @@ const Reset = () => {
 		<>
 			<div className="reset">
 				<div className="container">
-					<div className="header">Reset Password </div>
+					<div className="header">
+						<p>Reset Password</p>
+						<span>
+							Please enter your new password
+						</span>
+					</div>
 
-					<div className="assets">
+					{/* <div className="assets">
 						<img src={astronaut} alt="astronaut" />
 						<div className="circle"></div>
-					</div>
+					</div> */}
 
 					<form onSubmit={handleReset}>
 						<div className="password">

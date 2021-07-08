@@ -7,10 +7,10 @@ import axios from 'axios';
 import { RotateSpinner } from 'react-spinners-kit';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import alienIMG from '../../../../assets/logo/alienIMG.png';
-import astronautIMG from '../../../../assets/logo/astronautIMG.png';
-import sunIMG from '../../../../assets/logo/sunIMG.png';
-import saturnIMG from '../../../../assets/logo/saturnIMG.png';
+import type1 from '../../../../assets/debit-cards/complete-card.png';
+import type2 from '../../../../assets/debit-cards/complete-card2.png';
+import type3 from '../../../../assets/debit-cards/complete-card3.png';
+import type4 from '../../../../assets/debit-cards/complete-card4.png';
 
 export default function CardDesign({ user, BsThreeDotsVertical }) {
 	const [openModal, setOpenModal] = useState(false);
@@ -75,35 +75,35 @@ export default function CardDesign({ user, BsThreeDotsVertical }) {
 									<p>Select A New Card Design</p>
 									<div
 										onClick={async () => {
-											handleCardDesignChange('alienSVG');
+											handleCardDesignChange('type-1');
 										}}
 										className="alienSVG"
 									>
-										<img src={alienIMG} alt="alien" />
+										<img src={type1} alt="type1" />
 									</div>
 									<div
 										onClick={async () => {
-											handleCardDesignChange('astronautSVG');
+											handleCardDesignChange('type-2');
 										}}
 										className="astronautSVG"
 									>
-										<img src={astronautIMG} alt="astronaut" />
+										<img src={type2} alt="astronaut" />
 									</div>
 									<div
 										onClick={async () => {
-											handleCardDesignChange('saturnSVG');
+											handleCardDesignChange('type-3');
 										}}
 										className="saturnSVG"
 									>
-										<img src={saturnIMG} alt="saturn" />
+										<img src={type3} alt="saturn" />
 									</div>
 									<div
 										onClick={async () => {
-											handleCardDesignChange('sunSVG');
+											handleCardDesignChange('type-4');
 										}}
 										className="sunSVG"
 									>
-										<img src={sunIMG} alt="sun" />
+										<img src={type4} alt="sun" />
 									</div>
 								</>
 							)}

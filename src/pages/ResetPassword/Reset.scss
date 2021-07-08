@@ -114,9 +114,22 @@ $navyBlue: #262946;
         }
 
         .header {
-            color: $textColor;
-            font-size: 2rem;
-        }
+			color: $textColor;
+			display: flex;
+			flex-direction: column;
+
+			p {
+				text-align: center;
+				font-size: 1.75rem;
+				font-weight: bold;
+			}
+
+			span {
+				text-align: center;
+				opacity: 0.8;
+				margin-top: -1rem;
+			}
+		}
 
         form {
             width: 100%;
@@ -142,7 +155,7 @@ $navyBlue: #262946;
                     font-size: 1.15rem;
                     outline: none;
                     border-radius: 5px;
-                    border: 2px solid $subColor;
+                    border: 1px solid $subColor;
                     padding: .75rem;
                     background: transparent;
                     color: $textColor;
@@ -150,11 +163,11 @@ $navyBlue: #262946;
                 }
                 @media (min-width: 768px) {
                     input:hover {
-                        border: 2px solid $blue;
+                        border: 1px solid $blue;
                     }
                 }
                 input:focus {
-                    border: 2px solid $lightBlue;
+                    border: 1px solid $lightBlue;
                 }
 
                 .eyeIcons {

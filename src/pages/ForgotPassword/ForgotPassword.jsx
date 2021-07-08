@@ -1,5 +1,5 @@
 import './ForgotPassword.scss';
-import astronaut from '../../assets/logo/astronaut-ingravity.svg';
+// import astronaut from '../../assets/logo/astronaut-ingravity.svg';
 import { useState } from 'react';
 import { RotateSpinner } from 'react-spinners-kit';
 import { Link } from 'react-router-dom';
@@ -44,15 +44,18 @@ const ForgotPassword = () => {
 		<>
 			<div className="forgotPassword">
 				<div className="container">
-					<div className="header">{emailSent ? 'Email Sent!' : 'Reset Password'}</div>
-
-					<div className="assets">
-						<img src={astronaut} alt="astronaut" />
-						<div className="circle"></div>
+					<div className="header">
+						<p>{emailSent ? 'Email Sent!' : 'Reset Password'}</p>
+						<span>{emailSent ? '' : 'Please provide your email address'}</span>
 					</div>
 
+					{/* <div className="assets">
+						<img src={astronaut} alt="astronaut" />
+						<div className="circle"></div>
+					</div> */}
+
 					{emailSent ? (
-						<div className="resentTrue">Check your email for further instructions 🚀</div>
+						<div className="resentTrue">Please check your email for further instructions.</div>
 					) : (
 						<form onSubmit={handleLogin}>
 							<div className="email">

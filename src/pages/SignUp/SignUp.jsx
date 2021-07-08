@@ -1,11 +1,11 @@
 import './SignUp.scss';
-import astronaut from '../../assets/logo/astronaut-ingravity.svg';
+// import astronaut from '../../assets/logo/astronaut-ingravity.svg';
 import { useState, useContext } from 'react';
 import { RotateSpinner } from 'react-spinners-kit';
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import useTitle from '../../utils/useTitle'
+import useTitle from '../../utils/useTitle';
 import AuthContext from '../../components/Auth/AuthContext';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -75,12 +75,15 @@ const SignUp = () => {
 		<>
 			<div className="signup">
 				<div className="container">
-					<div className="header">Sign Up</div>
+					<div className="header">
+						<p>Welcome</p>
+						<span>Sign up to start simulating!</span>
+					</div>
 
-					<div className="assets">
+					{/* <div className="assets">
 						<img src={astronaut} alt="astronaut" />
 						<div className="circle"></div>
-					</div>
+					</div> */}
 
 					<form onSubmit={handleSignUp}>
 						<div className="name">
@@ -135,9 +138,8 @@ const SignUp = () => {
 							{signingIn ? <RotateSpinner size={30} color="#fff" /> : 'Create Account'}
 						</button>
 					</form>
-
 					<Link to="/login" className="oldUser">
-						Got an account? <span>Login</span> instead
+						Already have an account? - <span>Sign In</span>
 					</Link>
 				</div>
 			</div>

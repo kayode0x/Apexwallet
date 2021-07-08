@@ -37,7 +37,7 @@ $navyBlue: #262946;
 			width: 100%;
 			padding: 2rem;
 			align-items: center;
-			@media (min-width: 1024px){
+			@media (min-width: 1024px) {
 				align-items: flex-start;
 			}
 			justify-content: center;
@@ -61,7 +61,7 @@ $navyBlue: #262946;
 			@media (max-width: 767px) {
 				align-self: flex-start;
 			}
-			@media(min-width: 768px){
+			@media (min-width: 768px) {
 				display: none;
 			}
 		}
@@ -157,35 +157,7 @@ $navyBlue: #262946;
 			}
 		}
 
-		.alienSVG {
-			background-image: radial-gradient(
-				circle farthest-corner at 10% 20%,
-				rgba(128, 248, 174, 1) 0%,
-				rgba(223, 244, 148, 1) 90%
-			);
-		}
-
-		.saturnSVG {
-			background-image: linear-gradient( 109.6deg, rgb(158, 167, 250)  11.2%, rgb(67, 79, 184)  91.1% );
-		}
-
-		.sunSVG {
-			background-image: linear-gradient( 135deg, #FF9D6C 10%, #BB4E75 100%);
-		}
-
-		.astronautSVG {
-			background-image: radial-gradient(
-				circle farthest-corner at -8.9% 51.2%,
-				rgba(255, 124, 0, 1) 0%,
-				rgba(255, 124, 0, 1) 15.9%,
-				rgba(255, 163, 77, 1) 15.9%,
-				rgba(255, 163, 77, 1) 24.4%,
-				rgba(19, 30, 37, 1) 24.5%,
-				rgba(19, 30, 37, 1) 66%
-			);
-		}
-
-		.saturnSVG, .sunSVG, .astronautSVG, .alienSVG {
+		.cardDesign {
 			border-radius: 5px;
 			box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
 			color: #fff;
@@ -195,73 +167,45 @@ $navyBlue: #262946;
 			position: relative;
 			display: flex;
 			align-self: center;
-			@media (min-width: 768px){
+			@media (min-width: 768px) {
 				max-width: 23rem;
 			}
 
 			.cardOptions {
 				font-size: 1.5rem;
 				position: absolute;
-				right: 2%;
-				top: 5%;
+				right: 3%;
+				top: 10%;
 				cursor: pointer;
 			}
 
-			.apexWallet {
+			.cardName {
 				position: absolute;
-				top: 5%;
-				left: 5%;
-				font-size: 1.15rem;
-				font-weight: 600;
+				top: 2%;
+				left: 7%;
+				text-transform: capitalize;
+
+				p {
+					font-size: 1.25rem;
+				}
 			}
 
 			.cardBalance {
 				position: absolute;
-				left: 5%;
-				bottom: -8%;
+				left: 7%;
+				bottom: -15%;
 				display: flex;
 				flex-direction: column;
 				align-items: flex-start;
 
+				span {
+					font-size: 1.25rem;
+				}
+
 				p:nth-child(1) {
 					font-size: 1.75rem;
-					font-weight: 600;
 					margin-top: -0.75rem;
 					font-weight: bold;
-				}
-			}
-
-			.cardNumber {
-				position: absolute;
-				top: 40%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				z-index: 3;
-				font-size: 1.25rem;
-				width: 80%;
-				font-weight: bold;
-				display: flex;
-				color: #fff;
-				align-items: center;
-				justify-content: space-evenly;
-			}
-
-			.cardSVG {
-				position: absolute;
-				top: 15%;
-				right: 7%;
-				height: 8rem;
-				opacity: 0.7;
-				// animation: rotateUranus 10s ease-in-out infinite forwards;
-			}
-
-			@keyframes rotateUranus {
-				from {
-					transform: rotate(0deg);
-				}
-
-				to {
-					transform: rotate(360deg);
 				}
 			}
 		}
@@ -270,7 +214,7 @@ $navyBlue: #262946;
 			color: $textColor;
 			display: flex;
 			align-self: flex-start;
-			@media (min-width: 481px){
+			@media (min-width: 481px) {
 				align-self: center;
 			}
 			margin-top: 2rem;
@@ -283,7 +227,7 @@ $navyBlue: #262946;
 		}
 
 		.coinsAndTransactions {
-			@media (min-width : 768px){
+			@media (min-width: 768px) {
 				width: 100%;
 				display: flex;
 				flex-direction: column;
@@ -291,9 +235,10 @@ $navyBlue: #262946;
 			}
 		}
 
-		.assetsContainer, .transactionsContainer {
+		.assetsContainer,
+		.transactionsContainer {
 			width: 100%;
-			@media (min-width : 768px) and (max-width: 1023px){
+			@media (min-width: 768px) and (max-width: 1023px) {
 				width: 90%;
 			}
 		}
@@ -315,7 +260,7 @@ $navyBlue: #262946;
 				img {
 					height: 2rem;
 					width: 2rem;
-					// margin-left: 1rem; 
+					// margin-left: 1rem;
 				}
 				.nameAndSymbol {
 					display: flex;
@@ -360,7 +305,7 @@ $navyBlue: #262946;
 			display: flex;
 			align-items: center;
 			align-self: flex-start;
-			@media (min-width: 481px){
+			@media (min-width: 481px) {
 				align-self: center;
 			}
 			margin-top: 2rem;
@@ -405,9 +350,9 @@ $navyBlue: #262946;
 				}
 
 				p:nth-child(2) {
-					font-size: .9rem;
-					@media (min-width: 768px){
-						font-size: .95rem;
+					font-size: 0.9rem;
+					@media (min-width: 768px) {
+						font-size: 0.95rem;
 					}
 					margin-top: -0.75rem;
 					color: $subColor;
@@ -435,16 +380,25 @@ $navyBlue: #262946;
 }
 
 .Overlay {
-		background-color: rgba(0, 0, 0, 0.55);
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		position: fixed;
-		display: none;
-		z-index: 5;
-	}
+	background-color: rgba(0, 0, 0, 0.55);
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: fixed;
+	display: none;
+	z-index: 5;
+}
 
-	.Overlay.Show {
-		display: block;
-	}
+.Overlay.Show {
+	display: block;
+}
+
+.newCard {
+	display: flex;
+	align-self: center;
+	height: auto;
+	width: 100%;
+	max-width: 25rem;
+	margin-top: 1rem;
+}

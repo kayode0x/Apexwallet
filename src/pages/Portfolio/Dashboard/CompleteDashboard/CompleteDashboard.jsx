@@ -108,7 +108,7 @@ const CompleteDashboard = (user, watchList, news) => {
 		));
 	};
 
-	if (news !== null && watchList !== null && user !== null && user.isActive === false && user.wallet === undefined) {
+	if (news !== null && watchList !== null && user !== null && user.isActive === false) {
 		return (
 			<>
 				<div className="welcomeContainer">
@@ -161,7 +161,6 @@ const CompleteDashboard = (user, watchList, news) => {
 		news !== null &&
 		watchList !== null &&
 		user !== null &&
-		user.isActive === true &&
 		user.wallet !== undefined
 	) {
 		return (
@@ -192,6 +191,7 @@ const CompleteDashboard = (user, watchList, news) => {
 					/>
 				</div>
 				<div className="notificationDiv">{notificationsFunction()}</div>
+
 				<p className="watchListHeader">Watchlist</p>
 				{watchListFunction()}
 				<p className="newsHeader">News</p>
