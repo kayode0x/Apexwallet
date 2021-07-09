@@ -98,11 +98,8 @@ $navyBlue: #262946;
 
 				.cameraIcon {
 					position: absolute;
-					bottom: 10%;
-					left: 27%;
-					@media (max-width: 767px) {
-						left: 20%;
-					}
+					bottom: -5%;
+					right: 7%;
 					font-size: 1.25rem;
 					background: $mainColor;
 					border: 1px solid $borderColor;
@@ -115,12 +112,24 @@ $navyBlue: #262946;
 					justify-content: center;
 				}
 
-				img {
-					height: auto;
+				.image {
 					height: 6rem;
-					width: 6rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					position: relative;
+					width: 9rem;
 					border-radius: 100%;
 					background: #000;
+					@media (max-width: 767px){
+						height: 6.5rem;
+					}
+
+					img {
+						height: 100%;
+						width: 100%;
+						border-radius: 100%;
+					}
 				}
 
 				.nameAndStatus {

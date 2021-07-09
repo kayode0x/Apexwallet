@@ -14,7 +14,7 @@ const Image = ({ imageModal, setImageModal }) => {
 	});
 	const [uploading, setUploading] = useState(false);
 	const [file, setFile] = useState(null);
-	const apiEndpoint = 'https://api.apexwallet.app/api/v1/user/image';
+	const apiEndpoint = 'https://api.apexwallet.app/v1/user/image';
 
 	const handleImageSwitch = async (e) => {
 		e.preventDefault();

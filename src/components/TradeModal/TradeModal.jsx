@@ -28,7 +28,7 @@ const TradeModal = ({ tradeModal, setTradeModal }) => {
 	const coingeckoDataApi = `https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=true`;
 
 	//global api for Apexwallet.
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 
 	useEffect(() => {
 		isRendered.current = true;

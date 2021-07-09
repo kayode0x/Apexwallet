@@ -16,7 +16,7 @@ const Reset = () => {
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
 	const [resetting, setResetting] = useState(false);
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	const token = urlParams.get('token');

@@ -19,7 +19,7 @@ const SignUp = () => {
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [signingIn, setSigningIn] = useState(false);
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 	useTitle('SignUp | Apexwallet');
 
 	//handle the signup request from the form

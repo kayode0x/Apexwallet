@@ -26,7 +26,7 @@ const SellCoins = ({
 	const [sellType, setSellType] = useState('fiat');
 	const [selling, setSelling] = useState(false);
 	const [vibrate, setVibrate] = useState(false);
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 
 	//switch the way the user wants to buy coins, fiat or crypto
 	const handleSellTypeChange = () => {

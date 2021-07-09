@@ -14,7 +14,7 @@ const BuyCoins = ({ newCoinInfo, user, wallet, coin, setCoin }) => {
 	const [type, setType] = useState('fiat');
 	const [vibrate, setVibrate] = useState(false);
 	const [buying, setBuying] = useState(false);
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 
 	//buy methods
 	const coinAmountToBuy = (amountToBuyFiat) => {

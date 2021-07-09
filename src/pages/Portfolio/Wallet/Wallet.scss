@@ -315,7 +315,10 @@ $navyBlue: #262946;
 			a {
 				text-decoration: none;
 				margin-left: auto;
-				color: $lightBlue;
+				color: $blue;
+			}
+			a:hover {
+				text-decoration: underline;
 			}
 		}
 

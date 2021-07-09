@@ -15,7 +15,7 @@ const SellCoins = ({ newCoinInfo, user, wallet, coin, setCoin, balance }) => {
 	const [amountToSellCrypto, setAmountToSellCrypto] = useState(0.01);
 	const [selling, setSelling] = useState(false);
 	const [vibrate, setVibrate] = useState(false);
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 
 	const handleChange = (event) => {
 		setCoin(event.target.value);

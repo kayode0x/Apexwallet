@@ -21,7 +21,7 @@ import Learn from './LearningModal/Learn';
 const Account = ({ loggedIn, user }) => {
 	const history = useHistory();
 	useTitle('Account | Apexwallet');
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 	const [imageModal, setImageModal] = useState(false);
 
 	useEffect(() => {
@@ -54,11 +54,12 @@ const Account = ({ loggedIn, user }) => {
 						<div className="accountInfo">
 							<div className="userDetails">
 								<div className="nameAndImage">
-									<div onClick={() => setImageModal(!imageModal)} className="cameraIcon">
-										<IoCamera />
+									<div className="image">
+										<img src={user.image ? user.image : usrIMG} alt={user.username} />
+										<div onClick={() => setImageModal(!imageModal)} className="cameraIcon">
+											<IoCamera />
+										</div>
 									</div>
-									{/* <div className="imgDiv">{user.username.charAt(0).toUpperCase()}</div> */}
-									<img src={user.image ? user.image : usrIMG} alt={user.username} />
 									<div className="nameAndStatus">
 										<p style={{ textTransform: user.name ? '' : 'capitalize' }}>
 											{user.name ? user.name : user.username + ' 🚀'}

@@ -20,7 +20,7 @@ export default function NameModal({ user }) {
 	const [name, setName] = useState('');
 	const [changingName, setChangingName] = useState(false);
 
-	const nameChangeEndpoint = 'https://api.apexwallet.app/api/v1/user/change-name';
+	const nameChangeEndpoint = 'https://api.apexwallet.app/v1/user/change-name';
 
 	//change the user's password
 	const handleNameChange = async (e) => {

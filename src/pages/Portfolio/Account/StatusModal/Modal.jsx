@@ -17,7 +17,7 @@ export default function StatusModal({ user }) {
 	const handleOpenModal = () => setOpenModal(true);
 	const handleCloseModal = () => setOpenModal(false);
 	const [sending, setSending] = useState(false);
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 
 	const handleNewVerification = async () => {
 		setSending(true);

@@ -108,49 +108,46 @@ const CompleteUser = ({ user, asset, wallet }) => {
 
 	//get the icon background based on the transaction type
 	const getIconBg = (type) => {
-		switch (type) {
-			case 'Received' || 'Free' || 'Sold':
-				return '#C2FEDB';
-
-			case 'Bought' || 'Sent':
-				return '#FDC4CC';
-
-			case 'Converted':
-				return '#bbdefb';
-			default:
-			//
+		let color;
+		if (type === 'Received' || type === 'Free' || type === 'Sold') {
+			color = '#C2FEDB';
+			return color;
+		} else if (type === 'Bought' || type === 'Sent') {
+			color = '#FDC4CC';
+			return color;
+		} else if (type === 'Converted') {
+			color = '#bbdefb';
+			return color;
 		}
 	};
 
 	//get the icon color based on the transaction type
 	const getIconColor = (type) => {
-		switch (type) {
-			case 'Received' || 'Free' || 'Sold':
-				return '#12A550';
-
-			case 'Bought' || 'Sent':
-				return '#F71735';
-
-			case 'Converted':
-				return '#1565c0';
-
-			default: //
+		let color;
+		if (type === 'Received' || type === 'Free' || type === 'Sold') {
+			color = '#12A550';
+			return color;
+		} else if (type === 'Bought' || type === 'Sent') {
+			color = '#F71735';
+			return color;
+		} else if (type === 'Converted') {
+			color = '#1565c0';
+			return color;
 		}
 	};
 
 	//get the icon based on the transaction type
 	const getIcon = (type) => {
-		switch (type) {
-			case 'Received' || 'Free' || 'Sold':
-				return <ImArrowDownLeft2 />;
-
-			case 'Bought' || 'Sent':
-				return <ImArrowUpRight2 />;
-
-			case 'Converted':
-				return <ImLoop2 />;
-
-			default: //
+		let icon;
+		if (type === 'Received' || type === 'Free' || type === 'Sold') {
+			icon = <ImArrowDownLeft2 />;
+			return icon;
+		} else if (type === 'Bought' || type === 'Sent') {
+			icon = <ImArrowUpRight2 />;
+			return icon;
+		} else if (type === 'Converted') {
+			icon = <ImLoop2 />;
+			return icon;
 		}
 	};
 

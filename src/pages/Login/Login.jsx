@@ -18,7 +18,7 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const [passwordVisible, setPasswordVisible] = useState(false);
 	const [loggingIn, setLoggingIn] = useState(false);
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 
 	useTitle('Login | Apexwallet');
 

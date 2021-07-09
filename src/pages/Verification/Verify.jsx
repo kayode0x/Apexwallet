@@ -23,7 +23,7 @@ const Verify = () => {
 				history.push('/login');
 			}
 			const user = { token };
-			const apiURL = 'https://api.apexwallet.app/api/v1';
+			const apiURL = 'https://api.apexwallet.app/v1';
 
 			try {
 				await axios

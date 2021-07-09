@@ -13,7 +13,7 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setTradeModal, tradeModal, 
 	const [amountToBuyFiat, setAmountToBuyFiat] = useState(1);
 	const [amountToBuyCrypto, setAmountToBuyCrypto] = useState(0);
 	const [buyType, setBuyType] = useState('fiat');
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 	const [buying, setBuying] = useState(false);
 	const [vibrate, setVibrate] = useState(false);
 

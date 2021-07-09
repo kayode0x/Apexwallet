@@ -46,7 +46,7 @@ const Messages = ({ user, modalUpMessages, setModalUpMessages, messageModal, set
 
 	//set the message to unread after opening it.
 	const handleOpenMessage = async (messageId) => {
-		const apiURL = 'https://api.apexwallet.app/api/v1';
+		const apiURL = 'https://api.apexwallet.app/v1s';
 		const message = { messageId };
 		try {
 			await axios.put(`${apiURL}/message/open-message`, message, { withCredentials: true }).catch(async (err) => {

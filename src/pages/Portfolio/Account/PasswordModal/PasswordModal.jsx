@@ -24,7 +24,7 @@ export default function PasswordModal({ user }) {
 	const [newPassword, setNewPassword] = useState('');
 	const [changingPassword, setChangingPassword] = useState(false);
 
-	const passwordChangeEndpoint = 'https://api.apexwallet.app/api/v1/user/change-password';
+	const passwordChangeEndpoint = 'https://api.apexwallet.app/v1/user/change-password';
 
 	//change the user's password
 	const handlePasswordChange = async (e) => {

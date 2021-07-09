@@ -20,7 +20,7 @@ export default function CardDesign({ user, BsThreeDotsVertical }) {
 	};
 	const [changing, setChanging] = useState(false);
 
-	const cardDesignEndpoint = 'https://api.apexwallet.app/api/v1/user/card-design';
+	const cardDesignEndpoint = 'https://api.apexwallet.app/v1/user/card-design';
 
 	//change the user's password
 	const handleCardDesignChange = async (cardDesign) => {

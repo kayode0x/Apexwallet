@@ -21,7 +21,7 @@ const ConvertCoins = ({
 	wallet,
 	balance,
 }) => {
-	const apiURL = 'https://api.apexwallet.app/api/v1';
+	const apiURL = 'https://api.apexwallet.app/v1';
 	const [amountToConvert, setAmountToConvert] = useState(0.01);
 	const [proceed, setProceed] = useState(false);
 	const [vibrate, setVibrate] = useState(false);
