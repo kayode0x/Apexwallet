@@ -103,18 +103,13 @@ const TradeModal = ({ tradeModal, setTradeModal }) => {
 				setAddress(newCoinBalance[0]._id);
 			}
 		}
-		if (
-			user !== null &&
-			user.isActive === true &&
-			(user.wallet !== undefined) & (wallet !== null) &&
-			coinInfo !== null
-		) {
+		if (user !== null && user.isActive === true && wallet !== null && coinInfo !== null) {
 			callPrice(); //only call this function if the user is active and has a wallet
 		}
 	}, [coinInfo, user, wallet]);
 
 	function showTab() {
-		if (user !== null && user.wallet !== undefined) {
+		if (user !== null && user.isActive === true) {
 			return (
 				<>
 					<div className="buyCrypto" onClick={() => setModalUpBuy(!modalUpBuy)}>
@@ -212,8 +207,8 @@ const TradeModal = ({ tradeModal, setTradeModal }) => {
 					/>
 				</>
 			);
-		} else if (user !== null && user.wallet === undefined) {
-			return <p className="noWallet">Only available to users with a wallet</p>;
+		} else if (user !== null && user.isActive === false) {
+			return <p className="noWallet">Only verified users can trade.</p>;
 		}
 	}
 

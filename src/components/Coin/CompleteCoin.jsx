@@ -75,13 +75,7 @@ const CompleteCoin = ({ coinInfo, user, watchingCoin, triggerWatchCoin, matches,
 					<p>Verify your account before trading {coinInfo.name}</p>
 				</div>
 			);
-		} else if (user.isActive === true && user.wallet === undefined) {
-			return (
-				<div>
-					<p>Before buying {coinInfo.name}, please create a wallet.</p>
-				</div>
-			);
-		} else if (user.isActive === true && user.wallet !== undefined) {
+		} else if (user.isActive === true) {
 			return (
 				<div>
 					<img src={coinInfo.image.large} alt={coinInfo.id} />

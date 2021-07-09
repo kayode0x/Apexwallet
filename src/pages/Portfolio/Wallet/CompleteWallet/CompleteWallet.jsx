@@ -10,7 +10,7 @@ import type2 from '../../../../assets/debit-cards/complete-card2.svg';
 import type3 from '../../../../assets/debit-cards/complete-card3.svg';
 import type4 from '../../../../assets/debit-cards/complete-card4.svg';
 
-const CompleteUser = ({ user, asset, wallet, handleCreateWallet, creatingWallet }) => {
+const CompleteUser = ({ user, asset, wallet }) => {
 	//receipt modal.
 	const [transactionModal, setTransactionModal] = useState(false);
 	const [singleTransaction, setSingleTransaction] = useState(null);
@@ -193,7 +193,7 @@ const CompleteUser = ({ user, asset, wallet, handleCreateWallet, creatingWallet 
 		);
 	};
 
-	if (user !== null && user.isActive === true && user.wallet !== undefined && asset !== null && wallet !== null) {
+	if (user !== null && user.isActive === true && asset !== null) {
 		return (
 			<div style={{ display: 'flex', flexDirection: 'column' }} className="cardAssetsAndTransactions">
 				{cardDesignFunction()}
@@ -222,22 +222,6 @@ const CompleteUser = ({ user, asset, wallet, handleCreateWallet, creatingWallet 
 				</div>
 				<div className="notActive2">
 					<p>Once verified, your assets will show up here.</p>
-				</div>
-			</>
-		);
-	} else if (user !== null && user.isActive === true && user.wallet === undefined) {
-		return (
-			<>
-				<div className="createWallet">
-					<p>Account Verified!</p>
-					<p>Click the button below to create a wallet and get started 🚀</p>
-
-					<button onClick={handleCreateWallet} disabled={creatingWallet ? true : false}>
-						{creatingWallet ? <RotateSpinner size={30} color="#fff" /> : 'Create Wallet'}
-					</button>
-				</div>
-				<div className="notActive2">
-					<p>Once you create a wallet, your assets will show up here.</p>
 				</div>
 			</>
 		);

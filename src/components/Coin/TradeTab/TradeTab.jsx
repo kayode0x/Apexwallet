@@ -54,12 +54,7 @@ const TradeTab = ({ coinInfo, user, wallet }) => {
 				setBalance(newCoinBalance[0].balance);
 			}
 		}
-		if (
-			user !== null &&
-			user.isActive === true &&
-			(user.wallet !== undefined) & (wallet !== null) &&
-			newCoinInfo !== null
-		) {
+		if (user !== null && user.isActive === true && wallet !== null && newCoinInfo !== null) {
 			callPrice(); //only call this function if the user is active and has a wallet
 		}
 	}, [newCoinInfo, user, wallet]);
@@ -74,7 +69,7 @@ const TradeTab = ({ coinInfo, user, wallet }) => {
 					Sell
 				</div>
 			</div>
-			{user.wallet !== undefined ? (
+			{user.isActive !== false ? (
 				<div className="form">
 					{activeNav === 'buy' && (
 						<BuyCoins newCoinInfo={newCoinInfo} user={user} wallet={wallet} coin={coin} setCoin={setCoin} />

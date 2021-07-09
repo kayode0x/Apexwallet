@@ -27,7 +27,7 @@ const Verify = () => {
 
 			try {
 				await axios
-					.put(`${apiURL}/auth/verify`, user, { withCredentials: true })
+					.post(`${apiURL}/auth/verify`, user, { withCredentials: true })
 					.then(async (res) => {
 						if (res.status === 200) {
 							await toast.success(`${res.data}`, {});

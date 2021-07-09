@@ -1,7 +1,6 @@
 import './Wallet.scss';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -12,13 +11,9 @@ import useTitle from '../../../utils/useTitle';
 const Wallet = ({ user, wallet, prices, loggedIn }) => {
 	const history = useHistory();
 	const [asset, setAsset] = useState(null);
-	const [creatingWallet, setCreatingWallet] = useState(false);
 	//breakpoint set at mobile only
 	const matches = useMediaQuery('(max-width:767px)');
 	useTitle('Wallet | Apexwallet');
-
-	//api endpoint.
-	const apiURL = 'https://api.apexwallet.app/api/v1';
 
 	useEffect(() => {
 		if (loggedIn === false) {
@@ -66,29 +61,6 @@ const Wallet = ({ user, wallet, prices, loggedIn }) => {
 		}
 	}, [prices, wallet, user]);
 
-	//create a wallet
-	const handleCreateWallet = async (e) => {
-		e.preventDefault();
-
-		setCreatingWallet(true);
-		try {
-			await axios
-				.post(`${apiURL}/wallet/`, { withCredentials: true })
-				.then(async (res) => {
-					if (res.status === 201) {
-						await toast.success(res.data, {});
-					}
-				})
-				.catch(async (err) => {
-					await toast.error(err.response.data, {});
-					setCreatingWallet(false);
-				});
-		} catch (error) {
-			console.log('Error: ', error);
-			setCreatingWallet(false);
-		}
-	};
-
 	return (
 		<>
 			<div className="wallet">
@@ -101,8 +73,6 @@ const Wallet = ({ user, wallet, prices, loggedIn }) => {
 						user={user}
 						asset={asset}
 						wallet={wallet}
-						handleCreateWallet={handleCreateWallet}
-						creatingWallet={creatingWallet}
 						matches={matches}
 					/>
 				</div>

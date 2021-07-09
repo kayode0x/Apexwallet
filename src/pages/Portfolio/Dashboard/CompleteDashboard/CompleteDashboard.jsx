@@ -135,34 +135,7 @@ const CompleteDashboard = (user, watchList, news) => {
 				{newsFunction()}
 			</>
 		);
-	} else if (
-		news !== null &&
-		watchList !== null &&
-		user !== null &&
-		user.isActive === true &&
-		user.wallet === undefined
-	) {
-		return (
-			<>
-				<div className="verifiedNoWallet">
-					<p className="leadText">Up next, create a wallet!</p>
-					<p className="subText">
-						Yay your account has been verified, go to the <a href="/wallet">wallets</a> tab to create a
-						wallet.
-					</p>
-				</div>
-				<p className="watchListHeader">Watchlist</p>
-				{watchListFunction()}
-				<p className="newsHeader">News</p>
-				{newsFunction()}
-			</>
-		);
-	} else if (
-		news !== null &&
-		watchList !== null &&
-		user !== null &&
-		user.wallet !== undefined
-	) {
+	} else if (news !== null && watchList !== null && user !== null && user.isActive === true) {
 		return (
 			<>
 				<div className="verifiedWithWallet">

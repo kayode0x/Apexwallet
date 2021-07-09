@@ -128,12 +128,7 @@ const Coin = ({ user, wallet, loggedIn }) => {
 				setBalance(newCoinBalance[0].balance);
 			}
 		}
-		if (
-			user !== null &&
-			user.isActive === true &&
-			(user.wallet !== undefined) & (wallet !== null) &&
-			coinInfo !== null
-		) {
+		if (user !== null && user.isActive === true && wallet !== null && coinInfo !== null) {
 			callPrice(); //only call this function if the user is active and has a wallet
 		}
 	}, [coinInfo, user, wallet]);

@@ -153,7 +153,6 @@ const Transactions = ({ user, wallet, loggedIn, sorted, setSorted }) => {
 		if (
 			user !== null &&
 			user.isActive === true &&
-			user.wallet !== undefined &&
 			wallet !== null &&
 			sorted !== null
 		) {
@@ -221,7 +220,7 @@ const Transactions = ({ user, wallet, loggedIn, sorted, setSorted }) => {
 					))}
 				</>
 			);
-		} else if (user !== null && user.wallet === undefined) {
+		} else if (user.isActive === false) {
 			return <p className="noWalletTransaction">Once you create a wallet, your transactions will show up here</p>;
 		} else {
 			return (
