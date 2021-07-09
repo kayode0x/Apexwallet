@@ -6,7 +6,7 @@ import { BsArrowUpDown } from 'react-icons/bs';
 import { useLocation, Link } from 'react-router-dom';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useState } from 'react';
-import TradeModal from './TradeModal/TradeModal';
+import TradeModal from '../TradeModal/TradeModal';
 
 const BottomNav = () => {
 	const matches = useMediaQuery('(max-width:767px)');
