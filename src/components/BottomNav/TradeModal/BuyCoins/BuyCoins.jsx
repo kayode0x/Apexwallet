@@ -19,10 +19,15 @@ const BuyCoins = ({ modalUpBuy, coin, setModalUpBuy, setTradeModal, tradeModal, 
 
 	//switch the way the user wants to buy coins, fiat or crypto
 	const handleBuyTypeChange = () => {
-		if (buyType === 'fiat') {
-			setBuyType('crypto');
-		} else if (buyType === 'crypto') {
-			setBuyType('fiat');
+		switch (buyType) {
+			case 'fiat':
+				setBuyType('crypto');
+				break;
+			case 'crypto':
+				setBuyType('fiat');
+				break;
+			default:
+				setBuyType('fiat');
 		}
 	};
 

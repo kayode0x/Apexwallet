@@ -10,13 +10,19 @@ const Nav = () => {
 
 	const [navOpen, setNavOpen] = useState(false);
 	const [activeNav, setActiveNav] = useState(splitLocation);
+
 	//prevent scrolling when the navbar is open
-	if (navOpen === true) {
-		var bodyOpen = document.getElementsByTagName('BODY')[0];
-		bodyOpen.style.overflow = 'hidden';
-	} else {
-		var bodyClose = document.getElementsByTagName('BODY')[0];
-		bodyClose.style.overflow = 'auto';
+	switch (navOpen) {
+		case true:
+			var bodyOpen = document.getElementsByTagName('BODY')[0];
+			bodyOpen.style.overflow = 'hidden';
+			break;
+		case false:
+			var bodyClose = document.getElementsByTagName('BODY')[0];
+			bodyClose.style.overflow = 'auto';
+			break;
+		default:
+		//
 	}
 	return (
 		<>

@@ -34,11 +34,16 @@ const SendCoins = ({
 	const [vibrate, setVibrate] = useState(false);
 
 	//switch the way the user wants to buy coins, fiat or crypto
-	const handleBuyTypeChange = () => {
-		if (sendType === 'fiat') {
-			setSendType('crypto');
-		} else if (sendType === 'crypto') {
-			setSendType('fiat');
+	const handleSellTypeChange = () => {
+		switch (sendType) {
+			case 'crypto':
+				setSendType('fiat');
+				break;
+			case 'fiat':
+				setSendType('crypto');
+				break;
+			default:
+				setSendType('crypto');
 		}
 	};
 
@@ -229,7 +234,7 @@ const SendCoins = ({
 							required={true}
 						/>
 						<div>
-							<BsArrowUpDown onClick={handleBuyTypeChange} />
+							<BsArrowUpDown onClick={handleSellTypeChange} />
 						</div>
 					</div>
 					<div className="selectBalanceAndBTN">

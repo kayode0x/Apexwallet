@@ -23,10 +23,15 @@ const SellCoins = ({ newCoinInfo, user, wallet, coin, setCoin, balance }) => {
 
 	//switch the way the user wants to buy coins, fiat or crypto
 	const handleTypeChange = () => {
-		if (type === 'fiat') {
-			setType('crypto');
-		} else if (type === 'crypto') {
-			setType('fiat');
+		switch (type) {
+			case 'fiat':
+				setType('crypto');
+				break;
+			case 'crypto':
+				setType('fiat');
+				break;
+			default:
+				setType('fiat');
 		}
 	};
 

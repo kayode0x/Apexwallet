@@ -2,134 +2,98 @@ import { AreaChart, Tooltip, Area, ResponsiveContainer } from 'recharts';
 import moment from 'moment';
 
 const Graph = ({ graphData, days, coinInfoId }) => {
-	let mainColor;
-	let subColor;
 
 	const pickColor = (coinInfoId) => {
-		if (coinInfoId === 'bitcoin') {
-			mainColor = '#fb8c00';
-			return mainColor;
-		} else if (coinInfoId === 'ethereum') {
-			mainColor = '#424242';
-			return mainColor;
-		} else if (coinInfoId === 'litecoin') {
-			mainColor = '#3c3c3d';
-			return mainColor;
-		} else if (coinInfoId === 'dash') {
-			mainColor = '#42a5f5';
-			return mainColor;
-		} else if (coinInfoId === 'tron') {
-			mainColor = '#b71c1c';
-			return mainColor;
-		} else if (coinInfoId === 'ethereum-classic') {
-			mainColor = '#1b5e20';
-			return mainColor;
-		} else if (coinInfoId === 'uniswap') {
-			mainColor = '#d81b60';
-			return mainColor;
-		} else if (coinInfoId === 'bitcoin-cash') {
-			mainColor = '#00897b';
-			return mainColor;
-		} else if (coinInfoId === 'tether') {
-			mainColor = '#00897b';
-			return mainColor;
-		} else if (coinInfoId === 'usd-coin') {
-			mainColor = '#0277bd';
-			return mainColor;
-		} else if (coinInfoId === 'polkadot') {
-			mainColor = '#3c3c3d';
-			return mainColor;
-		} else if (coinInfoId === 'ripple') {
-			mainColor = '#3c3c3d';
-			return mainColor;
-		} else if (coinInfoId === 'dogecoin') {
-			mainColor = '#fbc02d';
-			return mainColor;
-		} else if (coinInfoId === 'cardano') {
-			mainColor = '#1976d2';
-			return mainColor;
-		} else if (coinInfoId === 'binancecoin') {
-			mainColor = '#ffc107';
-			return mainColor;
-		} else if (coinInfoId === 'decentraland') {
-			mainColor = '#e64a19';
-			return mainColor;
-		} else if (coinInfoId === 'shia-inu') {
-			mainColor = '#f90201';
-			return mainColor;
-		} else if (coinInfoId === 'solana') {
-			mainColor = '#7b1fa2';
-			return mainColor;
-		} else if (coinInfoId === 'stellar') {
-			mainColor = '#212121';
-			return mainColor;
-		} else if (coinInfoId === 'chainlink') {
-			mainColor = '#315acb';
-			return mainColor;
+		switch (coinInfoId) {
+			case 'bitcoin':
+				return '#fb8c00';
+			case 'ethereum':
+				return '#424242';
+			case 'litecoin':
+				return '#3c3c3d';
+			case 'dash':
+				return '#42a5f5';
+			case 'tron':
+				return '#b71c1c';
+			case 'ethereum-classic':
+				return '#1b5e20';
+			case 'uniswap':
+				return '#d81b60';
+			case 'bitcoin-cash':
+				return '#00897b';
+			case 'tether':
+				return '#00897b';
+			case 'usd-coin':
+				return '#0277bd';
+			case 'polkadot':
+				return '#3c3c3d';
+			case 'ripple':
+				return '#3c3c3d';
+			case 'dogecoin':
+				return '#fbc02d';
+			case 'cardano':
+				return '#1976d2';
+			case 'binancecoin':
+				return '#ffc107';
+			case 'decentraland':
+				return '#e64a19';
+			case 'shia-inu':
+				return '#f90201';
+			case 'solana':
+				return '#7b1fa2';
+			case 'stellar':
+				return '#212121';
+			case 'chainlink':
+				return '#315acb';
+			default:
+				return '#424242';
 		}
 	};
 
 	const pickSubColor = (coinInfoId) => {
-		if (coinInfoId === 'bitcoin') {
-			subColor = '#FEF4D8';
-			return subColor;
-		} else if (coinInfoId === 'ethereum') {
-			subColor = '#e0e0e0';
-			return subColor;
-		} else if (coinInfoId === 'litecoin') {
-			subColor = '#d3d3d3';
-			return subColor;
-		} else if (coinInfoId === 'dash') {
-			subColor = '#bbdefb';
-			return subColor;
-		} else if (coinInfoId === 'tron') {
-			subColor = '#ffcdd2';
-			return subColor;
-		} else if (coinInfoId === 'ethereum-classic') {
-			subColor = '#c8e6c9';
-			return subColor;
-		} else if (coinInfoId === 'uniswap') {
-			subColor = '#f8bbd0';
-			return subColor;
-		} else if (coinInfoId === 'bitcoin-cash') {
-			subColor = '#b2dfdb';
-			return subColor;
-		} else if (coinInfoId === 'tether') {
-			subColor = '#b2dfdb';
-			return subColor;
-		} else if (coinInfoId === 'usd-coin') {
-			subColor = '#b3e5fc';
-			return subColor;
-		} else if (coinInfoId === 'polkadot') {
-			subColor = '#d3d3d3';
-			return subColor;
-		} else if (coinInfoId === 'ripple') {
-			subColor = '#d3d3d3';
-			return subColor;
-		} else if (coinInfoId === 'dogecoin') {
-			subColor = '#fff9c4';
-			return subColor;
-		} else if (coinInfoId === 'cardano') {
-			subColor = '#bbdefb';
-			return subColor;
-		} else if (coinInfoId === 'binancecoin') {
-			subColor = '#ffecb3';
-			return subColor;
-		} else if (coinInfoId === 'decentraland') {
-			subColor = '#ffccbc';
-			return subColor;
-		} else if (coinInfoId === 'shiba-inu') {
-			subColor = '#fca501';
-			return subColor;
-		} else if (coinInfoId === 'solana') {
-			subColor = '#e1bee7';
-			return subColor;
-		} else if (coinInfoId === 'stellar') {
-			subColor = '#bdbdbd';
-			return subColor;
-		} else if (coinInfoId === 'chainlink') {
-			subColor = '#bbdefb';
-			return subColor;
+		switch (coinInfoId) {
+			case 'bitcoin':
+				return '#FEF4D8';
+			case 'ethereum':
+				return '#e0e0e0';
+			case 'litecoin':
+				return '#d3d3d3';
+			case 'dash':
+				return '#bbdefb';
+			case 'tron':
+				return '#ffcdd2';
+			case 'ethereum-classic':
+				return '#c8e6c9';
+			case 'uniswap':
+				return '#f8bbd0';
+			case 'bitcoin-cash':
+				return '#b2dfdb';
+			case 'tether':
+				return '#b2dfdb';
+			case 'usd-coin':
+				return '#b3e5fc';
+			case 'polkadot':
+				return '#d3d3d3';
+			case 'ripple':
+				return '#d3d3d3';
+			case 'dogecoin':
+				return '#fff9c4';
+			case 'cardano':
+				return '#bbdefb';
+			case 'binancecoin':
+				return '#ffecb3';
+			case 'decentraland':
+				return '#ffccbc';
+			case 'shia-inu':
+				return '#fca501';
+			case 'solana':
+				return '#e1bee7';
+			case 'stellar':
+				return '#bdbdbd';
+			case 'chainlink':
+				return '#bbdefb';
+			default:
+				return '#e0e0e0';
 		}
 	};
 

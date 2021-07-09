@@ -15,26 +15,28 @@ const CompleteUser = ({ user, asset, wallet }) => {
 	const [transactionModal, setTransactionModal] = useState(false);
 	const [singleTransaction, setSingleTransaction] = useState(null);
 
-	let cardImage;
-
-	if ((user !== null && user.cardDesign) === 'type-1') {
-		cardImage = type1;
-	} else if ((user !== null && user.cardDesign) === 'type-2') {
-		cardImage = type2;
-	} else if ((user !== null && user.cardDesign) === 'type-3') {
-		cardImage = type3;
-	} else if ((user !== null && user.cardDesign) === 'type-4') {
-		cardImage = type4;
-	} else {
-		cardImage = type1;
-	}
+	//switch between the card designs
+	const pickCard = () => {
+		switch (user.cardDesign) {
+			case 'type-1':
+				return type1;
+			case 'type-2':
+				return type2;
+			case 'type-3':
+				return type3;
+			case 'type-4':
+				return type4;
+			default:
+				return type1;
+		}
+	};
 
 	const cardDesignFunction = () => {
 		return (
 			<>
 				<div className="cardDesign">
 					<CardDesign BsThreeDotsVertical={BsThreeDotsVertical} />
-					<img className="newCard" src={cardImage} alt="" />
+					<img className="newCard" src={pickCard()} alt="" />
 					<div className="cardName">
 						<p>{user.name ? user.name : user.username}</p>
 					</div>
@@ -106,46 +108,49 @@ const CompleteUser = ({ user, asset, wallet }) => {
 
 	//get the icon background based on the transaction type
 	const getIconBg = (type) => {
-		let color;
-		if (type === 'Received' || type === 'Free' || type === 'Sold') {
-			color = '#C2FEDB';
-			return color;
-		} else if (type === 'Bought' || type === 'Sent') {
-			color = '#FDC4CC';
-			return color;
-		} else if (type === 'Converted') {
-			color = '#bbdefb';
-			return color;
+		switch (type) {
+			case 'Received' || 'Free' || 'Sold':
+				return '#C2FEDB';
+
+			case 'Bought' || 'Sent':
+				return '#FDC4CC';
+
+			case 'Converted':
+				return '#bbdefb';
+			default:
+			//
 		}
 	};
 
 	//get the icon color based on the transaction type
 	const getIconColor = (type) => {
-		let color;
-		if (type === 'Received' || type === 'Free' || type === 'Sold') {
-			color = '#12A550';
-			return color;
-		} else if (type === 'Bought' || type === 'Sent') {
-			color = '#F71735';
-			return color;
-		} else if (type === 'Converted') {
-			color = '#1565c0';
-			return color;
+		switch (type) {
+			case 'Received' || 'Free' || 'Sold':
+				return '#12A550';
+
+			case 'Bought' || 'Sent':
+				return '#F71735';
+
+			case 'Converted':
+				return '#1565c0';
+
+			default: //
 		}
 	};
 
 	//get the icon based on the transaction type
 	const getIcon = (type) => {
-		let icon;
-		if (type === 'Received' || type === 'Free' || type === 'Sold') {
-			icon = <ImArrowDownLeft2 />;
-			return icon;
-		} else if (type === 'Bought' || type === 'Sent') {
-			icon = <ImArrowUpRight2 />;
-			return icon;
-		} else if (type === 'Converted') {
-			icon = <ImLoop2 />;
-			return icon;
+		switch (type) {
+			case 'Received' || 'Free' || 'Sold':
+				return <ImArrowDownLeft2 />;
+
+			case 'Bought' || 'Sent':
+				return <ImArrowUpRight2 />;
+
+			case 'Converted':
+				return <ImLoop2 />;
+
+			default: //
 		}
 	};
 
