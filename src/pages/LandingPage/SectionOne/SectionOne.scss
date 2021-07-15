@@ -8,278 +8,295 @@ $orange: #ef5116;
 $navyBlue: #262946;
 
 .sectionOne {
-	min-height: 100vh;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 
-	.container {
-		padding: 1rem;
-		display: flex;
-		align-items: center;
-		max-width: 900px;
-		width: 100%;
-		justify-content: space-between;
-		@media (max-width: 768px) {
-			flex-direction: column;
-		}
+  .container {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+    justify-content: space-between;
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
 
-		@media (max-width: 812px) and (orientation: landscape) {
-			margin-top: 3rem;
-			flex-direction: column;
-		}
+    @media (max-width: 812px) and (orientation: landscape) {
+      margin-top: 3rem;
+      flex-direction: column;
+    }
 
-		.imgAndBlob {
-			display: flex;
-			@media (max-width: 768px) {
-				display: none;
-			}
-			@media (max-width: 812px) and (orientation: landscape) {
-				display: none;
-			}
-			position: relative;
+    .imgAndBlob {
+      display: flex;
+      @media (max-width: 768px) {
+        display: none;
+      }
+      @media (max-width: 812px) and (orientation: landscape) {
+        display: none;
+      }
+      position: relative;
 
-			svg {
-				right: -20%;
-				@media (min-width: 1140px) {
-					top: -30%;
-					right: -60%;
-				}
-				position: absolute;
-			}
+      svg {
+        right: -20%;
+        @media (min-width: 1140px) {
+          top: -30%;
+          right: -50%;
+        }
+        position: absolute;
+      }
 
-			.homepageIMG {
-				height: 35rem;
-				@media (max-width: 768px) {
-					height: 35rem;
-				}
-				animation: imageSlide 1s ease forwards;
-				z-index: 3;
-				margin-left: auto;
+      .bitcoinSVG {
+        height: 40rem;
+        @media (max-width: 768px) {
+          height: 35rem;
+        }
+        animation: imageSlide 1s ease forwards;
+        z-index: 3;
+        margin-left: auto;
 
-				@keyframes imageSlide {
-					from {
-						transform: translateX(20%);
-						opacity: 0;
-					}
-					to {
-						transform: translateX(0%);
-						opacity: 1;
-					}
-				}
-			}
-		}
+        @keyframes imageSlide {
+          from {
+            transform: translateX(20%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0%);
+            opacity: 1;
+          }
+        }
+      }
+    }
 
-		p {
-			max-width: 30rem;
-			font-size: 2rem;
-			@media (max-width: 768px) {
-				font-size: 1.5rem;
-				text-align: center;
-			}
-			@media (max-width: 812px) and (orientation: landscape) {
-				font-size: 1.5rem;
-				text-align: center;
-			}
-			color: $subColor;
-			span {
-				font-weight: bold;
-				color: $textColor;
-			}
-			animation: textSlide 0.5s ease forwards;
-		}
-		@keyframes textSlide {
-			from {
-				opacity: 0;
-				transform: translateY(20%);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0%);
-			}
-		}
+    .intro {
+      display: flex;
+      flex-direction: column;
+      margin-left: 2rem;
+      @media (max-width: 812px) and (orientation: landscape) {
+        margin-left: 0rem;
+      }
+      @media (max-width: 768px) {
+        align-items: center;
+        margin-left: 0rem;
+      }
 
-		.intro {
-			display: flex;
-			flex-direction: column;
-			@media (max-width: 768px) {
-				align-items: center;
-			}
-		}
+      p {
+        max-width: 30rem;
+        font-size: 2rem;
+        @media (max-width: 768px) {
+          font-size: 1.5rem;
+          text-align: center;
+        }
+        @media (max-width: 812px) and (orientation: landscape) {
+          font-size: 1.5rem;
+          text-align: center;
+        }
+        color: $subColor;
+        span {
+          font-weight: bold;
+          color: $textColor;
+        }
+        animation: textSlide 0.5s ease forwards;
+      }
+      @keyframes textSlide {
+        from {
+          opacity: 0;
+          transform: translateY(20%);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0%);
+        }
+      }
 
-		.buttons {
-			display: flex;
-			height: 3rem;
-			width: 15rem;
-			flex-direction: row;
-			align-items: center;
-			@media (max-width: 768px) {
-				justify-content: center;
-			}
-			@media (max-width: 812px) and (orientation: landscape) {
-				justify-content: center;
-				width: 100%;
-			}
-			margin-top: 1.5rem;
-			opacity: 0;
-			animation: textSlide 0.5s ease 0.5s forwards;
-			margin-top: 0rem;
+      .buttons {
+        display: flex;
+        height: 3rem;
+        width: 15rem;
+        flex-direction: row;
+        align-items: center;
+        @media (max-width: 767px) {
+          justify-content: center;
+          height: 6rem;
+          width: 100%;
+          flex-direction: column;
+        }
+        @media (max-width: 812px) and (orientation: landscape) {
+          justify-content: center;
+          width: 100%;
+        }
+        margin-top: 1.5rem;
+        opacity: 0;
+        animation: textSlide 0.5s ease 0.5s forwards;
+        margin-top: 0rem;
 
-			.signupBtn {
-				height: 3rem;
-				width: 8rem;
-				background: $blue;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				text-decoration: none;
-				color: $mainColor;
-				font-weight: bold;
-				border-radius: 5px;
-				font-size: 1.15rem;
-				transition: all 0.2s ease;
-				border: 1px solid $blue;
-				margin-right: 1rem;
-			}
-			.signupBtn:hover {
-				background: $mainColor;
-				color: $blue;
-				border: 1px solid $blue;
-			}
+        .signupBtn {
+          height: 3rem;
+          @media (max-width: 767px) {
+            width: 100%;
+            margin-right: 0%;
+          }
+          width: 8rem;
+          background: $blue;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          color: $mainColor;
+          font-weight: bold;
+          border-radius: 5px;
+          font-size: 1.15rem;
+          transition: all 0.2s ease;
+          border: 1px solid $blue;
+          margin-right: 1rem;
+        }
+        .signupBtn:hover {
+          background: $mainColor;
+          color: $blue;
+          border: 1px solid $blue;
+        }
 
-			.loginBtn {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				text-decoration: none;
-				color: $blue;
-				font-weight: bold;
-				border-radius: 5px;
-				font-size: 1.15rem;
-				margin-right: 1.5rem;
-				transition: all 0.2s ease;
-			}
-			.loginBtn:hover {
-				color: $lightBlue;
-			}
-		}
+        .loginBtn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          color: $blue;
+          font-weight: bold;
+          border-radius: 5px;
+          font-size: 1.15rem;
+          margin-right: 1.5rem;
+          @media (max-width: 767px) {
+            width: 100%;
+            margin-right: 0%;
+            margin-top: 1rem;
+          }
+          transition: all 0.2s ease;
+        }
+        .loginBtn:hover {
+          color: $lightBlue;
+        }
+      }
+    }
 
-		.coinLogo {
-			@media (max-width: 767px) {
-				display: none;
-			}
-			@media (max-width: 812px) and (orientation: landscape) {
-				display: none;
-			}
-			position: absolute;
-			z-index: 3;
-			img {
-				height: 1.5rem;
-				@media (min-width: 768px) {
-					height: 2rem;
-				}
-			}
-		}
+    .coinLogo {
+      @media (max-width: 767px) {
+        display: none;
+      }
+      @media (max-width: 812px) and (orientation: landscape) {
+        display: none;
+      }
+      position: absolute;
+      z-index: 3;
+      img {
+        height: 1.5rem;
+        @media (min-width: 768px) {
+          height: 2rem;
+        }
+      }
+    }
 
-		@keyframes coinLogoAnim1 {
-			0% {
-				transform: translateY(0%);
-			}
-			50% {
-				transform: translateY(10%);
-			}
-			100% {
-				transform: translateY(0%);
-			}
-		}
-		@keyframes coinLogoAnim2 {
-			0% {
-				transform: translateX(0%);
-			}
-			50% {
-				transform: translateX(10%);
-			}
-			100% {
-				transform: translateX(0%);
-			}
-		}
+    @keyframes coinLogoAnim1 {
+      0% {
+        transform: translateY(0%);
+      }
+      50% {
+        transform: translateY(10%);
+      }
+      100% {
+        transform: translateY(0%);
+      }
+    }
+    @keyframes coinLogoAnim2 {
+      0% {
+        transform: translateX(0%);
+      }
+      50% {
+        transform: translateX(10%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
 
-		.coinLogo.bitcoin {
-			top: 30%;
-			left: 60%;
-			animation: coinLogoAnim2 2s ease forwards infinite;
-		}
-		.coinLogo.ethereum {
-			top: 13%;
-			left: 76%;
-			animation: coinLogoAnim1 2s ease forwards infinite;
-		}
-		.coinLogo.tether {
-			top: 58%;
-			left: 70%;
-			animation: coinLogoAnim2 2s ease forwards infinite;
-		}
-		.coinLogo.dogecoin {
-			top: 30%;
-			left: 30%;
-			animation: coinLogoAnim2 2s ease forwards infinite;
-		}
-		.coinLogo.binanceCoin {
-			top: 73%;
-			left: 50%;
-			animation: coinLogoAnim1 2s ease forwards infinite;
-		}
-		.coinLogo.cardano {
-			top: 10%;
-			left: 20%;
-			animation: coinLogoAnim1 2s ease forwards infinite;
-		}
-		.coinLogo.usdCoin {
-			top: 54%;
-			left: 5%;
-			animation: coinLogoAnim2 2s ease forwards infinite;
-		}
-		.coinLogo.uniswap {
-			top: 85%;
-			left: 75%;
-			animation: coinLogoAnim2 2s ease forwards infinite;
-		}
-		.coinLogo.bitcoinCash {
-			top: 93%;
-			left: 38%;
-			animation: coinLogoAnim2 2s ease forwards infinite;
-		}
-		.coinLogo.xrp {
-			top: 75%;
-			animation: coinLogoAnim1 2s ease forwards infinite;
-			left: 20%;
-		}
-		.coinLogo.tron {
-			top: 65%;
-			left: 85%;
-			animation: coinLogoAnim1 2s ease forwards infinite;
-		}
-		.coinLogo.ethereumClassic {
-			top: 15%;
-			left: 50%;
-			animation: coinLogoAnim1 2s ease forwards infinite;
-		}
-		.coinLogo.litecoin {
-			top: 35%;
-			left: 90%;
-			animation: coinLogoAnim2 2s ease forwards infinite;
-		}
-		.coinLogo.dash {
-			top: 2%;
-			left: 35%;
-			animation: coinLogoAnim2 2s ease forwards infinite;
-		}
-		.coinLogo.polkadot {
-			top: 27%;
-			left: 9%;
-			animation: coinLogoAnim1 2s ease forwards infinite;
-		}
-	}
+    .coinLogo.bitcoin {
+      top: 30%;
+      left: 60%;
+      animation: coinLogoAnim2 2s ease forwards infinite;
+    }
+    .coinLogo.ethereum {
+      top: 13%;
+      left: 76%;
+      animation: coinLogoAnim1 2s ease forwards infinite;
+    }
+    .coinLogo.tether {
+      top: 58%;
+      left: 70%;
+      animation: coinLogoAnim2 2s ease forwards infinite;
+    }
+    .coinLogo.dogecoin {
+      top: 30%;
+      left: 30%;
+      animation: coinLogoAnim2 2s ease forwards infinite;
+    }
+    .coinLogo.binanceCoin {
+      top: 73%;
+      left: 50%;
+      animation: coinLogoAnim1 2s ease forwards infinite;
+    }
+    .coinLogo.cardano {
+      top: 10%;
+      left: 20%;
+      animation: coinLogoAnim1 2s ease forwards infinite;
+    }
+    .coinLogo.usdCoin {
+      top: 54%;
+      left: 5%;
+      animation: coinLogoAnim2 2s ease forwards infinite;
+    }
+    .coinLogo.uniswap {
+      top: 85%;
+      left: 75%;
+      animation: coinLogoAnim2 2s ease forwards infinite;
+    }
+    .coinLogo.bitcoinCash {
+      top: 93%;
+      left: 38%;
+      animation: coinLogoAnim2 2s ease forwards infinite;
+    }
+    .coinLogo.xrp {
+      top: 75%;
+      animation: coinLogoAnim1 2s ease forwards infinite;
+      left: 20%;
+    }
+    .coinLogo.tron {
+      top: 65%;
+      left: 85%;
+      animation: coinLogoAnim1 2s ease forwards infinite;
+    }
+    .coinLogo.ethereumClassic {
+      top: 15%;
+      left: 50%;
+      animation: coinLogoAnim1 2s ease forwards infinite;
+    }
+    .coinLogo.litecoin {
+      top: 35%;
+      left: 90%;
+      animation: coinLogoAnim2 2s ease forwards infinite;
+    }
+    .coinLogo.dash {
+      top: 2%;
+      left: 35%;
+      animation: coinLogoAnim2 2s ease forwards infinite;
+    }
+    .coinLogo.polkadot {
+      top: 27%;
+      left: 9%;
+      animation: coinLogoAnim1 2s ease forwards infinite;
+    }
+  }
 }

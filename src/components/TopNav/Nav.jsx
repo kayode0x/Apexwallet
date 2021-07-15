@@ -25,41 +25,41 @@ const Nav = () => {
 		//
 	}
 	return (
-		<>
-			<nav>
-				<Link to="/" className="logo">
-					Apexwallet
-				</Link>
-				<div className="desktop">
-					<Link to="#coming-soon-haha💀">Learn</Link>
-					<Link
-						onClick={() => setActiveNav('about')}
-						className={activeNav === 'about' ? 'active' : ''}
-						to="/about"
-					>
-						About Us
-					</Link>
-					<Link to="/login">Sign In</Link>
-					<Link className="signupBtn" to="/signup">
-						Get Started
-					</Link>
-				</div>
-				<div className="mobile">
-					<Hamburger size={25} toggled={navOpen} toggle={setNavOpen} />
-				</div>
-			</nav>
-			{navOpen && (
-				<div className="mobileNav">
-					<a href="#coming-soon-haha💀">Learn</a>
-					<a href="/about">About Us</a>
-					<a href="/login">Sign In</a>
-					<a href="/signup" className="signupBtn">
-						Get Started
-					</a>
-				</div>
-			)}
-		</>
-	);
+    <>
+      <nav>
+        <Link to="/" className="logo">
+          <p>apexwallet</p>
+        </Link>
+        <div className="desktop">
+          <Link to="#coming-soon-haha💀">Learn</Link>
+          <Link
+            onClick={() => setActiveNav("about")}
+            className={activeNav === "about" ? "active" : ""}
+            to="/about"
+          >
+            About Us
+          </Link>
+          <Link to="/login">Sign In</Link>
+          <Link className="signupBtn" to="/signup">
+            Get Started
+          </Link>
+        </div>
+        <div className="mobile">
+          <Hamburger size={25} toggled={navOpen} toggle={setNavOpen} />
+        </div>
+      </nav>
+      {navOpen && (
+        <div className="mobileNav">
+          <a href="#coming-soon-haha💀">Learn</a>
+          <a href="/about">About Us</a>
+          <a href="/login">Sign In</a>
+          <a href="/signup" className="signupBtn">
+            Get Started
+          </a>
+        </div>
+      )}
+    </>
+  );
 };
 
 export default Nav;

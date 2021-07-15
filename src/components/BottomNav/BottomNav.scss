@@ -170,6 +170,7 @@ $borderColor: rgb(170, 170, 170);
 			align-items: center;
 			justify-content: center;
 			margin-left: 2rem;
+			margin-top: .5rem;
 		}
 
 		p {
@@ -186,6 +187,12 @@ $borderColor: rgb(170, 170, 170);
 	}
 
 	.logoApex {
-		margin-top: 1.55rem;
+		height: 3.5rem;
+		margin-right: -.75rem;
+		opacity: 1;
+
+		img {
+			max-height: 100%;
+		}
 	}
 }

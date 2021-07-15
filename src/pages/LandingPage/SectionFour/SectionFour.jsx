@@ -19,7 +19,7 @@ const SectionFour = () => {
 	return (
 		<div className="sectionFour">
 			<div className="container">
-				<p className="getStarted">Starting with 15 cryptocurrencies</p>
+				<p className="header">Starting with 15 cryptocurrencies</p>
 				{/* All the logos go here */}
 				<div className="logos">
 					<div className="coinLogo bitcoin">

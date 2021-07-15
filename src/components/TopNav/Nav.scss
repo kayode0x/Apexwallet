@@ -11,6 +11,7 @@ nav {
 	position: absolute;
 	top: 0%;
 	height: 8vh;
+	z-index: 10;
 	@media (max-width: 768px) and (orientation: landscape) {
 		height: 15vh;
 	}
@@ -19,7 +20,7 @@ nav {
 	}
 	display: flex;
 	align-items: center;
-	width: 90%;
+	width: 95%;
 	justify-content: space-between;
 
 	.logo {
@@ -56,7 +57,7 @@ nav {
 
 		.signupBtn {
 			height: 3rem;
-			width: 7rem;
+			width: 8rem;
 			background: $blue;
 			display: flex;
 			align-items: center;

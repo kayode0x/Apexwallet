@@ -7,79 +7,88 @@ $lightBlue: #64b5f6;
 $orange: #ef5116;
 $navyBlue: #262946;
 
-.sectionSix {
-	min-height: 30vh;
-	background: #000;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+.footer {
+  min-height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  @media (min-width: 468px) {
+    width: 100vw;
+  }
 
-	.container {
-		display: flex;
-		align-items: center;
-		max-width: 900px;
-		width: 100%;
-		justify-content: space-between;
-		@media (max-width: 768px) {
-			flex-direction: column;
-		}
+  .container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 900px;
+    width: 100%;
 
-		.support {
-			padding: 1rem;
-			max-width: 30rem;
-			font-size: 1.5rem;
-			@media (max-width: 768px) {
-				font-size: 1.25rem;
-				text-align: center;
-			}
-			color: $mainColor;
-			span {
-				font-weight: bold;
-				color: $mainColor;
-			}
-		}
+    .subContainer {
+      width: 100%;
+      display: flex;
+      @media (max-width: 768px){
+        flex-direction: column;
+      }
+      align-items: center;
+      justify-content: space-between;
 
-		.contact {
-			font-size: 1rem;
-			color: $mainColor;
-			display: flex;
-			flex-direction: column;
-			@media (max-width: 768px) {
-				align-items: center;
-			}
+      .support {
+        padding: 1rem;
+        max-width: 30rem;
+        font-size: 1.5rem;
+        @media (max-width: 768px) {
+          font-size: 1.25rem;
+          text-align: center;
+        }
+        color: $mainColor;
+        span {
+          font-weight: bold;
+          color: $mainColor;
+        }
+      }
 
-			.icons {
-				font-size: 2rem;
-				display: flex;
-				align-items: center;
-				justify-content: flex-start;
-			}
+      .contact {
+        font-size: 1rem;
+        color: $mainColor;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        @media (max-width: 768px) {
+          align-items: center;
+        }
 
-			.instagram,
-			.twitter {
-				text-decoration: none;
-				color: $mainColor;
-				transition: all 0.3s ease;
-			}
+        .icons {
+          font-size: 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+        }
 
-			.instagram:hover,
-			.twitter:hover {
-				cursor: pointer;
-				color: $lightBlue;
-			}
+        .instagram,
+        .twitter {
+          text-decoration: none;
+          color: $mainColor;
+          transition: all 0.3s ease;
+        }
 
-			.instagram {
-				margin-left: 1rem;
-			}
-		}
-	}
+        .instagram:hover,
+        .twitter:hover {
+          cursor: pointer;
+          color: $lightBlue;
+        }
 
-	footer {
-		padding: 1rem;
-		margin-top: 1rem;
-		margin-bottom: 1rem;
-		color: $mainColor;
-	}
+        .instagram {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+
+  footer {
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: $mainColor;
+  }
 }

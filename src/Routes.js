@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import AuthContext from './components/Auth/AuthContext';
 import { useContext } from 'react';
-import AboutUs from './pages/AboutUs/AboutUs';
+import AboutUs from './pages/LandingPage/AboutUs/AboutUs';
 
 const Routes = () => {
 	//the links

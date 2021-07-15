@@ -9,6 +9,7 @@ $navyBlue: #262946;
 
 .sectionThree {
 	min-height: 100vh;
+	margin: 3rem 3rem;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -38,7 +39,7 @@ $navyBlue: #262946;
 				width: 100%;
 			}
 
-			.getStarted {
+			.header {
 				font-size: 2.25rem;
 				font-weight: bold;
 				color: $textColor;
@@ -87,6 +88,7 @@ $navyBlue: #262946;
 								font-size: 1.15rem;
 							}
 							color: $subColor;
+							font-weight: normal;
 						}
 					}
 

@@ -9,14 +9,14 @@ import useTitle from '../../utils/useTitle';
 const LandingPage = () => {
 	useTitle('Apexwallet');
 	return (
-		<>
+		<div style={{ width: '100%', display: 'flex', flexDirection: 'column',alignItems: 'center' }}>
 			<SectionOne />
 			<SectionTwo />
 			<SectionThree />
 			<SectionFour />
 			<SectionFive />
 			<SectionSix />
-		</>
+		</div>
 	);
 };
 
