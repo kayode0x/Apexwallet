@@ -1,134 +1,172 @@
-import './Account.scss';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { RotateSpinner } from 'react-spinners-kit';
-import BottomNav from '../../../components/BottomNav/BottomNav';
-import usrIMG from '../../../assets/logo/userIMG.svg';
-import StatusModal from './StatusModal/Modal';
-import { HiSpeakerphone } from 'react-icons/hi';
-import { MdInfo } from 'react-icons/md';
-import PasswordModal from './PasswordModal/PasswordModal';
-import NameModal from './NameModal/NameModal';
-import { FiChevronRight } from 'react-icons/fi';
-import { IoCamera } from 'react-icons/io5';
-import useTitle from '../../../utils/useTitle';
-import Image from './Image/Image';
-import Learn from './LearningModal/Learn';
+import "./Account.scss";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { RotateSpinner } from "react-spinners-kit";
+import BottomNav from "../../../components/BottomNav/BottomNav";
+import usrIMG from "../../../assets/logo/userIMG.svg";
+import StatusModal from "./StatusModal/Modal";
+import { HiSpeakerphone } from "react-icons/hi";
+import { MdInfo } from "react-icons/md";
+import PasswordModal from "./PasswordModal/PasswordModal";
+import NameModal from "./NameModal/NameModal";
+import { FiChevronRight } from "react-icons/fi";
+import { IoCamera } from "react-icons/io5";
+import useTitle from "../../../utils/useTitle";
+import Learn from "./LearningModal/Learn";
 
 const Account = ({ loggedIn, user }) => {
-	const history = useHistory();
-	useTitle('Account | Apexwallet');
-	const apiURL = 'https://api.apexwallet.app/v1';
-	const [imageModal, setImageModal] = useState(false);
+  const history = useHistory();
+  useTitle("Account | Apexwallet");
+  const apiURL = "https://api.apexwallet.app/v1";
+  const [imageModal, setImageModal] = useState(false);
 
-	useEffect(() => {
-		if (loggedIn === false) {
-			history.push('/login');
-		}
-	}, [loggedIn, history]);
+  useEffect(() => {
+    if (loggedIn === false) {
+      history.push("/login");
+    }
+  }, [loggedIn, history]);
 
-	//log the user out
-	const handleLogOut = async () => {
-		try {
-			await axios
-				.post(`${apiURL}/auth/logout`)
-				.then(history.push('/login'))
-				.catch(async (err) => {
-					await toast.error(`${err.response.data}`, {});
-				});
-		} catch (error) {
-			console.log('Error: ' + error);
-		}
-	};
+  //log the user out
+  const handleLogOut = async () => {
+    try {
+      await axios
+        .post(`${apiURL}/auth/logout`)
+        .then(history.push("/login"))
+        .catch(async (err) => {
+          await toast.error(`${err.response.data}`, {});
+        });
+    } catch (error) {
+      console.log("Error: " + error);
+    }
+  };
 
-	return (
-		<div className="account">
-			<BottomNav />
-			<div className="container">
-				<p className="header">Account</p>
-				{user ? (
-					<>
-						<div className="accountInfo">
-							<div className="userDetails">
-								<div className="nameAndImage">
-									<div className="image">
-										<img src={user.image ? user.image : usrIMG} alt={user.username} />
-										<div onClick={() => setImageModal(!imageModal)} className="cameraIcon">
-											<IoCamera />
-										</div>
-									</div>
-									<div className="nameAndStatus">
-										<p style={{ textTransform: user.name ? '' : 'capitalize' }}>
-											{user.name ? user.name : user.username + ' 🚀'}
-										</p>
-										<p>{user.username}</p>
-									</div>
-								</div>
-								<NameModal user={user} />
-								<div className="personalFieldEmail">
-									<div className="nameAndDisplay">
-										<p className="displayLabel">Email</p>
-										<p className="displayValue">{user.email}</p>
-									</div>
-								</div>
-								<PasswordModal user={user} />
+  //update the user's display pic.
+  const apiEndpoint = "https://api.apexwallet.app/v1/user/image";
 
-								<StatusModal user={user} />
+  const handleImageSwitch = async (e) => {
+    e.preventDefault();
 
-								<Learn />
+    const file = e.target.files[0];
 
-								<div onClick={() => alert('Coming Soon.')} className="reachOutField">
-									<div className="accountIcons">
-										<HiSpeakerphone />
-									</div>
-									<p>Reach Out</p>
-									<div className="editIcon">
-										<FiChevronRight />
-									</div>
-								</div>
+    if (file.size > 3145728) {
+      toast.error(`Image size is too large, max size allowed is 3MB`, {});
+    } else {
+      const formData = new FormData();
+      formData.append("image", file);
+      await axios
+        .put(apiEndpoint, formData)
+        .then((res) => {
+          if (res.status === 200) {
+            toast.success(`${res.data}`, {});
+            setImageModal(!imageModal);
+          }
+        })
+        .catch(async (err) => {
+          toast.error(`${err.response.data}`, {});
+        });
+    }
+  };
 
-								<div onClick={() => history.push('/about')} className="aboutUsField">
-									<div className="accountIcons">
-										<MdInfo />
-									</div>
-									<p>About Us</p>
-									<div className="editIcon">
-										<FiChevronRight />
-									</div>
-								</div>
-							</div>
+  return (
+    <div className="account">
+      <BottomNav />
+      <div className="container">
+        <p className="header">Account</p>
+        {user ? (
+          <div className="accountInfo">
+            <div className="userDetails">
+              <div className="nameAndImage">
+                <div className="image">
+                  <img
+                    src={user.image ? user.image : usrIMG}
+                    alt={user.username}
+                  />
+                  <div
+                    onClick={() => setImageModal(!imageModal)}
+                    className="cameraIcon"
+                  >
+                    <input
+                      name="file-input"
+                      id="file-input"
+                      type="file"
+                      onChange={(e) => handleImageSwitch(e)}
+                      accept="image/*"
+                    />
+                    <label htmlFor="file-input">
+                      <IoCamera />
+                    </label>
+                  </div>
+                </div>
+                <div className="nameAndStatus">
+                  <p style={{ textTransform: user.name ? "" : "capitalize" }}>
+                    {user.name ? user.name : user.username + " 🚀"}
+                  </p>
+                  <p>{user.username}</p>
+                </div>
+              </div>
+              <NameModal user={user} />
+              <div className="personalFieldEmail">
+                <div className="nameAndDisplay">
+                  <p className="displayLabel">Email</p>
+                  <p className="displayValue">{user.email}</p>
+                </div>
+              </div>
+              <PasswordModal user={user} />
 
-							{/* button to log the user out */}
-							<button onClick={handleLogOut} className="signOut">
-								Sign Out
-							</button>
+              <StatusModal user={user} />
 
-							<p className="walletVersion">v1.1 - beta 🚀</p>
-							<p className="copyright">
-								from <br />
-								<span>Decover</span>
-							</p>
-						</div>
+              <Learn />
 
-						{/* display image modal */}
-						<Image setImageModal={setImageModal} imageModal={imageModal} />
-						<div
-							className={`Overlay ${imageModal ? 'Show' : ''}`}
-							onClick={() => setImageModal(!imageModal)}
-						/>
-					</>
-				) : (
-					<div className="loading">
-						<RotateSpinner size={40} color="#080809" />
-					</div>
-				)}
-			</div>
-			<ToastContainer hideProgressBar autoClose={3000} />
-		</div>
-	);
+              <div
+                onClick={() => alert("Coming Soon.")}
+                className="reachOutField"
+              >
+                <div className="accountIcons">
+                  <HiSpeakerphone />
+                </div>
+                <p>Reach Out</p>
+                <div className="editIcon">
+                  <FiChevronRight />
+                </div>
+              </div>
+
+              <div
+                onClick={() => history.push("/about")}
+                className="aboutUsField"
+              >
+                <div className="accountIcons">
+                  <MdInfo />
+                </div>
+                <p>About Us</p>
+                <div className="editIcon">
+                  <FiChevronRight />
+                </div>
+              </div>
+            </div>
+
+            {/* button to log the user out */}
+            <button onClick={handleLogOut} className="signOut">
+              Sign Out
+            </button>
+
+            <p className="walletVersion">v1.1 - beta 🚀</p>
+            <p className="copyright">
+              from <br />
+              <span>Decover</span>
+            </p>
+          </div>
+        ) : (
+          <div className="loading">
+            <RotateSpinner size={40} color="#080809" />
+          </div>
+        )}
+      </div>
+      <ToastContainer hideProgressBar autoClose={3000} />
+    </div>
+  );
 };
 
 export default Account;

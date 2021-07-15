@@ -9,379 +9,401 @@ $orange: #ef5116;
 $navyBlue: #262946;
 
 .account {
-	display: flex;
-	justify-content: center;
-	min-height: 100vh;
-	@media (max-width: 767px) {
-		margin-bottom: 15rem;
-	}
-	@media (min-width: 768px) {
-		height: 95vh;
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: flex-start;
-		flex-direction: column;
-	}
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  @media (max-width: 767px) {
+    margin-bottom: 15rem;
+  }
+  @media (min-width: 768px) {
+    height: 95vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
 
-	.container {
-		display: flex;
-		width: 100%;
-		flex-direction: column;
-		align-items: center;
-		padding: 0 1rem;
+  .container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem;
 
-		@media (min-width: 768px) {
-			max-width: 600px;
-			width: 100%;
-			padding: 2rem 5rem;
-			align-items: center;
-			justify-content: center;
-			margin-left: 2rem;
-		}
+    @media (min-width: 768px) {
+      max-width: 600px;
+      width: 100%;
+      padding: 2rem 5rem;
+      align-items: center;
+      justify-content: center;
+      margin-left: 2rem;
+    }
 
-		.loading {
-			position: absolute;
-			top: 45%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-		}
+    .loading {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-		.header {
-			color: $textColor;
-			display: flex;
-			text-align: left;
-			align-self: center;
-			@media (max-width: 481px) {
-				align-self: flex-start;
-			}
-			font-size: 1.5rem;
-			font-weight: bold;
-			text-transform: capitalize;
-			@media (min-width: 768px) {
-				display: none;
-			}
-		}
+    .header {
+      color: $textColor;
+      display: flex;
+      text-align: left;
+      align-self: center;
+      @media (max-width: 481px) {
+        align-self: flex-start;
+      }
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: capitalize;
+      @media (min-width: 768px) {
+        display: none;
+      }
+    }
 
-		.accountInfo {
-			width: 100%;
-			height: 10rem;
-			border-radius: 5px;
-			color: $textColor;
-			text-align: center;
-			@media (max-width: 767px) {
-				max-width: 25rem;
-			}
-			display: flex;
-			flex-direction: column;
+    .accountInfo {
+      width: 100%;
+      height: 10rem;
+      border-radius: 5px;
+      color: $textColor;
+      text-align: center;
+      @media (max-width: 767px) {
+        max-width: 25rem;
+      }
+      display: flex;
+      flex-direction: column;
 
-			.userDetails {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				text-align: left;
-				width: 100%;
+      .userDetails {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        width: 100%;
 
-				.nameAndImage {
-					position: relative;
-					display: flex;
-					justify-content: center;
-					@media (max-width: 767px) {
-						width: 100%;
-					}
-					width: 45%;
-					height: 8rem;
-					margin-top: -1rem;
-					align-items: center;
-				}
+        .nameAndImage {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          @media (max-width: 767px) {
+            width: 100%;
+          }
+          width: 45%;
+          height: 8rem;
+          margin-top: -1rem;
+          align-items: center;
+        }
 
-				.cameraIcon {
-					position: absolute;
-					bottom: -5%;
-					right: 7%;
-					font-size: 1.25rem;
-					background: $mainColor;
-					border: 1px solid $borderColor;
-					color: $textColor;
-					border-radius: 50%;
-					height: 1.75rem;
-					width: 1.75rem;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-				}
+        .cameraIcon {
+          position: absolute;
+          bottom: -1%;
+          right: 0%;
+          font-size: 1.25rem;
+          color: $mainColor;
+          border-radius: 50%;
+          height: 1.75rem;
+          width: 1.75rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
-				.image {
-					height: 6rem;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					position: relative;
-					width: 9rem;
-					border-radius: 100%;
-					background: #000;
-					@media (max-width: 767px){
-						height: 6.5rem;
-					}
+          input {
+            background: #000;
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+          }
 
-					img {
-						height: 100%;
-						width: 100%;
-						border-radius: 100%;
-					}
-				}
+          label {
+            margin-top: -8%;
+            width: 90%;
+            height: 3rem;
+            border-radius: 5px;
+            display: flex;
+            font-weight: bold;
+            align-items: center;
+            justify-content: center;
+          }
+        }
 
-				.nameAndStatus {
-					width: 100%;
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					p:nth-child(1) {
-						margin-bottom: -0.75rem;
-						font-size: 1.15rem;
-						color: $textColor;
-						margin-left: 1.5rem;
-						display: flex;
-						align-self: flex-start;
-						font-weight: bold;
-						word-break: break-all;
-						max-width: 100%;
-					}
-					p:nth-child(2) {
-						margin-bottom: 0.5rem;
-						margin-left: 1.5rem;
-						align-items: center;
-						align-self: flex-start;
-						display: flex;
-						background-image: linear-gradient(
-							111.6deg,
-							rgba(217, 111, 111, 1) 0.4%,
-							rgba(34, 14, 215, 1) 100.3%
-						);
-						transition: 0.5s;
-						background-size: 200% auto;
-						color: $mainColor;
-						border-radius: 5px;
-						font-size: 1rem;
-						width: fit-content;
-						padding: 0 0.5rem;
-						height: 1.75rem;
-					}
+        .image {
+          height: 6rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          width: 9.5rem;
+          border-radius: 0.35rem;
+          background: #000;
+          @media (max-width: 767px) {
+            height: 6.5rem;
+          }
 
-					p:nth-child(2):hover {
-						background-position: right center; /* change the direction of the change here */
-						color: #fff;
-						text-decoration: none;
-					}
-				}
+          img {
+            height: 100%;
+            width: 100%;
+            border-radius: 0.35rem;
+          }
+        }
 
-				.personalFieldName,
-				.personalFieldEmail,
-				.personalFieldPassword {
-					width: 100%;
-					display: flex;
-					align-items: center;
-					justify-content: space-between;
+        .nameAndStatus {
+          width: 100%;
+		  height: 60%;
+          display: flex;
+          flex-direction: column;
+          align-self: flex-start;
+		  justify-self: flex-start;
+          p:nth-child(1) {
+            margin-bottom: -0.75rem;
+			margin-top: 0.5rem;
+            font-size: 1.15rem;
+            color: $textColor;
+            margin-left: 1.5rem;
+            display: flex;
+            align-self: flex-start;
+            font-weight: bold;
+            word-break: break-all;
+            max-width: 100%;
+          }
+          p:nth-child(2) {
+            // margin-bottom: 0.5rem;
+            margin-left: 1.5rem;
+            align-items: center;
+            align-self: flex-start;
+            display: flex;
+            background-image: linear-gradient(
+              111.6deg,
+              rgba(217, 111, 111, 1) 0.4%,
+              rgba(34, 14, 215, 1) 100.3%
+            );
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: $mainColor;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: fit-content;
+            padding: 0 0.5rem;
+            height: 1.75rem;
+          }
 
-					.nameAndDisplay {
-						display: flex;
-						flex-direction: column;
-						width: 100%;
+          p:nth-child(2):hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+        }
 
-						.displayLabel {
-							font-size: 0.95rem;
-							color: $subColor;
-							margin-bottom: -0.25rem;
-						}
+        .personalFieldName,
+        .personalFieldEmail,
+        .personalFieldPassword {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
 
-						.displayValue {
-							font-size: 1.05rem;
-							font-weight: 500;
-							color: $textColor;
-							max-width: 95%;
-							word-break: break-word;
-							margin-top: 0.5rem;
-						}
-					}
+          .nameAndDisplay {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
 
-					.editIcon {
-						font-size: 1.25rem;
-					}
-				}
+            .displayLabel {
+              font-size: 0.95rem;
+              color: $subColor;
+              margin-bottom: -0.25rem;
+            }
 
-				.statusField {
-					margin-top: 1rem;
-					cursor: pointer;
-					width: 100%;
-					display: flex;
-					align-items: center;
-					justify-content: flex-start;
-					position: relative;
+            .displayValue {
+              font-size: 1.05rem;
+              font-weight: 500;
+              color: $textColor;
+              max-width: 95%;
+              word-break: break-word;
+              margin-top: 0.5rem;
+            }
+          }
 
-					p {
-						margin-left: 1rem;
-						font-size: 1.05rem;
-					}
-					span {
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						position: absolute;
-						border-radius: 5px;
-						top: 25%;
-						right: 7%;
-						padding: 0 0.75rem;
-						height: 1.5rem;
-						font-size: 0.8rem;
-						color: $mainColor;
-						font-weight: bold;
-					}
+          .editIcon {
+            font-size: 1.25rem;
+          }
+        }
 
-					.editIcon {
-						margin-left: auto;
-						font-size: 1.25rem;
-					}
-				}
+        .statusField {
+          margin-top: 1rem;
+          cursor: pointer;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          position: relative;
 
-				.learnField {
-					position: relative;
-					span {
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						position: absolute;
-						top: 25%;
-						right: 7%;
-						background: rgba(226, 37, 37, 1);
-						padding: 0.2rem 0.35rem;
-						border-radius: 5px;
-						font-size: 0.8rem;
-						color: $mainColor;
-						font-weight: bold;
-					}
-				}
+          p {
+            margin-left: 1rem;
+            font-size: 1.05rem;
+          }
+          span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            border-radius: 5px;
+            top: 25%;
+            right: 7%;
+            padding: 0 0.75rem;
+            height: 1.5rem;
+            font-size: 0.8rem;
+            color: $mainColor;
+            font-weight: bold;
+          }
 
-				.statusField,
-				.learnField,
-				.reachOutField,
-				.aboutUsField {
-					width: 100%;
-					display: flex;
-					align-items: center;
+          .editIcon {
+            margin-left: auto;
+            font-size: 1.25rem;
+          }
+        }
 
-					.accountIcons {
-						font-size: 1.25rem;
-						display: flex;
-						align-items: center;
-					}
+        .learnField {
+          position: relative;
+          span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 25%;
+            right: 7%;
+            background: rgba(226, 37, 37, 1);
+            padding: 0.2rem 0.35rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            color: $mainColor;
+            font-weight: bold;
+          }
+        }
 
-					p {
-						margin-left: 1rem;
-					}
+        .statusField,
+        .learnField,
+        .reachOutField,
+        .aboutUsField {
+          width: 100%;
+          display: flex;
+          align-items: center;
 
-					.editIcon {
-						margin-left: auto;
-						font-size: 1.25rem;
-					}
-				}
-			}
-			.signOut {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				align-self: center;
-				width: 50%;
-				max-width: 10rem;
-				background-image: radial-gradient(
-					circle farthest-corner at 10% 20%,
-					rgba(226, 37, 37, 1) 0%,
-					rgba(211, 49, 49, 1) 82.8%
-				);
-				padding: 1rem 0rem;
-				margin-top: 2rem;
-				border-radius: 10px;
-				border: none;
-				font-size: 1rem;
-				font-weight: bold;
-				color: $mainColor;
-				transition: 0.5s;
-			}
+          .accountIcons {
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+          }
 
-			.signOut:hover {
-				background-image: radial-gradient(
-					circle farthest-corner at 10% 20%,
-					rgb(240, 94, 94) 0%,
-					rgb(230, 97, 97) 82.8%
-				);
-				color: $mainColor;
-				cursor: pointer;
-			}
-			.walletVersion {
-				font-size: 0.95rem;
-				color: $subColor;
-				margin-top: 1.5rem;
-			}
+          p {
+            margin-left: 1rem;
+          }
 
-			.copyright {
-				font-size: 0.85rem;
-				color: $subColor;
-				margin-top: 0.25rem;
+          .editIcon {
+            margin-left: auto;
+            font-size: 1.25rem;
+          }
+        }
+      }
+      .signOut {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        width: 50%;
+        max-width: 10rem;
+        background-image: radial-gradient(
+          circle farthest-corner at 10% 20%,
+          rgba(226, 37, 37, 1) 0%,
+          rgba(211, 49, 49, 1) 82.8%
+        );
+        padding: 1rem 0rem;
+        margin-top: 2rem;
+        border-radius: 10px;
+        border: none;
+        font-size: 1rem;
+        font-weight: bold;
+        color: $mainColor;
+        transition: 0.5s;
+      }
 
-				span {
-					font-size: 0.95rem;
-					color: $textColor;
-					font-weight: bold;
-				}
-			}
-		}
-	}
+      .signOut:hover {
+        background-image: radial-gradient(
+          circle farthest-corner at 10% 20%,
+          rgb(240, 94, 94) 0%,
+          rgb(230, 97, 97) 82.8%
+        );
+        color: $mainColor;
+        cursor: pointer;
+      }
+      .walletVersion {
+        font-size: 0.95rem;
+        color: $subColor;
+        margin-top: 1.5rem;
+      }
+
+      .copyright {
+        font-size: 0.85rem;
+        color: $subColor;
+        margin-top: 0.25rem;
+
+        span {
+          font-size: 0.95rem;
+          color: $textColor;
+          font-weight: bold;
+        }
+      }
+    }
+  }
 }
 .imageModal {
-	position: fixed;
-	bottom: -150vh;
-	background-color: $mainColor;
-	width: 100%;
-	box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.15);
-	left: 0;
-	padding: 1rem 0;
-	z-index: 10;
-	display: none;
-	font-size: 1.15rem;
-	animation: imageModal 0.3s ease-in-out forwards;
-	border-radius: 10px;
-	height: 40%;
-	@media (max-width: 767px) {
-		max-width: 20rem;
-	}
-	@media (min-width: 768px) {
-		display: none;
-		width: 30rem;
-		height: 28rem;
-	}
-	@media (max-width: 812px) and (orientation: landscape) {
-		height: 90%;
-	}
+  position: fixed;
+  bottom: -150vh;
+  background-color: $mainColor;
+  width: 100%;
+  box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.15);
+  left: 0;
+  padding: 1rem 0;
+  z-index: 10;
+  display: none;
+  font-size: 1.15rem;
+  animation: imageModal 0.3s ease-in-out forwards;
+  border-radius: 10px;
+  height: 40%;
+  @media (max-width: 767px) {
+    max-width: 20rem;
+  }
+  @media (min-width: 768px) {
+    display: none;
+    width: 30rem;
+    height: 28rem;
+  }
+  @media (max-width: 812px) and (orientation: landscape) {
+    height: 90%;
+  }
 }
 
 @keyframes imageModal {
-	from {
-		top: 60%;
-	}
+  from {
+    top: 60%;
+  }
 
-	to {
-		top: 50%;
-	}
+  to {
+    top: 50%;
+  }
 }
 
 .imageModal.Show {
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	transition: all 0.8s ease-in;
-	display: flex;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transition: all 0.8s ease-in;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
