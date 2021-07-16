@@ -7,7 +7,7 @@ import BottomNav from '../../../components/BottomNav/BottomNav';
 import useTitle from '../../../utils/useTitle'
 import CompleteDashboard from './CompleteDashboard/CompleteDashboard';
 
-const Dashboard = ({user, prices, news, loggedIn}) => {
+const Dashboard = ({user, wallet, prices, news, loggedIn}) => {
 	const history = useHistory();
 	const [watchList, setWatchList] = useState(null);
 	useTitle('Home | Apexwallet');
@@ -52,7 +52,7 @@ const Dashboard = ({user, prices, news, loggedIn}) => {
 				<BottomNav />
 				<div className="container">
 					<p className="header">Home</p>
-					{CompleteDashboard(user, watchList, news)}
+					{CompleteDashboard(user, wallet, watchList, news)}
 				</div>
 				<ToastContainer hideProgressBar autoClose={3000} />
 			</div>

@@ -171,7 +171,7 @@ const Routes = () => {
 			<Switch>
 				{/* BELOW ARE THE ROUTES FOR A LOGGED IN USER */}
 				<Route exact path="/dashboard">
-					<Dashboard loggedIn={loggedIn} news={news} prices={prices} user={user} />
+					<Dashboard loggedIn={loggedIn} news={news} prices={prices} user={user} wallet={wallet} />
 				</Route>
 				<Route exact path="/wallet">
 					<Wallet loggedIn={loggedIn} user={user} wallet={wallet} prices={prices} />

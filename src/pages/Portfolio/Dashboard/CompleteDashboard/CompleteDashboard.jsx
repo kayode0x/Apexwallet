@@ -6,7 +6,7 @@ import moment from 'moment';
 import { useState, useRef, useEffect } from 'react';
 import Messages from '../Messages/Messages';
 
-const CompleteDashboard = (user, watchList, news) => {
+const CompleteDashboard = (user, wallet, watchList, news) => {
 	const [hasNotifications, setHasNotifications] = useState(undefined);
 	const [modalUpMessages, setModalUpMessages] = useState(false);
 	const [messageModal, setMessageModal] = useState(false);
@@ -138,49 +138,57 @@ const CompleteDashboard = (user, watchList, news) => {
 				{newsFunction()}
 			</>
 		);
-	} else if (news !== null && watchList !== null && user !== null && user.isActive === true) {
-		return (
-			<>
-				<div className="verifiedWithWallet">
-					<div className="balanceDiv">
-						<p className="balanceHeader">Available Balance</p>
-						<p className="balanceUSD">${parseFloat(user.wallet.balance).toFixed(2)}</p>
-					</div>
+	} else if (
+    news !== null &&
+    watchList !== null &&
+    user !== null &&
+    wallet !== null &&
+    user.isActive === true
+  ) {
+    return (
+      <>
+        <div className="verifiedWithWallet">
+          <div className="balanceDiv">
+            <p className="balanceHeader">Available Balance</p>
+            <p className="balanceUSD">
+              ${parseFloat(wallet.balance).toFixed(2)}
+            </p>
+          </div>
 
-					<div className="notificationIcon">
-						{hasNotifications && <span className="activeNotification"></span>}
-						<RiNotification4Fill onClick={() => setModalUpMessages(true)} />
-						<Messages
-							messageModal={messageModal}
-							setMessageModal={setMessageModal}
-							user={user}
-							modalUpMessages={modalUpMessages}
-							setModalUpMessages={setModalUpMessages}
-						/>
-					</div>
-					<div
-						className={`Overlay ${modalUpMessages ? 'Show' : ''}`}
-						onClick={() => {
-							setModalUpMessages(false);
-							setMessageModal(false);
-						}}
-					/>
-				</div>
-				<div className="notificationDiv">{notificationsFunction()}</div>
+          <div className="notificationIcon">
+            {hasNotifications && <span className="activeNotification"></span>}
+            <RiNotification4Fill onClick={() => setModalUpMessages(true)} />
+            <Messages
+              messageModal={messageModal}
+              setMessageModal={setMessageModal}
+              user={user}
+              modalUpMessages={modalUpMessages}
+              setModalUpMessages={setModalUpMessages}
+            />
+          </div>
+          <div
+            className={`Overlay ${modalUpMessages ? "Show" : ""}`}
+            onClick={() => {
+              setModalUpMessages(false);
+              setMessageModal(false);
+            }}
+          />
+        </div>
+        <div className="notificationDiv">{notificationsFunction()}</div>
 
-				<p className="watchListHeader">Watchlist</p>
-				{watchListFunction()}
-				<p className="newsHeader">News</p>
-				{newsFunction()}
-			</>
-		);
-	} else {
-		return (
-			<div className="loading">
-				<RotateSpinner size={40} color="#080809" />
-			</div>
-		);
-	}
+        <p className="watchListHeader">Watchlist</p>
+        {watchListFunction()}
+        <p className="newsHeader">News</p>
+        {newsFunction()}
+      </>
+    );
+  } else {
+    return (
+      <div className="loading">
+        <RotateSpinner size={40} color="#080809" />
+      </div>
+    );
+  }
 };
 
 export default CompleteDashboard;
