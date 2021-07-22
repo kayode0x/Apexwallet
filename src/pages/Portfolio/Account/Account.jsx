@@ -16,8 +16,11 @@ import { FiChevronRight } from "react-icons/fi";
 import { IoCamera } from "react-icons/io5";
 import useTitle from "../../../utils/useTitle";
 import Learn from "./LearningModal/Learn";
+import AuthContext from "../../../components/Auth/AuthContext";
+import { useContext } from "react";
 
-const Account = ({ loggedIn, user }) => {
+const Account = ({ user }) => {
+  const { loggedIn, getLoggedIn } = useContext(AuthContext);
   const history = useHistory();
   useTitle("Account | Apexwallet");
   const apiURL = "https://api.apexwallet.app/v1";
@@ -34,7 +37,9 @@ const Account = ({ loggedIn, user }) => {
     try {
       await axios
         .post(`${apiURL}/auth/logout`)
+        .then(await getLoggedIn())
         .then(history.push("/login"))
+        .then(window.location.reload())
         .catch(async (err) => {
           await toast.error(`${err.response.data}`, {});
         });

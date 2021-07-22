@@ -125,20 +125,17 @@ const Routes = () => {
       };
 
       //only call updateSite if the user is logged in
-      if (loggedIn === true) {
-        updateUserData();
-        setInterval(updateUserData, 5000); //update every 5 seconds
-      }
+      await getLoggedIn();
+      loggedIn === true && updateUserData();
+      loggedIn && setInterval(updateUserData, 5000); //update every 5 seconds
 
-      if (loggedIn === true) {
-        updateAccessToken();
-        setInterval(updateAccessToken, 300000); //update every 5 minutes
-      }
+      await getLoggedIn();
+    //   loggedIn === true && updateAccessToken();
+      loggedIn && setInterval(updateAccessToken, 300000); //update every 5 minutes
 
-      if (loggedIn === true) {
-        updatePrices();
-        setInterval(updatePrices, 45000); //update every 30 seconds
-      }
+      await getLoggedIn();
+      loggedIn === true && updatePrices();
+      loggedIn === true && setInterval(updatePrices, 45000); //update every 30 seconds
 
       try {
         const cryptoCompareAPIKey = process.env.REACT_APP_CRYPTO_COMPARE_API;
@@ -178,14 +175,14 @@ const Routes = () => {
     }
 
     //only load if the user is logged in
-    if (loggedIn === true) {
-      load();
-    }
+
+    getLoggedIn();
+    loggedIn === true && load();
 
     return () => {
       isRendered.current = false;
     };
-  }, [loggedIn]);
+  }, [loggedIn, getLoggedIn]);
 
   return (
     <Router>
@@ -227,7 +224,7 @@ const Routes = () => {
         </Route>
 
         <Route exact path="/account">
-          <Account user={user} loggedIn={loggedIn} />
+          <Account user={user} loggedIn={loggedIn} getLoggedIn={getLoggedIn} />
         </Route>
 
         {/* BELOW ARE THE ROUTES FOR A NON-LOGGED IN USER */}
