@@ -126,7 +126,6 @@ const Routes = () => {
 
       //only call updateSite if the user is logged in
       if (loggedIn === true) {
-        //updateSite function to update data without reloading the page
         updateUserData();
         setInterval(updateUserData, 5000); //update every 5 seconds
       }
