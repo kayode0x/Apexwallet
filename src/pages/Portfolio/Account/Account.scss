@@ -132,12 +132,12 @@ $navyBlue: #262946;
         }
 
         .image {
-          height: 6rem;
+          max-height: 9rem;
+          width: 9rem;
           display: flex;
           align-items: center;
           justify-content: center;
           position: relative;
-          width: 9.5rem;
           border-radius: 0.35rem;
           background: #000;
           @media (max-width: 767px) {
@@ -145,9 +145,10 @@ $navyBlue: #262946;
           }
 
           img {
-            height: 100%;
-            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
             border-radius: 0.35rem;
+            object-fit: cover;
           }
         }
 

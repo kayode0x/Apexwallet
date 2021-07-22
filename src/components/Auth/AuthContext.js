@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const AuthContext = createContext();
 
-function AuthContextProvider(props) {
+function AuthContextProvider({ children }) {
 	const [loggedIn, setLoggedIn] = useState(undefined);
 	const apiURL = 'https://api.apexwallet.app/v1/auth/loggedin';
 
@@ -20,7 +20,7 @@ function AuthContextProvider(props) {
 		getLoggedIn();
 	}, []);
 
-	return <AuthContext.Provider value={{ loggedIn, getLoggedIn }}>{props.children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={{ loggedIn, getLoggedIn }}>{children}</AuthContext.Provider>;
 }
 
 export default AuthContext;
