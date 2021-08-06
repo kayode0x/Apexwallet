@@ -284,6 +284,12 @@ $navyBlue: #262946;
             font-weight: bold;
           }
         }
+        .statusField,
+        .learnField,
+        .reachOutField,
+        .aboutUsField:hover {
+          cursor: pointer;
+        }
 
         .statusField,
         .learnField,

@@ -70,11 +70,13 @@ $navyBlue: #262946;
         justify-content: space-around;
         flex-wrap: wrap;
 
-        div {
+        a {
           display: flex;
           flex-direction: column;
           align-items: center;
           margin: 2rem;
+          text-decoration: none;
+          color: $textColor;
 
           img {
             height: 8rem;
@@ -86,6 +88,7 @@ $navyBlue: #262946;
           p:nth-child(2) {
             font-size: 1.25rem;
             font-weight: bold;
+            text-decoration: underline;
           }
 
           p:nth-child(3) {

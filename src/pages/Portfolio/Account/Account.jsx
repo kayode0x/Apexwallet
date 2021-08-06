@@ -8,12 +8,12 @@ import { RotateSpinner } from "react-spinners-kit";
 import BottomNav from "../../../components/BottomNav/BottomNav";
 import usrIMG from "../../../assets/logo/userIMG.svg";
 import StatusModal from "./StatusModal/Modal";
-import { HiSpeakerphone } from "react-icons/hi";
 import { MdInfo } from "react-icons/md";
 import PasswordModal from "./PasswordModal/PasswordModal";
 import NameModal from "./NameModal/NameModal";
 import { FiChevronRight } from "react-icons/fi";
 import { IoCamera } from "react-icons/io5";
+import Source from "./source/source";
 import useTitle from "../../../utils/useTitle";
 import Learn from "./LearningModal/Learn";
 import AuthContext from "../../../components/Auth/AuthContext";
@@ -125,18 +125,7 @@ const Account = ({ user }) => {
 
               <Learn />
 
-              <div
-                onClick={() => alert("Coming Soon.")}
-                className="reachOutField"
-              >
-                <div className="accountIcons">
-                  <HiSpeakerphone />
-                </div>
-                <p>Reach Out</p>
-                <div className="editIcon">
-                  <FiChevronRight />
-                </div>
-              </div>
+              <Source />
 
               <div
                 onClick={() => history.push("/about")}
@@ -157,7 +146,7 @@ const Account = ({ user }) => {
               Sign Out
             </button>
 
-            <p className="walletVersion">v1.1 - beta 🚀</p>
+            <p className="walletVersion">v2 - stable 🚀</p>
             <p className="copyright">
               from <br />
               <span>Decover</span>

@@ -29,26 +29,46 @@ const AboutUs = () => {
         <div className="body">
           <p className="header">The Team</p>
           <div className="theTeam">
-            <div className="kayode">
+            <a
+              href="https://twitter.com/kayode0x"
+              target="_blank"
+              rel="noreferrer"
+              className="kayode"
+            >
               <img src={sakuna} alt="img" />
               <p>Kayode</p>
               <p>Development</p>
-            </div>
-            <div className="victor">
+            </a>
+            <a
+              href="https://www.linkedin.com/in/victor-ugochukwu-105698185"
+              target="_blank"
+              rel="noreferrer"
+              className="victor"
+            >
               <img src={kakashi} alt="img" />
               <p>Victor</p>
               <p>Operations</p>
-            </div>
-            <div className="david">
+            </a>
+            <a
+              href="https://twitter.com/daveokojie"
+              target="_blank"
+              rel="noreferrer"
+              className="david"
+            >
               <img src={shelby} alt="img" />
               <p>Dave</p>
               <p>Finance</p>
-            </div>
-            <div className="bolu">
+            </a>
+            <a
+              href="https://twitter.com/lexeblaze"
+              target="_blank"
+              rel="noreferrer"
+              className="bolu"
+            >
               <img src={beerus} alt="img" />
               <p>Bolu</p>
               <p>Marketing</p>
-            </div>
+            </a>
           </div>
         </div>
 

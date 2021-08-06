@@ -65,20 +65,19 @@ $navyBlue: #262946;
           justify-content: flex-start;
         }
 
-        .instagram,
-        .twitter {
+        .github,
+        .gmail {
           text-decoration: none;
           color: $mainColor;
           transition: all 0.3s ease;
         }
 
-        .instagram:hover,
-        .twitter:hover {
+        .github:hover, .gmail:hover {
           cursor: pointer;
           color: $lightBlue;
         }
 
-        .instagram {
+        .gmail {
           margin-left: 1rem;
         }
       }

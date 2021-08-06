@@ -31,7 +31,13 @@ const Nav = () => {
           <p>apexwallet</p>
         </Link>
         <div className="desktop">
-          <Link to="#coming-soon-haha💀">Learn</Link>
+          <a
+            href="https://apexwallet.s3.us-east-2.amazonaws.com/Crypto+Lexicons.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Learn
+          </a>
           <Link
             onClick={() => setActiveNav("about")}
             className={activeNav === "about" ? "active" : ""}
@@ -50,7 +56,13 @@ const Nav = () => {
       </nav>
       {navOpen && (
         <div className="mobileNav">
-          <a href="#coming-soon-haha💀">Learn</a>
+          <a
+            href="https://apexwallet.s3.us-east-2.amazonaws.com/Crypto+Lexicons.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Learn
+          </a>
           <a href="/about">About Us</a>
           <a href="/login">Sign In</a>
           <a href="/signup" className="signupBtn">

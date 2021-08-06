@@ -8,7 +8,7 @@ $orange: #ef5116;
 $navyBlue: #262946;
 $borderColor: rgb(158, 158, 158);
 
-.learnModalContainer {
+.sourceModalContainer {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -23,7 +23,7 @@ $borderColor: rgb(158, 158, 158);
 		transform: translate(-50%, -50%);
 	}
 
-	.learnModalSubContainer {
+	.sourceModalSubContainer {
 		background: $mainColor;
 		flex-direction: column;
 		height: 13rem;
@@ -48,11 +48,35 @@ $borderColor: rgb(158, 158, 158);
 				margin-bottom: 1.5rem;
             }
 
+			button {
+				color: $mainColor;
+				font-size: 1.15rem;
+				text-decoration: none;
+				padding: 0.5rem;
+				width: 40%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 7px;
+				background: $blue;
+				border: 1px solid $blue;
+				transition: all 0.2s ease-in;
+			}
+
+			button:hover {
+				color: $blue;
+				background: $mainColor;
+			}
+
 			a {
 				color: $mainColor;
 				font-size: 1.15rem;
 				text-decoration: none;
 				padding: 0.5rem;
+				width: 40%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				border-radius: 7px;
 				background: $blue;
 				border: 1px solid $blue;

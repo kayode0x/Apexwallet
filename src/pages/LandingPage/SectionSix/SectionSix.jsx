@@ -1,4 +1,5 @@
-import { FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
 import "./SectionSix.scss";
 
 const SectionSix = () => {
@@ -12,17 +13,16 @@ const SectionSix = () => {
       <div className="container">
         <div className="subContainer">
           <p className="support">
-            Please let us know about your feedbacks, questions or concerns to
-            ensure we continue to serve you well.
+            For feedbacks, support or general enquiries, please feel free to
+            contact us at support@apexwallet.app.
           </p>
           <div className="contact">
-            <p>support@apexwallet.app</p>
             <div className="icons">
-              <a href="https://twitter.com/apexwallet" className="twitter">
-                <FaTwitter />
+              <a href="https://github.com.com/apexwallet" className="github">
+                <FaGithub />
               </a>
-              <a href="https://instagram.com/apexwallet" className="instagram">
-                <FaInstagram />
+              <a href="mailto:support@apexwallet.app" className="gmail">
+                <SiGmail />
               </a>
             </div>
           </div>

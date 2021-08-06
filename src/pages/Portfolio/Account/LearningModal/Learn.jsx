@@ -13,43 +13,45 @@ export default function Learn() {
 	const handleCloseModal = () => setOpenModal(false);
 
 	return (
-		<div style={{ width: '100%' }}>
-			<div className="learnField" onClick={handleOpenModal}>
-				<div className="accountIcons">
-					<GiWhiteBook />
-				</div>
-				<p>Learn</p>
-				<span>
-					Coming Soon
-				</span>
-				<div className="editIcon">
-					<FiChevronRight />
-				</div>
-			</div>
-			<Modal
-				open={openModal}
-				onClose={handleCloseModal}
-				closeAfterTransition
-				BackdropComponent={Backdrop}
-				BackdropProps={{
-					timeout: 500,
-				}}
-			>
-				<Fade in={openModal}>
-					<div className="learnModalContainer">
-						<div className="learnModalSubContainer">
-							<div className="header">Learn</div>
-							<div className="body">
-								<p className="intro">
-									We'll teach you all you need to know regarding cryptocurrencies, from the
-									fundamentals to when to buy and sell. We'll also provide you with market updates and
-									predictions. It is user-friendly for beginners as well as seasoned traders.
-								</p>
-							</div>
-						</div>
-					</div>
-				</Fade>
-			</Modal>
-		</div>
-	);
+    <div style={{ width: "100%" }}>
+      <div className="learnField" onClick={handleOpenModal}>
+        <div className="accountIcons">
+          <GiWhiteBook />
+        </div>
+        <p>Learn</p>
+        <div className="editIcon">
+          <FiChevronRight />
+        </div>
+      </div>
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={openModal}>
+          <div className="learnModalContainer">
+            <div className="learnModalSubContainer">
+              <div className="body">
+                <p className="intro">
+                  Here are some crypto oriented lexicons to help you learn more
+                  about the crypto world.
+                </p>
+                <a
+                  href="https://apexwallet.s3.us-east-2.amazonaws.com/Crypto+Lexicons.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Take me there
+                </a>
+              </div>
+            </div>
+          </div>
+        </Fade>
+      </Modal>
+    </div>
+  );
 }
