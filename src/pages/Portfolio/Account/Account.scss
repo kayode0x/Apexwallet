@@ -154,14 +154,14 @@ $navyBlue: #262946;
 
         .nameAndStatus {
           width: 100%;
-		  height: 60%;
+          height: 60%;
           display: flex;
           flex-direction: column;
           align-self: flex-start;
-		  justify-self: flex-start;
+          justify-self: flex-start;
           p:nth-child(1) {
             margin-bottom: -0.75rem;
-			margin-top: 0.5rem;
+            margin-top: 0.5rem;
             font-size: 1.15rem;
             color: $textColor;
             margin-left: 1.5rem;
@@ -357,9 +357,9 @@ $navyBlue: #262946;
         color: $subColor;
         margin-top: 0.25rem;
 
-        span {
-          font-size: 0.95rem;
-          color: $textColor;
+        a {
+          text-decoration: none;
+          color: $subColor;
           font-weight: bold;
         }
       }

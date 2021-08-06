@@ -28,7 +28,13 @@ const SectionSix = () => {
           </div>
         </div>
 
-        <footer>Apexwallet, from Decover &copy; {getYear()}</footer>
+        <footer>
+          Apexwallet, from{" "}
+          <a href="https://decover.co" target="_blank"rel="noopener noreferrer">
+            Decover
+          </a>{" "}
+          &copy; {getYear()}
+        </footer>
       </div>
     </div>
   );

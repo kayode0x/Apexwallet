@@ -149,7 +149,13 @@ const Account = ({ user }) => {
             <p className="walletVersion">v2 - stable 🚀</p>
             <p className="copyright">
               from <br />
-              <span>Decover</span>
+              <a
+                href="https://decover.co"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Decover
+              </a>
             </p>
           </div>
         ) : (

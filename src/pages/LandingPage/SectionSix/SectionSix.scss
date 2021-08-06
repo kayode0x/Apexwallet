@@ -89,5 +89,11 @@ $navyBlue: #262946;
     margin-top: 1rem;
     margin-bottom: 1rem;
     color: $mainColor;
+
+    a {
+      text-decoration: none;
+      color: $mainColor;
+      font-weight: bold;
+    }
   }
 }

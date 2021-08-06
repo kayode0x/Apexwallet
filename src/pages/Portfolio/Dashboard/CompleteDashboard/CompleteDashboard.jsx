@@ -3,42 +3,13 @@ import { RiNotification4Fill } from 'react-icons/ri';
 import coinsSVG from '../../../../assets/logo/coinsSVG.svg';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Messages from '../Messages/Messages';
 
 const CompleteDashboard = (user, wallet, watchList, news) => {
 	const [hasNotifications, setHasNotifications] = useState(undefined);
 	const [modalUpMessages, setModalUpMessages] = useState(false);
 	const [messageModal, setMessageModal] = useState(false);
-	let notificationDiv = useRef(Math.floor(Math.random() * 3 + 1));
-
-	const notificationsFunction = () => {
-		switch (notificationDiv.current) {
-			case 1:
-				return (
-					<div>
-						<p>New on v1.1 beta</p>
-						<p>You can now send and receive coins with a QR code.</p>
-					</div>
-				);
-			case 2:
-				return (
-					<div>
-						<p>New on v1.1 beta</p>
-						<p>Coin conversion is live 🚀. You can now convert coins you own to another.</p>
-					</div>
-				);
-			case 3:
-				return (
-					<div>
-						<p>New on v1.1 beta</p>
-						<p>Decentraland, Shiba, Solana, Chainlink and Stellar have been added.</p>
-					</div>
-				);
-			default:
-			// Do nothing
-		}
-	};
 
 	useEffect(() => {
 		const checkNotifications = () => {
@@ -174,7 +145,6 @@ const CompleteDashboard = (user, wallet, watchList, news) => {
             }}
           />
         </div>
-        <div className="notificationDiv">{notificationsFunction()}</div>
 
         <p className="watchListHeader">Watchlist</p>
         {watchListFunction()}
